@@ -29,11 +29,6 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersIncrementer;
 import org.springframework.batch.core.JobParametersValidator;
-import org.springframework.batch.core.configuration.JobLocator;
-import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.launch.NoSuchJobException;
-import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
-import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
@@ -59,21 +54,14 @@ class JobLauncherDetailsTests {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		details.setJobLauncher(new JobLauncher() {
-			@Override
-			public JobExecution run(org.springframework.batch.core.Job job, JobParameters jobParameters)
-					throws JobExecutionAlreadyRunningException, JobRestartException {
-				list.add(jobParameters);
-				return null;
-			}
+		details.setJobLauncher((job, jobParameters) -> {
+			list.add(jobParameters);
+			return null;
 		});
 
-		details.setJobLocator(new JobLocator() {
-			@Override
-			public org.springframework.batch.core.Job getJob(@Nullable String name) throws NoSuchJobException {
-				list.add(name);
-				return new StubJob("foo");
-			}
+		details.setJobLocator(name -> {
+			list.add(name);
+			return new StubJob("foo");
 		});
 	}
 
@@ -142,6 +130,8 @@ class JobLauncherDetailsTests {
 	}
 
 	private final class StubJobExecutionContext extends JobExecutionContextImpl {
+
+		private static final long serialVersionUID = 1;
 
 		private StubJobExecutionContext() {
 			super(mock(Scheduler.class), firedBundle, mock(Job.class));

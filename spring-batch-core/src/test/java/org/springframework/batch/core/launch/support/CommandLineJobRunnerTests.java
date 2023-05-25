@@ -214,7 +214,7 @@ class CommandLineJobRunnerTests {
 	void testWithStdinParameters() throws Throwable {
 		String[] args = new String[] { jobPath, jobName };
 		System.setIn(new InputStream() {
-			char[] input = ("foo=bar\nspam=bucket").toCharArray();
+			char[] input = "foo=bar\nspam=bucket".toCharArray();
 
 			int index = 0;
 
@@ -418,11 +418,11 @@ class CommandLineJobRunnerTests {
 
 		public static JobExecution jobExecution;
 
-		public static boolean throwExecutionRunningException = false;
+		public static boolean throwExecutionRunningException;
 
 		public static JobParameters jobParameters;
 
-		private static boolean destroyed = false;
+		private static boolean destroyed;
 
 		@Override
 		public JobExecution run(Job job, JobParameters jobParameters) throws JobExecutionAlreadyRunningException {
@@ -583,7 +583,7 @@ class CommandLineJobRunnerTests {
 
 		JobParametersConverter delegate = new DefaultJobParametersConverter();
 
-		static boolean called = false;
+		static boolean called;
 
 		@Override
 		public JobParameters getJobParameters(@Nullable Properties properties) {

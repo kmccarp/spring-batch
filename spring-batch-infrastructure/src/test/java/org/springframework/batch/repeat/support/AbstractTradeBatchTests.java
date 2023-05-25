@@ -77,7 +77,7 @@ abstract class AbstractTradeBatchTests {
 
 	protected static class TradeWriter implements ItemWriter<Trade> {
 
-		int count = 0;
+		int count;
 
 		// This has to be synchronized because we are going to test the state
 		// (count) at the end of a concurrent batch run.

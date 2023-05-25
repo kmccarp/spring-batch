@@ -51,11 +51,11 @@ public abstract class AvroTestFixtures {
 			new User("Alana", 13, "yellow"),
 			new User("Joe", 1, "pink"));
 
-	private Chunk<PlainOldUser> plainOldUsers = Chunk.of(
-			new PlainOldUser("David", 20, "blue"),
-			new PlainOldUser("Sue", 4, "red"),
-			new PlainOldUser("Alana", 13, "yellow"),
-			new PlainOldUser("Joe", 1, "pink"));
+	private final Chunk<PlainOldUser> plainOldUsers = Chunk.of(
+	new PlainOldUser("David", 20, "blue"),
+	new PlainOldUser("Sue", 4, "red"),
+	new PlainOldUser("Alana", 13, "yellow"),
+	new PlainOldUser("Joe", 1, "pink"));
 	//@formatter:on
 
 	protected Resource schemaResource = new ClassPathResource("org/springframework/batch/item/avro/user-schema.json");
@@ -152,10 +152,12 @@ public abstract class AvroTestFixtures {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (o == null || getClass() != o.getClass())
+			}
+			if (o == null || getClass() != o.getClass()) {
 				return false;
+			}
 			PlainOldUser that = (PlainOldUser) o;
 			return favoriteNumber == that.favoriteNumber && Objects.equals(name, that.name)
 					&& Objects.equals(favoriteColor, that.favoriteColor);

@@ -46,9 +46,9 @@ class SynchronizedItemStreamReaderTests {
 	 */
 	private class TestItemReader extends AbstractItemStreamItemReader<Integer> implements ItemStreamReader<Integer> {
 
-		private int cursor = 0;
+		private int cursor;
 
-		private boolean isClosed = false;
+		private boolean isClosed;
 
 		public static final String HAS_BEEN_OPENED = "hasBeenOpened";
 
@@ -105,9 +105,9 @@ class SynchronizedItemStreamReaderTests {
 		 * context.
 		 */
 		final Set<Integer> ecSet = new HashSet<>();
-		final int SIZE = 20;
-		Thread[] threads = new Thread[SIZE];
-		for (int i = 0; i < SIZE; i++) {
+		final int size = 20;
+		Thread[] threads = new Thread[size];
+		for (int i = 0; i < size; i++) {
 			threads[i] = new Thread() {
 				public void run() {
 					try {
@@ -135,11 +135,11 @@ class SynchronizedItemStreamReaderTests {
 		 * ExecutionContext variable is set properly. Lastly, the Set<Integer> should have
 		 * 1 to 20 which may not always be the case if the read is not synchronized.
 		 */
-		for (int i = 1; i <= SIZE; i++) {
+		for (int i = 1; i <= size; i++) {
 			assertTrue(ecSet.contains(i));
 		}
 		assertTrue(testItemReader.isClosed());
-		assertEquals(SIZE, executionContext.getInt(TestItemReader.UPDATE_COUNT_KEY));
+		assertEquals(size, executionContext.getInt(TestItemReader.UPDATE_COUNT_KEY));
 	}
 
 }

@@ -32,6 +32,8 @@ import java.io.StringWriter;
 @SuppressWarnings("serial")
 public class ExitStatus implements Serializable, Comparable<ExitStatus> {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Convenient constant value representing unknown state - assumed to not be
 	 * continuable.

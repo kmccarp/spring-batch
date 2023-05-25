@@ -42,7 +42,7 @@ import org.springframework.batch.item.file.LineMapper;
  */
 public class JsonLineMapper implements LineMapper<Map<String, Object>> {
 
-	private MappingJsonFactory factory = new MappingJsonFactory();
+	private final MappingJsonFactory factory = new MappingJsonFactory();
 
 	/**
 	 * Interpret the line as a Json object and create a Map from it.

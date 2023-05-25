@@ -125,7 +125,7 @@ class RegisterMultiListenerTests {
 				AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
 	}
 
-	public static abstract class MultiListenerTestConfigurationSupport {
+	public abstract static class MultiListenerTestConfigurationSupport {
 
 		@Bean
 		public Job testJob(JobRepository jobRepository) {
@@ -167,15 +167,10 @@ class RegisterMultiListenerTests {
 
 		@Bean
 		public ItemWriter<String> writer() {
-			return new ItemWriter<String>() {
-
-				@Override
-				public void write(Chunk<? extends String> chunk) throws Exception {
-					if (chunk.getItems().contains("item2")) {
-						throw new MySkippableException();
-					}
+			return chunk -> {
+				if (chunk.getItems().contains("item2")) {
+					throw new MySkippableException();
 				}
-
 			};
 		}
 
@@ -241,18 +236,18 @@ class RegisterMultiListenerTests {
 
 	private static class CallChecker {
 
-		int beforeStepCalled = 0;
+		int beforeStepCalled;
 
-		int beforeChunkCalled = 0;
+		int beforeChunkCalled;
 
-		int beforeWriteCalled = 0;
+		int beforeWriteCalled;
 
-		int skipInWriteCalled = 0;
+		int skipInWriteCalled;
 
 	}
 
-	private static class MultiListener
-			implements StepExecutionListener, ChunkListener, ItemWriteListener<String>, SkipListener<String, String> {
+	private static final class MultiListener
+	implements StepExecutionListener, ChunkListener, ItemWriteListener<String>, SkipListener<String, String> {
 
 		private CallChecker callChecker;
 

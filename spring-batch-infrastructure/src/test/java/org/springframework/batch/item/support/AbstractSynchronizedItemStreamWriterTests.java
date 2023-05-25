@@ -43,11 +43,11 @@ public abstract class AbstractSynchronizedItemStreamWriterTests {
 
 	private SynchronizedItemStreamWriter<Object> synchronizedItemStreamWriter;
 
-	private final Chunk<Object> testList = new Chunk<Object>();
+	private final Chunk<Object> testList = new Chunk<>();
 
 	private final ExecutionContext testExecutionContext = new ExecutionContext();
 
-	abstract protected SynchronizedItemStreamWriter<Object> createNewSynchronizedItemStreamWriter();
+	protected abstract SynchronizedItemStreamWriter<Object> createNewSynchronizedItemStreamWriter();
 
 	@BeforeEach
 	void init() {

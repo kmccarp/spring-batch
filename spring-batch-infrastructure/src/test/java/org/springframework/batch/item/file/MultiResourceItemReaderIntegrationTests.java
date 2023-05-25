@@ -425,11 +425,11 @@ class MultiResourceItemReaderIntegrationTests {
 
 	private static class ItemStreamReaderImpl implements ResourceAwareItemReaderItemStream<String> {
 
-		private boolean openCalled = false;
+		private boolean openCalled;
 
-		private boolean updateCalled = false;
+		private boolean updateCalled;
 
-		private boolean closeCalled = false;
+		private boolean closeCalled;
 
 		@Nullable
 		@Override

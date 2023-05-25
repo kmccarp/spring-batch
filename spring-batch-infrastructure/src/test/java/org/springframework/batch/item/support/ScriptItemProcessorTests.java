@@ -214,7 +214,7 @@ class ScriptItemProcessorTests {
 	void testBshScriptEvaluator() throws Exception {
 		assumeTrue(languageExists("bsh"));
 
-		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<String, Object>();
+		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setScriptEvaluator(new BshScriptEvaluator());
 		scriptItemProcessor.setScriptSource("String process(String item) { return item.toUpperCase(); } process(item);",
 				"bsh");
@@ -227,7 +227,7 @@ class ScriptItemProcessorTests {
 	void testGroovyScriptEvaluator() throws Exception {
 		assumeTrue(languageExists("groovy"));
 
-		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<String, Object>();
+		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setScriptEvaluator(new GroovyScriptEvaluator());
 		scriptItemProcessor.setScriptSource("def process(item) { return item.toUpperCase() } \n process(item)",
 				"groovy");

@@ -32,6 +32,8 @@ import org.springframework.util.ClassUtils;
 @SuppressWarnings("serial")
 public class Entity implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private Long id;
 
 	private volatile Integer version;

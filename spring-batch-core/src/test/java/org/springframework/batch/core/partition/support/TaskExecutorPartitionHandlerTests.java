@@ -34,14 +34,13 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.partition.StepExecutionSplitter;
 import org.springframework.batch.core.step.StepSupport;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.core.task.TaskRejectedException;
 
 class TaskExecutorPartitionHandlerTests {
 
 	private TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
 
-	private int count = 0;
+	private int count;
 
 	private final Collection<String> stepExecutions = new TreeSet<>();
 
@@ -111,14 +110,11 @@ class TaskExecutorPartitionHandlerTests {
 	@Test
 	void testTaskExecutorFailure() throws Exception {
 		handler.setGridSize(2);
-		handler.setTaskExecutor(new TaskExecutor() {
-			@Override
-			public void execute(Runnable task) {
-				if (count > 0) {
-					throw new TaskRejectedException("foo");
-				}
-				task.run();
+		handler.setTaskExecutor(task -> {
+			if (count > 0) {
+				throw new TaskRejectedException("foo");
 			}
+			task.run();
 		});
 		Collection<StepExecution> executions = handler.handle(stepExecutionSplitter, stepExecution);
 		new DefaultStepExecutionAggregator().aggregate(stepExecution, executions);

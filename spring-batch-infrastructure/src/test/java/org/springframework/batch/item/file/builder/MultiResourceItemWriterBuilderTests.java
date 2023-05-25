@@ -48,12 +48,7 @@ class MultiResourceItemWriterBuilderTests {
 
 	private File file;
 
-	private final ResourceSuffixCreator suffixCreator = new ResourceSuffixCreator() {
-		@Override
-		public String getSuffix(int index) {
-			return "A" + index;
-		}
-	};
+	private final ResourceSuffixCreator suffixCreator = index -> "A" + index;
 
 	private final ExecutionContext executionContext = new ExecutionContext();
 

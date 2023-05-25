@@ -27,9 +27,9 @@ package org.springframework.batch.sample.common;
  */
 public class ProcessIndicatorItemWrapper<T> {
 
-	private long id;
+	private final long id;
 
-	private T item;
+	private final T item;
 
 	public ProcessIndicatorItemWrapper(long id, T item) {
 		this.id = id;

@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,18 +74,15 @@ class RepeatOperationsInterceptorTests {
 	@Test
 	void testSetTemplate() throws Exception {
 		final List<Object> calls = new ArrayList<>();
-		interceptor.setRepeatOperations(new RepeatOperations() {
-			@Override
-			public RepeatStatus iterate(RepeatCallback callback) {
-				try {
-					Object result = callback.doInIteration(null);
-					calls.add(result);
-				}
-				catch (Exception e) {
-					throw new RepeatException("Encountered exception in repeat.", e);
-				}
-				return RepeatStatus.CONTINUABLE;
+		interceptor.setRepeatOperations(callback -> {
+			try {
+				Object result = callback.doInIteration(null);
+				calls.add(result);
 			}
+			catch (Exception e) {
+				throw new RepeatException("Encountered exception in repeat.", e);
+			}
+			return RepeatStatus.CONTINUABLE;
 		});
 		((Advised) service).addAdvice(interceptor);
 		service.service();
@@ -96,12 +92,9 @@ class RepeatOperationsInterceptorTests {
 	@Test
 	void testCallbackNotExecuted() {
 		final List<Object> calls = new ArrayList<>();
-		interceptor.setRepeatOperations(new RepeatOperations() {
-			@Override
-			public RepeatStatus iterate(RepeatCallback callback) {
-				calls.add(null);
-				return RepeatStatus.FINISHED;
-			}
+		interceptor.setRepeatOperations(callback -> {
+			calls.add(null);
+			return RepeatStatus.FINISHED;
 		});
 		((Advised) service).addAdvice(interceptor);
 		Exception exception = assertThrows(IllegalStateException.class, service::service);
@@ -161,12 +154,9 @@ class RepeatOperationsInterceptorTests {
 	void testInterceptorChainWithRetry() throws Exception {
 		((Advised) service).addAdvice(interceptor);
 		final List<Object> list = new ArrayList<>();
-		((Advised) service).addAdvice(new MethodInterceptor() {
-			@Override
-			public Object invoke(MethodInvocation invocation) throws Throwable {
-				list.add("chain");
-				return invocation.proceed();
-			}
+		((Advised) service).addAdvice(invocation -> {
+			list.add("chain");
+			return invocation.proceed();
 		});
 		RepeatTemplate template = new RepeatTemplate();
 		template.setCompletionPolicy(new SimpleCompletionPolicy(2));
@@ -231,7 +221,7 @@ class RepeatOperationsInterceptorTests {
 
 	private static class ServiceImpl implements Service {
 
-		private int count = 0;
+		private int count;
 
 		private boolean complete;
 

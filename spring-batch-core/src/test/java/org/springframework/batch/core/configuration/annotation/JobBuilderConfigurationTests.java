@@ -25,12 +25,10 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -41,7 +39,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.support.JdbcTransactionManager;
-import org.springframework.lang.Nullable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class JobBuilderConfigurationTests {
 
-	public static boolean fail = false;
+	public static boolean fail;
 
 	@Test
 	void testVanillaBatchConfiguration() throws Exception {
@@ -124,15 +121,11 @@ public class JobBuilderConfigurationTests {
 
 		@Bean
 		protected Tasklet tasklet() {
-			return new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext context) throws Exception {
-					if (fail) {
-						throw new RuntimeException("Planned!");
-					}
-					return RepeatStatus.FINISHED;
+			return (contribution, context) -> {
+				if (fail) {
+					throw new RuntimeException("Planned!");
 				}
+				return RepeatStatus.FINISHED;
 			};
 		}
 
@@ -178,14 +171,7 @@ public class JobBuilderConfigurationTests {
 
 		@Bean
 		protected Step step1(JobRepository jobRepository) throws Exception {
-			return new StepBuilder("step1", jobRepository).tasklet(new Tasklet() {
-
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-					return null;
-				}
-			}, this.transactionManager).build();
+			return new StepBuilder("step1", jobRepository).tasklet((contribution, chunkContext) -> null, this.transactionManager).build();
 		}
 
 	}

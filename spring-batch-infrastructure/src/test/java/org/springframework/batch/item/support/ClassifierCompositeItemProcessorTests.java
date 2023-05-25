@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.classify.PatternMatchingClassifier;
 import org.springframework.classify.SubclassClassifier;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Jimmy Praet
@@ -35,20 +34,8 @@ class ClassifierCompositeItemProcessorTests {
 	void testBasicClassifierCompositeItemProcessor() throws Exception {
 		ClassifierCompositeItemProcessor<String, String> processor = new ClassifierCompositeItemProcessor<>();
 
-		ItemProcessor<String, String> fooProcessor = new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				return "foo: " + item;
-			}
-		};
-		ItemProcessor<String, String> defaultProcessor = new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				return item;
-			}
-		};
+		ItemProcessor<String, String> fooProcessor = item -> "foo: " + item;
+		ItemProcessor<String, String> defaultProcessor = item -> item;
 
 		Map<String, ItemProcessor<?, ? extends String>> routingConfiguration = new HashMap<>();
 		routingConfiguration.put("foo", fooProcessor);
@@ -68,27 +55,9 @@ class ClassifierCompositeItemProcessorTests {
 	void testGenericsClassifierCompositeItemProcessor() throws Exception {
 		ClassifierCompositeItemProcessor<Number, CharSequence> processor = new ClassifierCompositeItemProcessor<>();
 
-		ItemProcessor<Integer, String> intProcessor = new ItemProcessor<Integer, String>() {
-			@Nullable
-			@Override
-			public String process(Integer item) throws Exception {
-				return "int: " + item;
-			}
-		};
-		ItemProcessor<Long, StringBuffer> longProcessor = new ItemProcessor<Long, StringBuffer>() {
-			@Nullable
-			@Override
-			public StringBuffer process(Long item) throws Exception {
-				return new StringBuffer("long: " + item);
-			}
-		};
-		ItemProcessor<Number, StringBuilder> defaultProcessor = new ItemProcessor<Number, StringBuilder>() {
-			@Nullable
-			@Override
-			public StringBuilder process(Number item) throws Exception {
-				return new StringBuilder("number: " + item);
-			}
-		};
+		ItemProcessor<Integer, String> intProcessor = item -> "int: " + item;
+		ItemProcessor<Long, StringBuffer> longProcessor = item -> new StringBuffer("long: " + item);
+		ItemProcessor<Number, StringBuilder> defaultProcessor = item -> new StringBuilder("number: " + item);
 
 		SubclassClassifier<Number, ItemProcessor<?, ? extends CharSequence>> classifier = new SubclassClassifier<>();
 		Map<Class<? extends Number>, ItemProcessor<?, ? extends CharSequence>> typeMap = new HashMap<>();

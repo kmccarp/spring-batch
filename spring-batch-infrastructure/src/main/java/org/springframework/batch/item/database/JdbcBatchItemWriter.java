@@ -16,7 +16,6 @@
 package org.springframework.batch.item.database;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +27,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -146,7 +143,7 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 		Assert.state(sql != null, "An SQL statement is required.");
 		List<String> namedParameters = new ArrayList<>();
 		parameterCount = JdbcParameterUtils.countParameterPlaceholders(sql, namedParameters);
-		if (namedParameters.size() > 0) {
+		if (!namedParameters.isEmpty()) {
 			if (parameterCount != namedParameters.size()) {
 				throw new InvalidDataAccessApiUsageException(
 						"You can't use both named parameters and classic \"?\" placeholders: " + sql);
@@ -192,17 +189,13 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 			}
 			else {
 				updateCounts = namedParameterJdbcTemplate.getJdbcOperations().execute(sql,
-						new PreparedStatementCallback<int[]>() {
-							@Override
-							public int[] doInPreparedStatement(PreparedStatement ps)
-									throws SQLException, DataAccessException {
-								for (T item : chunk) {
-									itemPreparedStatementSetter.setValues(item, ps);
-									ps.addBatch();
-								}
-								return ps.executeBatch();
-							}
-						});
+				ps -> {
+					for (T item : chunk) {
+						itemPreparedStatementSetter.setValues(item, ps);
+						ps.addBatch();
+					}
+					return ps.executeBatch();
+				});
 			}
 
 			if (assertUpdates) {

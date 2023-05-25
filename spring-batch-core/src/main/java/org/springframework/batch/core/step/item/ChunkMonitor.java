@@ -35,9 +35,9 @@ import org.springframework.batch.item.support.CompositeItemStream;
  */
 public class ChunkMonitor extends ItemStreamSupport {
 
-	private Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
-	private boolean streamsRegistered = false;
+	private boolean streamsRegistered;
 
 	public static class ChunkMonitorData {
 
@@ -54,9 +54,9 @@ public class ChunkMonitor extends ItemStreamSupport {
 
 	private static final String OFFSET = "OFFSET";
 
-	private CompositeItemStream stream = new CompositeItemStream();
+	private final CompositeItemStream stream = new CompositeItemStream();
 
-	private ThreadLocal<ChunkMonitorData> holder = new ThreadLocal<>();
+	private final ThreadLocal<ChunkMonitorData> holder = new ThreadLocal<>();
 
 	private ItemReader<?> reader;
 

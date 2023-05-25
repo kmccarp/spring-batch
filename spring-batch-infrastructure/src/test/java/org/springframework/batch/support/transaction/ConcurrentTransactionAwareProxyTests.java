@@ -41,8 +41,6 @@ import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
 
@@ -110,12 +108,7 @@ class ConcurrentTransactionAwareProxyTests {
 	@Test
 	void testTransactionalContains() {
 		final Map<Long, Map<String, String>> map = TransactionAwareProxyFactory.createAppendOnlyTransactionalMap();
-		boolean result = new TransactionTemplate(transactionManager).execute(new TransactionCallback<Boolean>() {
-			@Override
-			public Boolean doInTransaction(TransactionStatus status) {
-				return map.containsKey("foo");
-			}
-		});
+		boolean result = new TransactionTemplate(transactionManager).execute(status -> map.containsKey("foo"));
 		assertFalse(result);
 	}
 
@@ -215,12 +208,9 @@ class ConcurrentTransactionAwareProxyTests {
 
 	private String saveInSetAndAssert(final Set<String> set, final String value) {
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				set.add(value);
-				return null;
-			}
+		new TransactionTemplate(transactionManager).execute(status -> {
+			set.add(value);
+			return null;
 		});
 
 		Assert.state(set.contains(value), "Lost update: value=" + value);
@@ -231,12 +221,9 @@ class ConcurrentTransactionAwareProxyTests {
 
 	private String saveInListAndAssert(final List<String> list, final String value) {
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				list.add(value);
-				return null;
-			}
+		new TransactionTemplate(transactionManager).execute(status -> {
+			list.add(value);
+			return null;
 		});
 
 		Assert.state(list.contains(value), "Lost update: value=" + value);
@@ -248,15 +235,12 @@ class ConcurrentTransactionAwareProxyTests {
 	private Map<String, String> saveInMapAndAssert(final Map<Long, Map<String, String>> map, final Long id,
 			final String value) {
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				if (!map.containsKey(id)) {
-					map.put(id, new HashMap<>());
-				}
-				map.get(id).put("foo", value);
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			if (!map.containsKey(id)) {
+				map.put(id, new HashMap<>());
 			}
+			map.get(id).put("foo", value);
+			return null;
 		});
 
 		Map<String, String> result = map.get(id);

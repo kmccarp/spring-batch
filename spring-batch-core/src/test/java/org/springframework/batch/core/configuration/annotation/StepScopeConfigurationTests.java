@@ -197,7 +197,7 @@ public class StepScopeConfigurationTests {
 		}
 	}
 
-	public static class SimpleCallable implements Callable<String> {
+	public static final class SimpleCallable implements Callable<String> {
 
 		private final String value;
 

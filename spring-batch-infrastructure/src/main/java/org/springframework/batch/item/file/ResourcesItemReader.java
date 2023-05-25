@@ -50,7 +50,7 @@ public class ResourcesItemReader extends AbstractItemStreamItemReader<Resource> 
 
 	private Resource[] resources = new Resource[0];
 
-	private AtomicInteger counter = new AtomicInteger(0);
+	private final AtomicInteger counter = new AtomicInteger(0);
 
 	public ResourcesItemReader() {
 		/*

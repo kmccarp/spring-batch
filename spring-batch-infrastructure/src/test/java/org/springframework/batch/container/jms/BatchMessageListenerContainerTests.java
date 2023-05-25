@@ -22,7 +22,6 @@ import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageConsumer;
-import jakarta.jms.MessageListener;
 import jakarta.jms.Session;
 
 import org.aopalliance.aop.Advice;
@@ -50,10 +49,7 @@ class BatchMessageListenerContainerTests {
 		template.setCompletionPolicy(new SimpleCompletionPolicy(2));
 		container = getContainer(template);
 
-		container.setMessageListener(new MessageListener() {
-			@Override
-			public void onMessage(Message arg0) {
-			}
+		container.setMessageListener(arg0 -> {
 		});
 
 		Session session = mock(Session.class);
@@ -147,13 +143,12 @@ class BatchMessageListenerContainerTests {
 	private boolean doTestWithException(final Throwable t, boolean expectRollback, int expectGetTransactionCount)
 			throws JMSException, IllegalAccessException {
 		container.setAcceptMessagesWhileStopping(true);
-		container.setMessageListener(new MessageListener() {
-			@Override
-			public void onMessage(Message arg0) {
-				if (t instanceof RuntimeException)
-					throw (RuntimeException) t;
-				else
-					throw (Error) t;
+		container.setMessageListener(arg0 -> {
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException) t;
+			}
+			else {
+				throw (Error) t;
 			}
 		});
 
@@ -172,9 +167,7 @@ class BatchMessageListenerContainerTests {
 			session.rollback();
 		}
 
-		boolean received = doExecute(session, consumer);
-
-		return received;
+		return doExecute(session, consumer);
 	}
 
 	private boolean doExecute(Session session, MessageConsumer consumer) throws IllegalAccessException {

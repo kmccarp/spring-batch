@@ -35,12 +35,7 @@ class RecursiveCollectionItemTransformerTests {
 
 	@Test
 	void testSetDelegateAndPassInString() {
-		aggregator.setDelegate(new LineAggregator<String>() {
-			@Override
-			public String aggregate(String item) {
-				return "bar";
-			}
-		});
+		aggregator.setDelegate(item -> "bar");
 		assertEquals("bar", aggregator.aggregate(Collections.singleton("foo")));
 	}
 

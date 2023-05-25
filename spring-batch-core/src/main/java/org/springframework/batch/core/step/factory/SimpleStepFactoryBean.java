@@ -95,7 +95,7 @@ public class SimpleStepFactoryBean<T, S> implements FactoryBean<Step>, BeanNameA
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private int commitInterval = 0;
+	private int commitInterval;
 
 	private TaskExecutor taskExecutor;
 
@@ -109,7 +109,7 @@ public class SimpleStepFactoryBean<T, S> implements FactoryBean<Step>, BeanNameA
 
 	private int throttleLimit = TaskExecutorRepeatTemplate.DEFAULT_THROTTLE_LIMIT;
 
-	private boolean isReaderTransactionalQueue = false;
+	private boolean isReaderTransactionalQueue;
 
 	/**
 	 * Default constructor for {@link SimpleStepFactoryBean}.
@@ -326,8 +326,7 @@ public class SimpleStepFactoryBean<T, S> implements FactoryBean<Step>, BeanNameA
 	public final Step getObject() throws Exception {
 		SimpleStepBuilder<T, S> builder = createBuilder(getName());
 		applyConfiguration(builder);
-		TaskletStep step = builder.build();
-		return step;
+		return builder.build();
 	}
 
 	protected SimpleStepBuilder<T, S> createBuilder(String name) {

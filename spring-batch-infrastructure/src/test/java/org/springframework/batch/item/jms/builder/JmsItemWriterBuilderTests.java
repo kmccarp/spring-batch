@@ -49,7 +49,7 @@ class JmsItemWriterBuilderTests {
 	@Test
 	void testNullJmsTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new JmsItemWriterBuilder<String>().build());
+		new JmsItemWriterBuilder<String>()::build);
 		assertEquals("jmsTemplate is required.", exception.getMessage());
 	}
 

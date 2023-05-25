@@ -51,7 +51,7 @@ public class JpaItemWriter<T> implements ItemWriter<T>, InitializingBean {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	private boolean usePersist = false;
+	private boolean usePersist;
 
 	/**
 	 * Set the EntityManager to be used internally.

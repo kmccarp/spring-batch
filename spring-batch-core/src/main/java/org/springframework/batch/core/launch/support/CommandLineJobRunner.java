@@ -192,7 +192,7 @@ public class CommandLineJobRunner {
 
 	private JobRepository jobRepository;
 
-	private final static List<String> VALID_OPTS = Arrays
+	private static final List<String> VALID_OPTS = Arrays
 			.asList(new String[] { "-restart", "-next", "-stop", "-abandon" });
 
 	/**

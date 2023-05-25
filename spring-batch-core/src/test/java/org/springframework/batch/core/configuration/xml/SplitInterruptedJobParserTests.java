@@ -36,11 +36,8 @@ class SplitInterruptedJobParserTests extends AbstractJobParserTests {
 	void testSplitInterrupted() throws Exception {
 
 		final JobExecution jobExecution = createJobExecution();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				job.execute(jobExecution);
-			}
+		new Thread(() -> {
+			job.execute(jobExecution);
 		}).start();
 
 		Thread.sleep(100L);

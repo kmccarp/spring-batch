@@ -65,7 +65,7 @@ public class MongoItemWriter<T> implements ItemWriter<T>, InitializingBean {
 
 	private String collection;
 
-	private boolean delete = false;
+	private boolean delete;
 
 	public MongoItemWriter() {
 		super();

@@ -56,11 +56,8 @@ class StepSynchronizationManagerTests {
 	void testClose() {
 		final List<String> list = new ArrayList<>();
 		StepContext context = StepSynchronizationManager.register(stepExecution);
-		context.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		context.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
 		StepSynchronizationManager.close();
 		assertNull(StepSynchronizationManager.getContext());
@@ -96,11 +93,8 @@ class StepSynchronizationManagerTests {
 	void testRelease() {
 		StepContext context = StepSynchronizationManager.register(stepExecution);
 		final List<String> list = new ArrayList<>();
-		context.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		context.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
 		// On release we expect the destruction callbacks to be called
 		StepSynchronizationManager.release();

@@ -39,8 +39,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StopWatch;
@@ -75,20 +73,17 @@ class Jaxb2NamespaceMarshallingTests {
 		StopWatch stopWatch = new StopWatch(getClass().getSimpleName());
 		stopWatch.start();
 		for (int i = 0; i < MAX_WRITE; i++) {
-			new TransactionTemplate(new ResourcelessTransactionManager()).execute(new TransactionCallback<Void>() {
-				@Override
-				public Void doInTransaction(TransactionStatus status) {
-					try {
-						writer.write(objects);
-					}
-					catch (RuntimeException e) {
-						throw e;
-					}
-					catch (Exception e) {
-						throw new IllegalStateException("Exception encountered on write", e);
-					}
-					return null;
+			new TransactionTemplate(new ResourcelessTransactionManager()).execute(status -> {
+				try {
+					writer.write(objects);
 				}
+				catch (RuntimeException e) {
+					throw e;
+				}
+				catch (Exception e) {
+					throw new IllegalStateException("Exception encountered on write", e);
+				}
+				return null;
 			});
 		}
 		writer.close();

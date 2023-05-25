@@ -40,6 +40,8 @@ import org.springframework.util.Assert;
 @SuppressWarnings("serial")
 public class JobInstance extends Entity {
 
+	private static final long serialVersionUID = 1;
+
 	private final String jobName;
 
 	/**

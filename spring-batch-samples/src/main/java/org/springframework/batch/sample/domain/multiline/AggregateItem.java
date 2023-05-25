@@ -61,9 +61,9 @@ public class AggregateItem<T> {
 
 	private T item;
 
-	private boolean footer = false;
+	private boolean footer;
 
-	private boolean header = false;
+	private boolean header;
 
 	/**
 	 * @param item the item to wrap

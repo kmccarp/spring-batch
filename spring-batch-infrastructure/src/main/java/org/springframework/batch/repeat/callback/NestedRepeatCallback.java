@@ -31,9 +31,9 @@ import org.springframework.batch.repeat.RepeatStatus;
  */
 public class NestedRepeatCallback implements RepeatCallback {
 
-	private RepeatOperations template;
+	private final RepeatOperations template;
 
-	private RepeatCallback callback;
+	private final RepeatCallback callback;
 
 	/**
 	 * Constructor setting mandatory fields.

@@ -128,9 +128,9 @@ class ItemCountingItemStreamItemReaderTests {
 
 	private static class ItemCountingItemStreamItemReader extends AbstractItemCountingItemStreamItemReader<String> {
 
-		private boolean closeCalled = false;
+		private boolean closeCalled;
 
-		private boolean openCalled = false;
+		private boolean openCalled;
 
 		private Iterator<String> items = Arrays.asList("a", "b", "c").iterator();
 

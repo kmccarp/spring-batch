@@ -64,7 +64,7 @@ import static org.springframework.batch.support.DatabaseType.SYBASE;
  */
 public class DefaultDataFieldMaxValueIncrementerFactory implements DataFieldMaxValueIncrementerFactory {
 
-	private DataSource dataSource;
+	private final DataSource dataSource;
 
 	private String incrementerColumnName = "ID";
 

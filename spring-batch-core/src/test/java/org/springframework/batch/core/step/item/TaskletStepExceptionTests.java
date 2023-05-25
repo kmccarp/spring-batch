@@ -106,13 +106,9 @@ class TaskletStepExceptionTests {
 
 	@Test
 	void testInterruptedWithCustomStatus() throws Exception {
-		taskletStep.setTasklet(new Tasklet() {
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-				contribution.setExitStatus(new ExitStatus("FUNNY"));
-				throw new JobInterruptedException("Planned");
-			}
+		taskletStep.setTasklet((contribution, chunkContext) -> {
+			contribution.setExitStatus(new ExitStatus("FUNNY"));
+			throw new JobInterruptedException("Planned");
 		});
 		taskletStep.execute(stepExecution);
 		assertEquals(STOPPED, stepExecution.getStatus());
@@ -162,15 +158,7 @@ class TaskletStepExceptionTests {
 				throw exception;
 			}
 		} });
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 		taskletStep.execute(stepExecution);
 		assertEquals(COMPLETED, stepExecution.getStatus());
 		assertFalse(stepExecution.getFailureExceptions().contains(exception));
@@ -232,15 +220,9 @@ class TaskletStepExceptionTests {
 			}
 		});
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				attributes.getStepContext().getStepExecution().getExecutionContext().putString("foo", "bar");
-				return RepeatStatus.FINISHED;
-			}
-
+		taskletStep.setTasklet((contribution, attributes) -> {
+			attributes.getStepContext().getStepExecution().getExecutionContext().putString("foo", "bar");
+			return RepeatStatus.FINISHED;
 		});
 
 		taskletStep.execute(stepExecution);
@@ -267,15 +249,9 @@ class TaskletStepExceptionTests {
 			}
 		});
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				attributes.getStepContext().getStepExecution().getExecutionContext().putString("foo", "bar");
-				return RepeatStatus.FINISHED;
-			}
-
+		taskletStep.setTasklet((contribution, attributes) -> {
+			attributes.getStepContext().getStepExecution().getExecutionContext().putString("foo", "bar");
+			return RepeatStatus.FINISHED;
 		});
 
 		taskletStep.execute(stepExecution);
@@ -294,15 +270,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnExecutionContext() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		jobRepository.setFailOnUpdateExecutionContext(true);
 		taskletStep.execute(stepExecution);
@@ -315,15 +283,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnExecutionContextInTransaction() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		jobRepository.setFailOnUpdateExecutionContext(true);
 		jobRepository.setFailInTransaction(true);
@@ -337,15 +297,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnExecutionContextInTransactionRollbackFailed() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		taskletStep.setTransactionManager(new FailingRollbackTransactionManager());
 
@@ -361,15 +313,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnUpdateStepExecution() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		jobRepository.setFailOnUpdateStepExecution(2);
 		taskletStep.execute(stepExecution);
@@ -382,15 +326,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnUpdateStepExecutionInTransaction() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		jobRepository.setFailOnUpdateStepExecution(1);
 		jobRepository.setFailInTransaction(true);
@@ -404,15 +340,7 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnUpdateStepExecutionInTransactionRollbackFailed() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				return RepeatStatus.FINISHED;
-			}
-
-		});
+		taskletStep.setTasklet((contribution, attributes) -> RepeatStatus.FINISHED);
 
 		taskletStep.setTransactionManager(new FailingRollbackTransactionManager());
 
@@ -428,14 +356,8 @@ class TaskletStepExceptionTests {
 	@Test
 	void testRepositoryErrorOnFailure() throws Exception {
 
-		taskletStep.setTasklet(new Tasklet() {
-
-			@Nullable
-			@Override
-			public RepeatStatus execute(StepContribution contribution, ChunkContext attributes) throws Exception {
-				throw new RuntimeException("Tasklet exception");
-			}
-
+		taskletStep.setTasklet((contribution, attributes) -> {
+			throw new RuntimeException("Tasklet exception");
 		});
 
 		jobRepository.setFailOnUpdateExecutionContext(true);
@@ -490,13 +412,13 @@ class TaskletStepExceptionTests {
 
 	private static class UpdateCountingJobRepository implements JobRepository {
 
-		private int updateCount = 0;
+		private int updateCount;
 
-		private boolean failOnUpdateContext = false;
+		private boolean failOnUpdateContext;
 
 		private int failOnUpdateExecution = -1;
 
-		private boolean failInTransaction = false;
+		private boolean failInTransaction;
 
 		public void setFailOnUpdateExecutionContext(boolean failOnUpdate) {
 			this.failOnUpdateContext = failOnUpdate;
@@ -592,6 +514,8 @@ class TaskletStepExceptionTests {
 	}
 
 	private static class FailingRollbackTransactionManager extends ResourcelessTransactionManager {
+
+		private static final long serialVersionUID = 1;
 
 		@Override
 		protected void doRollback(DefaultTransactionStatus status) throws TransactionException {

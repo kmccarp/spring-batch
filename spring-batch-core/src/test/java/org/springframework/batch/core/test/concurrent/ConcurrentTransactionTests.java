@@ -29,7 +29,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -37,9 +36,7 @@ import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
-import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -54,7 +51,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseConfigurer;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.jdbc.support.JdbcTransactionManager;
-import org.springframework.lang.Nullable;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -100,45 +96,23 @@ class ConcurrentTransactionTests {
 		@Bean
 		public Flow flow(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new FlowBuilder<Flow>("flow")
-					.start(new StepBuilder("flow.step1", jobRepository).tasklet(new Tasklet() {
-						@Nullable
-						@Override
-						public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-								throws Exception {
-							return RepeatStatus.FINISHED;
-						}
-					}, transactionManager).build())
-					.next(new StepBuilder("flow.step2", jobRepository).tasklet(new Tasklet() {
-						@Nullable
-						@Override
-						public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-								throws Exception {
-							return RepeatStatus.FINISHED;
-						}
-					}, transactionManager).build()).build();
+					.start(new StepBuilder("flow.step1", jobRepository).tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
+					.next(new StepBuilder("flow.step2", jobRepository).tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build()).build();
 		}
 
 		@Bean
 		public Step firstStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-			return new StepBuilder("firstStep", jobRepository).tasklet(new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-					System.out.println(">> Beginning concurrent job test");
-					return RepeatStatus.FINISHED;
-				}
+			return new StepBuilder("firstStep", jobRepository).tasklet((contribution, chunkContext) -> {
+				System.out.println(">> Beginning concurrent job test");
+				return RepeatStatus.FINISHED;
 			}, transactionManager).build();
 		}
 
 		@Bean
 		public Step lastStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-			return new StepBuilder("lastStep", jobRepository).tasklet(new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-					System.out.println(">> Ending concurrent job test");
-					return RepeatStatus.FINISHED;
-				}
+			return new StepBuilder("lastStep", jobRepository).tasklet((contribution, chunkContext) -> {
+				System.out.println(">> Ending concurrent job test");
+				return RepeatStatus.FINISHED;
 			}, transactionManager).build();
 		}
 

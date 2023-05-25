@@ -18,8 +18,6 @@ package org.springframework.batch.repeat.callback;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.batch.repeat.RepeatCallback;
-import org.springframework.batch.repeat.RepeatContext;
 import org.springframework.batch.repeat.support.RepeatTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,16 +25,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class NestedRepeatCallbackTests {
 
-	private int count = 0;
+	private int count;
 
 	@Test
 	void testExecute() throws Exception {
-		NestedRepeatCallback callback = new NestedRepeatCallback(new RepeatTemplate(), new RepeatCallback() {
-			@Override
-			public RepeatStatus doInIteration(RepeatContext context) throws Exception {
-				count++;
-				return RepeatStatus.continueIf(count <= 1);
-			}
+		NestedRepeatCallback callback = new NestedRepeatCallback(new RepeatTemplate(), context -> {
+			count++;
+			return RepeatStatus.continueIf(count <= 1);
 		});
 		RepeatStatus result = callback.doInIteration(null);
 		assertEquals(2, count);

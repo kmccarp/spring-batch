@@ -44,20 +44,20 @@ public class MultiLineTradeItemReader implements ItemReader<Trade>, ItemStream {
 
 		for (FieldSet line; (line = this.delegate.read()) != null;) {
 			String prefix = line.readString(0);
-			if (prefix.equals("BEGIN")) {
+			if ("BEGIN".equals(prefix)) {
 				t = new Trade(); // Record must start with 'BEGIN'
 			}
-			else if (prefix.equals("INFO")) {
+			else if ("INFO".equals(prefix)) {
 				Assert.notNull(t, "No 'BEGIN' was found.");
 				t.setIsin(line.readString(1));
 				t.setCustomer(line.readString(2));
 			}
-			else if (prefix.equals("AMNT")) {
+			else if ("AMNT".equals(prefix)) {
 				Assert.notNull(t, "No 'BEGIN' was found.");
 				t.setQuantity(line.readInt(1));
 				t.setPrice(line.readBigDecimal(2));
 			}
-			else if (prefix.equals("END")) {
+			else if ("END".equals(prefix)) {
 				return t; // Record must end with 'END'
 			}
 		}

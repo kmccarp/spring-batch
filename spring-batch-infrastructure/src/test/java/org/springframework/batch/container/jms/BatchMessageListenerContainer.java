@@ -65,10 +65,10 @@ public class BatchMessageListenerContainer extends DefaultMessageListenerContain
 
 	private Advice[] advices = new Advice[0];
 
-	private ContainerDelegate delegate = new ContainerDelegate() {
+	private final ContainerDelegate delegate = new ContainerDelegate() {
 		@Override
 		public boolean receiveAndExecute(Object invoker, Session session, MessageConsumer consumer)
-				throws JMSException {
+		throws JMSException {
 			return BatchMessageListenerContainer.super.receiveAndExecute(invoker, session, consumer);
 		}
 	};

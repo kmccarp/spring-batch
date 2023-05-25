@@ -32,9 +32,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 @SpringJUnitConfig
 public class JobExecutionListenerMethodAttributeParserTests {
 
-	public static boolean beforeCalled = false;
+	public static boolean beforeCalled;
 
-	public static boolean afterCalled = false;
+	public static boolean afterCalled;
 
 	@Autowired
 	Job job;

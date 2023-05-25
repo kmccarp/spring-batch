@@ -53,33 +53,33 @@ import org.springframework.core.task.TaskExecutor;
  */
 public class FlowBuilder<Q> {
 
-	private String name;
+	private final String name;
 
-	private String prefix;
+	private final String prefix;
 
-	private List<StateTransition> transitions = new ArrayList<>();
+	private final List<StateTransition> transitions = new ArrayList<>();
 
-	private Map<String, State> tos = new HashMap<>();
+	private final Map<String, State> tos = new HashMap<>();
 
 	private State currentState;
 
-	private EndState failedState;
+	private final EndState failedState;
 
-	private EndState completedState;
+	private final EndState completedState;
 
-	private EndState stoppedState;
+	private final EndState stoppedState;
 
-	private int stepCounter = 0;
+	private int stepCounter;
 
-	private int flowCounter = 0;
+	private int flowCounter;
 
-	private int decisionCounter = 0;
+	private int decisionCounter;
 
-	private int splitCounter = 0;
+	private int splitCounter;
 
-	private int endCounter = 0;
+	private int endCounter;
 
-	private Map<Object, State> states = new HashMap<>();
+	private final Map<Object, State> states = new HashMap<>();
 
 	private SimpleFlow flow;
 

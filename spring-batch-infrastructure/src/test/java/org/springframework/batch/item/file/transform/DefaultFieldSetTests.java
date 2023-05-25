@@ -468,7 +468,7 @@ class DefaultFieldSetTests {
 	@Test
 	void testPropertiesWithNoNames() {
 		assertThrows(IllegalStateException.class,
-				() -> new DefaultFieldSet(new String[] { "foo", "bar" }).getProperties());
+		new DefaultFieldSet(new String[]{"foo", "bar"})::getProperties);
 	}
 
 	@Test

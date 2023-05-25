@@ -235,9 +235,9 @@ class JobListenerFactoryBeanTests {
 
 	private class JobListenerWithInterface implements JobExecutionListener {
 
-		boolean beforeJobCalled = false;
+		boolean beforeJobCalled;
 
-		boolean afterJobCalled = false;
+		boolean afterJobCalled;
 
 		@Override
 		public void afterJob(JobExecution jobExecution) {
@@ -253,9 +253,9 @@ class JobListenerFactoryBeanTests {
 
 	private class AnnotatedTestClass {
 
-		boolean beforeJobCalled = false;
+		boolean beforeJobCalled;
 
-		boolean afterJobCalled = false;
+		boolean afterJobCalled;
 
 		@BeforeJob
 		public void before() {

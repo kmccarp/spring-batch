@@ -72,9 +72,9 @@ public class LdifReader extends AbstractItemCountingItemStreamItemReader<LdapAtt
 
 	private LdifParser ldifParser;
 
-	private int recordCount = 0;
+	private int recordCount;
 
-	private int recordsToSkip = 0;
+	private int recordsToSkip;
 
 	private boolean strict = true;
 
@@ -124,8 +124,9 @@ public class LdifReader extends AbstractItemCountingItemStreamItemReader<LdapAtt
 
 	@Override
 	protected void doOpen() throws Exception {
-		if (resource == null)
+		if (resource == null) {
 			throw new IllegalStateException("A resource has not been set.");
+		}
 
 		if (!resource.exists()) {
 			if (strict) {

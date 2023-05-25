@@ -32,8 +32,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.JdbcTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -65,7 +63,7 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 
 	private boolean ignoreFailedDrop = true;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 	/**
 	 * Main method as convenient entry point.
@@ -84,8 +82,9 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 	}
 
 	public void doDestroy() {
-		if (destroyScripts == null)
+		if (destroyScripts == null) {
 			return;
+		}
 		for (int i = 0; i < destroyScripts.length; i++) {
 			Resource destroyScript = destroyScripts[i];
 			try {
@@ -122,43 +121,38 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 	}
 
 	private void doExecuteScript(final Resource scriptResource) {
-		if (scriptResource == null || !scriptResource.exists())
+		if (scriptResource == null || !scriptResource.exists()) {
 			return;
+		}
 		final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		TransactionTemplate transactionTemplate = new TransactionTemplate(new JdbcTransactionManager(dataSource));
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-
-			@Override
-			@SuppressWarnings("unchecked")
-			public Void doInTransaction(TransactionStatus status) {
-				String[] scripts;
-				try {
-					scripts = StringUtils.delimitedListToStringArray(
-							stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
-				}
-				catch (IOException e) {
-					throw new BeanInitializationException("Cannot load script from [" + scriptResource + "]", e);
-				}
-				for (int i = 0; i < scripts.length; i++) {
-					String script = scripts[i].trim();
-					if (StringUtils.hasText(script)) {
-						try {
-							jdbcTemplate.execute(script);
+		transactionTemplate.execute(status -> {
+			String[] scripts;
+			try {
+				scripts = StringUtils.delimitedListToStringArray(
+				stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
+			}
+			catch (IOException e) {
+				throw new BeanInitializationException("Cannot load script from [" + scriptResource + "]", e);
+			}
+			for (int i = 0; i < scripts.length; i++) {
+				String script = scripts[i].trim();
+				if (StringUtils.hasText(script)) {
+					try {
+						jdbcTemplate.execute(script);
+					}
+					catch (DataAccessException e) {
+						if (ignoreFailedDrop && script.toLowerCase().startsWith("drop")) {
+							logger.debug("DROP script failed (ignoring): " + script);
 						}
-						catch (DataAccessException e) {
-							if (ignoreFailedDrop && script.toLowerCase().startsWith("drop")) {
-								logger.debug("DROP script failed (ignoring): " + script);
-							}
-							else {
-								throw e;
-							}
+						else {
+							throw e;
 						}
 					}
 				}
-				return null;
 			}
-
+			return null;
 		});
 
 	}

@@ -86,17 +86,14 @@ class TransactionalStaxEventItemWriterTests {
 	@Test
 	void testWriteAndFlush() throws Exception {
 		writer.open(executionContext);
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				try {
-					writer.write(items);
-				}
-				catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				writer.write(items);
 			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			return null;
 		});
 		writer.close();
 		String content = outputFileContent();
@@ -151,7 +148,7 @@ class TransactionalStaxEventItemWriterTests {
 		});
 		writer.close();
 		String content = outputFileContent();
-		assertEquals(1, StringUtils.countOccurrencesOf(content, ("<header/>")), "Wrong content: " + content);
+		assertEquals(1, StringUtils.countOccurrencesOf(content, "<header/>"), "Wrong content: " + content);
 		assertEquals(1, StringUtils.countOccurrencesOf(content, TEST_STRING), "Wrong content: " + content);
 	}
 
@@ -204,7 +201,7 @@ class TransactionalStaxEventItemWriterTests {
 				}));
 		writer.close();
 		String content = outputFileContent();
-		assertEquals(1, StringUtils.countOccurrencesOf(content, ("<header/>")), "Wrong content: " + content);
+		assertEquals(1, StringUtils.countOccurrencesOf(content, "<header/>"), "Wrong content: " + content);
 		assertEquals(1, StringUtils.countOccurrencesOf(content, TEST_STRING), "Wrong content: " + content);
 	}
 

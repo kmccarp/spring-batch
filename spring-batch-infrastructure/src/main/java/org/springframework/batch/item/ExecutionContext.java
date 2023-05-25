@@ -39,7 +39,9 @@ import org.springframework.lang.Nullable;
 @SuppressWarnings("serial")
 public class ExecutionContext implements Serializable {
 
-	private volatile boolean dirty = false;
+	private static final long serialVersionUID = 1;
+
+	private volatile boolean dirty;
 
 	private final Map<String, Object> map;
 

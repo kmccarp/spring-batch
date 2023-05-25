@@ -16,7 +16,6 @@
 package org.springframework.batch.item.file;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Writer;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -117,11 +116,8 @@ public class MultiResourceItemWriterFlatFileTests extends AbstractMultiResourceI
 	@Test
 	void testMultiResourceWriteScenarioWithFooter() throws Exception {
 
-		delegate.setFooterCallback(new FlatFileFooterCallback() {
-			@Override
-			public void writeFooter(Writer writer) throws IOException {
-				writer.write("f");
-			}
+		delegate.setFooterCallback(writer -> {
+			writer.write("f");
 		});
 		super.setUp(delegate);
 		tested.open(executionContext);
@@ -145,11 +141,8 @@ public class MultiResourceItemWriterFlatFileTests extends AbstractMultiResourceI
 	@Test
 	void testTransactionalMultiResourceWriteScenarioWithFooter() throws Exception {
 
-		delegate.setFooterCallback(new FlatFileFooterCallback() {
-			@Override
-			public void writeFooter(Writer writer) throws IOException {
-				writer.write("f");
-			}
+		delegate.setFooterCallback(writer -> {
+			writer.write("f");
 		});
 		super.setUp(delegate);
 		tested.open(executionContext);
@@ -206,11 +199,8 @@ public class MultiResourceItemWriterFlatFileTests extends AbstractMultiResourceI
 	@Test
 	void testRestartWithFooter() throws Exception {
 
-		delegate.setFooterCallback(new FlatFileFooterCallback() {
-			@Override
-			public void writeFooter(Writer writer) throws IOException {
-				writer.write("f");
-			}
+		delegate.setFooterCallback(writer -> {
+			writer.write("f");
 		});
 
 		super.setUp(delegate);
@@ -244,11 +234,8 @@ public class MultiResourceItemWriterFlatFileTests extends AbstractMultiResourceI
 	@Test
 	void testTransactionalRestartWithFooter() throws Exception {
 
-		delegate.setFooterCallback(new FlatFileFooterCallback() {
-			@Override
-			public void writeFooter(Writer writer) throws IOException {
-				writer.write("f");
-			}
+		delegate.setFooterCallback(writer -> {
+			writer.write("f");
 		});
 		super.setUp(delegate);
 		tested.open(executionContext);

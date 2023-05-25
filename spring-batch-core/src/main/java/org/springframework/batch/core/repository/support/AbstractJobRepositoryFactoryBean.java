@@ -18,7 +18,6 @@ package org.springframework.batch.core.repository.support;
 
 import java.util.Properties;
 
-import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
@@ -56,7 +55,7 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 
 	private TransactionAttributeSource transactionAttributeSource;
 
-	private ProxyFactory proxyFactory = new ProxyFactory();
+	private final ProxyFactory proxyFactory = new ProxyFactory();
 
 	private String isolationLevelForCreate = DEFAULT_ISOLATION_LEVEL;
 
@@ -197,15 +196,12 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 		TransactionInterceptor advice = new TransactionInterceptor((TransactionManager) this.transactionManager,
 				this.transactionAttributeSource);
 		if (this.validateTransactionState) {
-			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(new MethodInterceptor() {
-				@Override
-				public Object invoke(MethodInvocation invocation) throws Throwable {
-					if (TransactionSynchronizationManager.isActualTransactionActive()) {
-						throw new IllegalStateException("Existing transaction detected in JobRepository. "
-								+ "Please fix this and try again (e.g. remove @Transactional annotations from client).");
-					}
-					return invocation.proceed();
+			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(invocation -> {
+				if (TransactionSynchronizationManager.isActualTransactionActive()) {
+					throw new IllegalStateException("Existing transaction detected in JobRepository. "
+					+ "Please fix this and try again (e.g. remove @Transactional annotations from client).");
 				}
+				return invocation.proceed();
 			});
 			NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
 			pointcut.addMethodName("create*");

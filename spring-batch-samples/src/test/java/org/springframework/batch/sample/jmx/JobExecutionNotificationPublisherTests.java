@@ -16,8 +16,6 @@
 package org.springframework.batch.sample.jmx;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.jmx.export.notification.NotificationPublisher;
-import org.springframework.jmx.export.notification.UnableToSendNotificationException;
 
 import javax.management.Notification;
 import java.util.ArrayList;
@@ -40,11 +38,8 @@ class JobExecutionNotificationPublisherTests {
 	void testRepeatOperationsOpenUsed() {
 		final List<Notification> list = new ArrayList<>();
 
-		publisher.setNotificationPublisher(new NotificationPublisher() {
-			@Override
-			public void sendNotification(Notification notification) throws UnableToSendNotificationException {
-				list.add(notification);
-			}
+		publisher.setNotificationPublisher(notification -> {
+			list.add(notification);
 		});
 
 		publisher.onApplicationEvent(new SimpleMessageApplicationEvent(this, "foo"));

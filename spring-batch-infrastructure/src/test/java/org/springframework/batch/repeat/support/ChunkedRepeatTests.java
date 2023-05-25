@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class ChunkedRepeatTests extends AbstractTradeBatchTests {
 
-	private int count = 0;
+	private int count;
 
 	/**
 	 * Chunking using a dedicated TerminationPolicy. Transactions would be laid on at the
@@ -122,9 +122,9 @@ class ChunkedRepeatTests extends AbstractTradeBatchTests {
 
 		class Chunker {
 
-			boolean ready = false;
+			boolean ready;
 
-			int count = 0;
+			int count;
 
 			void set() {
 				ready = true;
@@ -159,8 +159,9 @@ class ChunkedRepeatTests extends AbstractTradeBatchTests {
 				@Nullable
 				@Override
 				public Trade read() throws Exception {
-					if (count++ < 2)
+					if (count++ < 2) {
 						return provider.read();
+					}
 					return null;
 				}
 			};

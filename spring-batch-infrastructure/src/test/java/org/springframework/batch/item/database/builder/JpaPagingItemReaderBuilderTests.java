@@ -196,7 +196,7 @@ class JpaPagingItemReaderBuilderTests {
 		Exception exception = assertThrows(IllegalArgumentException.class, builder::build);
 		assertEquals("pageSize must be greater than zero", exception.getMessage());
 
-		builder = new JpaPagingItemReaderBuilder<Foo>();
+		builder = new JpaPagingItemReaderBuilder<>();
 		exception = assertThrows(IllegalArgumentException.class, builder::build);
 		assertEquals("An EntityManagerFactory is required", exception.getMessage());
 

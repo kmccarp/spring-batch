@@ -51,7 +51,7 @@ public class FlatFileItemWriterBuilder<T> {
 
 	private WritableResource resource;
 
-	private boolean forceSync = false;
+	private boolean forceSync;
 
 	private String lineSeparator = FlatFileItemWriter.DEFAULT_LINE_SEPARATOR;
 
@@ -61,9 +61,9 @@ public class FlatFileItemWriterBuilder<T> {
 
 	private boolean shouldDeleteIfExists = true;
 
-	private boolean append = false;
+	private boolean append;
 
-	private boolean shouldDeleteIfEmpty = false;
+	private boolean shouldDeleteIfEmpty;
 
 	private FlatFileHeaderCallback headerCallback;
 
@@ -283,9 +283,9 @@ public class FlatFileItemWriterBuilder<T> {
 
 		private Locale locale = Locale.getDefault();
 
-		private int maximumLength = 0;
+		private int maximumLength;
 
-		private int minimumLength = 0;
+		private int minimumLength;
 
 		private FieldExtractor<T> fieldExtractor;
 

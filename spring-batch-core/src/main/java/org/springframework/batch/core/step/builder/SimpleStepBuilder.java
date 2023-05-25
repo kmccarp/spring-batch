@@ -77,7 +77,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 
 	private ItemProcessor<? super I, ? extends O> processor;
 
-	private int chunkSize = 0;
+	private int chunkSize;
 
 	private RepeatOperations chunkOperations;
 
@@ -85,7 +85,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 
 	private Set<StepListener> itemListeners = new LinkedHashSet<>();
 
-	private boolean readerTransactionalQueue = false;
+	private boolean readerTransactionalQueue;
 
 	private MeterRegistry meterRegistry = Metrics.globalRegistry;
 
@@ -270,7 +270,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 		itemListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), OnProcessError.class));
 		itemListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), OnWriteError.class));
 
-		if (itemListenerMethods.size() > 0) {
+		if (!itemListenerMethods.isEmpty()) {
 			StepListenerFactoryBean factory = new StepListenerFactoryBean();
 			factory.setDelegate(listener);
 			itemListeners.add((StepListener) factory.getObject());

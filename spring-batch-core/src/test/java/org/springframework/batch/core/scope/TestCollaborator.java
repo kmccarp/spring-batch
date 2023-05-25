@@ -21,6 +21,8 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class TestCollaborator implements Collaborator, Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private String name;
 
 	private Collaborator parent;

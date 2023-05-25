@@ -91,20 +91,17 @@ public class AsyncJobScopeIntegrationTests implements BeanFactoryAware {
 		for (int i = 0; i < 12; i++) {
 			final String value = "foo" + i;
 			final Long id = 123L + i;
-			FutureTask<String> task = new FutureTask<>(new Callable<String>() {
-				@Override
-				public String call() throws Exception {
-					JobExecution jobExecution = new JobExecution(id);
-					ExecutionContext executionContext = jobExecution.getExecutionContext();
-					executionContext.put("foo", value);
-					JobContext context = JobSynchronizationManager.register(jobExecution);
-					logger.debug("Registered: " + context.getJobExecutionContext());
-					try {
-						return simple.getName();
-					}
-					finally {
-						JobSynchronizationManager.close();
-					}
+			FutureTask<String> task = new FutureTask<>(() -> {
+				JobExecution jobExecution = new JobExecution(id);
+				ExecutionContext executionContext = jobExecution.getExecutionContext();
+				executionContext.put("foo", value);
+				JobContext context = JobSynchronizationManager.register(jobExecution);
+				logger.debug("Registered: " + context.getJobExecutionContext());
+				try {
+					return simple.getName();
+				}
+				finally {
+					JobSynchronizationManager.close();
 				}
 			});
 			tasks.add(task);

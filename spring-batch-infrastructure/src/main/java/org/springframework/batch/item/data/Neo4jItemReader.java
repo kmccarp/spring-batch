@@ -173,8 +173,8 @@ public class Neo4jItemReader<T> extends AbstractPaginatedDataItemReader<T> imple
 		query.append(whereStatement != null ? " WHERE " + whereStatement : "");
 		query.append(" RETURN ").append(returnStatement);
 		query.append(" ORDER BY ").append(orderByStatement);
-		query.append(" SKIP " + (pageSize * page));
-		query.append(" LIMIT " + pageSize);
+		query.append(" SKIP ").append(pageSize * page);
+		query.append(" LIMIT ").append(pageSize);
 
 		String resultingQuery = query.toString();
 

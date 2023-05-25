@@ -69,7 +69,7 @@ public class FlowJobTests {
 
 	private JobExplorer jobExplorer;
 
-	private boolean fail = false;
+	private boolean fail;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -693,7 +693,7 @@ public class FlowJobTests {
 	 * @author Dave Syer
 	 *
 	 */
-	private class StubStep extends StepSupport {
+	private final class StubStep extends StepSupport {
 
 		private StubStep(String name) {
 			super(name);

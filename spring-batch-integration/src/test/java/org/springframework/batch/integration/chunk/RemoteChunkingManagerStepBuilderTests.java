@@ -228,7 +228,7 @@ class RemoteChunkingManagerStepBuilderTests {
 
 		ItemProcessor<String, String> itemProcessor = item -> {
 			System.out.println("processing item " + item);
-			if (item.equals("b")) {
+			if ("b".equals(item)) {
 				throw new Exception("b was found");
 			}
 			else {

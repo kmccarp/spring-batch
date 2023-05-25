@@ -50,7 +50,7 @@ public class SybasePagingQueryProvider extends SqlWindowingPagingQueryProvider {
 	}
 
 	private String buildTopClause(int pageSize) {
-		return new StringBuilder().append("TOP ").append(pageSize).toString();
+		return "TOP " + pageSize;
 	}
 
 }

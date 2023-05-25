@@ -28,7 +28,6 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.lang.Nullable;
 import org.springframework.retry.RecoveryCallback;
 import org.springframework.retry.RetryCallback;
 import org.springframework.retry.RetryContext;
@@ -65,14 +64,10 @@ class ExternalRetryTests {
 		getMessages(); // drain queue
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_BARS");
 		jmsTemplate.convertAndSend("queue", "foo");
-		provider = new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() {
-				String text = (String) jmsTemplate.receiveAndConvert("queue");
-				list.add(text);
-				return text;
-			}
+		provider = () -> {
+			String text = (String) jmsTemplate.receiveAndConvert("queue");
+			list.add(text);
+			return text;
 		};
 		retryTemplate = new RetryTemplate();
 	}
@@ -95,20 +90,17 @@ class ExternalRetryTests {
 
 		assertInitialState();
 
-		final ItemWriter<Object> writer = new ItemWriter<Object>() {
-			@Override
-			public void write(final Chunk<?> texts) {
+		final ItemWriter<Object> writer = texts -> {
 
-				for (Object text : texts) {
+			for (Object text : texts) {
 
-					jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(), text);
-					if (list.size() == 1) {
-						throw new RuntimeException("Rollback!");
-					}
-
+				jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(), text);
+				if (list.size() == 1) {
+					throw new RuntimeException("Rollback!");
 				}
 
 			}
+
 		};
 
 		Exception exception = assertThrows(Exception.class,
@@ -130,23 +122,17 @@ class ExternalRetryTests {
 		// Client of retry template has to take care of rollback. This would
 		// be a message listener container in the MDP case.
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Object>() {
-			@Override
-			public Object doInTransaction(TransactionStatus status) {
-				try {
-					final String item = provider.read();
-					RetryCallback<Object, Exception> callback = new RetryCallback<Object, Exception>() {
-						@Override
-						public Object doWithRetry(RetryContext context) throws Exception {
-							writer.write(Chunk.of(item));
-							return null;
-						}
-					};
-					return retryTemplate.execute(callback, new DefaultRetryState(item));
-				}
-				catch (Exception e) {
-					throw new RuntimeException(e.getMessage(), e);
-				}
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				final String item = provider.read();
+				RetryCallback<Object, Exception> callback = context -> {
+					writer.write(Chunk.of(item));
+					return null;
+				};
+				return retryTemplate.execute(callback, new DefaultRetryState(item));
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
 		});
 
@@ -169,20 +155,14 @@ class ExternalRetryTests {
 		assertInitialState();
 
 		final String item = provider.read();
-		final RetryCallback<String, Exception> callback = new RetryCallback<String, Exception>() {
-			@Override
-			public String doWithRetry(RetryContext context) throws Exception {
-				jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(), item);
-				throw new RuntimeException("Rollback!");
-			}
+		final RetryCallback<String, Exception> callback = context -> {
+			jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(), item);
+			throw new RuntimeException("Rollback!");
 		};
 
-		final RecoveryCallback<String> recoveryCallback = new RecoveryCallback<String>() {
-			@Override
-			public String recover(RetryContext context) {
-				recovered.add(item);
-				return item;
-			}
+		final RecoveryCallback<String> recoveryCallback = context -> {
+			recovered.add(item);
+			return item;
 		};
 
 		String result = "start";
@@ -203,8 +183,9 @@ class ExternalRetryTests {
 			}
 			catch (Exception e) {
 
-				if (i < 3)
+				if (i < 3) {
 					assertEquals("Rollback!", e.getMessage());
+				}
 
 				// Client of retry template has to take care of rollback. This
 				// would
@@ -234,8 +215,9 @@ class ExternalRetryTests {
 		List<String> msgs = new ArrayList<>();
 		while (next != null) {
 			next = (String) jmsTemplate.receiveAndConvert("queue");
-			if (next != null)
+			if (next != null) {
 				msgs.add(next);
+			}
 		}
 		return msgs;
 	}

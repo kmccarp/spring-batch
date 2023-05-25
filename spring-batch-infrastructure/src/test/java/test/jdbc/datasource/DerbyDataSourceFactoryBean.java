@@ -26,7 +26,7 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
 
 public class DerbyDataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 
-	private static Log logger = LogFactory.getLog(DerbyDataSourceFactoryBean.class);
+	private static final Log logger = LogFactory.getLog(DerbyDataSourceFactoryBean.class);
 
 	private String dataDirectory = "target/derby-home";
 

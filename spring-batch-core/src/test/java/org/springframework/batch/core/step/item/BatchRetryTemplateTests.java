@@ -43,7 +43,7 @@ class BatchRetryTemplateTests {
 
 	}
 
-	private int count = 0;
+	private int count;
 
 	private List<String> outputs = new ArrayList<>();
 
@@ -52,13 +52,10 @@ class BatchRetryTemplateTests {
 
 		BatchRetryTemplate template = new BatchRetryTemplate();
 
-		String result = template.execute(new RetryCallback<String, Exception>() {
-			@Override
-			public String doWithRetry(RetryContext context) throws Exception {
-				assertTrue(context.getClass().getSimpleName().contains("Batch"),
-						"Wrong context type: " + context.getClass().getSimpleName());
-				return "2";
-			}
+		String result = template.execute(context -> {
+			assertTrue(context.getClass().getSimpleName().contains("Batch"),
+			"Wrong context type: " + context.getClass().getSimpleName());
+			return "2";
 		}, Arrays.<RetryState>asList(new DefaultRetryState("1")));
 
 		assertEquals("2", result);
@@ -70,18 +67,15 @@ class BatchRetryTemplateTests {
 
 		BatchRetryTemplate template = new BatchRetryTemplate();
 
-		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
-			@Override
-			public String[] doWithRetry(RetryContext context) throws Exception {
-				assertEquals(count, context.getRetryCount());
-				if (count++ == 0) {
-					throw new RecoverableException("Recoverable");
-				}
-				return new String[] { "a", "b" };
+		RetryCallback<String[], Exception> retryCallback = context -> {
+			assertEquals(count, context.getRetryCount());
+			if (count++ == 0) {
+				throw new RecoverableException("Recoverable");
 			}
+			return new String[]{"a", "b"};
 		};
 
-		List<RetryState> states = Arrays.<RetryState>asList(new DefaultRetryState("1"), new DefaultRetryState("2"));
+		List<RetryState> states = Arrays.asList(new DefaultRetryState("1"), new DefaultRetryState("2"));
 		Exception exception = assertThrows(RecoverableException.class, () -> template.execute(retryCallback, states));
 		assertEquals("Recoverable", exception.getMessage());
 		String[] result = template.execute(retryCallback, states);
@@ -97,14 +91,11 @@ class BatchRetryTemplateTests {
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
 				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
-		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
-			@Override
-			public String[] doWithRetry(RetryContext context) throws Exception {
-				if (count++ < 2) {
-					throw new RecoverableException("Recoverable");
-				}
-				return outputs.toArray(new String[0]);
+		RetryCallback<String[], Exception> retryCallback = context -> {
+			if (count++ < 2) {
+				throw new RecoverableException("Recoverable");
 			}
+			return outputs.toArray(new String[0]);
 		};
 
 		outputs = List.of("a", "b");
@@ -123,14 +114,11 @@ class BatchRetryTemplateTests {
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
 				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
-		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
-			@Override
-			public String[] doWithRetry(RetryContext context) throws Exception {
-				if (count++ < 1) {
-					throw new RecoverableException("Recoverable");
-				}
-				return outputs.toArray(new String[0]);
+		RetryCallback<String[], Exception> retryCallback = context -> {
+			if (count++ < 1) {
+				throw new RecoverableException("Recoverable");
 			}
+			return outputs.toArray(new String[0]);
 		};
 
 		outputs = Arrays.asList("a", "b");
@@ -166,25 +154,19 @@ class BatchRetryTemplateTests {
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
 				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
-		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
-			@Override
-			public String[] doWithRetry(RetryContext context) throws Exception {
-				if (count++ < 2) {
-					throw new RecoverableException("Recoverable");
-				}
-				return outputs.toArray(new String[0]);
+		RetryCallback<String[], Exception> retryCallback = context -> {
+			if (count++ < 2) {
+				throw new RecoverableException("Recoverable");
 			}
+			return outputs.toArray(new String[0]);
 		};
 
-		RecoveryCallback<String[]> recoveryCallback = new RecoveryCallback<String[]>() {
-			@Override
-			public String[] recover(RetryContext context) throws Exception {
-				List<String> recovered = new ArrayList<>();
-				for (String item : outputs) {
-					recovered.add("r:" + item);
-				}
-				return recovered.toArray(new String[0]);
+		RecoveryCallback<String[]> recoveryCallback = context -> {
+			List<String> recovered = new ArrayList<>();
+			for (String item : outputs) {
+				recovered.add("r:" + item);
 			}
+			return recovered.toArray(new String[0]);
 		};
 
 		outputs = Arrays.asList("a", "b");

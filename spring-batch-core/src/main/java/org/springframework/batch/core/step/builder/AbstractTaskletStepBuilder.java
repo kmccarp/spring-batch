@@ -62,7 +62,7 @@ public abstract class AbstractTaskletStepBuilder<B extends AbstractTaskletStepBu
 
 	private TransactionAttribute transactionAttribute;
 
-	private Set<ItemStream> streams = new LinkedHashSet<>();
+	private final Set<ItemStream> streams = new LinkedHashSet<>();
 
 	private ExceptionHandler exceptionHandler = new DefaultExceptionHandler();
 
@@ -162,7 +162,7 @@ public abstract class AbstractTaskletStepBuilder<B extends AbstractTaskletStepBu
 		chunkListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterChunk.class));
 		chunkListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterChunkError.class));
 
-		if (chunkListenerMethods.size() > 0) {
+		if (!chunkListenerMethods.isEmpty()) {
 			StepListenerFactoryBean factory = new StepListenerFactoryBean();
 			factory.setDelegate(listener);
 			this.listener((ChunkListener) factory.getObject());
@@ -276,8 +276,7 @@ public abstract class AbstractTaskletStepBuilder<B extends AbstractTaskletStepBu
 	 * @return true if the tasklet is going to be run in multiple threads
 	 */
 	protected boolean concurrent() {
-		boolean concurrent = taskExecutor != null && !(taskExecutor instanceof SyncTaskExecutor);
-		return concurrent;
+		return taskExecutor != null && !(taskExecutor instanceof SyncTaskExecutor);
 	}
 
 	protected TaskExecutor getTaskExecutor() {

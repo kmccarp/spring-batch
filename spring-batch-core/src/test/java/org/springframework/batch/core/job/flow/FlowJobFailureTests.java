@@ -50,7 +50,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
  */
 class FlowJobFailureTests {
 
-	private FlowJob job = new FlowJob();
+	private final FlowJob job = new FlowJob();
 
 	private JobExecution execution;
 

@@ -136,7 +136,7 @@ public abstract class JobBuilderHelper<B extends JobBuilderHelper<B>> {
 		jobExecutionListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), BeforeJob.class));
 		jobExecutionListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterJob.class));
 
-		if (jobExecutionListenerMethods.size() > 0) {
+		if (!jobExecutionListenerMethods.isEmpty()) {
 			JobListenerFactoryBean factory = new JobListenerFactoryBean();
 			factory.setDelegate(listener);
 			properties.addJobExecutionListener((JobExecutionListener) factory.getObject());

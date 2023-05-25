@@ -38,7 +38,7 @@ public class InfiniteLoopWriter implements StepExecutionListener, ItemWriter<Obj
 
 	private StepExecution stepExecution;
 
-	private int count = 0;
+	private int count;
 
 	/**
 	 * @see org.springframework.batch.core.StepExecutionListener#beforeStep(StepExecution)

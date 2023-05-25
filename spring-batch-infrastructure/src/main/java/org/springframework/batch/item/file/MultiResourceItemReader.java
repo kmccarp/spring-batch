@@ -62,7 +62,7 @@ public class MultiResourceItemReader<T> extends AbstractItemStreamItemReader<T> 
 	// signals there are no resources to read -> just return null on first read
 	private boolean noInput;
 
-	private boolean strict = false;
+	private boolean strict;
 
 	/**
 	 * In strict mode the reader will throw an exception on

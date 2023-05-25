@@ -24,8 +24,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.batch.item.Chunk;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailMessage;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -99,11 +97,8 @@ class SimpleMailMessageItemWriterTests {
 	void testCustomErrorHandler() {
 
 		final AtomicReference<String> content = new AtomicReference<>();
-		writer.setMailErrorHandler(new MailErrorHandler() {
-			@Override
-			public void handle(MailMessage message, Exception exception) throws MailException {
-				content.set(exception.getMessage());
-			}
+		writer.setMailErrorHandler((message, exception) -> {
+			content.set(exception.getMessage());
 		});
 
 		SimpleMailMessage foo = new SimpleMailMessage();

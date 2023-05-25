@@ -99,12 +99,7 @@ class SimpleStepExecutionSplitterTests {
 	void testSimpleStepExecutionProviderJobRepositoryStepPartitioner() throws Exception {
 		final Map<String, ExecutionContext> map = Collections.singletonMap("foo", new ExecutionContext());
 		SimpleStepExecutionSplitter splitter = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new Partitioner() {
-					@Override
-					public Map<String, ExecutionContext> partition(int gridSize) {
-						return map;
-					}
-				});
+		gridSize -> map);
 		assertEquals(1, splitter.split(stepExecution, 2).size());
 	}
 

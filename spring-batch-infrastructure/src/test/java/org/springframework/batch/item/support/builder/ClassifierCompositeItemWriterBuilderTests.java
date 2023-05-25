@@ -43,17 +43,11 @@ class ClassifierCompositeItemWriterBuilderTests {
 	@Test
 	void testWrite() throws Exception {
 		Map<String, ItemWriter<? super String>> map = new HashMap<>();
-		ItemWriter<String> fooWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				foos.addAll(chunk.getItems());
-			}
+		ItemWriter<String> fooWriter = chunk -> {
+			foos.addAll(chunk.getItems());
 		};
-		ItemWriter<String> defaultWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				defaults.addAll(chunk.getItems());
-			}
+		ItemWriter<String> defaultWriter = chunk -> {
+			defaults.addAll(chunk.getItems());
 		};
 		map.put("foo", fooWriter);
 		map.put("*", defaultWriter);
@@ -68,7 +62,7 @@ class ClassifierCompositeItemWriterBuilderTests {
 	@Test
 	void testSetNullClassifier() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new ClassifierCompositeItemWriterBuilder<>().build());
+		new ClassifierCompositeItemWriterBuilder<>()::build);
 		assertEquals("A classifier is required.", exception.getMessage());
 	}
 

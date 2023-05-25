@@ -21,6 +21,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Player implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private String id;
 
 	private String lastName;

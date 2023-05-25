@@ -67,7 +67,7 @@ public class HibernateCursorItemReader<T> extends AbstractItemCountingItemStream
 
 	private ScrollableResults<? extends T> cursor;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 	private int fetchSize;
 

@@ -16,7 +16,6 @@
 package org.springframework.batch.item.database.builder;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Arrays;
 import javax.sql.DataSource;
@@ -33,7 +32,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -190,12 +188,9 @@ class JdbcCursorItemReaderBuilderTests {
 	void testPreparedStatementSetter() throws Exception {
 		JdbcCursorItemReader<Foo> reader = new JdbcCursorItemReaderBuilder<Foo>().dataSource(this.dataSource)
 				.name("fooReader").sql("SELECT * FROM FOO WHERE FIRST > ? ORDER BY FIRST")
-				.preparedStatementSetter(new PreparedStatementSetter() {
-					@Override
-					public void setValues(PreparedStatement ps) throws SQLException {
-						ps.setInt(1, 3);
-					}
-				}).rowMapper((rs, rowNum) -> {
+				.preparedStatementSetter(ps -> {
+			ps.setInt(1, 3);
+		}).rowMapper((rs, rowNum) -> {
 					Foo foo = new Foo();
 
 					foo.setFirst(rs.getInt("FIRST"));

@@ -36,7 +36,7 @@ import org.springframework.batch.item.ExecutionContext;
  */
 public class JobParameterExecutionContextCopyListener implements StepExecutionListener {
 
-	private Collection<String> keys = null;
+	private Collection<String> keys;
 
 	/**
 	 * @param keys A list of keys corresponding to items in the {@link JobParameters} that

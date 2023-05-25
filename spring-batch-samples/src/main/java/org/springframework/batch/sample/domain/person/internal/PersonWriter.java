@@ -25,7 +25,7 @@ import org.springframework.batch.sample.domain.person.Person;
 
 public class PersonWriter implements ItemWriter<Person> {
 
-	private static Log log = LogFactory.getLog(PersonWriter.class);
+	private static final Log log = LogFactory.getLog(PersonWriter.class);
 
 	@Override
 	public void write(Chunk<? extends Person> data) {

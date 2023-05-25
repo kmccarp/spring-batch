@@ -58,18 +58,15 @@ class ThrottleLimitResultQueueTests {
 	@Test
 	void testThrottleLimit() throws Exception {
 		queue.expect();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(100L);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-					Thread.currentThread().interrupt();
-				}
-				queue.put("foo");
+		new Thread(() -> {
+			try {
+				Thread.sleep(100L);
 			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+				Thread.currentThread().interrupt();
+			}
+			queue.put("foo");
 		}).start();
 		long t0 = System.currentTimeMillis();
 		queue.expect();

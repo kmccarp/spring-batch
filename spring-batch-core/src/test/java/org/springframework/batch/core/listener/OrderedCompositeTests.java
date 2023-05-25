@@ -61,12 +61,7 @@ class OrderedCompositeTests {
 	@Test
 	void testAddOrdered() {
 		list.setItems(Arrays.asList((Object) "1"));
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 0;
-			}
-		});
+		list.add(() -> 0);
 		Iterator<Object> iterator = list.iterator();
 		iterator.next();
 		assertEquals("1", iterator.next());
@@ -75,18 +70,8 @@ class OrderedCompositeTests {
 	@Test
 	void testAddMultipleOrdered() {
 		list.setItems(Arrays.asList((Object) "1"));
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 1;
-			}
-		});
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 0;
-			}
-		});
+		list.add(() -> 1);
+		list.add(() -> 0);
 		Iterator<Object> iterator = list.iterator();
 		assertEquals(0, ((Ordered) iterator.next()).getOrder());
 		assertEquals(1, ((Ordered) iterator.next()).getOrder());
@@ -96,18 +81,8 @@ class OrderedCompositeTests {
 	@Test
 	void testAddDuplicateOrdered() {
 		list.setItems(Arrays.asList((Object) "1"));
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 1;
-			}
-		});
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 1;
-			}
-		});
+		list.add(() -> 1);
+		list.add(() -> 1);
 		Iterator<Object> iterator = list.iterator();
 		assertEquals(1, ((Ordered) iterator.next()).getOrder());
 		assertEquals(1, ((Ordered) iterator.next()).getOrder());
@@ -116,12 +91,7 @@ class OrderedCompositeTests {
 
 	@Test
 	void testAddAnnotationOrdered() {
-		list.add(new Ordered() {
-			@Override
-			public int getOrder() {
-				return 1;
-			}
-		});
+		list.add(() -> 1);
 		OrderedObject item = new OrderedObject();
 		list.add(item);
 		Iterator<Object> iterator = list.iterator();

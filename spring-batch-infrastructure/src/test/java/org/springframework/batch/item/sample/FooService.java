@@ -29,17 +29,18 @@ public class FooService {
 
 	public static final int GENERATION_LIMIT = 10;
 
-	private int counter = 0;
+	private int counter;
 
-	private List<Foo> generatedFoos = new ArrayList<>(GENERATION_LIMIT);
+	private final List<Foo> generatedFoos = new ArrayList<>(GENERATION_LIMIT);
 
-	private List<Foo> processedFoos = new ArrayList<>(GENERATION_LIMIT);
+	private final List<Foo> processedFoos = new ArrayList<>(GENERATION_LIMIT);
 
-	private List<Foo> processedFooNameValuePairs = new ArrayList<>(GENERATION_LIMIT);
+	private final List<Foo> processedFooNameValuePairs = new ArrayList<>(GENERATION_LIMIT);
 
 	public Foo generateFoo() {
-		if (counter++ >= GENERATION_LIMIT)
+		if (counter++ >= GENERATION_LIMIT) {
 			return null;
+		}
 
 		Foo foo = new Foo(counter, "foo" + counter, counter);
 		generatedFoos.add(foo);

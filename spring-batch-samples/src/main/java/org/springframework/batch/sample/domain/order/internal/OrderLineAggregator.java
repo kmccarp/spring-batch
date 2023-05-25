@@ -38,13 +38,13 @@ public class OrderLineAggregator implements LineAggregator<Order> {
 	public String aggregate(Order order) {
 		StringBuilder result = new StringBuilder();
 
-		result.append(aggregators.get("header").aggregate(order) + LINE_SEPARATOR);
-		result.append(aggregators.get("customer").aggregate(order) + LINE_SEPARATOR);
-		result.append(aggregators.get("address").aggregate(order) + LINE_SEPARATOR);
-		result.append(aggregators.get("billing").aggregate(order) + LINE_SEPARATOR);
+		result.append(aggregators.get("header").aggregate(order)).append(LINE_SEPARATOR);
+		result.append(aggregators.get("customer").aggregate(order)).append(LINE_SEPARATOR);
+		result.append(aggregators.get("address").aggregate(order)).append(LINE_SEPARATOR);
+		result.append(aggregators.get("billing").aggregate(order)).append(LINE_SEPARATOR);
 
 		for (LineItem lineItem : order.getLineItems()) {
-			result.append(aggregators.get("item").aggregate(lineItem) + LINE_SEPARATOR);
+			result.append(aggregators.get("item").aggregate(lineItem)).append(LINE_SEPARATOR);
 		}
 
 		result.append(aggregators.get("footer").aggregate(order));

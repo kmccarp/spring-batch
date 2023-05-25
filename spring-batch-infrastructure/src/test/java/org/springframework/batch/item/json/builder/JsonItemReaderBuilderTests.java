@@ -44,7 +44,7 @@ class JsonItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new JsonItemReaderBuilder<String>().build());
+		new JsonItemReaderBuilder<String>()::build);
 		assertEquals("A json object reader is required.", exception.getMessage());
 
 		exception = assertThrows(IllegalStateException.class,

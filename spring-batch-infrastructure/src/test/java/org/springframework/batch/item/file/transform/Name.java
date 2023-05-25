@@ -69,27 +69,35 @@ public class Name {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Name other = (Name) obj;
-		if (born != other.born)
+		if (born != other.born) {
 			return false;
+		}
 		if (first == null) {
-			if (other.first != null)
+			if (other.first != null) {
 				return false;
+			}
 		}
-		else if (!first.equals(other.first))
+		else if (!first.equals(other.first)) {
 			return false;
+		}
 		if (last == null) {
-			if (other.last != null)
+			if (other.last != null) {
 				return false;
+			}
 		}
-		else if (!last.equals(other.last))
+		else if (!last.equals(other.last)) {
 			return false;
+		}
 		return true;
 	}
 

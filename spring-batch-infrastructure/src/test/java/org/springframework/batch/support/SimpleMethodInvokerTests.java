@@ -108,9 +108,9 @@ class SimpleMethodInvokerTests {
 	@SuppressWarnings("unused")
 	private class TestClass {
 
-		boolean beforeCalled = false;
+		boolean beforeCalled;
 
-		boolean argumentTestCalled = false;
+		boolean argumentTestCalled;
 
 		public void before() {
 			beforeCalled = true;

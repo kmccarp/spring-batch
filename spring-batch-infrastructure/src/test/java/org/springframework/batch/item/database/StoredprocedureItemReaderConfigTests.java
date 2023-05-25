@@ -21,21 +21,16 @@ import static org.mockito.Mockito.when;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
 import org.hsqldb.types.Types;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 class StoredprocedureItemReaderConfigTests {
@@ -65,13 +60,10 @@ class StoredprocedureItemReaderConfigTests {
 		reader.setUseSharedExtendedConnection(true);
 		reader.setProcedureName("foo_bar");
 		final ExecutionContext ec = new ExecutionContext();
-		tt.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				reader.open(ec);
-				reader.close();
-				return null;
-			}
+		tt.execute(status -> {
+			reader.open(ec);
+			reader.close();
+			return null;
 		});
 	}
 
@@ -100,13 +92,10 @@ class StoredprocedureItemReaderConfigTests {
 		reader.setDataSource(ds);
 		reader.setProcedureName("foo_bar");
 		final ExecutionContext ec = new ExecutionContext();
-		tt.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				reader.open(ec);
-				reader.close();
-				return null;
-			}
+		tt.execute(status -> {
+			reader.open(ec);
+			reader.close();
+			return null;
 		});
 	}
 
@@ -136,20 +125,14 @@ class StoredprocedureItemReaderConfigTests {
 		reader.setProcedureName("foo_bar");
 		reader.setParameters(
 				new SqlParameter[] { new SqlParameter("foo", Types.VARCHAR), new SqlParameter("bar", Types.OTHER) });
-		reader.setPreparedStatementSetter(new PreparedStatementSetter() {
-			@Override
-			public void setValues(PreparedStatement ps) throws SQLException {
-			}
+		reader.setPreparedStatementSetter(ps -> {
 		});
 		reader.setRefCursorPosition(3);
 		final ExecutionContext ec = new ExecutionContext();
-		tt.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				reader.open(ec);
-				reader.close();
-				return null;
-			}
+		tt.execute(status -> {
+			reader.open(ec);
+			reader.close();
+			return null;
 		});
 	}
 

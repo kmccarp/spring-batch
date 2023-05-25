@@ -38,13 +38,13 @@ import java.util.Iterator;
  */
 public abstract class AbstractPaginatedDataItemReader<T> extends AbstractItemCountingItemStreamItemReader<T> {
 
-	protected volatile int page = 0;
+	protected volatile int page;
 
 	protected int pageSize = 10;
 
 	protected Iterator<T> results;
 
-	private Object lock = new Object();
+	private final Object lock = new Object();
 
 	/**
 	 * The number of items to be read with each page.

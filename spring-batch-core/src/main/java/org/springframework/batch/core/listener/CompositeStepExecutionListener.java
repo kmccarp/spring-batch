@@ -31,7 +31,7 @@ import org.springframework.lang.Nullable;
  */
 public class CompositeStepExecutionListener implements StepExecutionListener {
 
-	private OrderedComposite<StepExecutionListener> list = new OrderedComposite<>();
+	private final OrderedComposite<StepExecutionListener> list = new OrderedComposite<>();
 
 	/**
 	 * Public setter for the listeners.

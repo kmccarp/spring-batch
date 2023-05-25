@@ -56,7 +56,7 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 
 	private Partitioner partitioner;
 
-	private boolean allowStartIfComplete = false;
+	private boolean allowStartIfComplete;
 
 	private JobRepository jobRepository;
 
@@ -223,7 +223,7 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 		String stepName = stepExecution.getStepName();
 		StepExecution lastStepExecution = jobRepository.getLastStepExecution(jobInstance, stepName);
 
-		boolean isRestart = (lastStepExecution != null && lastStepExecution.getStatus() != BatchStatus.COMPLETED);
+		boolean isRestart = lastStepExecution != null && lastStepExecution.getStatus() != BatchStatus.COMPLETED;
 
 		if (isRestart) {
 			stepExecution.setExecutionContext(lastStepExecution.getExecutionContext());

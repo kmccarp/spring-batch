@@ -27,7 +27,7 @@ import org.springframework.batch.core.configuration.JobFactory;
  */
 public class ReferenceJobFactory implements JobFactory {
 
-	private Job job;
+	private final Job job;
 
 	/**
 	 * @param job the {@link Job} to return from {@link #createJob()}.

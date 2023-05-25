@@ -52,7 +52,7 @@ public class SqlPagingQueryUtils {
 		buildWhereClause(provider, remainingPageQuery, sql);
 		buildGroupByClause(provider, sql);
 		sql.append(" ORDER BY ").append(buildSortClause(provider));
-		sql.append(" " + limitClause);
+		sql.append(" ").append(limitClause);
 
 		return sql.toString();
 	}
@@ -82,7 +82,7 @@ public class SqlPagingQueryUtils {
 		sql.append("WHERE ");
 		buildSortConditions(provider, sql);
 		sql.append(" ORDER BY ").append(buildSortClause(provider));
-		sql.append(" " + limitClause);
+		sql.append(" ").append(limitClause);
 
 		return sql.toString();
 	}
@@ -106,7 +106,7 @@ public class SqlPagingQueryUtils {
 		sql.append("WHERE ");
 		buildSortConditions(provider, sql);
 		sql.append(" ORDER BY ").append(buildSortClause(provider));
-		sql.append(" " + limitClause);
+		sql.append(" ").append(limitClause);
 
 		return sql.toString();
 	}

@@ -20,8 +20,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.repeat.RepeatCallback;
-import org.springframework.batch.repeat.RepeatContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.repeat.policy.SimpleCompletionPolicy;
 import org.springframework.batch.repeat.support.RepeatSynchronizationManager;
@@ -29,7 +27,6 @@ import org.springframework.batch.repeat.support.RepeatTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.lang.Nullable;
 import org.springframework.retry.RecoveryCallback;
 import org.springframework.retry.RetryCallback;
 import org.springframework.retry.RetryContext;
@@ -74,14 +71,10 @@ class ExternalRetryInBatchTests {
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_BARS");
 		jmsTemplate.convertAndSend("queue", "foo");
 		jmsTemplate.convertAndSend("queue", "bar");
-		provider = new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() {
-				String text = (String) jmsTemplate.receiveAndConvert("queue");
-				list.add(text);
-				return text;
-			}
+		provider = () -> {
+			String text = (String) jmsTemplate.receiveAndConvert("queue");
+			list.add(text);
+			return text;
 		};
 		retryTemplate = new RetryTemplate();
 	}
@@ -119,47 +112,42 @@ class ExternalRetryInBatchTests {
 					public Void doInTransaction(TransactionStatus status) {
 						try {
 
-							repeatTemplate.iterate(new RepeatCallback() {
+							repeatTemplate.iterate(context -> {
 
-								@Override
-								public RepeatStatus doInIteration(RepeatContext context) throws Exception {
+								final String item = provider.read();
 
-									final String item = provider.read();
-
-									if (item == null) {
-										return RepeatStatus.FINISHED;
-									}
-
-									RetryCallback<String, Exception> callback = new RetryCallback<String, Exception>() {
-										@Override
-										public String doWithRetry(RetryContext context) throws Exception {
-											// No need for transaction here: the whole
-											// batch will roll
-											// back. When it comes back for recovery this
-											// code is not
-											// executed...
-											jdbcTemplate.update(
-													"INSERT into T_BARS (id,name,foo_date) values (?,?,null)",
-													list.size(), item);
-											throw new RuntimeException("Rollback!");
-										}
-									};
-
-									RecoveryCallback<String> recoveryCallback = new RecoveryCallback<String>() {
-										@Override
-										public String recover(RetryContext context) {
-											// aggressive commit on a recovery
-											RepeatSynchronizationManager.setCompleteOnly();
-											recovered.add(item);
-											return item;
-										}
-									};
-
-									retryTemplate.execute(callback, recoveryCallback, new DefaultRetryState(item));
-
-									return RepeatStatus.CONTINUABLE;
-
+								if (item == null) {
+									return RepeatStatus.FINISHED;
 								}
+
+								RetryCallback<String, Exception> callback = new RetryCallback<String, Exception>() {
+									@Override
+									public String doWithRetry(RetryContext context) throws Exception {
+										// No need for transaction here: the whole
+										// batch will roll
+										// back. When it comes back for recovery this
+										// code is not
+										// executed...
+										jdbcTemplate.update(
+										"INSERT into T_BARS (id,name,foo_date) values (?,?,null)",
+										list.size(), item);
+										throw new RuntimeException("Rollback!");
+									}
+								};
+
+								RecoveryCallback<String> recoveryCallback = new RecoveryCallback<String>() {
+									@Override
+									public String recover(RetryContext context) {
+										// aggressive commit on a recovery
+										RepeatSynchronizationManager.setCompleteOnly();
+										recovered.add(item);
+										return item;
+									}
+								};
+
+								retryTemplate.execute(callback, recoveryCallback, new DefaultRetryState(item));
+
+								return RepeatStatus.CONTINUABLE;
 
 							});
 							return null;
@@ -208,8 +196,9 @@ class ExternalRetryInBatchTests {
 		List<String> msgs = new ArrayList<>();
 		while (next != null) {
 			next = (String) jmsTemplate.receiveAndConvert("queue");
-			if (next != null)
+			if (next != null) {
 				msgs.add(next);
+			}
 		}
 		return msgs;
 	}

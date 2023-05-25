@@ -33,7 +33,7 @@ import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer
  */
 public class JdbcTradeDao implements TradeDao {
 
-	private Log log = LogFactory.getLog(JdbcTradeDao.class);
+	private final Log log = LogFactory.getLog(JdbcTradeDao.class);
 
 	/**
 	 * template for inserting a row

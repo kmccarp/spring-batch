@@ -54,7 +54,7 @@ public abstract class AbstractJobExplorerFactoryBean implements FactoryBean<JobE
 
 	private TransactionAttributeSource transactionAttributeSource;
 
-	private ProxyFactory proxyFactory = new ProxyFactory();
+	private final ProxyFactory proxyFactory = new ProxyFactory();
 
 	/**
 	 * Creates a job instance data access object (DAO).

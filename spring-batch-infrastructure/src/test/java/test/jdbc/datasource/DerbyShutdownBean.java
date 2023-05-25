@@ -26,11 +26,11 @@ import org.springframework.beans.factory.DisposableBean;
 
 public class DerbyShutdownBean implements DisposableBean {
 
-	private static Log logger = LogFactory.getLog(DerbyShutdownBean.class);
+	private static final Log logger = LogFactory.getLog(DerbyShutdownBean.class);
 
 	private DataSource dataSource;
 
-	private boolean isShutdown = false;
+	private boolean isShutdown;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -46,7 +46,7 @@ public class DerbyShutdownBean implements DisposableBean {
 				ds.getConnection();
 			}
 			catch (SQLException except) {
-				if (except.getSQLState().equals("08006")) {
+				if ("08006".equals(except.getSQLState())) {
 					// SQLState derby throws when shutting down the database
 					logger.info("Derby database is now shut down.");
 					isShutdown = true;

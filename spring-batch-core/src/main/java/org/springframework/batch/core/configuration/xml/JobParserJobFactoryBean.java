@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
  */
 public class JobParserJobFactoryBean implements SmartFactoryBean<FlowJob> {
 
-	private String name;
+	private final String name;
 
 	private Boolean restartable;
 

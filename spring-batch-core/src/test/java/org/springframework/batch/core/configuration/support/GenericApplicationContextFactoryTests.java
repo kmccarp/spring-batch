@@ -285,9 +285,9 @@ class GenericApplicationContextFactoryTests {
 
 	public static class ChildBean implements ApplicationContextAware, EnvironmentAware {
 
-		private int counter1 = 0;
+		private int counter1;
 
-		private int counter2 = 0;
+		private int counter2;
 
 		@Override
 		public void setEnvironment(Environment environment) {

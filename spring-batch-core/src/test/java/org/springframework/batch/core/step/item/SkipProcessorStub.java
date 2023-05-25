@@ -28,11 +28,11 @@ import org.springframework.lang.Nullable;
  */
 public class SkipProcessorStub<T> extends AbstractExceptionThrowingItemHandlerStub<T> implements ItemProcessor<T, T> {
 
-	private List<T> processed = new ArrayList<>();
+	private final List<T> processed = new ArrayList<>();
 
-	private List<T> committed = TransactionAwareProxyFactory.createTransactionalList();
+	private final List<T> committed = TransactionAwareProxyFactory.createTransactionalList();
 
-	private boolean filter = false;
+	private boolean filter;
 
 	public SkipProcessorStub() throws Exception {
 		super();

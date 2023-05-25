@@ -35,7 +35,6 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -145,23 +144,12 @@ class StepScopeAnnotatedListenerIntegrationTests {
 
 		@Bean
 		public ItemProcessor<String, String> processor() {
-			return new ItemProcessor<String, String>() {
-
-				@Nullable
-				@Override
-				public String process(String item) throws Exception {
-					return item;
-				}
-			};
+			return item -> item;
 		}
 
 		@Bean
 		public ItemWriter<String> writer() {
-			return new ItemWriter<String>() {
-
-				@Override
-				public void write(Chunk<? extends String> items) throws Exception {
-				}
+			return items -> {
 			};
 		}
 

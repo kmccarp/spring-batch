@@ -21,6 +21,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Game implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private String id;
 
 	private int year;
@@ -277,19 +279,24 @@ public class Game implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Game other = (Game) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
+			}
 		}
-		else if (!id.equals(other.id))
+		else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 

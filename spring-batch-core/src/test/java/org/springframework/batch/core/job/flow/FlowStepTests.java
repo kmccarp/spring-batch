@@ -169,7 +169,7 @@ class FlowStepTests {
 	 * @author Dave Syer
 	 *
 	 */
-	private class StubStep extends StepSupport {
+	private final class StubStep extends StepSupport {
 
 		private final boolean fail;
 

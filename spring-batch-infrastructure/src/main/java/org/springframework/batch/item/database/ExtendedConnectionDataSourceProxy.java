@@ -85,10 +85,10 @@ public class ExtendedConnectionDataSourceProxy implements SmartDataSource, Initi
 	private DataSource dataSource;
 
 	/** The connection to suppress close calls for */
-	private Connection closeSuppressedConnection = null;
+	private Connection closeSuppressedConnection;
 
 	/** The connection to suppress close calls for */
-	private boolean borrowedConnection = false;
+	private boolean borrowedConnection;
 
 	/** Synchronization monitor for the shared Connection */
 	private final Object connectionMonitor = new Object();
@@ -254,7 +254,7 @@ public class ExtendedConnectionDataSourceProxy implements SmartDataSource, Initi
 			switch (method.getName()) {
 				case "equals":
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0] ? Boolean.TRUE : Boolean.FALSE);
+					return proxy == args[0] ? Boolean.TRUE : Boolean.FALSE;
 				case "hashCode":
 					// Use hashCode of Connection proxy.
 					return System.identityHashCode(proxy);

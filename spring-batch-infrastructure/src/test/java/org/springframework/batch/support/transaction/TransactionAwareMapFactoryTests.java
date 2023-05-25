@@ -84,60 +84,45 @@ class TransactionAwareMapFactoryTests {
 
 	@Test
 	void testTransactionalAdd() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testAdd();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testAdd();
+			return null;
 		});
 		assertEquals(4, map.size());
 	}
 
 	@Test
 	void testTransactionalEmpty() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testEmpty();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testEmpty();
+			return null;
 		});
 		assertEquals(4, map.size());
 	}
 
 	@Test
 	void testTransactionalValues() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testValues();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testValues();
+			return null;
 		});
 		assertEquals(4, map.size());
 	}
 
 	@Test
 	void testTransactionalRemove() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testRemove();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testRemove();
+			return null;
 		});
 		assertEquals(2, map.size());
 	}
 
 	@Test
 	void testTransactionalClear() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testClear();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testClear();
+			return null;
 		});
 		assertEquals(0, map.size());
 	}

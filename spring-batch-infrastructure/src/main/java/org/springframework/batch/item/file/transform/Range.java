@@ -28,11 +28,11 @@ import org.springframework.util.Assert;
  */
 public class Range {
 
-	public final static int UPPER_BORDER_NOT_DEFINED = Integer.MAX_VALUE;
+	public static final int UPPER_BORDER_NOT_DEFINED = Integer.MAX_VALUE;
 
-	final private int min;
+	private final int min;
 
-	final private int max;
+	private final int max;
 
 	public Range(int min) {
 		this(min, UPPER_BORDER_NOT_DEFINED);

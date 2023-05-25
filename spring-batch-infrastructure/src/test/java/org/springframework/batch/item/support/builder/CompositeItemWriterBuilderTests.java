@@ -42,12 +42,12 @@ class CompositeItemWriterBuilderTests {
 	@SuppressWarnings("unchecked")
 	void testProcess() throws Exception {
 
-		final int NUMBER_OF_WRITERS = 10;
+		final int numberOfWriters = 10;
 		Chunk<Object> data = Chunk.of(new Object());
 
 		List<ItemWriter<? super Object>> writers = new ArrayList<>();
 
-		for (int i = 0; i < NUMBER_OF_WRITERS; i++) {
+		for (int i = 0; i < numberOfWriters; i++) {
 			ItemWriter<? super Object> writer = mock(ItemWriter.class);
 			writers.add(writer);
 		}

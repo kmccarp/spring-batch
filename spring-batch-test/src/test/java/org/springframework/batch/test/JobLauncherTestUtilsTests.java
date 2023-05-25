@@ -22,22 +22,17 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.support.JdbcTransactionManager;
-import org.springframework.lang.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -82,13 +77,7 @@ class JobLauncherTestUtilsTests {
 
 		@Bean
 		public Step step(JobRepository jobRepository) {
-			return new StepBuilder("step1", jobRepository).tasklet(new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-					return null;
-				}
-			}, transactionManager(dataSource())).build();
+			return new StepBuilder("step1", jobRepository).tasklet((contribution, chunkContext) -> null, transactionManager(dataSource())).build();
 		}
 
 		@Bean

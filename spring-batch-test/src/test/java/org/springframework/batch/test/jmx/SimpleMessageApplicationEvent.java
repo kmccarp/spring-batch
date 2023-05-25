@@ -24,6 +24,8 @@ import org.springframework.context.ApplicationEvent;
 @SuppressWarnings("serial")
 public class SimpleMessageApplicationEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private String message;
 
 	public SimpleMessageApplicationEvent(Object source, String message) {

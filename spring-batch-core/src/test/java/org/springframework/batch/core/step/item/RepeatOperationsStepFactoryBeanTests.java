@@ -30,8 +30,6 @@ import org.springframework.batch.core.launch.EmptyItemWriter;
 import org.springframework.batch.core.step.JobRepositorySupport;
 import org.springframework.batch.core.step.factory.SimpleStepFactoryBean;
 import org.springframework.batch.item.support.ListItemReader;
-import org.springframework.batch.repeat.RepeatCallback;
-import org.springframework.batch.repeat.RepeatOperations;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 
@@ -78,14 +76,10 @@ class RepeatOperationsStepFactoryBeanTests {
 		factory.setJobRepository(new JobRepositorySupport());
 		factory.setTransactionManager(new ResourcelessTransactionManager());
 
-		factory.setStepOperations(new RepeatOperations() {
-
-			@Override
-			public RepeatStatus iterate(RepeatCallback callback) {
-				list = new ArrayList<>();
-				list.add("foo");
-				return RepeatStatus.FINISHED;
-			}
+		factory.setStepOperations(callback -> {
+			list = new ArrayList<>();
+			list.add("foo");
+			return RepeatStatus.FINISHED;
 		});
 
 		Step step = factory.getObject();

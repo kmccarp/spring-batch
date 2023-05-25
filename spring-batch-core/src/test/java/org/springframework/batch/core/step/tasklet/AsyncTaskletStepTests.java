@@ -45,7 +45,6 @@ import org.springframework.batch.repeat.support.RepeatTemplate;
 import org.springframework.batch.repeat.support.TaskExecutorRepeatTemplate;
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 class AsyncTaskletStepTests {
@@ -58,15 +57,12 @@ class AsyncTaskletStepTests {
 
 	private int throttleLimit = 20;
 
-	ItemWriter<String> itemWriter = new ItemWriter<String>() {
-		@Override
-		public void write(Chunk<? extends String> data) throws Exception {
-			// Thread.sleep(100L);
-			logger.info("Items: " + data);
-			processed.addAll(data.getItems());
-			if (data.getItems().contains("fail")) {
-				throw new RuntimeException("Planned");
-			}
+	ItemWriter<String> itemWriter = data -> {
+		// Thread.sleep(100L);
+		logger.info("Items: " + data);
+		processed.addAll(data.getItems());
+		if (data.getItems().contains("fail")) {
+			throw new RuntimeException("Planned");
 		}
 	};
 
@@ -176,17 +172,13 @@ class AsyncTaskletStepTests {
 		throttleLimit = 1;
 		concurrencyLimit = 1;
 		items = Arrays.asList("one", "barf", "three", "four");
-		itemProcessor = new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				logger.info("Item: " + item);
-				processed.add(item);
-				if (item.equals("barf")) {
-					throw new RuntimeException("Planned processor error");
-				}
-				return item;
+		itemProcessor = item -> {
+			logger.info("Item: " + item);
+			processed.add(item);
+			if ("barf".equals(item)) {
+				throw new RuntimeException("Planned processor error");
 			}
+			return item;
 		};
 		setUp();
 

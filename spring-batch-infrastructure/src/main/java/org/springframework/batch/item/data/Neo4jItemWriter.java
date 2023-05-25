@@ -49,7 +49,7 @@ public class Neo4jItemWriter<T> implements ItemWriter<T>, InitializingBean {
 
 	protected static final Log logger = LogFactory.getLog(Neo4jItemWriter.class);
 
-	private boolean delete = false;
+	private boolean delete;
 
 	private SessionFactory sessionFactory;
 

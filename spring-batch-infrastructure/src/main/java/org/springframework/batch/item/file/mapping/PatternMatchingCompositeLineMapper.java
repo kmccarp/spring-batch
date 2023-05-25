@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
  */
 public class PatternMatchingCompositeLineMapper<T> implements LineMapper<T>, InitializingBean {
 
-	private PatternMatchingCompositeLineTokenizer tokenizer = new PatternMatchingCompositeLineTokenizer();
+	private final PatternMatchingCompositeLineTokenizer tokenizer = new PatternMatchingCompositeLineTokenizer();
 
 	private PatternMatcher<FieldSetMapper<T>> patternMatcher;
 

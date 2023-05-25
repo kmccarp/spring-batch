@@ -22,12 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.ItemStreamSupport;
-import org.springframework.batch.item.ParseException;
-import org.springframework.batch.item.UnexpectedInputException;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Dave Syer
@@ -39,19 +35,13 @@ class ChunkMonitorTests {
 
 	private ChunkMonitor monitor = new ChunkMonitor();
 
-	private int count = 0;
+	private int count;
 
-	private boolean closed = false;
+	private boolean closed;
 
 	@BeforeEach
 	void setUp() {
-		monitor.setItemReader(new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() throws Exception, UnexpectedInputException, ParseException {
-				return "" + (count++);
-			}
-		});
+		monitor.setItemReader(() -> "" + (count++));
 		monitor.registerItemStream(new ItemStreamSupport() {
 			@Override
 			public void close() {
@@ -111,12 +101,8 @@ class ChunkMonitorTests {
 
 	@Test
 	void testOpenWithErrorInReader() {
-		monitor.setItemReader(new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() throws Exception, UnexpectedInputException, ParseException {
-				throw new IllegalStateException("Expected");
-			}
+		monitor.setItemReader(() -> {
+			throw new IllegalStateException("Expected");
 		});
 		ExecutionContext executionContext = new ExecutionContext();
 		executionContext.putInt(ChunkMonitor.class.getName() + ".OFFSET", 2);
@@ -146,13 +132,7 @@ class ChunkMonitorTests {
 	@Test
 	void testUpdateWithNoStream() {
 		monitor = new ChunkMonitor();
-		monitor.setItemReader(new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() throws Exception, UnexpectedInputException, ParseException {
-				return "" + (count++);
-			}
-		});
+		monitor.setItemReader(() -> "" + (count++));
 		monitor.setChunkSize(CHUNK_SIZE);
 		monitor.incrementOffset();
 		ExecutionContext executionContext = new ExecutionContext();

@@ -86,7 +86,7 @@ public class MappingLdifReaderTests {
 	void testResourceNotExists() throws Exception {
 		JobExecution jobExecution = launcher.run(job2, new JobParameters());
 
-		Assert.isTrue(jobExecution.getExitStatus().getExitCode().equals("FAILED"),
+		Assert.isTrue("FAILED".equals(jobExecution.getExitStatus().getExitCode()),
 				"The job exit status is not FAILED.");
 		Assert.isTrue(
 				jobExecution.getAllFailureExceptions().get(0).getMessage().contains("Failed to initialize the reader"),

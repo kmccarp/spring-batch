@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 import org.junit.jupiter.api.Test;
@@ -31,18 +30,12 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.test.MetaDataInstanceFactory;
 import org.springframework.batch.test.StepScopeTestUtils;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.lang.Nullable;
 
 class AsyncItemProcessorTests {
 
 	private final AsyncItemProcessor<String, String> processor = new AsyncItemProcessor<>();
 
-	private ItemProcessor<String, String> delegate = new ItemProcessor<String, String>() {
-		@Nullable
-		public String process(String item) throws Exception {
-			return item + item;
-		}
-	};
+	private ItemProcessor<String, String> delegate = item -> item + item;
 
 	@Test
 	void testNoDelegate() {
@@ -58,21 +51,14 @@ class AsyncItemProcessorTests {
 
 	@Test
 	void testExecutionInStepScope() throws Exception {
-		delegate = new ItemProcessor<String, String>() {
-			@Nullable
-			public String process(String item) throws Exception {
-				StepContext context = StepSynchronizationManager.getContext();
-				assertTrue(context != null && context.getStepExecution() != null);
-				return item + item;
-			}
+		delegate = item -> {
+			StepContext context = StepSynchronizationManager.getContext();
+			assertTrue(context != null && context.getStepExecution() != null);
+			return item + item;
 		};
 		processor.setDelegate(delegate);
 		Future<String> result = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
-				new Callable<Future<String>>() {
-					public Future<String> call() throws Exception {
-						return processor.process("foo");
-					}
-				});
+		() -> processor.process("foo"));
 		assertEquals("foofoo", result.get());
 	}
 

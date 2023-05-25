@@ -38,12 +38,10 @@ import org.springframework.batch.core.listener.ItemListenerSupport;
 import org.springframework.batch.core.step.skip.AlwaysSkipItemSkipPolicy;
 import org.springframework.batch.core.step.skip.LimitCheckingItemSkipPolicy;
 import org.springframework.batch.item.Chunk;
-import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.PassThroughItemProcessor;
 import org.springframework.classify.BinaryExceptionClassifier;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.lang.Nullable;
 import org.springframework.retry.RetryException;
 import org.springframework.retry.policy.NeverRetryPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
@@ -66,14 +64,11 @@ class FaultTolerantChunkProcessorTests {
 	@BeforeEach
 	void setUp() {
 		batchRetryTemplate = new BatchRetryTemplate();
-		processor = new FaultTolerantChunkProcessor<>(new PassThroughItemProcessor<>(), new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new RuntimeException("Planned failure!");
-				}
-				list.addAll(chunk.getItems());
+		processor = new FaultTolerantChunkProcessor<>(new PassThroughItemProcessor<>(), chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new RuntimeException("Planned failure!");
 			}
+			list.addAll(chunk.getItems());
 		}, batchRetryTemplate);
 		batchRetryTemplate.setRetryPolicy(new NeverRetryPolicy());
 	}
@@ -87,13 +82,7 @@ class FaultTolerantChunkProcessorTests {
 
 	@Test
 	void testTransform() throws Exception {
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				return item.equals("1") ? null : item;
-			}
-		});
+		processor.setItemProcessor(item -> "1".equals(item) ? null : item);
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2"));
 		processor.process(contribution, inputs);
 		assertEquals(1, list.size());
@@ -103,18 +92,14 @@ class FaultTolerantChunkProcessorTests {
 	@Test
 	void testFilterCountOnSkip() throws Exception {
 		processor.setProcessSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				if (item.equals("1")) {
-					throw new RuntimeException("Skippable");
-				}
-				if (item.equals("3")) {
-					return null;
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			if ("1".equals(item)) {
+				throw new RuntimeException("Skippable");
 			}
+			if ("3".equals(item)) {
+				return null;
+			}
+			return item;
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "1", "2"));
 		Exception exception = assertThrows(Exception.class, () -> processor.process(contribution, inputs));
@@ -129,15 +114,11 @@ class FaultTolerantChunkProcessorTests {
 	// BATCH-2663
 	void testFilterCountOnSkipInWriteWithoutRetry() throws Exception {
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				if (item.equals("1")) {
-					return null;
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			if ("1".equals(item)) {
+				return null;
 			}
+			return item;
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("fail", "1", "2"));
 		processAndExpectPlannedRuntimeException(inputs); // (first attempt) Process fail,
@@ -160,15 +141,11 @@ class FaultTolerantChunkProcessorTests {
 		retryPolicy.setMaxAttempts(3);
 		batchRetryTemplate.setRetryPolicy(retryPolicy);
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				if (item.equals("1")) {
-					return null;
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			if ("1".equals(item)) {
+				return null;
 			}
+			return item;
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("fail", "1", "2"));
 		processAndExpectPlannedRuntimeException(inputs); // (first attempt) Process fail,
@@ -193,12 +170,9 @@ class FaultTolerantChunkProcessorTests {
 	@Test
 	void testWriteSkipOnError() throws Exception {
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					fail("Expected Error!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				fail("Expected Error!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "2"));
@@ -210,12 +184,9 @@ class FaultTolerantChunkProcessorTests {
 	@Test
 	void testWriteSkipOnException() throws Exception {
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new RuntimeException("Expected Exception!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new RuntimeException("Expected Exception!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "2"));
@@ -232,12 +203,9 @@ class FaultTolerantChunkProcessorTests {
 	@Test
 	void testWriteSkipOnExceptionWithTrivialChunk() throws Exception {
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new RuntimeException("Expected Exception!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new RuntimeException("Expected Exception!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("fail"));
@@ -255,15 +223,11 @@ class FaultTolerantChunkProcessorTests {
 
 	@Test
 	void testTransformWithExceptionAndNoRollback() throws Exception {
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				if (item.equals("1")) {
-					throw new DataIntegrityViolationException("Planned");
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			if ("1".equals(item)) {
+				throw new DataIntegrityViolationException("Planned");
 			}
+			return item;
 		});
 		processor.setProcessSkipPolicy(new AlwaysSkipItemSkipPolicy());
 		processor.setRollbackClassifier(
@@ -348,12 +312,9 @@ class FaultTolerantChunkProcessorTests {
 	@Test
 	void testOnErrorInWriteAllItemsFail() throws Exception {
 		Chunk<String> chunk = new Chunk<>(Arrays.asList("foo", "bar"));
-		processor = new FaultTolerantChunkProcessor<>(new PassThroughItemProcessor<>(), new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> items) throws Exception {
-				// Always fail in writer
-				throw new RuntimeException("Planned failure!");
-			}
+		processor = new FaultTolerantChunkProcessor<>(new PassThroughItemProcessor<>(), items -> {
+			// Always fail in writer
+			throw new RuntimeException("Planned failure!");
 		}, batchRetryTemplate);
 		processor.setListeners(Arrays.asList(new ItemListenerSupport<String, String>() {
 			@Override
@@ -376,12 +337,9 @@ class FaultTolerantChunkProcessorTests {
 		retryPolicy.setMaxAttempts(2);
 		batchRetryTemplate.setRetryPolicy(retryPolicy);
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new IllegalArgumentException("Expected Exception!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new IllegalArgumentException("Expected Exception!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "2"));
@@ -409,12 +367,9 @@ class FaultTolerantChunkProcessorTests {
 		retryPolicy.setMaxAttempts(2);
 		batchRetryTemplate.setRetryPolicy(retryPolicy);
 		processor.setWriteSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new IllegalArgumentException("Expected Exception!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new IllegalArgumentException("Expected Exception!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "fail", "4"));
@@ -446,15 +401,12 @@ class FaultTolerantChunkProcessorTests {
 		batchRetryTemplate.setRetryPolicy(retryPolicy);
 		processor.setWriteSkipPolicy(new LimitCheckingItemSkipPolicy(1,
 				Collections.<Class<? extends Throwable>, Boolean>singletonMap(IllegalArgumentException.class, true)));
-		processor.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (chunk.getItems().contains("fail")) {
-					throw new IllegalArgumentException("Expected Exception!");
-				}
-				if (chunk.getItems().contains("2")) {
-					throw new RuntimeException("Expected Non-Skippable Exception!");
-				}
+		processor.setItemWriter(chunk -> {
+			if (chunk.getItems().contains("fail")) {
+				throw new IllegalArgumentException("Expected Exception!");
+			}
+			if (chunk.getItems().contains("2")) {
+				throw new RuntimeException("Expected Non-Skippable Exception!");
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "2"));
@@ -484,19 +436,15 @@ class FaultTolerantChunkProcessorTests {
 		final List<String> processedItems = new ArrayList<>();
 		processor.setProcessorTransactional(false);
 		processor.setProcessSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				processedItems.add(item);
-				if (item.contains("fail")) {
-					throw new IllegalArgumentException("Expected Skippable Exception!");
-				}
-				if (item.contains("skip")) {
-					return null;
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			processedItems.add(item);
+			if (item.contains("fail")) {
+				throw new IllegalArgumentException("Expected Skippable Exception!");
 			}
+			if (item.contains("skip")) {
+				return null;
+			}
+			return item;
 		});
 		processor.afterPropertiesSet();
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2", "skip", "skip", "3", "fail", "fail", "4", "5"));
@@ -520,19 +468,15 @@ class FaultTolerantChunkProcessorTests {
 		final List<String> processedItems = new ArrayList<>();
 		processor.setProcessorTransactional(false);
 		processor.setProcessSkipPolicy(new AlwaysSkipItemSkipPolicy());
-		processor.setItemProcessor(new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				processedItems.add(item);
-				if (item.contains("fail")) {
-					throw new IllegalArgumentException("Expected Skippable Exception!");
-				}
-				if (item.contains("skip")) {
-					return null;
-				}
-				return item;
+		processor.setItemProcessor(item -> {
+			processedItems.add(item);
+			if (item.contains("fail")) {
+				throw new IllegalArgumentException("Expected Skippable Exception!");
 			}
+			if (item.contains("skip")) {
+				return null;
+			}
+			return item;
 		});
 		processor.setRollbackClassifier(new BinaryExceptionClassifier(
 				Collections.<Class<? extends Throwable>>singleton(IllegalArgumentException.class), false));

@@ -549,12 +549,7 @@ class FaultTolerantStepFactoryBeanRollbackTests {
 
 	@Test
 	void testMultithreadedSkipInWriter() throws Exception {
-		factory.setItemReader(new ItemReader<>() {
-			@Override
-			public synchronized String read() throws Exception {
-				return reader.read();
-			}
-		});
+		factory.setItemReader(reader::read);
 		writer.setFailures("1", "2", "3", "4", "5");
 		factory.setCommitInterval(3);
 		factory.setSkipLimit(10);

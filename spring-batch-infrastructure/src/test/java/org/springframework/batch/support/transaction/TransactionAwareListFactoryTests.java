@@ -66,36 +66,27 @@ class TransactionAwareListFactoryTests {
 
 	@Test
 	void testTransactionalAdd() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testAdd();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testAdd();
+			return null;
 		});
 		assertEquals(4, list.size());
 	}
 
 	@Test
 	void testTransactionalRemove() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testRemove();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testRemove();
+			return null;
 		});
 		assertEquals(2, list.size());
 	}
 
 	@Test
 	void testTransactionalClear() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				testClear();
-				return null;
-			}
+		transactionTemplate.execute(status -> {
+			testClear();
+			return null;
 		});
 		assertEquals(0, list.size());
 	}

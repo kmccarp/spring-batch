@@ -60,11 +60,8 @@ class JobSynchronizationManagerTests {
 	void testClose() {
 		final List<String> list = new ArrayList<>();
 		JobContext context = JobSynchronizationManager.register(jobExecution);
-		context.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		context.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
 		JobSynchronizationManager.close();
 		assertNull(JobSynchronizationManager.getContext());
@@ -100,11 +97,8 @@ class JobSynchronizationManagerTests {
 	void testRelease() {
 		JobContext context = JobSynchronizationManager.register(jobExecution);
 		final List<String> list = new ArrayList<>();
-		context.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		context.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
 		// On release we expect the destruction callbacks to be called
 		JobSynchronizationManager.release();

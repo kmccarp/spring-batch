@@ -113,8 +113,8 @@ class Jaxb2NamespaceUnmarshallingTests {
 		reader.close();
 	}
 
-	private static String TRADE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><trade xmlns=\"urn:org.springframework.batch.io.oxm.domain\">"
-			+ "<customer>Customer1</customer><isin>XYZ0001</isin><price>11.39</price><quantity>5</quantity>"
-			+ "</trade>";
+	private static final String TRADE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><trade xmlns=\"urn:org.springframework.batch.io.oxm.domain\">"
+	+ "<customer>Customer1</customer><isin>XYZ0001</isin><price>11.39</price><quantity>5</quantity>"
+	+ "</trade>";
 
 }

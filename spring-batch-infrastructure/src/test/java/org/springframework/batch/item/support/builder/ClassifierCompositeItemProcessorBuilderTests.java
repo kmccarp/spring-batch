@@ -53,7 +53,7 @@ class ClassifierCompositeItemProcessorBuilderTests {
 	@Test
 	void testNullClassifier() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new ClassifierCompositeItemProcessorBuilder<String, String>().build());
+		new ClassifierCompositeItemProcessorBuilder<String, String>()::build);
 		assertEquals("A classifier is required.", exception.getMessage());
 	}
 

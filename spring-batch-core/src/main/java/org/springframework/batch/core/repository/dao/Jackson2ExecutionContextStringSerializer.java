@@ -158,7 +158,7 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	 * Custom Jackson module to support {@link JobParameter} and {@link JobParameters}
 	 * serialization and deserialization.
 	 */
-	private class JobParametersModule extends SimpleModule {
+	private final class JobParametersModule extends SimpleModule {
 
 		private static final long serialVersionUID = 1L;
 
@@ -177,6 +177,8 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 		}
 
 		private class JobParameterSerializer extends StdSerializer<JobParameter> {
+
+			private static final long serialVersionUID = 1;
 
 			protected JobParameterSerializer(Class<JobParameter> type) {
 				super(type);
@@ -254,6 +256,8 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	 * @author Rob Winch
 	 */
 	static class TrustedTypeResolverBuilder extends ObjectMapper.DefaultTypeResolverBuilder {
+
+		private static final long serialVersionUID = 1;
 
 		private final String[] trustedClassNames;
 

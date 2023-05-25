@@ -42,7 +42,7 @@ public class ChunkOrientedTasklet<I> implements Tasklet {
 
 	private boolean buffering = true;
 
-	private static Log logger = LogFactory.getLog(ChunkOrientedTasklet.class);
+	private static final Log logger = LogFactory.getLog(ChunkOrientedTasklet.class);
 
 	public ChunkOrientedTasklet(ChunkProvider<I> chunkProvider, ChunkProcessor<I> chunkProcessor) {
 		this.chunkProvider = chunkProvider;

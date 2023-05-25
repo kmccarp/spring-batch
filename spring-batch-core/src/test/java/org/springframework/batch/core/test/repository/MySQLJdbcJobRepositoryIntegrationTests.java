@@ -47,7 +47,6 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.core.io.ClassPathResource;
@@ -173,23 +172,15 @@ class MySQLJdbcJobRepositoryIntegrationTests {
 		public ConfigurableConversionService conversionService() {
 			DefaultConversionService conversionService = new DefaultConversionService();
 			final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-			conversionService.addConverter(String.class, Date.class, new Converter<String, Date>() {
-				@Override
-				public Date convert(String source) {
-					try {
-						return dateFormat.parse(source);
-					}
-					catch (ParseException e) {
-						throw new RuntimeException(e);
-					}
+			conversionService.addConverter(String.class, Date.class, source -> {
+				try {
+					return dateFormat.parse(source);
+				}
+				catch (ParseException e) {
+					throw new RuntimeException(e);
 				}
 			});
-			conversionService.addConverter(Date.class, String.class, new Converter<Date, String>() {
-				@Override
-				public String convert(Date source) {
-					return dateFormat.format(source);
-				}
-			});
+			conversionService.addConverter(Date.class, String.class, source -> dateFormat.format(source));
 			return conversionService;
 		}
 

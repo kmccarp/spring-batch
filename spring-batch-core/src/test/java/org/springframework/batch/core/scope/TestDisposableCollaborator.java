@@ -20,11 +20,13 @@ import org.springframework.beans.factory.DisposableBean;
 @SuppressWarnings("serial")
 public class TestDisposableCollaborator extends TestCollaborator implements DisposableBean {
 
+	private static final long serialVersionUID = 1;
+
 	public static volatile String message = "none";
 
 	@Override
 	public void destroy() throws Exception {
-		message = (message.equals("none") ? "" : message + ",") + getName() + ":destroyed";
+		message = ("none".equals(message) ? "" : message + ",") + getName() + ":destroyed";
 	}
 
 }

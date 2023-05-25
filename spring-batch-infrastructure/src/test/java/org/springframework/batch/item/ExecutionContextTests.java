@@ -165,6 +165,8 @@ class ExecutionContextTests {
 	 */
 	private static class TestSerializable implements Serializable {
 
+		private static final long serialVersionUID = 1;
+
 		int value;
 
 		@Override
@@ -187,10 +189,7 @@ class ExecutionContextTests {
 				return false;
 			}
 			TestSerializable other = (TestSerializable) obj;
-			if (value != other.value) {
-				return false;
-			}
-			return true;
+			return value == other.value;
 		}
 
 	}

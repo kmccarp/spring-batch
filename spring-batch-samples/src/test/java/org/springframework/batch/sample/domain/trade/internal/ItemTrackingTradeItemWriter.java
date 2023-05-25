@@ -29,7 +29,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ItemTrackingTradeItemWriter implements ItemWriter<Trade> {
 
-	private List<Trade> items = new ArrayList<>();
+	private final List<Trade> items = new ArrayList<>();
 
 	private String writeFailureISIN;
 

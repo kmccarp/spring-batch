@@ -27,9 +27,9 @@ import org.springframework.transaction.PlatformTransactionManager;
  */
 public class RemoteChunkingManagerStepBuilderFactory {
 
-	private JobRepository jobRepository;
+	private final JobRepository jobRepository;
 
-	private PlatformTransactionManager transactionManager;
+	private final PlatformTransactionManager transactionManager;
 
 	/**
 	 * Create a new {@link RemoteChunkingManagerStepBuilderFactory}.

@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogAdvice {
 
-	private static Log log = LogFactory.getLog(LogAdvice.class);
+	private static final Log log = LogFactory.getLog(LogAdvice.class);
 
 	public void doStronglyTypedLogging(Object item) {
 		if (log.isInfoEnabled()) {

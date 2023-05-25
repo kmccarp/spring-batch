@@ -130,8 +130,8 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 
 			currentStepExecution = execution.createStepExecution(step.getName());
 
-			boolean isRestart = (lastStepExecution != null
-					&& !lastStepExecution.getStatus().equals(BatchStatus.COMPLETED));
+			boolean isRestart = lastStepExecution != null
+					&& !lastStepExecution.getStatus().equals(BatchStatus.COMPLETED);
 
 			if (isRestart) {
 				currentStepExecution.setExecutionContext(lastStepExecution.getExecutionContext());

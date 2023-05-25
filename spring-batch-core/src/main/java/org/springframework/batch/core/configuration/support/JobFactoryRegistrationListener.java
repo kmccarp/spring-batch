@@ -31,7 +31,7 @@ import org.springframework.batch.core.configuration.JobRegistry;
  */
 public class JobFactoryRegistrationListener {
 
-	private Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private JobRegistry jobRegistry;
 

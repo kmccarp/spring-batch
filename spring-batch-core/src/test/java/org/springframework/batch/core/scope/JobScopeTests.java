@@ -30,8 +30,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.scope.context.JobContext;
 import org.springframework.batch.core.scope.context.JobSynchronizationManager;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.support.StaticApplicationContext;
 
 /**
@@ -60,23 +58,13 @@ class JobScopeTests {
 	void testGetWithNoContext() {
 		final String foo = "bar";
 		JobSynchronizationManager.release();
-		assertThrows(IllegalStateException.class, () -> scope.get("foo", new ObjectFactory<String>() {
-			@Override
-			public String getObject() throws BeansException {
-				return foo;
-			}
-		}));
+		assertThrows(IllegalStateException.class, () -> scope.get("foo", () -> foo));
 	}
 
 	@Test
 	void testGetWithNothingAlreadyThere() {
 		final String foo = "bar";
-		Object value = scope.get("foo", new ObjectFactory<String>() {
-			@Override
-			public String getObject() throws BeansException {
-				return foo;
-			}
-		});
+		Object value = scope.get("foo", () -> foo);
 		assertEquals(foo, value);
 		assertTrue(context.hasAttribute("foo"));
 	}
@@ -84,12 +72,7 @@ class JobScopeTests {
 	@Test
 	void testGetWithSomethingAlreadyThere() {
 		context.setAttribute("foo", "bar");
-		Object value = scope.get("foo", new ObjectFactory<String>() {
-			@Override
-			public String getObject() throws BeansException {
-				return null;
-			}
-		});
+		Object value = scope.get("foo", () -> null);
 		assertEquals("bar", value);
 		assertTrue(context.hasAttribute("foo"));
 	}
@@ -104,11 +87,8 @@ class JobScopeTests {
 	void testRegisterDestructionCallback() {
 		final List<String> list = new ArrayList<>();
 		context.setAttribute("foo", "bar");
-		scope.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		scope.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
 		assertEquals(0, list.size());
 		// When the context is closed, provided the attribute exists the
@@ -121,17 +101,11 @@ class JobScopeTests {
 	void testRegisterAnotherDestructionCallback() {
 		final List<String> list = new ArrayList<>();
 		context.setAttribute("foo", "bar");
-		scope.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("foo");
-			}
+		scope.registerDestructionCallback("foo", () -> {
+			list.add("foo");
 		});
-		scope.registerDestructionCallback("foo", new Runnable() {
-			@Override
-			public void run() {
-				list.add("bar");
-			}
+		scope.registerDestructionCallback("foo", () -> {
+			list.add("bar");
 		});
 		assertEquals(0, list.size());
 		// When the context is closed, provided the attribute exists the

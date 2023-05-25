@@ -34,9 +34,9 @@ public class FormatterLineAggregator<T> extends ExtractorLineAggregator<T> {
 
 	private Locale locale = Locale.getDefault();
 
-	private int maximumLength = 0;
+	private int maximumLength;
 
-	private int minimumLength = 0;
+	private int minimumLength;
 
 	/**
 	 * Public setter for the minimum length of the formatted string. If this is not set

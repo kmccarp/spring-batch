@@ -44,11 +44,11 @@ import org.springframework.util.ObjectUtils;
  */
 public class ExecutionContextPromotionListener implements StepExecutionListener, InitializingBean {
 
-	private String[] keys = null;
+	private String[] keys;
 
 	private String[] statuses = new String[] { ExitStatus.COMPLETED.getExitCode() };
 
-	private boolean strict = false;
+	private boolean strict;
 
 	@Nullable
 	@Override

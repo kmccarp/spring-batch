@@ -26,7 +26,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.JobLocator;
 import org.springframework.batch.core.configuration.support.ApplicationContextFactory;
 import org.springframework.batch.core.configuration.support.AutomaticJobRegistrar;
@@ -36,7 +35,6 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -46,7 +44,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ApplicationObjectSupport;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Dave Syer
@@ -146,13 +143,7 @@ class JobLoaderConfigurationTests {
 
 		@Bean
 		protected Tasklet tasklet() {
-			return new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext context) throws Exception {
-					return RepeatStatus.FINISHED;
-				}
-			};
+			return (contribution, context) -> RepeatStatus.FINISHED;
 		}
 
 	}
@@ -168,13 +159,7 @@ class JobLoaderConfigurationTests {
 
 		@Bean
 		protected Step step3(JobRepository jobRepository) throws Exception {
-			return new StepBuilder("step3", jobRepository).tasklet(new Tasklet() {
-				@Nullable
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext context) throws Exception {
-					return RepeatStatus.FINISHED;
-				}
-			}, new ResourcelessTransactionManager()).build();
+			return new StepBuilder("step3", jobRepository).tasklet((contribution, context) -> RepeatStatus.FINISHED, new ResourcelessTransactionManager()).build();
 		}
 
 	}

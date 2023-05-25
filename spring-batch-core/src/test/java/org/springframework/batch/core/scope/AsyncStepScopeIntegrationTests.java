@@ -92,20 +92,17 @@ public class AsyncStepScopeIntegrationTests implements BeanFactoryAware {
 		for (int i = 0; i < 12; i++) {
 			final String value = "foo" + i;
 			final Long id = 123L + i;
-			FutureTask<String> task = new FutureTask<>(new Callable<String>() {
-				@Override
-				public String call() throws Exception {
-					StepExecution stepExecution = new StepExecution(value, new JobExecution(0L), id);
-					ExecutionContext executionContext = stepExecution.getExecutionContext();
-					executionContext.put("foo", value);
-					StepContext context = StepSynchronizationManager.register(stepExecution);
-					logger.debug("Registered: " + context.getStepExecutionContext());
-					try {
-						return simple.getName();
-					}
-					finally {
-						StepSynchronizationManager.close();
-					}
+			FutureTask<String> task = new FutureTask<>(() -> {
+				StepExecution stepExecution = new StepExecution(value, new JobExecution(0L), id);
+				ExecutionContext executionContext = stepExecution.getExecutionContext();
+				executionContext.put("foo", value);
+				StepContext context = StepSynchronizationManager.register(stepExecution);
+				logger.debug("Registered: " + context.getStepExecutionContext());
+				try {
+					return simple.getName();
+				}
+				finally {
+					StepSynchronizationManager.close();
 				}
 			});
 			tasks.add(task);

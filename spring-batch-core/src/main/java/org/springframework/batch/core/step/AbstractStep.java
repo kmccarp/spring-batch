@@ -72,7 +72,7 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 
 	private int startLimit = Integer.MAX_VALUE;
 
-	private boolean allowStartIfComplete = false;
+	private boolean allowStartIfComplete;
 
 	private CompositeStepExecutionListener stepExecutionListener = new CompositeStepExecutionListener();
 

@@ -120,18 +120,12 @@ class SimpleJobTests {
 		job.setObservationRegistry(observationRegistry);
 
 		step1 = new StubStep("TestStep1", jobRepository);
-		step1.setCallback(new Runnable() {
-			@Override
-			public void run() {
-				list.add("default");
-			}
+		step1.setCallback(() -> {
+			list.add("default");
 		});
 		step2 = new StubStep("TestStep2", jobRepository);
-		step2.setCallback(new Runnable() {
-			@Override
-			public void run() {
-				list.add("default");
-			}
+		step2.setCallback(() -> {
+			list.add("default");
 		});
 
 		List<Step> steps = new ArrayList<>();
@@ -489,11 +483,8 @@ class SimpleJobTests {
 	void testGetMultipleJobParameters() throws Exception {
 		StubStep failStep = new StubStep("failStep", jobRepository);
 
-		failStep.setCallback(new Runnable() {
-			@Override
-			public void run() {
-				throw new RuntimeException("An error occurred.");
-			}
+		failStep.setCallback(() -> {
+			throw new RuntimeException("An error occurred.");
 		});
 
 		job.setName("parametersTestJob");

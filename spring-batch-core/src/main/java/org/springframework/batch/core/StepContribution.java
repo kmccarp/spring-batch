@@ -28,11 +28,13 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class StepContribution implements Serializable {
 
-	private volatile long readCount = 0;
+	private static final long serialVersionUID = 1;
 
-	private volatile long writeCount = 0;
+	private volatile long readCount;
 
-	private volatile long filterCount = 0;
+	private volatile long writeCount;
+
+	private volatile long filterCount;
 
 	private final long parentSkipCount;
 

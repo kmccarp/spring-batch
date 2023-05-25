@@ -31,9 +31,11 @@ import org.springframework.core.AttributeAccessorSupport;
 @SuppressWarnings("serial")
 public class ChunkContext extends AttributeAccessorSupport {
 
+	private static final long serialVersionUID = 1;
+
 	private final StepContext stepContext;
 
-	private boolean complete = false;
+	private boolean complete;
 
 	/**
 	 * @param stepContext the current step context

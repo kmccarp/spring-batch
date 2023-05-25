@@ -42,7 +42,7 @@ class RetryRepeatTransactionalPollingIntegrationTests implements ApplicationCont
 
 	private final Log logger = LogFactory.getLog(getClass());
 
-	private volatile static List<String> list = new ArrayList<>();
+	private static volatile List<String> list = new ArrayList<>();
 
 	@Autowired
 	private SimpleRecoverer recoverer;
@@ -56,7 +56,7 @@ class RetryRepeatTransactionalPollingIntegrationTests implements ApplicationCont
 		lifecycle = (Lifecycle) applicationContext;
 	}
 
-	private static volatile int count = 0;
+	private static volatile int count;
 
 	@BeforeEach
 	void clearLists() {

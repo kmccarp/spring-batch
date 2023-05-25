@@ -56,9 +56,9 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 	private State startState;
 
-	private Map<String, Set<StateTransition>> transitionMap = new HashMap<>();
+	private final Map<String, Set<StateTransition>> transitionMap = new HashMap<>();
 
-	private Map<String, State> stateMap = new HashMap<>();
+	private final Map<String, State> stateMap = new HashMap<>();
 
 	private List<StateTransition> stateTransitions = new ArrayList<>();
 
@@ -219,7 +219,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		for (StateTransition stateTransition : set) {
 			if (stateTransition.matches(exitCode)
-					|| (exitCode.equals("PENDING") && stateTransition.matches("STOPPED"))) {
+					|| ("PENDING".equals(exitCode) && stateTransition.matches("STOPPED"))) {
 				if (stateTransition.isEnd()) {
 					// End of job
 					return null;

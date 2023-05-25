@@ -89,7 +89,7 @@ class MessagingGatewayIntegrationTests {
 
 		@ServiceActivator
 		public String transform(String input) {
-			if (input.equals("filter")) {
+			if ("filter".equals(input)) {
 				return null;
 			}
 			return input + ": " + (count++);
@@ -136,7 +136,6 @@ class MessagingGatewayIntegrationTests {
 		@ServiceActivator
 		public void service(String input) {
 			count++;
-			return;
 		}
 
 	}

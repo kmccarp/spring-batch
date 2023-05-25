@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  */
 public class SimpleJobBuilder extends JobBuilderHelper<SimpleJobBuilder> {
 
-	private List<Step> steps = new ArrayList<>();
+	private final List<Step> steps = new ArrayList<>();
 
 	private JobFlowBuilder builder;
 
@@ -82,7 +82,7 @@ public class SimpleJobBuilder extends JobBuilderHelper<SimpleJobBuilder> {
 	 * @return a builder for fluent chaining
 	 */
 	public FlowBuilder.TransitionBuilder<FlowJobBuilder> on(String pattern) {
-		Assert.state(steps.size() > 0, "You have to start a job with a step");
+		Assert.state(!steps.isEmpty(), "You have to start a job with a step");
 		for (Step step : steps) {
 			if (builder == null) {
 				builder = new JobFlowBuilder(new FlowJobBuilder(this), step);

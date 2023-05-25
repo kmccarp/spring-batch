@@ -33,7 +33,7 @@ public class MongoItemWriterBuilder<T> {
 
 	private String collection;
 
-	private boolean delete = false;
+	private boolean delete;
 
 	/**
 	 * Indicates if the items being passed to the writer are to be saved or removed from

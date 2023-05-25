@@ -73,11 +73,11 @@ public class JobRegistryBackgroundJobRunner {
 
 	private JobLoader jobLoader;
 
-	private ApplicationContext parentContext = null;
+	private ApplicationContext parentContext;
 
-	public static boolean testing = false;
+	public static boolean testing;
 
-	final private String parentContextPath;
+	private final String parentContextPath;
 
 	private JobRegistry jobRegistry;
 
@@ -165,7 +165,6 @@ public class JobRegistryBackgroundJobRunner {
 		}
 
 		jobLoader = parentContext.getBean(names[0], JobLoader.class);
-		return;
 
 	}
 
@@ -200,16 +199,13 @@ public class JobRegistryBackgroundJobRunner {
 		if (logger.isInfoEnabled()) {
 			logger.info("Starting job registry in parent context from XML at: [" + args[0] + "]");
 		}
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					launcher.run();
-				}
-				catch (RuntimeException e) {
-					errors.add(e);
-					throw e;
-				}
+		new Thread(() -> {
+			try {
+				launcher.run();
+			}
+			catch (RuntimeException e) {
+				errors.add(e);
+				throw e;
 			}
 		}).start();
 

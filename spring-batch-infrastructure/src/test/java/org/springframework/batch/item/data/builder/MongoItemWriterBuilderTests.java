@@ -122,7 +122,7 @@ class MongoItemWriterBuilderTests {
 	@Test
 	void testNullTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new MongoItemWriterBuilder<>().build());
+		new MongoItemWriterBuilder<>()::build);
 		assertEquals("template is required.", exception.getMessage());
 	}
 

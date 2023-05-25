@@ -93,9 +93,9 @@ class JobBuilderTests {
 
 	static class InterfaceBasedJobExecutionListener implements JobExecutionListener {
 
-		public static int beforeJobCount = 0;
+		public static int beforeJobCount;
 
-		public static int afterJobCount = 0;
+		public static int afterJobCount;
 
 		@Override
 		public void beforeJob(JobExecution jobExecution) {
@@ -111,9 +111,9 @@ class JobBuilderTests {
 
 	static class AnnotationBasedJobExecutionListener {
 
-		public static int beforeJobCount = 0;
+		public static int beforeJobCount;
 
-		public static int afterJobCount = 0;
+		public static int afterJobCount;
 
 		@BeforeJob
 		public void beforeJob(JobExecution jobExecution) {

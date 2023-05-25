@@ -81,7 +81,7 @@ public class ReprocessExceptionTests {
 		public void write(Chunk<? extends Person> persons) throws Exception {
 			for (Person person : persons) {
 				System.out.println(person.getFirstName() + " " + person.getLastName());
-				if (person.getFirstName().equals("JANE")) {
+				if ("JANE".equals(person.getFirstName())) {
 					throw new RuntimeException("jane doe write exception causing rollback");
 				}
 			}

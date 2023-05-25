@@ -65,7 +65,7 @@ public class JobOperatorFactoryBean implements FactoryBean<JobOperator>, Initial
 
 	private JobParametersConverter jobParametersConverter = new DefaultJobParametersConverter();
 
-	private ProxyFactory proxyFactory = new ProxyFactory();
+	private final ProxyFactory proxyFactory = new ProxyFactory();
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

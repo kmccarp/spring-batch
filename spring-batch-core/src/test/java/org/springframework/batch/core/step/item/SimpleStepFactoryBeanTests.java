@@ -71,11 +71,8 @@ class SimpleStepFactoryBeanTests {
 
 	private final List<String> written = new ArrayList<>();
 
-	private final ItemWriter<String> writer = new ItemWriter<String>() {
-		@Override
-		public void write(Chunk<? extends String> data) throws Exception {
-			written.addAll(data.getItems());
-		}
+	private final ItemWriter<String> writer = data -> {
+		written.addAll(data.getItems());
 	};
 
 	private ItemReader<String> reader = new ListItemReader<>(Arrays.asList("a", "b", "c"));
@@ -173,11 +170,8 @@ class SimpleStepFactoryBeanTests {
 
 		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
 
-		factory.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> data) throws Exception {
-				throw new RuntimeException("Error!");
-			}
+		factory.setItemWriter(data -> {
+			throw new RuntimeException("Error!");
 		});
 		factory.setListeners(new StepListener[] { new ItemListenerSupport<String, String>() {
 			@Override
@@ -211,11 +205,8 @@ class SimpleStepFactoryBeanTests {
 	void testExceptionTerminates() throws Exception {
 		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
 		factory.setBeanName("exceptionStep");
-		factory.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> data) throws Exception {
-				throw new RuntimeException("Foo");
-			}
+		factory.setItemWriter(data -> {
+			throw new RuntimeException("Foo");
 		});
 		AbstractStep step = (AbstractStep) factory.getObject();
 		job.setSteps(Collections.singletonList((Step) step));
@@ -281,13 +272,13 @@ class SimpleStepFactoryBeanTests {
 		}
 		class CountingChunkListener implements ChunkListener {
 
-			int beforeCount = 0;
+			int beforeCount;
 
-			int afterCount = 0;
+			int afterCount;
 
-			int failedCount = 0;
+			int failedCount;
 
-			private AssertingWriteListener writeListener;
+			private final AssertingWriteListener writeListener;
 
 			public CountingChunkListener(AssertingWriteListener writeListener) {
 				super();

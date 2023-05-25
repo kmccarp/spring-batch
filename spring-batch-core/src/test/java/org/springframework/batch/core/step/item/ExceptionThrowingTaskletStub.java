@@ -33,11 +33,11 @@ import org.springframework.lang.Nullable;
  */
 public class ExceptionThrowingTaskletStub implements Tasklet {
 
-	private int maxTries = 4;
+	private final int maxTries = 4;
 
 	protected Log logger = LogFactory.getLog(getClass());
 
-	private List<Integer> committed = TransactionAwareProxyFactory.createTransactionalList();
+	private final List<Integer> committed = TransactionAwareProxyFactory.createTransactionalList();
 
 	private Constructor<? extends Exception> exception;
 

@@ -98,7 +98,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 
 	private boolean streamIsReader;
 
-	private int retryLimit = 0;
+	private int retryLimit;
 
 	private BackOffPolicy backOffPolicy;
 
@@ -122,7 +122,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 
 	private Set<SkipListener<? super I, ? super O>> skipListeners = new LinkedHashSet<>();
 
-	private int skipLimit = 0;
+	private int skipLimit;
 
 	private SkipPolicy skipPolicy;
 
@@ -198,7 +198,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		skipListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), OnSkipInProcess.class));
 		skipListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), OnSkipInWrite.class));
 
-		if (skipListenerMethods.size() > 0) {
+		if (!skipListenerMethods.isEmpty()) {
 			StepListenerFactoryBean factory = new StepListenerFactoryBean();
 			factory.setDelegate(listener);
 			skipListeners.add((SkipListener) factory.getObject());
@@ -523,10 +523,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 			types.add(ExhaustedRetryException.class);
 			final Classifier<Throwable, Boolean> panic = new BinaryExceptionClassifier(types, true);
 
-			classifier = (Classifier<Throwable, Boolean>) classifiable -> {
-				// Rollback if either the user's list or our own applies
-				return panic.classify(classifiable) || binary.classify(classifiable);
-			};
+			classifier = (Classifier<Throwable, Boolean>) classifiable -> panic.classify(classifiable) || binary.classify(classifiable);
 
 		}
 
@@ -581,7 +578,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 					"If a retry limit is provided then retryable exceptions must also be specified");
 			retryPolicy = simpleRetryPolicy;
 		}
-		else if ((!retryableExceptionClasses.isEmpty() && retryLimit > 0)) {
+		else if (!retryableExceptionClasses.isEmpty() && retryLimit > 0) {
 			CompositeRetryPolicy compositeRetryPolicy = new CompositeRetryPolicy();
 			compositeRetryPolicy.setPolicies(new RetryPolicy[] { retryPolicy, simpleRetryPolicy });
 			retryPolicy = compositeRetryPolicy;

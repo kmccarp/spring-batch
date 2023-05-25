@@ -77,7 +77,7 @@ public class FlatFileItemReaderBuilder<T> {
 
 	private List<String> comments = new ArrayList<>(Arrays.asList(FlatFileItemReader.DEFAULT_COMMENT_PREFIXES));
 
-	private int linesToSkip = 0;
+	private int linesToSkip;
 
 	private LineCallbackHandler skippedLinesCallback;
 
@@ -97,7 +97,7 @@ public class FlatFileItemReaderBuilder<T> {
 
 	private BeanFactory beanFactory;
 
-	private Map<Class<?>, PropertyEditor> customEditors = new HashMap<>();
+	private final Map<Class<?>, PropertyEditor> customEditors = new HashMap<>();
 
 	private int distanceLimit = 5;
 

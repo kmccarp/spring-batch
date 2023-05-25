@@ -38,7 +38,7 @@ public abstract class AbstractLineTokenizer implements LineTokenizer {
 
 	private boolean strict = true;
 
-	private String emptyToken = "";
+	private final String emptyToken = "";
 
 	private FieldSetFactory fieldSetFactory = new DefaultFieldSetFactory();
 
@@ -99,10 +99,7 @@ public abstract class AbstractLineTokenizer implements LineTokenizer {
 	 * @see #setNames(String[])
 	 */
 	public boolean hasNames() {
-		if (names != null && names.length > 0) {
-			return true;
-		}
-		return false;
+		return names != null && names.length > 0;
 	}
 
 	/**

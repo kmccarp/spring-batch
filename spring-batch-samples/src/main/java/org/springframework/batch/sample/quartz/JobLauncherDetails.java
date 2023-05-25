@@ -40,7 +40,7 @@ public class JobLauncherDetails extends QuartzJobBean {
 	 */
 	static final String JOB_NAME = "jobName";
 
-	private static Log log = LogFactory.getLog(JobLauncherDetails.class);
+	private static final Log log = LogFactory.getLog(JobLauncherDetails.class);
 
 	private JobLocator jobLocator;
 

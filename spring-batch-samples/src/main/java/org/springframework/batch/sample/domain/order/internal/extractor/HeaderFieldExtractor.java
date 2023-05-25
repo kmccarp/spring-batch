@@ -26,7 +26,7 @@ import org.springframework.batch.sample.domain.order.Order;
  */
 public class HeaderFieldExtractor implements FieldExtractor<Order> {
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 	@Override
 	public Object[] extract(Order order) {

@@ -29,7 +29,7 @@ import org.springframework.core.annotation.AnnotationUtils;
  * @author Michael Minella
  * @since 2.2.6
  */
-public class ReflectionUtils {
+public final class ReflectionUtils {
 
 	private ReflectionUtils() {
 	}
@@ -43,7 +43,7 @@ public class ReflectionUtils {
 	 * empty set if not.
 	 */
 	@SuppressWarnings("rawtypes")
-	public static final Set<Method> findMethod(Class clazz, Class<? extends Annotation> annotationType) {
+	public static Set<Method> findMethod(Class clazz, Class<? extends Annotation> annotationType) {
 
 		Method[] declaredMethods = org.springframework.util.ReflectionUtils.getAllDeclaredMethods(clazz);
 		Set<Method> results = new HashSet<>();

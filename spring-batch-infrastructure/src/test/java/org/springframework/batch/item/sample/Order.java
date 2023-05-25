@@ -79,37 +79,48 @@ public class Order {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Order other = (Order) obj;
 		if (customer == null) {
-			if (other.customer != null)
+			if (other.customer != null) {
 				return false;
+			}
 		}
-		else if (!customer.equals(other.customer))
+		else if (!customer.equals(other.customer)) {
 			return false;
+		}
 		if (date == null) {
-			if (other.date != null)
+			if (other.date != null) {
 				return false;
+			}
 		}
-		else if (!date.equals(other.date))
+		else if (!date.equals(other.date)) {
 			return false;
+		}
 		if (lineItems == null) {
-			if (other.lineItems != null)
+			if (other.lineItems != null) {
 				return false;
+			}
 		}
-		else if (!lineItems.equals(other.lineItems))
+		else if (!lineItems.equals(other.lineItems)) {
 			return false;
+		}
 		if (shipper == null) {
-			if (other.shipper != null)
+			if (other.shipper != null) {
 				return false;
+			}
 		}
-		else if (!shipper.equals(other.shipper))
+		else if (!shipper.equals(other.shipper)) {
 			return false;
+		}
 		return true;
 	}
 

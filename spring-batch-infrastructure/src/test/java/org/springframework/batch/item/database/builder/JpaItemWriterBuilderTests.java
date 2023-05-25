@@ -75,7 +75,7 @@ class JpaItemWriterBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new JpaItemWriterBuilder<String>().build());
+		new JpaItemWriterBuilder<String>()::build);
 		assertEquals("EntityManagerFactory must be provided", exception.getMessage());
 	}
 

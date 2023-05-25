@@ -44,17 +44,17 @@ public abstract class AbstractRowMapperTests<T> {
 	 * @return Expected result of mapping the mock <code>ResultSet</code> by the mapper
 	 * being tested.
 	 */
-	abstract protected T expectedDomainObject();
+	protected abstract T expectedDomainObject();
 
 	/**
 	 * @return <code>RowMapper</code> implementation that is being tested.
 	 */
-	abstract protected RowMapper<T> rowMapper();
+	protected abstract RowMapper<T> rowMapper();
 
 	/*
 	 * Define the behaviour of mock <code>ResultSet</code>.
 	 */
-	abstract protected void setUpResultSetMock(ResultSet rs) throws SQLException;
+	protected abstract void setUpResultSetMock(ResultSet rs) throws SQLException;
 
 	/*
 	 * Regular usage scenario.

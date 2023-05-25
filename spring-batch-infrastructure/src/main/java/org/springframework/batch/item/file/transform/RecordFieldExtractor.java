@@ -36,9 +36,9 @@ public class RecordFieldExtractor<T> implements FieldExtractor<T> {
 
 	private List<String> names;
 
-	private Class<? extends T> targetType;
+	private final Class<? extends T> targetType;
 
-	private RecordComponent[] recordComponents;
+	private final RecordComponent[] recordComponents;
 
 	public RecordFieldExtractor(Class<? extends T> targetType) {
 		Assert.notNull(targetType, "target type must not be null");
@@ -80,7 +80,7 @@ public class RecordFieldExtractor<T> implements FieldExtractor<T> {
 	}
 
 	private List<String> getRecordComponentNames() {
-		return Arrays.stream(this.recordComponents).map(recordComponent -> recordComponent.getName()).toList();
+		return Arrays.stream(this.recordComponents).map(RecordComponent::getName).toList();
 	}
 
 	private void validate(String[] names) {

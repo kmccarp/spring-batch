@@ -17,7 +17,6 @@
 package org.springframework.batch.sample;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,6 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
@@ -47,7 +45,7 @@ class CustomerFilterJobFunctionalTests {
 
 	private List<Customer> customers;
 
-	private int activeRow = 0;
+	private int activeRow;
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -90,13 +88,10 @@ class CustomerFilterJobFunctionalTests {
 				new Customer("customer6", 123456));
 
 		activeRow = 0;
-		jdbcTemplate.query(GET_CUSTOMERS, new RowCallbackHandler() {
-			@Override
-			public void processRow(ResultSet rs) throws SQLException {
-				CustomerFilterJobFunctionalTests.Customer customer = customers.get(activeRow++);
-				assertEquals(customer.getName(), rs.getString(1));
-				assertEquals(customer.getCredit(), rs.getDouble(2), .01);
-			}
+		jdbcTemplate.query(GET_CUSTOMERS, rs -> {
+			CustomerFilterJobFunctionalTests.Customer customer = customers.get(activeRow++);
+			assertEquals(customer.getName(), rs.getString(1));
+			assertEquals(customer.getCredit(), rs.getDouble(2), .01);
 		});
 
 		Map<String, Object> step1Execution = this.getStepExecution(jobExecution, "uploadCustomer");
@@ -144,12 +139,12 @@ class CustomerFilterJobFunctionalTests {
 		 */
 		@Override
 		public int hashCode() {
-			final int PRIME = 31;
+			final int prime = 31;
 			int result = 1;
 			long temp;
 			temp = Double.doubleToLongBits(credit);
-			result = PRIME * result + (int) (temp ^ (temp >>> 32));
-			result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + (int) (temp ^ (temp >>> 32));
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			return result;
 		}
 
@@ -160,21 +155,27 @@ class CustomerFilterJobFunctionalTests {
 		 */
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj)
+			if (this == obj) {
 				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			final Customer other = (Customer) obj;
-			if (Double.doubleToLongBits(credit) != Double.doubleToLongBits(other.credit))
-				return false;
-			if (name == null) {
-				if (other.name != null)
-					return false;
 			}
-			else if (!name.equals(other.name))
+			if (obj == null) {
 				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			final Customer other = (Customer) obj;
+			if (Double.doubleToLongBits(credit) != Double.doubleToLongBits(other.credit)) {
+				return false;
+			}
+			if (name == null) {
+				if (other.name != null) {
+					return false;
+				}
+			}
+			else if (!name.equals(other.name)) {
+				return false;
+			}
 			return true;
 		}
 

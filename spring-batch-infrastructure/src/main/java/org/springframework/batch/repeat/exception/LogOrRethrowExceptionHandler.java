@@ -39,7 +39,7 @@ public class LogOrRethrowExceptionHandler implements ExceptionHandler {
 	 * @author Dave Syer
 	 *
 	 */
-	public static enum Level {
+	public enum Level {
 
 		/**
 		 * Key for {@link Classifier} signalling that the throwable should be rethrown. If

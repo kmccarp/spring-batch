@@ -66,19 +66,19 @@ class AbstractDelegatorTests {
 	@Test
 	void testDelegationWithArgument() throws Exception {
 		delegator.setTargetMethod("setName");
-		final String NEW_FOO_NAME = "newFooName";
+		final String newFooName = "newFooName";
 		delegator.afterPropertiesSet();
 
-		delegator.invokeDelegateMethodWithArgument(NEW_FOO_NAME);
-		assertEquals(NEW_FOO_NAME, foo.getName());
+		delegator.invokeDelegateMethodWithArgument(newFooName);
+		assertEquals(newFooName, foo.getName());
 
 		// using the arguments setter should work equally well
 		foo.setName("foo");
-		assertNotEquals(NEW_FOO_NAME, foo.getName());
-		delegator.setArguments(new Object[] { NEW_FOO_NAME });
+		assertNotEquals(newFooName, foo.getName());
+		delegator.setArguments(new Object[] { newFooName });
 		delegator.afterPropertiesSet();
 		delegator.invokeDelegateMethod();
-		assertEquals(NEW_FOO_NAME, foo.getName());
+		assertEquals(newFooName, foo.getName());
 	}
 
 	/**
@@ -103,13 +103,13 @@ class AbstractDelegatorTests {
 		delegator.setTargetMethod("processNameValuePair");
 		delegator.afterPropertiesSet();
 
-		final String FOO_NAME = "fooName";
-		final int FOO_VALUE = 12345;
+		final String fooName = "fooName";
+		final int fooValue = 12345;
 
-		delegator.invokeDelegateMethodWithArguments(new Object[] { FOO_NAME, FOO_VALUE });
+		delegator.invokeDelegateMethodWithArguments(new Object[] { fooName, fooValue });
 		Foo foo = fooService.getProcessedFooNameValuePairs().get(0);
-		assertEquals(FOO_NAME, foo.getName());
-		assertEquals(FOO_VALUE, foo.getValue());
+		assertEquals(fooName, foo.getName());
+		assertEquals(fooValue, foo.getValue());
 	}
 
 	/**

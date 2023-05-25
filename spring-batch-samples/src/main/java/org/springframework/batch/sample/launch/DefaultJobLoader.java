@@ -36,7 +36,7 @@ public class DefaultJobLoader implements JobLoader, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
-	private Map<String, String> configurations = new HashMap<>();
+	private final Map<String, String> configurations = new HashMap<>();
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

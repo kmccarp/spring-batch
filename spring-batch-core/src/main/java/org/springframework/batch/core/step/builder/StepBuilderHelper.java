@@ -95,7 +95,7 @@ public abstract class StepBuilderHelper<B extends StepBuilderHelper<B>> {
 		stepExecutionListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), BeforeStep.class));
 		stepExecutionListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterStep.class));
 
-		if (stepExecutionListenerMethods.size() > 0) {
+		if (!stepExecutionListenerMethods.isEmpty()) {
 			StepListenerFactoryBean factory = new StepListenerFactoryBean();
 			factory.setDelegate(listener);
 			properties.addStepExecutionListener((StepExecutionListener) factory.getObject());

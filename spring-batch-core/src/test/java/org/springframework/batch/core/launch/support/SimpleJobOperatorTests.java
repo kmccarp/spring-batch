@@ -105,7 +105,7 @@ class SimpleJobOperatorTests {
 		jobOperator.setJobRegistry(new MapJobRegistry() {
 			@Override
 			public Job getJob(@Nullable String name) throws NoSuchJobException {
-				if (name.equals("foo")) {
+				if ("foo".equals(name)) {
 					return job;
 				}
 				throw new NoSuchJobException("foo");
@@ -247,7 +247,7 @@ class SimpleJobOperatorTests {
 	@SuppressWarnings("unchecked")
 	void testFindRunningExecutionsNoSuchJob() {
 		jobParameters = new JobParameters();
-		when(jobExplorer.findRunningJobExecutions("no-such-job")).thenReturn(Collections.EMPTY_SET);
+		when(jobExplorer.findRunningJobExecutions("no-such-job")).thenReturn(Collections.emptySet());
 		assertThrows(NoSuchJobException.class, () -> jobOperator.getRunningExecutions("no-such-job"));
 	}
 

@@ -58,7 +58,7 @@ public class JobScope extends BatchScopeSupport {
 
 	private static final String TARGET_NAME_PREFIX = "jobScopedTarget.";
 
-	private Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private final Object mutex = new Object();
 

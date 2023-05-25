@@ -29,17 +29,17 @@ import org.springframework.util.ClassUtils;
  */
 public class ExampleItemReader extends AbstractItemStreamItemReader<String> {
 
-	private Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
-	private String[] input = { "Hello", "world!", "Go", "on", "punk", "make", "my", "day!" };
+	private final String[] input = {"Hello", "world!", "Go", "on", "punk", "make", "my", "day!"};
 
-	private int index = 0;
+	private int index;
 
-	private int min = 0;
+	private int min;
 
 	private int max = Integer.MAX_VALUE;
 
-	public static volatile boolean fail = false;
+	public static volatile boolean fail;
 
 	public ExampleItemReader() {
 		this.setExecutionContextName(ClassUtils.getShortName(this.getClass()));

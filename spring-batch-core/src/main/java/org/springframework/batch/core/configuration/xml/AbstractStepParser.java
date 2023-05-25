@@ -147,7 +147,7 @@ public abstract class AbstractStepParser {
 						value = parserContext.getDelegate().decorateBeanDefinitionIfRequired(nestedElement, holder);
 					}
 					// Spring Batch transitions
-					else if (ns.equals("http://www.springframework.org/schema/batch")) {
+					else if ("http://www.springframework.org/schema/batch".equals(ns)) {
 						// don't parse
 						skip = true;
 					}

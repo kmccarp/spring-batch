@@ -71,16 +71,13 @@ class TransactionAwareListItemReaderTests {
 	void testTransactionalExhausted() {
 		PlatformTransactionManager transactionManager = new ResourcelessTransactionManager();
 		final List<Object> taken = new ArrayList<>();
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				Object next = reader.read();
-				while (next != null) {
-					taken.add(next);
-					next = reader.read();
-				}
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			Object next = reader.read();
+			while (next != null) {
+				taken.add(next);
+				next = reader.read();
 			}
+			return null;
 		});
 		assertEquals(3, taken.size());
 		assertEquals("a", taken.get(0));

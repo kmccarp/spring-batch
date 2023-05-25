@@ -25,11 +25,11 @@ import org.springframework.batch.item.file.transform.FieldSet;
  */
 public class Trade {
 
-	private String isin;
+	private final String isin;
 
-	private long quantity;
+	private final long quantity;
 
-	private BigDecimal price;
+	private final BigDecimal price;
 
 	Trade(FieldSet fieldSet) {
 		this.isin = fieldSet.readString(0);

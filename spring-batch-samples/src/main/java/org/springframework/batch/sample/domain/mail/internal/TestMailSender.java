@@ -37,7 +37,7 @@ public class TestMailSender implements MailSender {
 
 	private List<String> subjectsToFail = new ArrayList<>();
 
-	private List<SimpleMailMessage> received = new ArrayList<>();
+	private final List<SimpleMailMessage> received = new ArrayList<>();
 
 	public void clear() {
 		received.clear();

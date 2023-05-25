@@ -38,9 +38,9 @@ import org.springframework.util.StringUtils;
  */
 public class UnopenedElementClosingEventWriter extends AbstractEventWriterWrapper {
 
-	private LinkedList<QName> unopenedElements;
+	private final LinkedList<QName> unopenedElements;
 
-	private Writer ioWriter;
+	private final Writer ioWriter;
 
 	public UnopenedElementClosingEventWriter(XMLEventWriter wrappedEventWriter, Writer ioWriter,
 			List<QName> unopenedElements) {

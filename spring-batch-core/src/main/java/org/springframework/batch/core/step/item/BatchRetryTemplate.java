@@ -70,6 +70,8 @@ public class BatchRetryTemplate implements RetryOperations {
 	@SuppressWarnings("serial")
 	private static class BatchRetryContext extends RetryContextSupport {
 
+		private static final long serialVersionUID = 1;
+
 		private final Collection<RetryContext> contexts;
 
 		public BatchRetryContext(RetryContext parent, Collection<RetryContext> contexts) {

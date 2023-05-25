@@ -74,27 +74,24 @@ class FaultTolerantStepFactoryBeanRetryTests {
 
 	private FaultTolerantStepFactoryBean<String, String> factory;
 
-	private List<Object> recovered = new ArrayList<>();
+	private final List<Object> recovered = new ArrayList<>();
 
-	private List<Object> processed = new ArrayList<>();
+	private final List<Object> processed = new ArrayList<>();
 
-	private List<Object> provided = new ArrayList<>();
+	private final List<Object> provided = new ArrayList<>();
 
-	private List<Object> written = TransactionAwareProxyFactory.createTransactionalList();
+	private final List<Object> written = TransactionAwareProxyFactory.createTransactionalList();
 
-	int count = 0;
+	int count;
 
-	boolean fail = false;
+	boolean fail;
 
 	private JobRepository repository;
 
 	JobExecution jobExecution;
 
-	private ItemWriter<String> writer = new ItemWriter<String>() {
-		@Override
-		public void write(Chunk<? extends String> data) throws Exception {
-			processed.addAll(data.getItems());
-		}
+	private final ItemWriter<String> writer = data -> {
+		processed.addAll(data.getItems());
 	};
 
 	@SuppressWarnings("unchecked")
@@ -143,8 +140,8 @@ class FaultTolerantStepFactoryBeanRetryTests {
 
 	@Test
 	void testProcessAllItemsWhenErrorInWriterTransformationWhenReaderTransactional() throws Exception {
-		final int RETRY_LIMIT = 3;
-		final List<String> ITEM_LIST = TransactionAwareProxyFactory
+		final int retryLimit = 3;
+		final List<String> itemList = TransactionAwareProxyFactory
 				.createTransactionalList(Arrays.asList("1", "2", "3"));
 		FaultTolerantStepFactoryBean<String, Integer> factory = new FaultTolerantStepFactoryBean<>();
 		factory.setBeanName("step");
@@ -164,18 +161,14 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 
-		ItemProcessor<String, Integer> processor = new ItemProcessor<String, Integer>() {
-			@Nullable
-			@Override
-			public Integer process(String item) throws Exception {
-				processed.add(item);
-				return Integer.parseInt(item);
-			}
+		ItemProcessor<String, Integer> processor = item -> {
+			processed.add(item);
+			return Integer.parseInt(item);
 		};
 		ItemReader<String> reader = new ListItemReader<>(
-				TransactionAwareProxyFactory.createTransactionalList(ITEM_LIST));
+				TransactionAwareProxyFactory.createTransactionalList(itemList));
 		factory.setCommitInterval(3);
-		factory.setRetryLimit(RETRY_LIMIT);
+		factory.setRetryLimit(retryLimit);
 		factory.setSkipLimit(1);
 		factory.setIsReaderTransactionalQueue(true);
 		@SuppressWarnings("unchecked")
@@ -194,7 +187,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 		 * Each chunk tried up to RETRY_LIMIT, then the scan processes each item once,
 		 * identifying the skip as it goes
 		 */
-		assertEquals((RETRY_LIMIT + 1) * ITEM_LIST.size(), processed.size());
+		assertEquals((retryLimit + 1) * itemList.size(), processed.size());
 	}
 
 	@Test
@@ -214,13 +207,9 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 
-		ItemProcessor<String, String> processor = new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				processed.add(item);
-				return item;
-			}
+		ItemProcessor<String, String> processor = item -> {
+			processed.add(item);
+			return item;
 		};
 		ItemReader<String> reader = new ListItemReader<>(ITEM_LIST);
 		factory.setCommitInterval(3);
@@ -260,13 +249,9 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 
-		ItemProcessor<String, String> processor = new ItemProcessor<String, String>() {
-			@Nullable
-			@Override
-			public String process(String item) throws Exception {
-				processed.add(item);
-				return item;
-			}
+		ItemProcessor<String, String> processor = item -> {
+			processed.add(item);
+			return item;
 		};
 		ItemReader<String> reader = new ListItemReader<>(Arrays.asList("a", "b", "c"));
 		factory.setProcessorTransactional(false);
@@ -357,14 +342,11 @@ class FaultTolerantStepFactoryBeanRetryTests {
 		reader.setName("foo");
 		factory.setItemReader(reader);
 		factory.setStreams(new ItemStream[] { reader });
-		factory.setItemWriter(new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				if (fail && chunk.getItems().contains("e")) {
-					throw new RuntimeException("Planned failure");
-				}
-				processed.addAll(chunk.getItems());
+		factory.setItemWriter(chunk -> {
+			if (fail && chunk.getItems().contains("e")) {
+				throw new RuntimeException("Planned failure");
 			}
+			processed.addAll(chunk.getItems());
 		});
 		factory.setRetryLimit(0);
 		Step step = factory.getObject();
@@ -444,15 +426,12 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
-				processed.addAll(chunk.getItems());
-				written.addAll(chunk.getItems());
-				if (chunk.getItems().contains("b") || chunk.getItems().contains("d")) {
-					throw new RuntimeException("Write error - planned but recoverable.");
-				}
+		ItemWriter<String> itemWriter = chunk -> {
+			logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
+			processed.addAll(chunk.getItems());
+			written.addAll(chunk.getItems());
+			if (chunk.getItems().contains("b") || chunk.getItems().contains("d")) {
+				throw new RuntimeException("Write error - planned but recoverable.");
 			}
 		};
 		factory.setItemReader(provider);
@@ -502,15 +481,12 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				logger.debug("Write Called! Item: [" + chunk + "]");
-				processed.addAll(chunk.getItems());
-				written.addAll(chunk.getItems());
-				if (chunk.getItems().contains("b") || chunk.getItems().contains("d")) {
-					throw new RuntimeException("Write error - planned but recoverable.");
-				}
+		ItemWriter<String> itemWriter = chunk -> {
+			logger.debug("Write Called! Item: [" + chunk + "]");
+			processed.addAll(chunk.getItems());
+			written.addAll(chunk.getItems());
+			if (chunk.getItems().contains("b") || chunk.getItems().contains("d")) {
+				throw new RuntimeException("Write error - planned but recoverable.");
 			}
 		};
 		factory.setItemReader(provider);
@@ -555,14 +531,11 @@ class FaultTolerantStepFactoryBeanRetryTests {
 				return item;
 			}
 		};
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				processed.addAll(chunk.getItems());
-				written.addAll(chunk.getItems());
-				logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
-				throw new RuntimeException("Write error - planned but retryable.");
-			}
+		ItemWriter<String> itemWriter = chunk -> {
+			processed.addAll(chunk.getItems());
+			written.addAll(chunk.getItems());
+			logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
+			throw new RuntimeException("Write error - planned but retryable.");
 		};
 		factory.setItemReader(provider);
 		factory.setItemWriter(itemWriter);
@@ -607,14 +580,11 @@ class FaultTolerantStepFactoryBeanRetryTests {
 				return item;
 			}
 		};
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				processed.addAll(chunk.getItems());
-				written.addAll(chunk.getItems());
-				logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
-				throw new RuntimeException("Write error - planned but not skippable.");
-			}
+		ItemWriter<String> itemWriter = chunk -> {
+			processed.addAll(chunk.getItems());
+			written.addAll(chunk.getItems());
+			logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
+			throw new RuntimeException("Write error - planned but not skippable.");
 		};
 		factory.setItemReader(provider);
 		factory.setItemWriter(itemWriter);
@@ -654,14 +624,11 @@ class FaultTolerantStepFactoryBeanRetryTests {
 				return item;
 			}
 		};
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				processed.addAll(chunk.getItems());
-				written.addAll(chunk.getItems());
-				logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
-				throw new RuntimeException("Write error - planned but retryable.");
-			}
+		ItemWriter<String> itemWriter = chunk -> {
+			processed.addAll(chunk.getItems());
+			written.addAll(chunk.getItems());
+			logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
+			throw new RuntimeException("Write error - planned but retryable.");
 		};
 		factory.setItemReader(provider);
 		factory.setItemWriter(itemWriter);
@@ -692,27 +659,20 @@ class FaultTolerantStepFactoryBeanRetryTests {
 		factory.setSkipLimit(10);
 		// set the cache limit stupidly low
 		factory.setRetryContextCache(new MapRetryContextCache(0));
-		ItemReader<String> provider = new ItemReader<String>() {
-			@Nullable
-			@Override
-			public String read() {
-				String item = "" + count;
-				provided.add(item);
-				count++;
-				if (count >= 10) {
-					// prevent infinite loop in worst case scenario
-					return null;
-				}
-				return item;
+		ItemReader<String> provider = () -> {
+			String item = "" + count;
+			provided.add(item);
+			count++;
+			if (count >= 10) {
+				// prevent infinite loop in worst case scenario
+				return null;
 			}
+			return item;
 		};
-		ItemWriter<String> itemWriter = new ItemWriter<String>() {
-			@Override
-			public void write(Chunk<? extends String> chunk) throws Exception {
-				processed.addAll(chunk.getItems());
-				logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
-				throw new RuntimeException("Write error - planned but retryable.");
-			}
+		ItemWriter<String> itemWriter = chunk -> {
+			processed.addAll(chunk.getItems());
+			logger.debug("Write Called! Item: [" + chunk.getItems() + "]");
+			throw new RuntimeException("Write error - planned but retryable.");
 		};
 		factory.setItemReader(provider);
 		factory.setItemWriter(itemWriter);

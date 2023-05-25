@@ -380,8 +380,8 @@ class StaxEventItemReaderTests {
 		Resource resource = new ByteArrayResource(xml.getBytes());
 		XMLEventReader reader = StaxUtils.createDefensiveInputFactory().createXMLEventReader(resource.getInputStream());
 
-		final int EXPECTED_NUMBER_OF_FRAGMENTS = 2;
-		for (int i = 0; i < EXPECTED_NUMBER_OF_FRAGMENTS; i++) {
+		final int expectedNumberOfFragments = 2;
+		for (int i = 0; i < expectedNumberOfFragments; i++) {
 			assertTrue(source.moveCursorToNextFragment(reader));
 			assertEquals("fragment", EventHelper.startElementName(reader.peek()));
 			reader.nextEvent(); // move away from beginning of fragment
@@ -462,20 +462,20 @@ class StaxEventItemReaderTests {
 	 */
 	@Test
 	void testExecutionContext() throws Exception {
-		final int NUMBER_OF_RECORDS = 2;
+		final int numberOfRecords = 2;
 		source.open(executionContext);
 		source.update(executionContext);
 
-		for (int i = 0; i < NUMBER_OF_RECORDS; i++) {
+		for (int i = 0; i < numberOfRecords; i++) {
 			int recordCount = extractRecordCount();
 			assertEquals(i, recordCount);
 			source.read();
 			source.update(executionContext);
 		}
 
-		assertEquals(NUMBER_OF_RECORDS, extractRecordCount());
+		assertEquals(numberOfRecords, extractRecordCount());
 		source.read();
-		assertEquals(NUMBER_OF_RECORDS, extractRecordCount());
+		assertEquals(numberOfRecords, extractRecordCount());
 	}
 
 	private int extractRecordCount() {
@@ -796,7 +796,7 @@ class StaxEventItemReaderTests {
 
 	private static class MockStaxEventItemReader extends StaxEventItemReader<List<XMLEvent>> {
 
-		private boolean openCalled = false;
+		private boolean openCalled;
 
 		@Override
 		public void open(ExecutionContext executionContext) {

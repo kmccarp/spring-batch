@@ -44,6 +44,8 @@ import org.springframework.lang.Nullable;
 @SuppressWarnings("serial")
 public class JobExecution extends Entity {
 
+	private static final long serialVersionUID = 1;
+
 	private final JobParameters jobParameters;
 
 	private JobInstance jobInstance;
@@ -52,13 +54,13 @@ public class JobExecution extends Entity {
 
 	private volatile BatchStatus status = BatchStatus.STARTING;
 
-	private volatile LocalDateTime startTime = null;
+	private volatile LocalDateTime startTime;
 
 	private volatile LocalDateTime createTime = LocalDateTime.now();
 
-	private volatile LocalDateTime endTime = null;
+	private volatile LocalDateTime endTime;
 
-	private volatile LocalDateTime lastUpdated = null;
+	private volatile LocalDateTime lastUpdated;
 
 	private volatile ExitStatus exitStatus = ExitStatus.UNKNOWN;
 

@@ -224,39 +224,33 @@ class StaxEventItemWriterTests {
 
 		PlatformTransactionManager transactionManager = new ResourcelessTransactionManager();
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				try {
-					// write item
-					writer.write(items);
-				}
-				catch (Exception e) {
-					throw new UnexpectedInputException("Could not write data", e);
-				}
-				// get restart data
-				writer.update(executionContext);
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				// write item
+				writer.write(items);
 			}
+			catch (Exception e) {
+				throw new UnexpectedInputException("Could not write data", e);
+			}
+			// get restart data
+			writer.update(executionContext);
+			return null;
 		});
 		writer.close();
 
 		// create new writer from saved restart data and continue writing
 		writer = createItemWriter();
 		writer.open(executionContext);
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				try {
-					writer.write(items);
-				}
-				catch (Exception e) {
-					throw new UnexpectedInputException("Could not write data", e);
-				}
-				// get restart data
-				writer.update(executionContext);
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				writer.write(items);
 			}
+			catch (Exception e) {
+				throw new UnexpectedInputException("Could not write data", e);
+			}
+			// get restart data
+			writer.update(executionContext);
+			return null;
 		});
 		writer.close();
 
@@ -285,20 +279,17 @@ class StaxEventItemWriterTests {
 
 		PlatformTransactionManager transactionManager = new ResourcelessTransactionManager();
 
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				try {
-					// write item
-					writer.write(itemsMultiByte);
-				}
-				catch (Exception e) {
-					throw new UnexpectedInputException("Could not write data", e);
-				}
-				// get restart data
-				writer.update(executionContext);
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				// write item
+				writer.write(itemsMultiByte);
 			}
+			catch (Exception e) {
+				throw new UnexpectedInputException("Could not write data", e);
+			}
+			// get restart data
+			writer.update(executionContext);
+			return null;
 		});
 		writer.close();
 
@@ -306,19 +297,16 @@ class StaxEventItemWriterTests {
 		writer = createItemWriter();
 		writer.setEncoding(encoding);
 		writer.open(executionContext);
-		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				try {
-					writer.write(itemsMultiByte);
-				}
-				catch (Exception e) {
-					throw new UnexpectedInputException("Could not write data", e);
-				}
-				// get restart data
-				writer.update(executionContext);
-				return null;
+		new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				writer.write(itemsMultiByte);
 			}
+			catch (Exception e) {
+				throw new UnexpectedInputException("Could not write data", e);
+			}
+			// get restart data
+			writer.update(executionContext);
+			return null;
 		});
 		writer.close();
 
@@ -408,7 +396,7 @@ class StaxEventItemWriterTests {
 		writer.open(executionContext);
 		writer.write(items);
 		String content = getOutputFileContent();
-		assertTrue(content.contains(("<header/>")), "Wrong content: " + content);
+		assertTrue(content.contains("<header/>"), "Wrong content: " + content);
 		assertTrue(content.contains(TEST_STRING), "Wrong content: " + content);
 	}
 
@@ -418,9 +406,9 @@ class StaxEventItemWriterTests {
 	@Test
 	void testStreamContext() throws Exception {
 		writer.open(executionContext);
-		final int NUMBER_OF_RECORDS = 10;
+		final int numberOfRecords = 10;
 		assertFalse(executionContext.containsKey(ClassUtils.getShortName(StaxEventItemWriter.class) + ".record.count"));
-		for (int i = 1; i <= NUMBER_OF_RECORDS; i++) {
+		for (int i = 1; i <= numberOfRecords; i++) {
 			writer.write(items);
 			writer.update(executionContext);
 			long writeStatistics = executionContext
@@ -663,10 +651,10 @@ class StaxEventItemWriterTests {
 		writer.write(items);
 		writer.close();
 		String content = getOutputFileContent();
-		assertTrue(content.contains(("<root xmlns=\"https://www.springframework.org/test\">")),
+		assertTrue(content.contains("<root xmlns=\"https://www.springframework.org/test\">"),
 				"Wrong content: " + content);
 		assertTrue(content.contains(TEST_STRING), "Wrong content: " + content);
-		assertTrue(content.contains(("</root>")), "Wrong content: " + content);
+		assertTrue(content.contains("</root>"), "Wrong content: " + content);
 	}
 
 	/**
@@ -682,11 +670,11 @@ class StaxEventItemWriterTests {
 		writer.write(items);
 		writer.close();
 		String content = getOutputFileContent();
-		assertTrue(content.contains(("<ns:root xmlns:ns=\"https://www.springframework.org/test\">")),
+		assertTrue(content.contains("<ns:root xmlns:ns=\"https://www.springframework.org/test\">"),
 				"Wrong content: " + content);
 		assertTrue(content.contains(NS_TEST_STRING), "Wrong content: " + content);
-		assertTrue(content.contains(("</ns:root>")), "Wrong content: " + content);
-		assertTrue(content.contains(("<ns:root")), "Wrong content: " + content);
+		assertTrue(content.contains("</ns:root>"), "Wrong content: " + content);
+		assertTrue(content.contains("<ns:root"), "Wrong content: " + content);
 	}
 
 	/**
@@ -707,8 +695,8 @@ class StaxEventItemWriterTests {
 				("<ns:root xmlns:ns=\"https://www.springframework.org/test\" " + "xmlns:foo=\"urn:org.test.foo\">")),
 				"Wrong content: " + content);
 		assertTrue(content.contains(FOO_TEST_STRING), "Wrong content: " + content);
-		assertTrue(content.contains(("</ns:root>")), "Wrong content: " + content);
-		assertTrue(content.contains(("<ns:root")), "Wrong content: " + content);
+		assertTrue(content.contains("</ns:root>"), "Wrong content: " + content);
+		assertTrue(content.contains("<ns:root"), "Wrong content: " + content);
 	}
 
 	/**

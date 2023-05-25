@@ -18,7 +18,6 @@ package org.springframework.batch.sample;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,6 @@ import org.springframework.batch.sample.domain.trade.Trade;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
@@ -51,7 +49,7 @@ class TradeJobFunctionalTests {
 
 	private List<Trade> trades;
 
-	private int activeRow = 0;
+	private int activeRow;
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -95,29 +93,23 @@ class TradeJobFunctionalTests {
 				new Trade("UK21341EAH48", 108, new BigDecimal("109.25"), "customer3"),
 				new Trade("UK21341EAH49", 854, new BigDecimal("123.39"), "customer4"));
 
-		jdbcTemplate.query(GET_TRADES, new RowCallbackHandler() {
-			@Override
-			public void processRow(ResultSet rs) throws SQLException {
-				Trade trade = trades.get(activeRow++);
+		jdbcTemplate.query(GET_TRADES, rs -> {
+			Trade trade = trades.get(activeRow++);
 
-				assertEquals(trade.getIsin(), rs.getString(1));
-				assertEquals(trade.getQuantity(), rs.getLong(2));
-				assertEquals(trade.getPrice(), rs.getBigDecimal(3));
-				assertEquals(trade.getCustomer(), rs.getString(4));
-			}
+			assertEquals(trade.getIsin(), rs.getString(1));
+			assertEquals(trade.getQuantity(), rs.getLong(2));
+			assertEquals(trade.getPrice(), rs.getBigDecimal(3));
+			assertEquals(trade.getCustomer(), rs.getString(4));
 		});
 
 		assertEquals(activeRow, trades.size());
 
 		activeRow = 0;
-		jdbcTemplate.query(GET_CUSTOMERS, new RowCallbackHandler() {
-			@Override
-			public void processRow(ResultSet rs) throws SQLException {
-				Customer customer = customers.get(activeRow++);
+		jdbcTemplate.query(GET_CUSTOMERS, rs -> {
+			Customer customer = customers.get(activeRow++);
 
-				assertEquals(customer.getName(), rs.getString(1));
-				assertEquals(customer.getCredit(), rs.getDouble(2), .01);
-			}
+			assertEquals(customer.getName(), rs.getString(1));
+			assertEquals(customer.getCredit(), rs.getDouble(2), .01);
 		});
 
 		assertEquals(customers.size(), activeRow);
@@ -150,32 +142,38 @@ class TradeJobFunctionalTests {
 
 		@Override
 		public int hashCode() {
-			final int PRIME = 31;
+			final int prime = 31;
 			int result = 1;
 			long temp;
 			temp = Double.doubleToLongBits(credit);
-			result = PRIME * result + (int) (temp ^ (temp >>> 32));
-			result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + (int) (temp ^ (temp >>> 32));
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			return result;
 		}
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj)
+			if (this == obj) {
 				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			final Customer other = (Customer) obj;
-			if (Double.doubleToLongBits(credit) != Double.doubleToLongBits(other.credit))
-				return false;
-			if (name == null) {
-				if (other.name != null)
-					return false;
 			}
-			else if (!name.equals(other.name))
+			if (obj == null) {
 				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			final Customer other = (Customer) obj;
+			if (Double.doubleToLongBits(credit) != Double.doubleToLongBits(other.credit)) {
+				return false;
+			}
+			if (name == null) {
+				if (other.name != null) {
+					return false;
+				}
+			}
+			else if (!name.equals(other.name)) {
+				return false;
+			}
 			return true;
 		}
 

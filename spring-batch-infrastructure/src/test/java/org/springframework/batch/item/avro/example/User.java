@@ -40,11 +40,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 		return SCHEMA$;
 	}
 
-	private static SpecificData MODEL$ = new SpecificData();
+	private static SpecificData model$ = new SpecificData();
 
-	private static final BinaryMessageEncoder<User> ENCODER = new BinaryMessageEncoder<User>(MODEL$, SCHEMA$);
+	private static final BinaryMessageEncoder<User> ENCODER = new BinaryMessageEncoder<>(model$, SCHEMA$);
 
-	private static final BinaryMessageDecoder<User> DECODER = new BinaryMessageDecoder<User>(MODEL$, SCHEMA$);
+	private static final BinaryMessageDecoder<User> DECODER = new BinaryMessageDecoder<>(model$, SCHEMA$);
 
 	/**
 	 * Return the BinaryMessageEncoder instance used by this class.
@@ -70,7 +70,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	 * SchemaStore
 	 */
 	public static BinaryMessageDecoder<User> createDecoder(SchemaStore resolver) {
-		return new BinaryMessageDecoder<User>(MODEL$, SCHEMA$, resolver);
+		return new BinaryMessageDecoder<>(model$, SCHEMA$, resolver);
 	}
 
 	/**
@@ -110,17 +110,17 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	/**
 	 * All-args constructor.
 	 * @param name The new value for name
-	 * @param favorite_number The new value for favorite_number
-	 * @param favorite_color The new value for favorite_color
+	 * @param favoriteNumber The new value for favorite_number
+	 * @param favoriteColor The new value for favorite_color
 	 */
-	public User(CharSequence name, Integer favorite_number, CharSequence favorite_color) {
+	public User(CharSequence name, Integer favoriteNumber, CharSequence favoriteColor) {
 		this.name = name;
-		this.favorite_number = favorite_number;
-		this.favorite_color = favorite_color;
+		this.favorite_number = favoriteNumber;
+		this.favorite_color = favoriteColor;
 	}
 
 	public SpecificData getSpecificData() {
-		return MODEL$;
+		return model$;
 	}
 
 	public org.apache.avro.Schema getSchema() {
@@ -235,8 +235,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	/**
 	 * RecordBuilder for User instances.
 	 */
-	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
-			implements org.apache.avro.data.RecordBuilder<User> {
+	public static final class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
+	implements org.apache.avro.data.RecordBuilder<User> {
 
 		private CharSequence name;
 
@@ -426,7 +426,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	}
 
 	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumWriter<User> WRITER$ = (org.apache.avro.io.DatumWriter<User>) MODEL$
+	private static final org.apache.avro.io.DatumWriter<User> WRITER$ = (org.apache.avro.io.DatumWriter<User>) model$
 			.createDatumWriter(SCHEMA$);
 
 	@Override
@@ -435,7 +435,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	}
 
 	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumReader<User> READER$ = (org.apache.avro.io.DatumReader<User>) MODEL$
+	private static final org.apache.avro.io.DatumReader<User> READER$ = (org.apache.avro.io.DatumReader<User>) model$
 			.createDatumReader(SCHEMA$);
 
 	@Override

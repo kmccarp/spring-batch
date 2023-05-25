@@ -38,7 +38,7 @@ import org.springframework.util.Assert;
  */
 public class TradeWriter extends ItemStreamSupport implements ItemWriter<Trade> {
 
-	private static Log log = LogFactory.getLog(TradeWriter.class);
+	private static final Log log = LogFactory.getLog(TradeWriter.class);
 
 	public static final String TOTAL_AMOUNT_KEY = "TOTAL_AMOUNT";
 

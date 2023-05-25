@@ -72,8 +72,8 @@ class SimpleLimitExceptionHandlerTests {
 	void testNormalExceptionThrown() throws Throwable {
 		Throwable throwable = new RuntimeException("foo");
 
-		final int MORE_THAN_ZERO = 1;
-		handler.setLimit(MORE_THAN_ZERO);
+		final int moreThanZero = 1;
+		handler.setLimit(moreThanZero);
 		handler.setExceptionClasses(Collections.<Class<? extends Throwable>>singleton(IllegalArgumentException.class));
 		handler.afterPropertiesSet();
 
@@ -151,18 +151,15 @@ class SimpleLimitExceptionHandlerTests {
 	@Test
 	void testExceptionNotThrownBelowLimit() throws Throwable {
 
-		final int EXCEPTION_LIMIT = 3;
-		handler.setLimit(EXCEPTION_LIMIT);
+		final int exceptionLimit = 3;
+		handler.setLimit(exceptionLimit);
 		handler.afterPropertiesSet();
 
 		@SuppressWarnings("serial")
-		List<Throwable> throwables = new ArrayList<Throwable>() {
-			{
-				for (int i = 0; i < (EXCEPTION_LIMIT); i++) {
-					add(new RuntimeException("below exception limit"));
-				}
-			}
-		};
+		List<Throwable> throwables = new ArrayList<>();
+		for (int i = 0; i < exceptionLimit; i++) {
+			throwables.add(new RuntimeException("below exception limit"));
+		}
 
 		RepeatContextSupport context = new RepeatContextSupport(null);
 
@@ -184,13 +181,10 @@ class SimpleLimitExceptionHandlerTests {
 		handler.afterPropertiesSet();
 
 		@SuppressWarnings("serial")
-		List<Throwable> throwables = new ArrayList<Throwable>() {
-			{
-				for (int i = 0; i < (EXCEPTION_LIMIT); i++) {
-					add(new RuntimeException("below exception limit"));
-				}
-			}
-		};
+		List<Throwable> throwables = new ArrayList<>();
+		for (int i = 0; i < EXCEPTION_LIMIT; i++) {
+			throwables.add(new RuntimeException("below exception limit"));
+		}
 
 		throwables.add(new RuntimeException("above exception limit"));
 

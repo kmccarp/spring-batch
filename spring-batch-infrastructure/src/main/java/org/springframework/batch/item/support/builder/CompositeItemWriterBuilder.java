@@ -35,7 +35,7 @@ public class CompositeItemWriterBuilder<T> {
 
 	private List<ItemWriter<? super T>> delegates;
 
-	private boolean ignoreItemStream = false;
+	private boolean ignoreItemStream;
 
 	/**
 	 * Establishes the policy whether to call the open, close, or update methods for the
