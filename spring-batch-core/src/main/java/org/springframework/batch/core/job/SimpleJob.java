@@ -125,7 +125,7 @@ public class SimpleJob extends AbstractJob {
 	 */
 	@Override
 	protected void doExecute(JobExecution execution)
-			throws JobInterruptedException, JobRestartException, StartLimitExceededException {
+	throws JobInterruptedException, JobRestartException, StartLimitExceededException {
 
 		StepExecution stepExecution = null;
 		for (Step step : steps) {

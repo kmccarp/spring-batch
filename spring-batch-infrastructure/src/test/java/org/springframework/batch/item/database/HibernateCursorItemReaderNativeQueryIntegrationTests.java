@@ -23,7 +23,7 @@ import org.springframework.batch.item.sample.Foo;
  * @author Dave Syer
  */
 public class HibernateCursorItemReaderNativeQueryIntegrationTests
-		extends AbstractHibernateCursorItemReaderIntegrationTests {
+extends AbstractHibernateCursorItemReaderIntegrationTests {
 
 	@Override
 	protected void setQuery(HibernateCursorItemReader<Foo> hibernateReader) throws Exception {

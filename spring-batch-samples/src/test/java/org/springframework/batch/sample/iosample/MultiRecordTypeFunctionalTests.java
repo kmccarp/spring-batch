@@ -33,8 +33,8 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @author Glenn Renfro
  * @since 2.0
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/iosample/multiRecordType.xml",
-		"/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/iosample/multiRecordType.xml",
+"/job-runner-context.xml"})
 class MultiRecordTypeFunctionalTests {
 
 	private static final String OUTPUT_FILE = "target/test-outputs/multiRecordTypeOutput.txt";

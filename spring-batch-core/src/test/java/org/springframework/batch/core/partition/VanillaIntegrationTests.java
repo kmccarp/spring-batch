@@ -58,14 +58,14 @@ public class VanillaIntegrationTests {
 	@Test
 	void testLaunchJob() throws Exception {
 		int beforeManager = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME='step1:manager'");
+		"STEP_NAME='step1:manager'");
 		int beforePartition = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME like 'step1:partition%'");
+		"STEP_NAME like 'step1:partition%'");
 		assertNotNull(jobLauncher.run(job, new JobParameters()));
 		int afterManager = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME='step1:manager'");
+		"STEP_NAME='step1:manager'");
 		int afterPartition = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME like 'step1:partition%'");
+		"STEP_NAME like 'step1:partition%'");
 		assertEquals(1, afterManager - beforeManager);
 		// Should be same as grid size in step splitter
 		assertEquals(2, afterPartition - beforePartition);

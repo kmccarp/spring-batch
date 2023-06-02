@@ -60,7 +60,7 @@ public class SimpleRetryExceptionHandler extends RetryListenerSupport implements
 	 * @param fatalExceptionClasses exceptions
 	 */
 	public SimpleRetryExceptionHandler(RetryPolicy retryPolicy, ExceptionHandler exceptionHandler,
-			Collection<Class<? extends Throwable>> fatalExceptionClasses) {
+	Collection<Class<? extends Throwable>> fatalExceptionClasses) {
 		this.retryPolicy = retryPolicy;
 		this.exceptionHandler = exceptionHandler;
 		this.fatalExceptionClassifier = new BinaryExceptionClassifier(fatalExceptionClasses);
@@ -96,7 +96,7 @@ public class SimpleRetryExceptionHandler extends RetryListenerSupport implements
 	 */
 	@Override
 	public <T, E extends Throwable> void close(RetryContext context, RetryCallback<T, E> callback,
-			Throwable throwable) {
+	Throwable throwable) {
 		if (!retryPolicy.canRetry(context)) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Marking retry as exhausted: " + context);

@@ -61,7 +61,7 @@ public class JobScopeConfigurationTests {
 	@Test
 	void testXmlJobScopeWithProxyTargetClass() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsProxyTargetClass-context.xml");
+		"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsProxyTargetClass-context.xml");
 		JobSynchronizationManager.register(jobExecution);
 		SimpleHolder value = context.getBean(SimpleHolder.class);
 		assertEquals("JOB", value.call());
@@ -70,7 +70,7 @@ public class JobScopeConfigurationTests {
 	@Test
 	void testXmlJobScopeWithInterface() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsInterface-context.xml");
+		"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsInterface-context.xml");
 		JobSynchronizationManager.register(jobExecution);
 		@SuppressWarnings("unchecked")
 		Callable<String> value = context.getBean(Callable.class);
@@ -80,7 +80,7 @@ public class JobScopeConfigurationTests {
 	@Test
 	void testXmlJobScopeWithInheritance() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsInheritance-context.xml");
+		"org/springframework/batch/core/configuration/annotation/JobScopeConfigurationTestsInheritance-context.xml");
 		JobSynchronizationManager.register(jobExecution);
 		SimpleHolder value = (SimpleHolder) context.getBean("child");
 		assertEquals("JOB", value.call());

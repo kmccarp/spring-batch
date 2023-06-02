@@ -33,7 +33,7 @@ class RecordFieldSetMapperTests {
 	void testMapFieldSet() {
 		// given
 		RecordFieldSetMapper<Person> recordFieldSetMapper = new RecordFieldSetMapper<>(Person.class);
-		FieldSet fieldSet = new DefaultFieldSet(new String[] { "1", "foo" }, new String[] { "id", "name" });
+		FieldSet fieldSet = new DefaultFieldSet(new String[]{"1", "foo"}, new String[]{"id", "name"});
 
 		// when
 		Person person = recordFieldSetMapper.mapFieldSet(fieldSet);
@@ -48,11 +48,11 @@ class RecordFieldSetMapperTests {
 	void testMapFieldSetWhenFieldCountIsIncorrect() {
 		// given
 		RecordFieldSetMapper<Person> recordFieldSetMapper = new RecordFieldSetMapper<>(Person.class);
-		FieldSet fieldSet = new DefaultFieldSet(new String[] { "1" }, new String[] { "id" });
+		FieldSet fieldSet = new DefaultFieldSet(new String[]{"1"}, new String[]{"id"});
 
 		// when
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> recordFieldSetMapper.mapFieldSet(fieldSet));
+		() -> recordFieldSetMapper.mapFieldSet(fieldSet));
 		assertEquals("Fields count must be equal to record components count", exception.getMessage());
 	}
 
@@ -60,11 +60,11 @@ class RecordFieldSetMapperTests {
 	void testMapFieldSetWhenFieldNamesAreNotSpecified() {
 		// given
 		RecordFieldSetMapper<Person> recordFieldSetMapper = new RecordFieldSetMapper<>(Person.class);
-		FieldSet fieldSet = new DefaultFieldSet(new String[] { "1", "foo" });
+		FieldSet fieldSet = new DefaultFieldSet(new String[]{"1", "foo"});
 
 		// when
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> recordFieldSetMapper.mapFieldSet(fieldSet));
+		() -> recordFieldSetMapper.mapFieldSet(fieldSet));
 		assertEquals("Field names must specified", exception.getMessage());
 	}
 

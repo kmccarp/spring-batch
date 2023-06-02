@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
  * @since 2.0
  */
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/ioSampleJob.xml", "/jobs/iosample/jdbcPaging.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/ioSampleJob.xml", "/jobs/iosample/jdbcPaging.xml"})
 class TwoJobInstancesPagingFunctionalTests {
 
 	@Autowired
@@ -74,7 +74,7 @@ class TwoJobInstancesPagingFunctionalTests {
 
 	protected JobParameters getJobParameters(double amount) {
 		return new JobParametersBuilder().addLong("timestamp", new Date().getTime()).addDouble("credit", amount)
-				.toJobParameters();
+		.toJobParameters();
 	}
 
 }

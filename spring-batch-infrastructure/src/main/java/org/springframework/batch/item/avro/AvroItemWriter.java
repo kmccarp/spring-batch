@@ -140,7 +140,7 @@ public class AvroItemWriter<T> extends AbstractItemStreamItemWriter<T> {
 		if (this.embedSchema) {
 			Assert.notNull(this.schemaResource, "'schema' is required.");
 			Assert.state(this.schemaResource.exists(),
-					"'schema' " + this.schemaResource.getFilename() + " does not exist.");
+			"'schema' " + this.schemaResource.getFilename() + " does not exist.");
 			Schema schema;
 			try {
 				schema = new Schema.Parser().parse(this.schemaResource.getInputStream());
@@ -153,7 +153,7 @@ public class AvroItemWriter<T> extends AbstractItemStreamItemWriter<T> {
 		}
 		else {
 			this.outputStreamWriter = createOutputStreamWriter(this.resource.getOutputStream(),
-					datumWriterForClass(this.clazz));
+			datumWriterForClass(this.clazz));
 		}
 
 	}
@@ -169,7 +169,7 @@ public class AvroItemWriter<T> extends AbstractItemStreamItemWriter<T> {
 	}
 
 	private AvroItemWriter.OutputStreamWriter<T> createOutputStreamWriter(OutputStream outputStream,
-			DatumWriter<T> datumWriter) {
+	DatumWriter<T> datumWriter) {
 		return new AvroItemWriter.OutputStreamWriter<>(outputStream, datumWriter);
 	}
 

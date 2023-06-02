@@ -81,7 +81,7 @@ class RetryRepeatTransactionalPollingIntegrationTests implements ApplicationCont
 	@DirtiesContext
 	void testSunnyDay() throws Exception {
 		list = TransactionAwareProxyFactory.createTransactionalList(
-				Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
+		Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
 		List<String> expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d"));
 		service.setExpected(expected);
 		waitForResults(lifecycle, expected.size(), 60);
@@ -93,11 +93,11 @@ class RetryRepeatTransactionalPollingIntegrationTests implements ApplicationCont
 	@DirtiesContext
 	void testRollback() throws Exception {
 		list = TransactionAwareProxyFactory.createTransactionalList(
-				Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
+		Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
 		List<String> expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,fail,d,e,f"));
 		service.setExpected(expected);
 		waitForResults(lifecycle, expected.size(), 60); // (a,b), (fail), (fail),
-														// ([fail],d), (e,f)
+		// ([fail],d), (e,f)
 		System.err.println(service.getProcessed());
 		assertEquals(7, service.getProcessed().size()); // a,b,fail,fail,d,e,f
 		assertEquals(1, recoverer.getRecovered().size()); // fail

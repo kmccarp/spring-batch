@@ -152,10 +152,10 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
 		JobInstance jobInstance = new JobInstance(jobInstanceId, jobName);
 		jobInstance.incrementVersion();
 
-		Object[] parameters = new Object[] { jobInstanceId, jobName, jobKeyGenerator.generateKey(jobParameters),
-				jobInstance.getVersion() };
+		Object[] parameters = new Object[]{jobInstanceId, jobName, jobKeyGenerator.generateKey(jobParameters),
+		jobInstance.getVersion()};
 		getJdbcTemplate().update(getQuery(CREATE_JOB_INSTANCE), parameters,
-				new int[] { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER });
+		new int[]{Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER});
 
 		return jobInstance;
 	}
@@ -274,7 +274,7 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
 	public JobInstance getLastJobInstance(String jobName) {
 		try {
 			return getJdbcTemplate().queryForObject(getQuery(FIND_LAST_JOB_INSTANCE_BY_JOB_NAME),
-					new JobInstanceRowMapper(), jobName, jobName);
+			new JobInstanceRowMapper(), jobName, jobName);
 		}
 		catch (EmptyResultDataAccessException e) {
 			return null;
@@ -293,7 +293,7 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
 
 		try {
 			return getJdbcTemplate().queryForObject(getQuery(GET_JOB_FROM_EXECUTION_ID), new JobInstanceRowMapper(),
-					jobExecution.getId());
+			jobExecution.getId());
 		}
 		catch (EmptyResultDataAccessException e) {
 			return null;
@@ -400,7 +400,7 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
 
 		@SuppressWarnings("unchecked")
 		List<JobInstance> result = (List<JobInstance>) getJdbcTemplate().query(getQuery(FIND_LAST_JOBS_LIKE_NAME),
-				extractor, jobName);
+		extractor, jobName);
 
 		return result;
 	}

@@ -69,7 +69,7 @@ public final class BatchMetrics {
 	 */
 	public static Timer createTimer(MeterRegistry meterRegistry, String name, String description, Tag... tags) {
 		return Timer.builder(METRICS_PREFIX + name).description(description).tags(Arrays.asList(tags))
-				.register(meterRegistry);
+		.register(meterRegistry);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public final class BatchMetrics {
 	 */
 	public static Counter createCounter(MeterRegistry meterRegistry, String name, String description, Tag... tags) {
 		return Counter.builder(METRICS_PREFIX + name).description(description).tags(Arrays.asList(tags))
-				.register(meterRegistry);
+		.register(meterRegistry);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public final class BatchMetrics {
 	 * @since 5.0
 	 */
 	public static Observation createObservation(String name, BatchJobContext context,
-			ObservationRegistry observationRegistry) {
+	ObservationRegistry observationRegistry) {
 		return Observation.createNotStarted(name, context, observationRegistry);
 	}
 
@@ -116,7 +116,7 @@ public final class BatchMetrics {
 	 * @since 5.0
 	 */
 	public static Observation createObservation(String name, BatchStepContext context,
-			ObservationRegistry observationRegistry) {
+	ObservationRegistry observationRegistry) {
 		return Observation.createNotStarted(name, context, observationRegistry);
 	}
 
@@ -139,9 +139,9 @@ public final class BatchMetrics {
 	 * @return a new long task timer instance
 	 */
 	public static LongTaskTimer createLongTaskTimer(MeterRegistry meterRegistry, String name, String description,
-			Tag... tags) {
+	Tag... tags) {
 		return LongTaskTimer.builder(METRICS_PREFIX + name).description(description).tags(Arrays.asList(tags))
-				.register(meterRegistry);
+		.register(meterRegistry);
 	}
 
 	/**

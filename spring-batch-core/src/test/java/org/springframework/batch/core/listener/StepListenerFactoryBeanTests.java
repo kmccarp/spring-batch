@@ -213,7 +213,7 @@ class StepListenerFactoryBeanTests {
 		};
 		ProxyFactory factory = new ProxyFactory(delegate);
 		assertTrue(StepListenerFactoryBean.getListener(factory.getProxy()) instanceof StepExecutionListener,
-				"Listener is not of correct type");
+		"Listener is not of correct type");
 	}
 
 	@Test

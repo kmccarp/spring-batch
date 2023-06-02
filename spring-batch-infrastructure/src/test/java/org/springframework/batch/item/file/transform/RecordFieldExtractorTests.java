@@ -47,7 +47,7 @@ class RecordFieldExtractorTests {
 
 		// then
 		assertNotNull(fields);
-		assertArrayEquals(new Object[] { 1, "foo" }, fields);
+		assertArrayEquals(new Object[]{1, "foo"}, fields);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ class RecordFieldExtractorTests {
 
 		// then
 		assertNotNull(fields);
-		assertArrayEquals(new Object[] { "foo" }, fields);
+		assertArrayEquals(new Object[]{"foo"}, fields);
 	}
 
 	@Test

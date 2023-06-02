@@ -84,7 +84,7 @@ public class HibernateItemReaderHelper<T> implements InitializingBean {
 	 */
 	public void setUseStatelessSession(boolean useStatelessSession) {
 		Assert.state(statefulSession == null && statelessSession == null,
-				"The useStatelessSession flag can only be set before a session is initialized.");
+		"The useStatelessSession flag can only be set before a session is initialized.");
 		this.useStatelessSession = useStatelessSession;
 	}
 
@@ -103,7 +103,7 @@ public class HibernateItemReaderHelper<T> implements InitializingBean {
 		if (queryProvider == null) {
 			Assert.state(sessionFactory != null, "session factory must be set");
 			Assert.state(StringUtils.hasText(queryString) ^ StringUtils.hasText(queryName),
-					"queryString or queryName must be set");
+			"queryString or queryName must be set");
 		}
 	}
 
@@ -204,7 +204,7 @@ public class HibernateItemReaderHelper<T> implements InitializingBean {
 	 * @return a collection of items
 	 */
 	public Collection<? extends T> readPage(int page, int pageSize, int fetchSize,
-			Map<String, Object> parameterValues) {
+	Map<String, Object> parameterValues) {
 
 		clear();
 

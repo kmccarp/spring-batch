@@ -88,7 +88,7 @@ public class TaskExecutorPartitionHandler extends AbstractPartitionHandler imple
 
 	@Override
 	protected Set<StepExecution> doHandle(StepExecution managerStepExecution,
-			Set<StepExecution> partitionStepExecutions) throws Exception {
+	Set<StepExecution> partitionStepExecutions) throws Exception {
 		Assert.notNull(step, "A Step must be provided.");
 		final Set<Future<StepExecution>> tasks = new HashSet<>(getGridSize());
 		final Set<StepExecution> result = new HashSet<>();
@@ -103,7 +103,7 @@ public class TaskExecutorPartitionHandler extends AbstractPartitionHandler imple
 			catch (TaskRejectedException e) {
 				// couldn't execute one of the tasks
 				ExitStatus exitStatus = ExitStatus.FAILED
-						.addExitDescription("TaskExecutor rejected the task for this step.");
+				.addExitDescription("TaskExecutor rejected the task for this step.");
 				/*
 				 * Set the status in case the caller is tracking it through the
 				 * JobExecution.

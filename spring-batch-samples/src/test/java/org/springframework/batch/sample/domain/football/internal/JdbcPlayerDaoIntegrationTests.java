@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Glenn Renfro
  *
  */
-@SpringJUnitConfig(locations = { "/data-source-context.xml" })
+@SpringJUnitConfig(locations = {"/data-source-context.xml"})
 class JdbcPlayerDaoIntegrationTests {
 
 	private JdbcPlayerDao playerDao;

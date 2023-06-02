@@ -57,7 +57,7 @@ public class CompositeItemProcessListener<T, S> implements ItemProcessListener<T
 	 */
 	@Override
 	public void afterProcess(T item, @Nullable S result) {
-		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ItemProcessListener<? super T, ? super S> listener = iterator.next();
 			listener.afterProcess(item, result);
 		}
@@ -70,7 +70,7 @@ public class CompositeItemProcessListener<T, S> implements ItemProcessListener<T
 	 */
 	@Override
 	public void beforeProcess(T item) {
-		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			ItemProcessListener<? super T, ? super S> listener = iterator.next();
 			listener.beforeProcess(item);
 		}
@@ -84,7 +84,7 @@ public class CompositeItemProcessListener<T, S> implements ItemProcessListener<T
 	 */
 	@Override
 	public void onProcessError(T item, Exception e) {
-		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ItemProcessListener<? super T, ? super S>> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ItemProcessListener<? super T, ? super S> listener = iterator.next();
 			listener.onProcessError(item, e);
 		}

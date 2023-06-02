@@ -140,7 +140,7 @@ public class DefaultJobLoader implements JobLoader, InitializingBean {
 		}
 		catch (DuplicateJobException e) {
 			throw new IllegalStateException("Found duplicate job in reload (it should have been unregistered "
-					+ "if it was previously registered in this loader)", e);
+			+ "if it was previously registered in this loader)", e);
 		}
 	}
 
@@ -258,7 +258,7 @@ public class DefaultJobLoader implements JobLoader, InitializingBean {
 		if (stepRegistry != null) {
 			if (!(job instanceof StepLocator)) {
 				throw new UnsupportedOperationException("Cannot locate steps from a Job that is not a StepLocator: job="
-						+ job.getName() + " does not implement StepLocator");
+				+ job.getName() + " does not implement StepLocator");
 			}
 			stepRegistry.register(job.getName(), getSteps((StepLocator) job, context));
 		}

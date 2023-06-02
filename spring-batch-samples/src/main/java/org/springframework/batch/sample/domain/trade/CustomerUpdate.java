@@ -58,7 +58,7 @@ public class CustomerUpdate {
 	@Override
 	public String toString() {
 		return "Customer Update, name: [" + customerName + "], operation: [" + operation + "], credit: [" + credit
-				+ "]";
+		+ "]";
 	}
 
 }

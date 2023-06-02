@@ -66,12 +66,12 @@ public class JdbcCustomerDao extends JdbcDaoSupport implements CustomerDao {
 	@Override
 	public void insertCustomer(String name, BigDecimal credit) {
 
-		getJdbcTemplate().update(INSERT_CUSTOMER, new Object[] { incrementer.nextIntValue(), name, credit });
+		getJdbcTemplate().update(INSERT_CUSTOMER, new Object[]{incrementer.nextIntValue(), name, credit});
 	}
 
 	@Override
 	public void updateCustomer(String name, BigDecimal credit) {
-		getJdbcTemplate().update(UPDATE_CUSTOMER, new Object[] { credit, name });
+		getJdbcTemplate().update(UPDATE_CUSTOMER, new Object[]{credit, name});
 	}
 
 }

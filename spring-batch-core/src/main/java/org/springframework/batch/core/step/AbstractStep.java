@@ -198,7 +198,7 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 	 */
 	@Override
 	public final void execute(StepExecution stepExecution)
-			throws JobInterruptedException, UnexpectedJobExecutionException {
+	throws JobInterruptedException, UnexpectedJobExecutionException {
 
 		Assert.notNull(stepExecution, "stepExecution must not be null");
 		stepExecution.getExecutionContext().put(SpringBatchVersion.BATCH_VERSION_KEY, SpringBatchVersion.getVersion());
@@ -209,9 +209,9 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 		stepExecution.setStartTime(LocalDateTime.now());
 		stepExecution.setStatus(BatchStatus.STARTED);
 		Observation observation = BatchMetrics
-				.createObservation(BatchStepObservation.BATCH_STEP_OBSERVATION.getName(),
-						new BatchStepContext(stepExecution), this.observationRegistry)
-				.contextualName(stepExecution.getStepName()).observationConvention(this.observationConvention).start();
+		.createObservation(BatchStepObservation.BATCH_STEP_OBSERVATION.getName(),
+	new BatchStepContext(stepExecution), this.observationRegistry)
+		.contextualName(stepExecution.getStepName()).observationConvention(this.observationConvention).start();
 		getJobRepository().update(stepExecution);
 
 		// Start with a default value that will be trumped by anything
@@ -248,14 +248,14 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 			stepExecution.addFailureException(e);
 			if (stepExecution.getStatus() == BatchStatus.STOPPED) {
 				logger.info(String.format("Encountered interruption executing step %s in job %s : %s", name,
-						stepExecution.getJobExecution().getJobInstance().getJobName(), e.getMessage()));
+				stepExecution.getJobExecution().getJobInstance().getJobName(), e.getMessage()));
 				if (logger.isDebugEnabled()) {
 					logger.debug("Full exception", e);
 				}
 			}
 			else {
 				logger.error(String.format("Encountered an error executing step %s in job %s", name,
-						stepExecution.getJobExecution().getJobInstance().getJobName()), e);
+				stepExecution.getJobExecution().getJobInstance().getJobName()), e);
 			}
 		}
 		finally {
@@ -269,7 +269,7 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 			}
 			catch (Exception e) {
 				logger.error(String.format("Exception in afterStep callback in step %s in job %s", name,
-						stepExecution.getJobExecution().getJobInstance().getJobName()), e);
+				stepExecution.getJobExecution().getJobInstance().getJobName()), e);
 			}
 
 			try {
@@ -280,18 +280,18 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 				exitStatus = exitStatus.and(ExitStatus.UNKNOWN);
 				stepExecution.addFailureException(e);
 				logger.error(String.format(
-						"Encountered an error saving batch meta data for step %s in job %s. "
-								+ "This job is now in an unknown state and should not be restarted.",
-						name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
+				"Encountered an error saving batch meta data for step %s in job %s. "
+			+ "This job is now in an unknown state and should not be restarted.",
+				name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
 			}
 			stopObservation(stepExecution, observation);
 			stepExecution.setEndTime(LocalDateTime.now());
 			stepExecution.setExitStatus(exitStatus);
 			Duration stepExecutionDuration = BatchMetrics.calculateDuration(stepExecution.getStartTime(),
-					stepExecution.getEndTime());
+			stepExecution.getEndTime());
 			if (logger.isInfoEnabled()) {
 				logger.info("Step: [" + stepExecution.getStepName() + "] executed in "
-						+ BatchMetrics.formatDuration(stepExecutionDuration));
+				+ BatchMetrics.formatDuration(stepExecutionDuration));
 			}
 			try {
 				getJobRepository().update(stepExecution);
@@ -301,9 +301,9 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 				stepExecution.setExitStatus(exitStatus.and(ExitStatus.UNKNOWN));
 				stepExecution.addFailureException(e);
 				logger.error(String.format(
-						"Encountered an error saving batch meta data for step %s in job %s. "
-								+ "This job is now in an unknown state and should not be restarted.",
-						name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
+				"Encountered an error saving batch meta data for step %s in job %s. "
+			+ "This job is now in an unknown state and should not be restarted.",
+				name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
 			}
 
 			try {
@@ -311,7 +311,7 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 			}
 			catch (Exception e) {
 				logger.error(String.format("Exception while closing step execution resources in step %s in job %s",
-						name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
+				name, stepExecution.getJobExecution().getJobInstance().getJobName()), e);
 				stepExecution.addFailureException(e);
 			}
 
@@ -333,7 +333,7 @@ public abstract class AbstractStep implements Step, InitializingBean, BeanNameAw
 
 	private IllegalStateException mergedThrowables(List<Throwable> throwables) {
 		return new IllegalStateException(
-				throwables.stream().map(Throwable::toString).collect(Collectors.joining("\n")));
+		throwables.stream().map(Throwable::toString).collect(Collectors.joining("\n")));
 	}
 
 	/**

@@ -66,12 +66,12 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		Collection<StepExecution> executions = messageChannelPartitionHandler.handle(stepExecutionSplitter,
-				managerStepExecution);
+		managerStepExecution);
 		// verify
 		assertTrue(executions.isEmpty());
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	void testHandleNoReply() throws Exception {
 		// execute with no default set
@@ -92,13 +92,13 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		Collection<StepExecution> executions = messageChannelPartitionHandler.handle(stepExecutionSplitter,
-				managerStepExecution);
+		managerStepExecution);
 		// verify
 		assertNotNull(executions);
 		assertTrue(executions.isEmpty());
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	void testHandleWithReplyChannel() throws Exception {
 		// execute with no default set
@@ -121,7 +121,7 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		Collection<StepExecution> executions = messageChannelPartitionHandler.handle(stepExecutionSplitter,
-				managerStepExecution);
+		managerStepExecution);
 		// verify
 		assertNotNull(executions);
 		assertTrue(executions.isEmpty());
@@ -148,7 +148,7 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		assertThrows(MessageTimeoutException.class,
-				() -> messageChannelPartitionHandler.handle(stepExecutionSplitter, managerStepExecution));
+		() -> messageChannelPartitionHandler.handle(stepExecutionSplitter, managerStepExecution));
 	}
 
 	@Test
@@ -180,7 +180,7 @@ class MessageChannelPartitionHandlerTests {
 		JobExecution completedJobExecution = new JobExecution(5L, new JobParameters());
 		completedJobExecution.addStepExecutions(Arrays.asList(partition2, partition1, partition4));
 		when(jobExplorer.getJobExecution(5L)).thenReturn(runningJobExecution, runningJobExecution, runningJobExecution,
-				completedJobExecution);
+		completedJobExecution);
 
 		// set
 		messageChannelPartitionHandler.setMessagingOperations(operations);
@@ -191,7 +191,7 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		Collection<StepExecution> executions = messageChannelPartitionHandler.handle(stepExecutionSplitter,
-				managerStepExecution);
+		managerStepExecution);
 		// verify
 		assertNotNull(executions);
 		assertEquals(3, executions.size());
@@ -238,7 +238,7 @@ class MessageChannelPartitionHandlerTests {
 
 		// execute
 		assertThrows(TimeoutException.class,
-				() -> messageChannelPartitionHandler.handle(stepExecutionSplitter, managerStepExecution));
+		() -> messageChannelPartitionHandler.handle(stepExecutionSplitter, managerStepExecution));
 	}
 
 }

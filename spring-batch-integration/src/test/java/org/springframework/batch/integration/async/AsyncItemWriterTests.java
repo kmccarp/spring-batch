@@ -175,7 +175,7 @@ class AsyncItemWriterTests {
 
 			@Override
 			public String get(long timeout, TimeUnit unit)
-					throws InterruptedException, ExecutionException, TimeoutException {
+			throws InterruptedException, ExecutionException, TimeoutException {
 				return null;
 			}
 		});

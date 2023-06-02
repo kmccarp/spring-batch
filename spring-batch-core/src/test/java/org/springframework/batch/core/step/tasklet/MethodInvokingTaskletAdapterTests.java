@@ -233,7 +233,7 @@ class MethodInvokingTaskletAdapterTests {
 		 * Incorrect signature: extra parameter (ie a superset not a subset as specified)
 		 */
 		public RepeatStatus execute10(StepContribution stepContribution, ChunkContext chunkContext, String string)
-				throws Exception {
+		throws Exception {
 			this.stepContribution = stepContribution;
 			this.chunkContext = chunkContext;
 			return RepeatStatus.FINISHED;

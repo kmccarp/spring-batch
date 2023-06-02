@@ -141,8 +141,8 @@ class Neo4jItemReaderTests {
 
 		when(this.sessionFactory.openSession()).thenReturn(this.session);
 		when(this.session.query(String.class,
-				"START n=node(*) MATCH n -- m WHERE has(n.name) RETURN m ORDER BY n.age SKIP 0 LIMIT 50", null))
-						.thenReturn(result);
+		"START n=node(*) MATCH n -- m WHERE has(n.name) RETURN m ORDER BY n.age SKIP 0 LIMIT 50", null))
+		.thenReturn(result);
 		when(result.iterator()).thenReturn(Arrays.asList("foo", "bar", "baz").iterator());
 
 		assertTrue(itemReader.doPageRead().hasNext());
@@ -161,8 +161,8 @@ class Neo4jItemReaderTests {
 
 		when(this.sessionFactory.openSession()).thenReturn(this.session);
 		when(this.session.query(String.class,
-				"START n=node(*) MATCH n -- m WHERE has(n.name) RETURN m ORDER BY n.age SKIP 0 LIMIT 50", params))
-						.thenReturn(result);
+		"START n=node(*) MATCH n -- m WHERE has(n.name) RETURN m ORDER BY n.age SKIP 0 LIMIT 50", params))
+		.thenReturn(result);
 		when(result.iterator()).thenReturn(Arrays.asList("foo", "bar", "baz").iterator());
 
 		assertTrue(itemReader.doPageRead().hasNext());

@@ -49,7 +49,7 @@ class StepExecutionRequestTests {
 	void stepExecutionRequestShouldBeDeserializableWithJackson() throws IOException {
 		// when
 		StepExecutionRequest deserializedRequest = this.objectMapper.readValue(SERIALIZED_REQUEST,
-				StepExecutionRequest.class);
+		StepExecutionRequest.class);
 
 		// then
 		assertNotNull(deserializedRequest);

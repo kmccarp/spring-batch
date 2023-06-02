@@ -68,11 +68,11 @@ class AsyncItemProcessorTests {
 		};
 		processor.setDelegate(delegate);
 		Future<String> result = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
-				new Callable<Future<String>>() {
-					public Future<String> call() throws Exception {
-						return processor.process("foo");
-					}
-				});
+		new Callable<Future<String>>() {
+			public Future<String> call() throws Exception {
+				return processor.process("foo");
+			}
+		});
 		assertEquals("foofoo", result.get());
 	}
 

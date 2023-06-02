@@ -46,8 +46,8 @@ abstract class JsonItemReaderFunctionalTests {
 	@Test
 	void testJsonReading() throws Exception {
 		JsonItemReader<Trade> itemReader = new JsonItemReaderBuilder<Trade>().jsonObjectReader(getJsonObjectReader())
-				.resource(new ClassPathResource("org/springframework/batch/item/json/trades.json"))
-				.name("tradeJsonItemReader").build();
+		.resource(new ClassPathResource("org/springframework/batch/item/json/trades.json"))
+		.name("tradeJsonItemReader").build();
 
 		itemReader.open(new ExecutionContext());
 
@@ -86,7 +86,7 @@ abstract class JsonItemReaderFunctionalTests {
 	@Test
 	void testEmptyResource() throws Exception {
 		JsonItemReader<Trade> itemReader = new JsonItemReaderBuilder<Trade>().jsonObjectReader(getJsonObjectReader())
-				.resource(new ByteArrayResource("[]".getBytes())).name("tradeJsonItemReader").build();
+		.resource(new ByteArrayResource("[]".getBytes())).name("tradeJsonItemReader").build();
 
 		itemReader.open(new ExecutionContext());
 
@@ -98,11 +98,11 @@ abstract class JsonItemReaderFunctionalTests {
 	void testInvalidResourceFormat() {
 		// given
 		JsonItemReader<Trade> itemReader = new JsonItemReaderBuilder<Trade>().jsonObjectReader(getJsonObjectReader())
-				.resource(new ByteArrayResource("{}, {}".getBytes())).name("tradeJsonItemReader").build();
+		.resource(new ByteArrayResource("{}, {}".getBytes())).name("tradeJsonItemReader").build();
 
 		// when
 		final Exception expectedException = assertThrows(ItemStreamException.class,
-				() -> itemReader.open(new ExecutionContext()));
+		() -> itemReader.open(new ExecutionContext()));
 
 		// then
 		assertEquals("Failed to initialize the reader", expectedException.getMessage());
@@ -113,7 +113,7 @@ abstract class JsonItemReaderFunctionalTests {
 	void testInvalidResourceContent() {
 		// given
 		JsonItemReader<Trade> itemReader = new JsonItemReaderBuilder<Trade>().jsonObjectReader(getJsonObjectReader())
-				.resource(new ByteArrayResource("[{]".getBytes())).name("tradeJsonItemReader").build();
+		.resource(new ByteArrayResource("[{]".getBytes())).name("tradeJsonItemReader").build();
 		itemReader.open(new ExecutionContext());
 
 		// when

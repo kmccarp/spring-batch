@@ -340,7 +340,7 @@ public class JobParametersBuilder {
 		Assert.state(this.jobExplorer != null, "A JobExplorer is required to get next job parameters");
 		Assert.notNull(job, "Job must not be null");
 		Assert.notNull(job.getJobParametersIncrementer(),
-				"No job parameters incrementer found for job=" + job.getName());
+		"No job parameters incrementer found for job=" + job.getName());
 
 		String name = job.getName();
 		JobParameters nextParameters;

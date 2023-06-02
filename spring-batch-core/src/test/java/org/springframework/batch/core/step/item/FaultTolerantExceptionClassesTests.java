@@ -343,7 +343,7 @@ public class FaultTolerantExceptionClassesTests implements ApplicationContextAwa
 		job.setSteps(stepsToExecute);
 
 		JobExecution jobExecution = jobLauncher.run(job,
-				new JobParametersBuilder().addString("uuid", UUID.randomUUID().toString()).toJobParameters());
+		new JobParametersBuilder().addString("uuid", UUID.randomUUID().toString()).toJobParameters());
 		return jobExecution.getStepExecutions().iterator().next();
 	}
 

@@ -70,7 +70,7 @@ public class SimpleMethodInvoker implements MethodInvoker {
 		}
 		if (this.method == null) {
 			throw new IllegalArgumentException("No methods found for name: [" + methodName + "] in class: ["
-					+ object.getClass() + "] with arguments of type: [" + Arrays.toString(paramTypes) + "]");
+			+ object.getClass() + "] with arguments of type: [" + Arrays.toString(paramTypes) + "]");
 		}
 		this.object = object;
 	}
@@ -88,11 +88,11 @@ public class SimpleMethodInvoker implements MethodInvoker {
 		Class<?>[] parameterTypes = method.getParameterTypes();
 		Object[] invokeArgs;
 		if (parameterTypes.length == 0) {
-			invokeArgs = new Object[] {};
+			invokeArgs = new Object[]{};
 		}
 		else if (parameterTypes.length != args.length) {
 			throw new IllegalArgumentException(
-					"Wrong number of arguments, expected no more than: [" + parameterTypes.length + "]");
+			"Wrong number of arguments, expected no more than: [" + parameterTypes.length + "]");
 		}
 		else {
 			invokeArgs = args;
@@ -108,7 +108,7 @@ public class SimpleMethodInvoker implements MethodInvoker {
 		}
 		catch (Exception e) {
 			throw new IllegalArgumentException("Unable to invoke method: [" + method + "] on object: [" + object
-					+ "] with arguments: [" + Arrays.toString(args) + "]", e);
+			+ "] with arguments: [" + Arrays.toString(args) + "]", e);
 		}
 	}
 

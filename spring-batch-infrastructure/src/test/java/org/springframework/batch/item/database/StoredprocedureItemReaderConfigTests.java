@@ -54,7 +54,7 @@ class StoredprocedureItemReaderConfigTests {
 		when(con.getAutoCommit()).thenReturn(false);
 		CallableStatement cs = mock(CallableStatement.class);
 		when(con.prepareCall("{call foo_bar()}", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY,
-				ResultSet.HOLD_CURSORS_OVER_COMMIT)).thenReturn(cs);
+		ResultSet.HOLD_CURSORS_OVER_COMMIT)).thenReturn(cs);
 		when(ds.getConnection()).thenReturn(con);
 		when(ds.getConnection()).thenReturn(con);
 		con.commit();
@@ -90,7 +90,7 @@ class StoredprocedureItemReaderConfigTests {
 		when(con.getAutoCommit()).thenReturn(false);
 		CallableStatement cs = mock(CallableStatement.class);
 		when(con.prepareCall("{call foo_bar()}", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY))
-				.thenReturn(cs);
+		.thenReturn(cs);
 		when(ds.getConnection()).thenReturn(con);
 		when(ds.getConnection()).thenReturn(con);
 		con.commit();
@@ -125,7 +125,7 @@ class StoredprocedureItemReaderConfigTests {
 		when(con.getAutoCommit()).thenReturn(false);
 		CallableStatement cs = mock(CallableStatement.class);
 		when(con.prepareCall("{call foo_bar(?, ?)}", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY))
-				.thenReturn(cs);
+		.thenReturn(cs);
 		when(ds.getConnection()).thenReturn(con);
 		when(ds.getConnection()).thenReturn(con);
 		con.commit();
@@ -135,7 +135,7 @@ class StoredprocedureItemReaderConfigTests {
 		reader.setDataSource(ds);
 		reader.setProcedureName("foo_bar");
 		reader.setParameters(
-				new SqlParameter[] { new SqlParameter("foo", Types.VARCHAR), new SqlParameter("bar", Types.OTHER) });
+		new SqlParameter[]{new SqlParameter("foo", Types.VARCHAR), new SqlParameter("bar", Types.OTHER)});
 		reader.setPreparedStatementSetter(new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {

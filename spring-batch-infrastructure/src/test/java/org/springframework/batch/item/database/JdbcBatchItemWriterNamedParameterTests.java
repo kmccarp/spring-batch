@@ -103,7 +103,7 @@ public class JdbcBatchItemWriterNamedParameterTests {
 		Exception exception = assertThrows(IllegalStateException.class, writer::afterPropertiesSet);
 		String message = exception.getMessage();
 		assertTrue(message.contains("NamedParameterJdbcTemplate"),
-				"Message does not contain 'NamedParameterJdbcTemplate'.");
+		"Message does not contain 'NamedParameterJdbcTemplate'.");
 
 		writer.setJdbcTemplate(namedParameterJdbcOperations);
 		exception = assertThrows(IllegalStateException.class, writer::afterPropertiesSet);
@@ -117,13 +117,13 @@ public class JdbcBatchItemWriterNamedParameterTests {
 	@Test
 	void testWriteAndFlush() throws Exception {
 		when(namedParameterJdbcOperations.batchUpdate(eq(sql),
-				eqSqlParameterSourceArray(
-						new SqlParameterSource[] { new BeanPropertySqlParameterSource(new Foo("bar")) })))
-								.thenReturn(new int[] { 1 });
+		eqSqlParameterSourceArray(
+	new SqlParameterSource[]{new BeanPropertySqlParameterSource(new Foo("bar"))})))
+		.thenReturn(new int[]{1});
 		writer.write(Chunk.of(new Foo("bar")));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Test
 	void testWriteAndFlushMap() throws Exception {
 		JdbcBatchItemWriter<Map<String, Object>> mapWriter = new JdbcBatchItemWriter<>();
@@ -134,7 +134,7 @@ public class JdbcBatchItemWriterNamedParameterTests {
 
 		ArgumentCaptor<Map[]> captor = ArgumentCaptor.forClass(Map[].class);
 
-		when(namedParameterJdbcOperations.batchUpdate(eq(sql), captor.capture())).thenReturn(new int[] { 1 });
+		when(namedParameterJdbcOperations.batchUpdate(eq(sql), captor.capture())).thenReturn(new int[]{1});
 		mapWriter.write(Chunk.of(Map.of("foo", "bar")));
 
 		assertEquals(1, captor.getValue().length);
@@ -158,7 +158,7 @@ public class JdbcBatchItemWriterNamedParameterTests {
 
 		ArgumentCaptor<SqlParameterSource[]> captor = ArgumentCaptor.forClass(SqlParameterSource[].class);
 
-		when(namedParameterJdbcOperations.batchUpdate(any(String.class), captor.capture())).thenReturn(new int[] { 1 });
+		when(namedParameterJdbcOperations.batchUpdate(any(String.class), captor.capture())).thenReturn(new int[]{1});
 		mapWriter.write(Chunk.of(Map.of("foo", "bar")));
 
 		assertEquals(1, captor.getValue().length);
@@ -169,11 +169,11 @@ public class JdbcBatchItemWriterNamedParameterTests {
 	@Test
 	void testWriteAndFlushWithEmptyUpdate() {
 		when(namedParameterJdbcOperations.batchUpdate(eq(sql),
-				eqSqlParameterSourceArray(
-						new SqlParameterSource[] { new BeanPropertySqlParameterSource(new Foo("bar")) })))
-								.thenReturn(new int[] { 0 });
+		eqSqlParameterSourceArray(
+	new SqlParameterSource[]{new BeanPropertySqlParameterSource(new Foo("bar"))})))
+		.thenReturn(new int[]{0});
 		Exception exception = assertThrows(EmptyResultDataAccessException.class,
-				() -> writer.write(Chunk.of(new Foo("bar"))));
+		() -> writer.write(Chunk.of(new Foo("bar"))));
 		String message = exception.getMessage();
 		assertTrue(message.contains("did not update"), "Wrong message: " + message);
 	}
@@ -182,9 +182,9 @@ public class JdbcBatchItemWriterNamedParameterTests {
 	void testWriteAndFlushWithFailure() {
 		final RuntimeException ex = new RuntimeException("ERROR");
 		when(namedParameterJdbcOperations.batchUpdate(eq(sql),
-				eqSqlParameterSourceArray(
-						new SqlParameterSource[] { new BeanPropertySqlParameterSource(new Foo("bar")) })))
-								.thenThrow(ex);
+		eqSqlParameterSourceArray(
+	new SqlParameterSource[]{new BeanPropertySqlParameterSource(new Foo("bar"))})))
+		.thenThrow(ex);
 		Exception exception = assertThrows(RuntimeException.class, () -> writer.write(Chunk.of(new Foo("bar"))));
 		assertEquals("ERROR", exception.getMessage());
 	}

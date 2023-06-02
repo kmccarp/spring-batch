@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/infiniteLoopJob.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/infiniteLoopJob.xml"})
 class JobOperatorFunctionalTests {
 
 	private static final Log LOG = LogFactory.getLog(JobOperatorFunctionalTests.class);
@@ -93,9 +93,9 @@ class JobOperatorFunctionalTests {
 
 		Set<Long> runningExecutions = operator.getRunningExecutions(job.getName());
 		assertTrue(runningExecutions.contains(executionId),
-				"Wrong executions: " + runningExecutions + " expected: " + executionId);
+		"Wrong executions: " + runningExecutions + " expected: " + executionId);
 		assertTrue(operator.getSummary(executionId).contains(BatchStatus.STARTED.toString()),
-				"Wrong summary: " + operator.getSummary(executionId));
+		"Wrong summary: " + operator.getSummary(executionId));
 
 		operator.stop(executionId);
 
@@ -108,9 +108,9 @@ class JobOperatorFunctionalTests {
 
 		runningExecutions = operator.getRunningExecutions(job.getName());
 		assertFalse(runningExecutions.contains(executionId),
-				"Wrong executions: " + runningExecutions + " expected: " + executionId);
+		"Wrong executions: " + runningExecutions + " expected: " + executionId);
 		assertTrue(operator.getSummary(executionId).contains(BatchStatus.STOPPED.toString()),
-				"Wrong summary: " + operator.getSummary(executionId));
+		"Wrong summary: " + operator.getSummary(executionId));
 
 		// there is just a single step in the test job
 		Map<Long, String> summaries = operator.getStepExecutionSummaries(executionId);
@@ -141,7 +141,7 @@ class JobOperatorFunctionalTests {
 
 		int count = 0;
 		boolean running = operator.getSummary(exec1).contains("STARTED")
-				&& operator.getSummary(exec2).contains("STARTED");
+		&& operator.getSummary(exec2).contains("STARTED");
 
 		while (count++ < 10 && !running) {
 			Thread.sleep(100L);
@@ -149,7 +149,7 @@ class JobOperatorFunctionalTests {
 		}
 
 		assertTrue(running, String.format("Jobs not started: [%s] and [%s]", operator.getSummary(exec1),
-				operator.getSummary(exec1)));
+		operator.getSummary(exec1)));
 
 		operator.stop(exec1);
 		operator.stop(exec2);

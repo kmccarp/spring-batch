@@ -72,7 +72,7 @@ public class ChunkRequest<T> implements Serializable {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + ": jobId=" + jobId + ", sequence=" + sequence + ", contribution="
-				+ stepContribution + ", item count=" + items.size();
+		+ stepContribution + ", item count=" + items.size();
 	}
 
 }

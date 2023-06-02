@@ -60,6 +60,6 @@ public interface JobLauncher {
 	 * @throws JobParametersInvalidException if the parameters are not valid for this job
 	 */
 	public JobExecution run(Job job, JobParameters jobParameters) throws JobExecutionAlreadyRunningException,
-			JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException;
+	JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException;
 
 }

@@ -149,23 +149,23 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 				// prove that the reference in the {@link
 				// TaskExecutorPartitionHandler} is the step configured inline
 				TaskExecutorPartitionHandler taskExecutorPartitionHandler = accessPrivateField(partitionStep,
-						"partitionHandler");
+				"partitionHandler");
 				TaskletStep taskletStep = accessPrivateField(taskExecutorPartitionHandler, "step");
 
 				assertNotNull(taskletStep, "the taskletStep wasn't configured with a step. "
-						+ "We're trusting that the factory ensured " + "a reference was given.");
+				+ "We're trusting that the factory ensured " + "a reference was given.");
 			}
 		}
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		Collections.sort(savedStepNames);
 		assertEquals(
-				"[j3s1:partition0, j3s1:partition1, j3s1:partition2, j3s1:partition3, j3s1:partition4, j3s1:partition5]",
-				savedStepNames.toString());
+		"[j3s1:partition0, j3s1:partition1, j3s1:partition2, j3s1:partition3, j3s1:partition4, j3s1:partition5]",
+		savedStepNames.toString());
 		List<String> stepNames = getStepNames(jobExecution);
 		assertEquals(7, stepNames.size());
 		assertEquals(
-				"[j3s1, j3s1:partition0, j3s1:partition1, j3s1:partition2, j3s1:partition3, j3s1:partition4, j3s1:partition5]",
-				stepNames.toString());
+		"[j3s1, j3s1:partition0, j3s1:partition1, j3s1:partition2, j3s1:partition3, j3s1:partition4, j3s1:partition5]",
+		stepNames.toString());
 	}
 
 	/**
@@ -189,11 +189,11 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 				// prove that the reference in the {@link
 				// TaskExecutorPartitionHandler} is the step configured inline
 				TaskExecutorPartitionHandler taskExecutorPartitionHandler = accessPrivateField(partitionStep,
-						"partitionHandler");
+				"partitionHandler");
 				TaskletStep taskletStep = accessPrivateField(taskExecutorPartitionHandler, "step");
 
 				assertNotNull(taskletStep, "the taskletStep wasn't configured with a step. "
-						+ "We're trusting that the factory ensured " + "a reference was given.");
+				+ "We're trusting that the factory ensured " + "a reference was given.");
 			}
 		}
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
@@ -202,8 +202,8 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 		List<String> stepNames = getStepNames(jobExecution);
 		assertEquals(7, stepNames.size());
 		assertEquals(
-				"[j4s1, j4s1:partition0, j4s1:partition1, j4s1:partition2, j4s1:partition3, j4s1:partition4, j4s1:partition5]",
-				stepNames.toString());
+		"[j4s1, j4s1:partition0, j4s1:partition1, j4s1:partition2, j4s1:partition3, j4s1:partition4, j4s1:partition5]",
+		stepNames.toString());
 	}
 
 	@Test
@@ -230,7 +230,7 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 
 		@Override
 		public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-				throws Exception {
+		throws Exception {
 			return Arrays.asList(stepExecution);
 		}
 

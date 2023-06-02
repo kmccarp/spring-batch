@@ -85,8 +85,8 @@ class SimpleStepFactoryBeanTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -171,7 +171,7 @@ class SimpleStepFactoryBeanTests {
 	@Test
 	void testSimpleJobWithItemListeners() throws Exception {
 
-		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
+		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[]{"foo", "bar", "spam"});
 
 		factory.setItemWriter(new ItemWriter<String>() {
 			@Override
@@ -179,7 +179,7 @@ class SimpleStepFactoryBeanTests {
 				throw new RuntimeException("Error!");
 			}
 		});
-		factory.setListeners(new StepListener[] { new ItemListenerSupport<String, String>() {
+		factory.setListeners(new StepListener[]{new ItemListenerSupport<String, String>() {
 			@Override
 			public void onReadError(Exception ex) {
 				listened.add(ex);
@@ -189,7 +189,7 @@ class SimpleStepFactoryBeanTests {
 			public void onWriteError(Exception ex, Chunk<? extends String> item) {
 				listened.add(ex);
 			}
-		} });
+		}});
 
 		Step step = factory.getObject();
 
@@ -209,7 +209,7 @@ class SimpleStepFactoryBeanTests {
 
 	@Test
 	void testExceptionTerminates() throws Exception {
-		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
+		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[]{"foo", "bar", "spam"});
 		factory.setBeanName("exceptionStep");
 		factory.setItemWriter(new ItemWriter<String>() {
 			@Override
@@ -229,7 +229,7 @@ class SimpleStepFactoryBeanTests {
 
 	@Test
 	void testExceptionHandler() throws Exception {
-		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
+		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[]{"foo", "bar", "spam"});
 		factory.setBeanName("exceptionStep");
 		SimpleLimitExceptionHandler exceptionHandler = new SimpleLimitExceptionHandler(1);
 		exceptionHandler.afterPropertiesSet();
@@ -256,7 +256,7 @@ class SimpleStepFactoryBeanTests {
 
 	@Test
 	void testChunkListeners() throws Exception {
-		String[] items = new String[] { "1", "2", "3", "4", "5", "6", "7", "error" };
+		String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "error"};
 		int commitInterval = 3;
 
 		SimpleStepFactoryBean<String, String> factory = getStepFactory(items);
@@ -315,7 +315,7 @@ class SimpleStepFactoryBeanTests {
 		}
 		AssertingWriteListener writeListener = new AssertingWriteListener();
 		CountingChunkListener chunkListener = new CountingChunkListener(writeListener);
-		factory.setListeners(new StepListener[] { chunkListener, writeListener });
+		factory.setListeners(new StepListener[]{chunkListener, writeListener});
 		factory.setCommitInterval(commitInterval);
 
 		AbstractStep step = (AbstractStep) factory.getObject();
@@ -371,13 +371,13 @@ class SimpleStepFactoryBeanTests {
 	@Test
 	void testAutoRegisterItemListeners() throws Exception {
 
-		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
+		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[]{"foo", "bar", "spam"});
 
 		final List<String> listenerCalls = new ArrayList<>();
 
 		class TestItemListenerWriter
-				implements ItemWriter<String>, ItemProcessor<String, String>, ItemReadListener<String>,
-				ItemWriteListener<String>, ItemProcessListener<String, String>, ChunkListener {
+		implements ItemWriter<String>, ItemProcessor<String, String>, ItemReadListener<String>,
+		ItemWriteListener<String>, ItemProcessListener<String, String>, ChunkListener {
 
 			@Override
 			public void write(Chunk<? extends String> items) throws Exception {
@@ -456,7 +456,7 @@ class SimpleStepFactoryBeanTests {
 		job.execute(jobExecution);
 
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
-		for (String type : new String[] { "read", "write", "process", "chunk" }) {
+		for (String type : new String[]{"read", "write", "process", "chunk"}) {
 			assertTrue(listenerCalls.contains(type), "Missing listener call: " + type + " from " + listenerCalls);
 		}
 	}
@@ -464,7 +464,7 @@ class SimpleStepFactoryBeanTests {
 	@Test
 	void testAutoRegisterItemListenersNoDoubleCounting() throws Exception {
 
-		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[] { "foo", "bar", "spam" });
+		SimpleStepFactoryBean<String, String> factory = getStepFactory(new String[]{"foo", "bar", "spam"});
 
 		final List<String> listenerCalls = new ArrayList<>();
 
@@ -490,7 +490,7 @@ class SimpleStepFactoryBeanTests {
 		}
 
 		TestItemListenerWriter itemWriter = new TestItemListenerWriter();
-		factory.setListeners(new StepListener[] { itemWriter });
+		factory.setListeners(new StepListener[]{itemWriter});
 		factory.setItemWriter(itemWriter);
 
 		Step step = factory.getObject();

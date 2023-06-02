@@ -223,7 +223,7 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 	 */
 	@Override
 	protected Set<StepExecution> doHandle(StepExecution managerStepExecution,
-			Set<StepExecution> partitionStepExecutions) throws Exception {
+	Set<StepExecution> partitionStepExecutions) throws Exception {
 
 		if (CollectionUtils.isEmpty(partitionStepExecutions)) {
 			return partitionStepExecutions;
@@ -233,8 +233,8 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 
 		for (StepExecution stepExecution : partitionStepExecutions) {
 			Message<StepExecutionRequest> request = createMessage(count++, partitionStepExecutions.size(),
-					new StepExecutionRequest(stepName, stepExecution.getJobExecutionId(), stepExecution.getId()),
-					replyChannel);
+			new StepExecutionRequest(stepName, stepExecution.getJobExecutionId(), stepExecution.getId()),
+			replyChannel);
 			if (logger.isDebugEnabled()) {
 				logger.debug("Sending request: " + request);
 			}
@@ -250,19 +250,19 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 	}
 
 	private Set<StepExecution> pollReplies(final StepExecution managerStepExecution, final Set<StepExecution> split)
-			throws Exception {
+	throws Exception {
 		final Set<StepExecution> result = new HashSet<>(split.size());
 
 		Callable<Set<StepExecution>> callback = new Callable<Set<StepExecution>>() {
 			@Override
 			public Set<StepExecution> call() throws Exception {
 				Set<Long> currentStepExecutionIds = split.stream().map(StepExecution::getId)
-						.collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 				JobExecution jobExecution = jobExplorer.getJobExecution(managerStepExecution.getJobExecutionId());
 				jobExecution.getStepExecutions().stream()
-						.filter(stepExecution -> currentStepExecutionIds.contains(stepExecution.getId()))
-						.filter(stepExecution -> !result.contains(stepExecution))
-						.filter(stepExecution -> !stepExecution.getStatus().isRunning()).forEach(result::add);
+				.filter(stepExecution -> currentStepExecutionIds.contains(stepExecution.getId()))
+				.filter(stepExecution -> !result.contains(stepExecution))
+				.filter(stepExecution -> !stepExecution.getStatus().isRunning()).forEach(result::add);
 
 				if (logger.isDebugEnabled()) {
 					logger.debug(String.format("Currently waiting on %s partitions to finish", split.size()));
@@ -290,7 +290,7 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 
 	private Set<StepExecution> receiveReplies(PollableChannel currentReplyChannel) {
 		Message<Set<StepExecution>> message = (Message<Set<StepExecution>>) messagingGateway
-				.receive(currentReplyChannel);
+		.receive(currentReplyChannel);
 
 		if (message == null) {
 			throw new MessageTimeoutException("Timeout occurred before all partitions returned");
@@ -303,11 +303,11 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 	}
 
 	private Message<StepExecutionRequest> createMessage(int sequenceNumber, int sequenceSize,
-			StepExecutionRequest stepExecutionRequest, PollableChannel replyChannel) {
+	StepExecutionRequest stepExecutionRequest, PollableChannel replyChannel) {
 		return MessageBuilder.withPayload(stepExecutionRequest).setSequenceNumber(sequenceNumber)
-				.setSequenceSize(sequenceSize)
-				.setCorrelationId(stepExecutionRequest.getJobExecutionId() + ":" + stepExecutionRequest.getStepName())
-				.setReplyChannel(replyChannel).build();
+		.setSequenceSize(sequenceSize)
+		.setCorrelationId(stepExecutionRequest.getJobExecutionId() + ":" + stepExecutionRequest.getStepName())
+		.setReplyChannel(replyChannel).build();
 	}
 
 }

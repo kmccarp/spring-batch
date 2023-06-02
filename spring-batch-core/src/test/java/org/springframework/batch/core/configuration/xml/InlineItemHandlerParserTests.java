@@ -52,7 +52,7 @@ class InlineItemHandlerParserTests {
 	@Test
 	void testInlineHandlers() {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/InlineItemHandlerParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/InlineItemHandlerParserTests-context.xml");
 		Object step = context.getBean("inlineHandlers");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
 		Object chunkProvider = ReflectionTestUtils.getField(tasklet, "chunkProvider");
@@ -69,7 +69,7 @@ class InlineItemHandlerParserTests {
 	@Test
 	void testInlineAdapters() {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/InlineItemHandlerParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/InlineItemHandlerParserTests-context.xml");
 		Object step = context.getBean("inlineAdapters");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
 		Object chunkProvider = ReflectionTestUtils.getField(tasklet, "chunkProvider");
@@ -100,10 +100,10 @@ class InlineItemHandlerParserTests {
 	@Test
 	void testInlineHandlersWithStepScope() {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/InlineItemHandlerWithStepScopeParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/InlineItemHandlerWithStepScopeParserTests-context.xml");
 		StepSynchronizationManager.register(new StepExecution("step", new JobExecution(123L)));
 
-		@SuppressWarnings({ "rawtypes" })
+		@SuppressWarnings({"rawtypes"})
 		Map<String, ItemReader> readers = context.getBeansOfType(ItemReader.class);
 		// Should be 2 each (proxy and target) for the two readers in the steps defined
 		assertEquals(4, readers.size());

@@ -74,7 +74,7 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 	 * @param partitioner a {@link Partitioner} to use for generating input parameters
 	 */
 	public SimpleStepExecutionSplitter(JobRepository jobRepository, boolean allowStartIfComplete, String stepName,
-			Partitioner partitioner) {
+	Partitioner partitioner) {
 		this.jobRepository = jobRepository;
 		this.allowStartIfComplete = allowStartIfComplete;
 		this.partitioner = partitioner;
@@ -237,7 +237,7 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 	}
 
 	private boolean shouldStart(boolean allowStartIfComplete, StepExecution stepExecution,
-			StepExecution lastStepExecution) throws JobExecutionException {
+	StepExecution lastStepExecution) throws JobExecutionException {
 
 		if (lastStepExecution == null) {
 			return true;
@@ -247,8 +247,8 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 
 		if (stepStatus == BatchStatus.UNKNOWN) {
 			throw new JobExecutionException("Cannot restart step from UNKNOWN status.  "
-					+ "The last execution ended with a failure that could not be rolled back, "
-					+ "so it may be dangerous to proceed.  " + "Manual intervention is probably necessary.");
+			+ "The last execution ended with a failure that could not be rolled back, "
+			+ "so it may be dangerous to proceed.  " + "Manual intervention is probably necessary.");
 		}
 
 		if (stepStatus == BatchStatus.COMPLETED) {
@@ -271,13 +271,13 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 		}
 
 		if (stepStatus == BatchStatus.STARTED || stepStatus == BatchStatus.STARTING
-				|| stepStatus == BatchStatus.STOPPING) {
+		|| stepStatus == BatchStatus.STOPPING) {
 			throw new JobExecutionException("Cannot restart step from " + stepStatus + " status.  "
-					+ "The old execution may still be executing, so you may need to verify manually that this is the case.");
+			+ "The old execution may still be executing, so you may need to verify manually that this is the case.");
 		}
 
 		throw new JobExecutionException("Cannot restart step from " + stepStatus + " status.  "
-				+ "We believe the old execution was abandoned and therefore has been marked as un-restartable.");
+		+ "We believe the old execution was abandoned and therefore has been marked as un-restartable.");
 
 	}
 

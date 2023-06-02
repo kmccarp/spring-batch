@@ -48,6 +48,7 @@ public enum DatabaseType {
 			nameMap.put(type.getProductName(), type);
 		}
 	}
+
 	// A description is necessary due to the nature of database descriptions
 	// in metadata.
 	private final String productName;
@@ -84,10 +85,10 @@ public enum DatabaseType {
 	 */
 	public static DatabaseType fromMetaData(DataSource dataSource) throws MetaDataAccessException {
 		String databaseProductName = JdbcUtils.extractDatabaseMetaData(dataSource,
-				DatabaseMetaData::getDatabaseProductName);
+		DatabaseMetaData::getDatabaseProductName);
 		if (StringUtils.hasText(databaseProductName) && databaseProductName.startsWith("DB2")) {
 			String databaseProductVersion = JdbcUtils.extractDatabaseMetaData(dataSource,
-					DatabaseMetaData::getDatabaseProductVersion);
+			DatabaseMetaData::getDatabaseProductVersion);
 			if (databaseProductVersion.startsWith("ARI")) {
 				databaseProductName = "DB2VSE";
 			}
@@ -95,8 +96,8 @@ public enum DatabaseType {
 				databaseProductName = "DB2ZOS";
 			}
 			else if (databaseProductName.contains("AS")
-					&& (databaseProductVersion.startsWith("QSQ") || databaseProductVersion
-							.substring(databaseProductVersion.indexOf('V')).matches("V\\dR\\d[mM]\\d"))) {
+			&& (databaseProductVersion.startsWith("QSQ") || databaseProductVersion
+			.substring(databaseProductVersion.indexOf('V')).matches("V\\dR\\d[mM]\\d"))) {
 				databaseProductName = "DB2AS400";
 			}
 			else {

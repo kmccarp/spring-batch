@@ -33,10 +33,10 @@ class BeanWrapperFieldSetMapperFuzzyMatchingTests {
 		mapper.setStrict(true);
 		mapper.setTargetType(GreenBean.class);
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		String[] names = { "brown", "green", "great", "groin", "braun" };
+		String[] names = {"brown", "green", "great", "groin", "braun"};
 		lineTokenizer.setNames(names);
 		assertThrows(NotWritablePropertyException.class,
-				() -> mapper.mapFieldSet(lineTokenizer.tokenize("brown,green,great,groin,braun")));
+		() -> mapper.mapFieldSet(lineTokenizer.tokenize("brown,green,great,groin,braun")));
 	}
 
 	@Test
@@ -46,7 +46,7 @@ class BeanWrapperFieldSetMapperFuzzyMatchingTests {
 		mapper.setStrict(false);
 		mapper.setTargetType(GreenBean.class);
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		String[] names = { "brown", "green", "great", "groin", "braun" };
+		String[] names = {"brown", "green", "great", "groin", "braun"};
 		lineTokenizer.setNames(names);
 		GreenBean bean = mapper.mapFieldSet(lineTokenizer.tokenize("brown,green,great,groin,braun"));
 		assertEquals("green", bean.getGreen());
@@ -58,7 +58,7 @@ class BeanWrapperFieldSetMapperFuzzyMatchingTests {
 		mapper.setStrict(true);
 		mapper.setTargetType(BlueBean.class);
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		String[] names = { "blue" };
+		String[] names = {"blue"};
 		lineTokenizer.setNames(names);
 		BlueBean bean = mapper.mapFieldSet(lineTokenizer.tokenize("blue"));
 		// An exact match always wins...

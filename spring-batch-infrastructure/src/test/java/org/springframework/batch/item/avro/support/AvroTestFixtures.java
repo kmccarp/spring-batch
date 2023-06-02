@@ -46,16 +46,16 @@ public abstract class AvroTestFixtures {
 
 	//@formatter:off
 	private final Chunk<User> avroGeneratedUsers = Chunk.of(
-			new User("David", 20, "blue"),
-			new User("Sue", 4, "red"),
-			new User("Alana", 13, "yellow"),
-			new User("Joe", 1, "pink"));
+	new User("David", 20, "blue"),
+	new User("Sue", 4, "red"),
+	new User("Alana", 13, "yellow"),
+	new User("Joe", 1, "pink"));
 
 	private Chunk<PlainOldUser> plainOldUsers = Chunk.of(
-			new PlainOldUser("David", 20, "blue"),
-			new PlainOldUser("Sue", 4, "red"),
-			new PlainOldUser("Alana", 13, "yellow"),
-			new PlainOldUser("Joe", 1, "pink"));
+	new PlainOldUser("David", 20, "blue"),
+	new PlainOldUser("Sue", 4, "red"),
+	new PlainOldUser("Alana", 13, "yellow"),
+	new PlainOldUser("Joe", 1, "pink"));
 	//@formatter:on
 
 	protected Resource schemaResource = new ClassPathResource("org/springframework/batch/item/avro/user-schema.json");
@@ -64,14 +64,14 @@ public abstract class AvroTestFixtures {
 
 	// Serialized data only
 	protected Resource dataResource = new ClassPathResource(
-			"org/springframework/batch/item/avro/user-data-no-schema.avro");
+	"org/springframework/batch/item/avro/user-data-no-schema.avro");
 
 	// Data written with DataFileWriter, includes embedded SCHEMA (more common)
 	protected Resource dataResourceWithSchema = new ClassPathResource(
-			"org/springframework/batch/item/avro/user-data.avro");
+	"org/springframework/batch/item/avro/user-data.avro");
 
 	protected Resource plainOldUserDataResource = new ClassPathResource(
-			"org/springframework/batch/item/avro/plain-old-user-data-no-schema.avro");
+	"org/springframework/batch/item/avro/plain-old-user-data-no-schema.avro");
 
 	protected String schemaString(Resource resource) {
 		{
@@ -107,7 +107,7 @@ public abstract class AvroTestFixtures {
 
 	protected Chunk<GenericRecord> genericPlainOldUsers() {
 		return new Chunk(
-				this.plainOldUsers.getItems().stream().map(PlainOldUser::toGenericRecord).collect(Collectors.toList()));
+		this.plainOldUsers.getItems().stream().map(PlainOldUser::toGenericRecord).collect(Collectors.toList()));
 	}
 
 	protected static class PlainOldUser {
@@ -158,7 +158,7 @@ public abstract class AvroTestFixtures {
 				return false;
 			PlainOldUser that = (PlainOldUser) o;
 			return favoriteNumber == that.favoriteNumber && Objects.equals(name, that.name)
-					&& Objects.equals(favoriteColor, that.favoriteColor);
+			&& Objects.equals(favoriteColor, that.favoriteColor);
 		}
 
 		@Override

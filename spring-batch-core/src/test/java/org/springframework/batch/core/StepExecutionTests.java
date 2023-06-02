@@ -159,7 +159,7 @@ class StepExecutionTests {
 	@Test
 	void testNullNameIsIllegal() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new StepExecution(null, new JobExecution(new JobInstance(null, "job"), null)));
+		() -> new StepExecution(null, new JobExecution(new JobInstance(null, "job"), null)));
 	}
 
 	@Test
@@ -243,7 +243,7 @@ class StepExecutionTests {
 	@Test
 	void testHashCodeWithNullIds() {
 		assertTrue(new Entity(execution.getId()).hashCode() != blankExecution.hashCode(),
-				"Hash code not same as parent");
+		"Hash code not same as parent");
 	}
 
 	@Test
@@ -296,7 +296,7 @@ class StepExecutionTests {
 	private StepExecution newStepExecution(Step step, Long jobExecutionId, long stepExecutionId) {
 		JobInstance job = new JobInstance(3L, "testJob");
 		StepExecution execution = new StepExecution(step.getName(),
-				new JobExecution(job, jobExecutionId, new JobParameters()), stepExecutionId);
+		new JobExecution(job, jobExecutionId, new JobParameters()), stepExecutionId);
 		return execution;
 	}
 

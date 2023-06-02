@@ -67,8 +67,8 @@ class StepExecutorInterruptionTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		this.transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -78,7 +78,7 @@ class StepExecutorInterruptionTests {
 	}
 
 	private void configureStep(TaskletStep step)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 
 		this.step = step;
 		JobSupport job = new JobSupport();

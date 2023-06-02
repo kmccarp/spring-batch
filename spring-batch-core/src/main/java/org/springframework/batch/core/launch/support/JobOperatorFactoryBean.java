@@ -77,7 +77,7 @@ public class JobOperatorFactoryBean implements FactoryBean<JobOperator>, Initial
 		if (this.transactionAttributeSource == null) {
 			Properties transactionAttributes = new Properties();
 			String transactionProperties = String.join(",", TRANSACTION_PROPAGATION_PREFIX + Propagation.REQUIRED,
-					TRANSACTION_ISOLATION_LEVEL_PREFIX + Isolation.DEFAULT);
+			TRANSACTION_ISOLATION_LEVEL_PREFIX + Isolation.DEFAULT);
 			transactionAttributes.setProperty("stop*", transactionProperties);
 			this.transactionAttributeSource = new NameMatchTransactionAttributeSource();
 			((NameMatchTransactionAttributeSource) transactionAttributeSource).setProperties(transactionAttributes);
@@ -155,7 +155,7 @@ public class JobOperatorFactoryBean implements FactoryBean<JobOperator>, Initial
 	@Override
 	public JobOperator getObject() throws Exception {
 		TransactionInterceptor advice = new TransactionInterceptor((TransactionManager) this.transactionManager,
-				this.transactionAttributeSource);
+		this.transactionAttributeSource);
 		this.proxyFactory.addAdvice(advice);
 		this.proxyFactory.setProxyTargetClass(false);
 		this.proxyFactory.addInterface(JobOperator.class);

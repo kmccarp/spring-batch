@@ -68,10 +68,10 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 
 		if (!CoreNamespaceUtils.namespaceMatchesVersion(element)) {
 			parserContext.getReaderContext().error(
-					"You are using a version of the spring-batch XSD that is not compatible with Spring Batch 3.0."
-							+ "  Please upgrade your schema declarations (or use the spring-batch.xsd alias if you are "
-							+ "feeling lucky).",
-					element);
+			"You are using a version of the spring-batch XSD that is not compatible with Spring Batch 3.0."
+		+ "  Please upgrade your schema declarations (or use the spring-batch.xsd alias if you are "
+		+ "feeling lucky).",
+			element);
 			return;
 		}
 
@@ -112,8 +112,8 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 			for (String tagName : Arrays.asList("step", "decision", "split")) {
 				if (!DomUtils.getChildElementsByTagName(element, tagName).isEmpty()) {
 					parserContext.getReaderContext().error("The <" + tagName
-							+ "/> element may not appear on a <job/> with abstract=\"true\" [" + jobName + "]",
-							element);
+					+ "/> element may not appear on a <job/> with abstract=\"true\" [" + jobName + "]",
+					element);
 				}
 			}
 		}
@@ -132,11 +132,11 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 		if (listenersElements.size() == 1) {
 			Element listenersElement = listenersElements.get(0);
 			CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(listenersElement.getTagName(),
-					parserContext.extractSource(element));
+			parserContext.extractSource(element));
 			parserContext.pushContainingComponent(compositeDef);
 			ManagedList<BeanDefinition> listeners = new ManagedList<>();
 			listeners.setMergeEnabled(listenersElement.hasAttribute(MERGE_ATTR)
-					&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
+			&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
 			List<Element> listenerElements = DomUtils.getChildElementsByTagName(listenersElement, "listener");
 			for (Element listenerElement : listenerElements) {
 				listeners.add(jobListenerParser.parse(listenerElement, parserContext));
@@ -146,7 +146,7 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 		}
 		else if (listenersElements.size() > 1) {
 			parserContext.getReaderContext()
-					.error("The '<listeners/>' element may not appear more than once in a single <job/>.", element);
+			.error("The '<listeners/>' element may not appear more than once in a single <job/>.", element);
 		}
 
 	}
@@ -167,7 +167,7 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 		}
 		else if (beanElement != null) {
 			BeanDefinitionHolder beanDefinitionHolder = parserContext.getDelegate()
-					.parseBeanDefinitionElement(beanElement);
+			.parseBeanDefinitionElement(beanElement);
 			parserContext.getDelegate().decorateBeanDefinitionIfRequired(beanElement, beanDefinitionHolder);
 			return beanDefinitionHolder;
 		}
@@ -176,7 +176,7 @@ public class JobParser extends AbstractSingleBeanDefinitionParser {
 		}
 
 		parserContext.getReaderContext()
-				.error("One of ref attribute or a nested bean definition or ref element must be specified", element);
+		.error("One of ref attribute or a nested bean definition or ref element must be specified", element);
 		return null;
 	}
 

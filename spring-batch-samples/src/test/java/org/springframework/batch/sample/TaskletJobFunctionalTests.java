@@ -29,7 +29,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/taskletJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/taskletJob.xml", "/job-runner-context.xml"})
 class TaskletJobFunctionalTests {
 
 	@Autowired
@@ -38,7 +38,7 @@ class TaskletJobFunctionalTests {
 	@Test
 	void testLaunchJob() throws Exception {
 		JobExecution jobExecution = jobLauncherTestUtils
-				.launchJob(new JobParametersBuilder().addString("value", "foo").toJobParameters());
+		.launchJob(new JobParametersBuilder().addString("value", "foo").toJobParameters());
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		assertEquals("yes", jobExecution.getExecutionContext().getString("done"));
 	}

@@ -60,7 +60,7 @@ class JpaCursorItemReaderBuilderTests {
 	@BeforeEach
 	void setUp() {
 		this.context = new AnnotationConfigApplicationContext(
-				JpaCursorItemReaderBuilderTests.TestDataSourceConfiguration.class);
+		JpaCursorItemReaderBuilderTests.TestDataSourceConfiguration.class);
 		this.entityManagerFactory = (EntityManagerFactory) context.getBean("entityManagerFactory");
 	}
 
@@ -74,8 +74,8 @@ class JpaCursorItemReaderBuilderTests {
 	@Test
 	void testConfiguration() throws Exception {
 		JpaCursorItemReader<Foo> reader = new JpaCursorItemReaderBuilder<Foo>().name("fooReader")
-				.entityManagerFactory(this.entityManagerFactory).currentItemCount(2).maxItemCount(4)
-				.queryString("select f from Foo f ").build();
+		.entityManagerFactory(this.entityManagerFactory).currentItemCount(2).maxItemCount(4)
+		.queryString("select f from Foo f ").build();
 
 		reader.afterPropertiesSet();
 
@@ -104,8 +104,8 @@ class JpaCursorItemReaderBuilderTests {
 		parameters.put("value", 2);
 
 		JpaCursorItemReader<Foo> reader = new JpaCursorItemReaderBuilder<Foo>().name("fooReader")
-				.entityManagerFactory(this.entityManagerFactory).queryString("select f from Foo f where f.id > :value")
-				.parameterValues(parameters).saveState(false).build();
+		.entityManagerFactory(this.entityManagerFactory).queryString("select f from Foo f where f.id > :value")
+		.parameterValues(parameters).saveState(false).build();
 
 		reader.afterPropertiesSet();
 
@@ -133,7 +133,7 @@ class JpaCursorItemReaderBuilderTests {
 		namedQueryProvider.afterPropertiesSet();
 
 		JpaCursorItemReader<Foo> reader = new JpaCursorItemReaderBuilder<Foo>().name("fooReader")
-				.entityManagerFactory(this.entityManagerFactory).queryProvider(namedQueryProvider).build();
+		.entityManagerFactory(this.entityManagerFactory).queryProvider(namedQueryProvider).build();
 
 		reader.afterPropertiesSet();
 
@@ -165,7 +165,7 @@ class JpaCursorItemReaderBuilderTests {
 		provider.afterPropertiesSet();
 
 		JpaCursorItemReader<Foo> reader = new JpaCursorItemReaderBuilder<Foo>().name("fooReader")
-				.entityManagerFactory(this.entityManagerFactory).queryProvider(provider).build();
+		.entityManagerFactory(this.entityManagerFactory).queryProvider(provider).build();
 
 		reader.afterPropertiesSet();
 
@@ -195,7 +195,7 @@ class JpaCursorItemReaderBuilderTests {
 		assertEquals("A name is required when saveState is set to true", exception.getMessage());
 
 		builder = new JpaCursorItemReaderBuilder<Foo>().entityManagerFactory(this.entityManagerFactory)
-				.saveState(false);
+		.saveState(false);
 		exception = assertThrows(IllegalArgumentException.class, builder::build);
 		assertEquals("Query string is required when queryProvider is null", exception.getMessage());
 	}
@@ -214,7 +214,7 @@ class JpaCursorItemReaderBuilderTests {
 			dataSourceInitializer.setDataSource(dataSource);
 
 			Resource create = new ClassPathResource(
-					"org/springframework/batch/item/database/init-foo-schema-hsqldb.sql");
+			"org/springframework/batch/item/database/init-foo-schema-hsqldb.sql");
 			dataSourceInitializer.setDatabasePopulator(new ResourceDatabasePopulator(create));
 
 			return dataSourceInitializer;

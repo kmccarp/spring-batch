@@ -60,8 +60,8 @@ abstract class AbstractStaxEventWriterItemWriterTests {
 	protected Resource expected = new ClassPathResource("expected-output.xml", getClass());
 
 	protected Chunk<Trade> objects = Chunk.of(new Trade("isin1", 1, new BigDecimal(1.0), "customer1"),
-			new Trade("isin2", 2, new BigDecimal(2.0), "customer2"),
-			new Trade("isin3", 3, new BigDecimal(3.0), "customer3"));
+	new Trade("isin2", 2, new BigDecimal(2.0), "customer2"),
+	new Trade("isin3", 3, new BigDecimal(3.0), "customer3"));
 
 	/**
 	 * Write list of domain objects and check the output file.
@@ -92,7 +92,7 @@ abstract class AbstractStaxEventWriterItemWriterTests {
 		logger.info("Timing for XML writer: " + stopWatch);
 
 		assertThat(Input.from(expected.getFile()), CompareMatcher.isSimilarTo(Input.from(resource.getFile()))
-				.withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText)));
+		.withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText)));
 	}
 
 	@BeforeEach

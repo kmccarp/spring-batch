@@ -53,13 +53,13 @@ class PatternMatchingCompositeLineMapperTests {
 		tokenizers.put("foo*", new LineTokenizer() {
 			@Override
 			public FieldSet tokenize(@Nullable String line) {
-				return new DefaultFieldSet(new String[] { "a", "b" });
+				return new DefaultFieldSet(new String[]{"a", "b"});
 			}
 		});
 		tokenizers.put("bar*", new LineTokenizer() {
 			@Override
 			public FieldSet tokenize(@Nullable String line) {
-				return new DefaultFieldSet(new String[] { "c", "d" });
+				return new DefaultFieldSet(new String[]{"c", "d"});
 			}
 		});
 		mapper.setTokenizers(tokenizers);
@@ -89,13 +89,13 @@ class PatternMatchingCompositeLineMapperTests {
 		tokenizers.put("foo*", new LineTokenizer() {
 			@Override
 			public FieldSet tokenize(@Nullable String line) {
-				return new DefaultFieldSet(new String[] { "a", "b" });
+				return new DefaultFieldSet(new String[]{"a", "b"});
 			}
 		});
 		tokenizers.put("bar*", new LineTokenizer() {
 			@Override
 			public FieldSet tokenize(@Nullable String line) {
-				return new DefaultFieldSet(new String[] { "c", "d" });
+				return new DefaultFieldSet(new String[]{"c", "d"});
 			}
 		});
 		mapper.setTokenizers(tokenizers);

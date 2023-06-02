@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  */
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/infiniteLoopJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/infiniteLoopJob.xml", "/job-runner-context.xml"})
 class GracefulShutdownFunctionalTests {
 
 	/** Logger */
@@ -59,7 +59,7 @@ class GracefulShutdownFunctionalTests {
 	@Test
 	void testLaunchJob() throws Exception {
 		final JobParameters jobParameters = new JobParametersBuilder().addLong("timestamp", System.currentTimeMillis())
-				.toJobParameters();
+		.toJobParameters();
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 

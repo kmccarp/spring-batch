@@ -221,11 +221,11 @@ public class DefaultBatchConfiguration implements ApplicationContextAware {
 	 */
 	protected DataSource getDataSource() {
 		String errorMessage = " To use the default configuration, a data source bean named 'dataSource'"
-				+ " should be defined in the application context but none was found. Override getDataSource()"
-				+ " to provide the data source to use for Batch meta-data.";
+		+ " should be defined in the application context but none was found. Override getDataSource()"
+		+ " to provide the data source to use for Batch meta-data.";
 		if (this.applicationContext.getBeansOfType(DataSource.class).isEmpty()) {
 			throw new BatchConfigurationException(
-					"Unable to find a DataSource bean in the application context." + errorMessage);
+			"Unable to find a DataSource bean in the application context." + errorMessage);
 		}
 		else {
 			if (!this.applicationContext.containsBean("dataSource")) {
@@ -243,11 +243,11 @@ public class DefaultBatchConfiguration implements ApplicationContextAware {
 	 */
 	protected PlatformTransactionManager getTransactionManager() {
 		String errorMessage = " To use the default configuration, a transaction manager bean named 'transactionManager'"
-				+ " should be defined in the application context but none was found. Override getTransactionManager()"
-				+ " to provide the transaction manager to use for the job repository.";
+		+ " should be defined in the application context but none was found. Override getTransactionManager()"
+		+ " to provide the transaction manager to use for the job repository.";
 		if (this.applicationContext.getBeansOfType(PlatformTransactionManager.class).isEmpty()) {
 			throw new BatchConfigurationException(
-					"Unable to find a PlatformTransactionManager bean in the application context." + errorMessage);
+			"Unable to find a PlatformTransactionManager bean in the application context." + errorMessage);
 		}
 		else {
 			if (!this.applicationContext.containsBean("transactionManager")) {

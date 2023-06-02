@@ -82,7 +82,7 @@ public class DelimitedLineTokenizer extends AbstractLineTokenizer implements Ini
 	public DelimitedLineTokenizer(String delimiter) {
 		Assert.notNull(delimiter, "A delimiter is required");
 		Assert.state(!delimiter.equals(String.valueOf(DEFAULT_QUOTE_CHARACTER)),
-				"[" + DEFAULT_QUOTE_CHARACTER + "] is not allowed as delimiter for tokenizers.");
+		"[" + DEFAULT_QUOTE_CHARACTER + "] is not allowed as delimiter for tokenizers.");
 
 		this.delimiter = delimiter;
 		setQuoteCharacter(DEFAULT_QUOTE_CHARACTER);
@@ -208,14 +208,14 @@ public class DelimitedLineTokenizer extends AbstractLineTokenizer implements Ini
 		}
 
 		while ((start < (start + len))
-				&& ((start + len - 1 < line.length()) && (line.charAt(start + len - 1) <= ' '))) {
+		&& ((start + len - 1 < line.length()) && (line.charAt(start + len - 1) <= ' '))) {
 			len--;
 		}
 
 		String value;
 
 		if ((line.length() >= 2) && isQuoteCharacter(line.charAt(start))
-				&& isQuoteCharacter(line.charAt(start + len - 1))) {
+		&& isQuoteCharacter(line.charAt(start + len - 1))) {
 			int beginIndex = start + 1;
 			int endIndex = len - 2;
 			value = line.substring(beginIndex, beginIndex + endIndex);

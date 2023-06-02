@@ -101,7 +101,7 @@ class AssertFileTests {
 
 	private void executeAssertEquals(String expected, String actual) throws Exception {
 		AssertFile.assertFileEquals(new FileSystemResource(DIRECTORY + expected),
-				new FileSystemResource(DIRECTORY + actual));
+		new FileSystemResource(DIRECTORY + actual));
 	}
 
 	@Test

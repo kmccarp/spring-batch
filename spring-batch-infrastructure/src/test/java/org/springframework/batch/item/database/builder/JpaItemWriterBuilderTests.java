@@ -49,7 +49,7 @@ class JpaItemWriterBuilderTests {
 	@BeforeEach
 	void setUp() {
 		TransactionSynchronizationManager.bindResource(this.entityManagerFactory,
-				new EntityManagerHolder(this.entityManager));
+		new EntityManagerHolder(this.entityManager));
 	}
 
 	@AfterEach
@@ -60,7 +60,7 @@ class JpaItemWriterBuilderTests {
 	@Test
 	void testConfiguration() throws Exception {
 		JpaItemWriter<String> itemWriter = new JpaItemWriterBuilder<String>()
-				.entityManagerFactory(this.entityManagerFactory).build();
+		.entityManagerFactory(this.entityManagerFactory).build();
 
 		itemWriter.afterPropertiesSet();
 
@@ -75,14 +75,14 @@ class JpaItemWriterBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new JpaItemWriterBuilder<String>().build());
+		() -> new JpaItemWriterBuilder<String>().build());
 		assertEquals("EntityManagerFactory must be provided", exception.getMessage());
 	}
 
 	@Test
 	void testPersist() throws Exception {
 		JpaItemWriter<String> itemWriter = new JpaItemWriterBuilder<String>()
-				.entityManagerFactory(this.entityManagerFactory).usePersist(true).build();
+		.entityManagerFactory(this.entityManagerFactory).usePersist(true).build();
 
 		itemWriter.afterPropertiesSet();
 

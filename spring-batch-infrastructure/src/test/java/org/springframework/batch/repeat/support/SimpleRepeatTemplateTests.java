@@ -350,17 +350,17 @@ class SimpleRepeatTemplateTests extends AbstractTradeBatchTests {
 		RepeatStatus result = RepeatStatus.FINISHED;
 
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> template.iterate(new ItemReaderRepeatCallback<>(provider, processor) {
-					@Override
-					public RepeatStatus doInIteration(RepeatContext context) throws Exception {
-						RepeatStatus result = super.doInIteration(context);
-						if (processor.count >= 2) {
-							context.setCompleteOnly();
-							throw new RuntimeException("Barf second try count=" + processor.count);
-						}
-						return result;
-					}
-				}));
+		() -> template.iterate(new ItemReaderRepeatCallback<>(provider, processor) {
+			@Override
+			public RepeatStatus doInIteration(RepeatContext context) throws Exception {
+				RepeatStatus result = super.doInIteration(context);
+				if (processor.count >= 2) {
+					context.setCompleteOnly();
+					throw new RuntimeException("Barf second try count=" + processor.count);
+				}
+				return result;
+			}
+		}));
 		assertEquals("Barf second try count=2", exception.getMessage());
 
 		// 2 items were processed before completion signalled
@@ -418,7 +418,7 @@ class SimpleRepeatTemplateTests extends AbstractTradeBatchTests {
 		RepeatListenerStub listener = new RepeatListenerStub();
 
 		template.setExceptionHandler(exHandler);
-		template.setListeners(new RepeatListener[] { listener });
+		template.setListeners(new RepeatListener[]{listener});
 
 		Exception expected = assertThrows(RepeatException.class, () -> template.iterate(context -> {
 			throw new RepeatException("typically thrown by nested repeat template", exception);

@@ -72,8 +72,8 @@ class KafkaItemReaderTests {
 	@BeforeAll
 	static void setUpTopics(@Autowired EmbeddedKafkaBroker embeddedKafka) {
 		embeddedKafka.addTopics(new NewTopic("topic1", 1, (short) 1), new NewTopic("topic2", 2, (short) 1),
-				new NewTopic("topic3", 1, (short) 1), new NewTopic("topic4", 2, (short) 1),
-				new NewTopic("topic5", 1, (short) 1), new NewTopic("topic6", 1, (short) 1));
+		new NewTopic("topic3", 1, (short) 1), new NewTopic("topic4", 2, (short) 1),
+		new NewTopic("topic5", 1, (short) 1), new NewTopic("topic6", 1, (short) 1));
 	}
 
 	@BeforeEach
@@ -84,43 +84,43 @@ class KafkaItemReaderTests {
 
 		this.consumerProperties = new Properties();
 		this.consumerProperties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-				embeddedKafka.getBrokersAsString());
+		embeddedKafka.getBrokersAsString());
 		this.consumerProperties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "1");
 		this.consumerProperties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-				StringDeserializer.class.getName());
+		StringDeserializer.class.getName());
 		this.consumerProperties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-				StringDeserializer.class.getName());
+		StringDeserializer.class.getName());
 	}
 
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(null, "topic", 0));
+		() -> new KafkaItemReader<>(null, "topic", 0));
 		assertEquals("Consumer properties must not be null", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(new Properties(), "topic", 0));
+		() -> new KafkaItemReader<>(new Properties(), "topic", 0));
 		assertEquals("bootstrap.servers property must be provided", exception.getMessage());
 
 		Properties consumerProperties = new Properties();
 		consumerProperties.put("bootstrap.servers", embeddedKafka);
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
+		() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
 		assertEquals("group.id property must be provided", exception.getMessage());
 
 		consumerProperties.put("group.id", "1");
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
+		() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
 		assertEquals("key.deserializer property must be provided", exception.getMessage());
 
 		consumerProperties.put("key.deserializer", StringDeserializer.class.getName());
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
+		() -> new KafkaItemReader<>(consumerProperties, "topic", 0));
 		assertEquals("value.deserializer property must be provided", exception.getMessage());
 
 		consumerProperties.put("value.deserializer", StringDeserializer.class.getName());
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new KafkaItemReader<>(consumerProperties, "", 0));
+		() -> new KafkaItemReader<>(consumerProperties, "", 0));
 		assertEquals("Topic name must not be null or empty", exception.getMessage());
 
 		exception = assertThrows(Exception.class, () -> new KafkaItemReader<>(consumerProperties, "topic"));
@@ -135,7 +135,7 @@ class KafkaItemReaderTests {
 		assertEquals("pollTimeout must not be zero", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> this.reader.setPollTimeout(Duration.ofSeconds(-1)));
+		() -> this.reader.setPollTimeout(Duration.ofSeconds(-1)));
 		assertEquals("pollTimeout must not be negative", exception.getMessage());
 	}
 
@@ -235,7 +235,7 @@ class KafkaItemReaderTests {
 
 		// The offset stored in Kafka should be equal to 2 at this point
 		OffsetAndMetadata currentOffset = KafkaTestUtils.getCurrentOffset(embeddedKafka.getBrokersAsString(), "1",
-				"topic6", 0);
+		"topic6", 0);
 		assertEquals(2, currentOffset.offset());
 
 		// second run (with same consumer group ID): new messages arrived since the last

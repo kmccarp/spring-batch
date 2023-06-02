@@ -86,7 +86,7 @@ class TaskExecutorJobLauncherTests {
 	void testRunWithValidator() throws Exception {
 
 		job.setJobParametersValidator(
-				new DefaultJobParametersValidator(new String[] { "missing-and-required" }, new String[0]));
+		new DefaultJobParametersValidator(new String[]{"missing-and-required"}, new String[0]));
 
 		when(jobRepository.getLastJobExecution(job.getName(), jobParameters)).thenReturn(null);
 
@@ -112,9 +112,9 @@ class TaskExecutorJobLauncherTests {
 
 		testRun();
 		when(jobRepository.getLastJobExecution(job.getName(), jobParameters))
-				.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
+		.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
 		when(jobRepository.createJobExecution(job.getName(), jobParameters))
-				.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
+		.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
 		jobLauncher.run(job, jobParameters);
 	}
 
@@ -139,7 +139,7 @@ class TaskExecutorJobLauncherTests {
 
 		testRun();
 		when(jobRepository.getLastJobExecution(job.getName(), jobParameters))
-				.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
+		.thenReturn(new JobExecution(new JobInstance(1L, job.getName()), jobParameters));
 		assertThrows(JobRestartException.class, () -> jobLauncher.run(job, jobParameters));
 	}
 
@@ -217,9 +217,9 @@ class TaskExecutorJobLauncherTests {
 	@Test
 	void testInitialiseWithoutRepository() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new TaskExecutorJobLauncher().afterPropertiesSet());
+		() -> new TaskExecutorJobLauncher().afterPropertiesSet());
 		assertTrue(exception.getMessage().toLowerCase().contains("repository"),
-				"Message did not contain repository: " + exception.getMessage());
+		"Message did not contain repository: " + exception.getMessage());
 	}
 
 	@Test
@@ -256,26 +256,26 @@ class TaskExecutorJobLauncherTests {
 	@Test
 	void testRunStepStatusStarting() {
 		assertThrows(JobExecutionAlreadyRunningException.class,
-				() -> testRestartStepExecutionInvalidStatus(BatchStatus.STARTING));
+		() -> testRestartStepExecutionInvalidStatus(BatchStatus.STARTING));
 	}
 
 	@Test
 	void testRunStepStatusStarted() {
 		assertThrows(JobExecutionAlreadyRunningException.class,
-				() -> testRestartStepExecutionInvalidStatus(BatchStatus.STARTED));
+		() -> testRestartStepExecutionInvalidStatus(BatchStatus.STARTED));
 	}
 
 	@Test
 	void testRunStepStatusStopping() {
 		assertThrows(JobExecutionAlreadyRunningException.class,
-				() -> testRestartStepExecutionInvalidStatus(BatchStatus.STOPPING));
+		() -> testRestartStepExecutionInvalidStatus(BatchStatus.STOPPING));
 	}
 
 	private void testRestartStepExecutionInvalidStatus(BatchStatus status) throws Exception {
 		String jobName = "test_job";
 		JobRepository jobRepository = mock(JobRepository.class);
 		JobParameters parameters = new JobParametersBuilder().addLong("runtime", System.currentTimeMillis())
-				.toJobParameters();
+		.toJobParameters();
 		JobExecution jobExecution = mock(JobExecution.class);
 		Job job = mock(Job.class);
 		JobParametersValidator validator = mock(JobParametersValidator.class);

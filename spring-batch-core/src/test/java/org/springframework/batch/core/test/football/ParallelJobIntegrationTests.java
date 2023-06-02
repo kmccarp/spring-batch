@@ -39,7 +39,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
  * @author Dave Syer
  *
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/META-INF/batch/parallelJob.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/META-INF/batch/parallelJob.xml"})
 public class ParallelJobIntegrationTests {
 
 	/** Logger */

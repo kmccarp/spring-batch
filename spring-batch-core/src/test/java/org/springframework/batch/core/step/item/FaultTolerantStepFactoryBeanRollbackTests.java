@@ -110,8 +110,8 @@ class FaultTolerantStepFactoryBeanRollbackTests {
 		factory.setSkippableExceptionClasses(getExceptionMap(Exception.class));
 
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JobRepositoryFactoryBean repositoryFactory = new JobRepositoryFactoryBean();
 		repositoryFactory.setDataSource(embeddedDatabase);
 		repositoryFactory.setTransactionManager(new JdbcTransactionManager(embeddedDatabase));
@@ -134,13 +134,13 @@ class FaultTolerantStepFactoryBeanRollbackTests {
 
 	@Test
 	void testBeforeChunkListenerException() throws Exception {
-		factory.setListeners(new StepListener[] { new ExceptionThrowingChunkListener(1) });
+		factory.setListeners(new StepListener[]{new ExceptionThrowingChunkListener(1)});
 		Step step = factory.getObject();
 		step.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
 		assertEquals(FAILED.toString(), stepExecution.getExitStatus().getExitCode());
 		assertTrue(stepExecution.getCommitCount() == 0);// Make sure exception was thrown
-														// in after, not before
+		// in after, not before
 		Throwable e = stepExecution.getFailureExceptions().get(0);
 		assertThat(e, instanceOf(FatalStepExecutionException.class));
 		assertThat(e.getCause(), instanceOf(IllegalArgumentException.class));
@@ -148,13 +148,13 @@ class FaultTolerantStepFactoryBeanRollbackTests {
 
 	@Test
 	void testAfterChunkListenerException() throws Exception {
-		factory.setListeners(new StepListener[] { new ExceptionThrowingChunkListener(2) });
+		factory.setListeners(new StepListener[]{new ExceptionThrowingChunkListener(2)});
 		Step step = factory.getObject();
 		step.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
 		assertEquals(FAILED.toString(), stepExecution.getExitStatus().getExitCode());
 		assertTrue(stepExecution.getCommitCount() > 0);// Make sure exception was thrown
-														// in after, not before
+		// in after, not before
 		Throwable e = stepExecution.getFailureExceptions().get(0);
 		assertThat(e, instanceOf(FatalStepExecutionException.class));
 		assertThat(e.getCause(), instanceOf(IllegalArgumentException.class));
@@ -531,7 +531,7 @@ class FaultTolerantStepFactoryBeanRollbackTests {
 	void testSkipInWriterTransactionalReader() throws Exception {
 		writer.setFailures("4");
 		ItemReader<String> reader = new ListItemReader<>(
-				TransactionAwareProxyFactory.createTransactionalList(Arrays.asList("1", "2", "3", "4", "5")));
+		TransactionAwareProxyFactory.createTransactionalList(Arrays.asList("1", "2", "3", "4", "5")));
 		factory.setItemReader(reader);
 		factory.setCommitInterval(30);
 		factory.setSkipLimit(10);

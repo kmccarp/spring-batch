@@ -96,7 +96,7 @@ public class JdbcBatchItemWriterBuilder<T> {
 	 * @see JdbcBatchItemWriter#setItemPreparedStatementSetter(ItemPreparedStatementSetter)
 	 */
 	public JdbcBatchItemWriterBuilder<T> itemPreparedStatementSetter(
-			ItemPreparedStatementSetter<T> itemPreparedStatementSetter) {
+	ItemPreparedStatementSetter<T> itemPreparedStatementSetter) {
 		this.itemPreparedStatementSetter = itemPreparedStatementSetter;
 
 		return this;
@@ -110,7 +110,7 @@ public class JdbcBatchItemWriterBuilder<T> {
 	 * @see JdbcBatchItemWriter#setItemSqlParameterSourceProvider(ItemSqlParameterSourceProvider)
 	 */
 	public JdbcBatchItemWriterBuilder<T> itemSqlParameterSourceProvider(
-			ItemSqlParameterSourceProvider<T> itemSqlParameterSourceProvider) {
+	ItemSqlParameterSourceProvider<T> itemSqlParameterSourceProvider) {
 		this.itemSqlParameterSourceProvider = itemSqlParameterSourceProvider;
 
 		return this;
@@ -123,7 +123,7 @@ public class JdbcBatchItemWriterBuilder<T> {
 	 * @return The current instance of the builder for chaining
 	 */
 	public JdbcBatchItemWriterBuilder<T> namedParametersJdbcTemplate(
-			NamedParameterJdbcOperations namedParameterJdbcOperations) {
+	NamedParameterJdbcOperations namedParameterJdbcOperations) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcOperations;
 
 		return this;
@@ -163,7 +163,7 @@ public class JdbcBatchItemWriterBuilder<T> {
 	@SuppressWarnings("unchecked")
 	public JdbcBatchItemWriter<T> build() {
 		Assert.state(this.dataSource != null || this.namedParameterJdbcTemplate != null,
-				"Either a DataSource or a NamedParameterJdbcTemplate is required");
+		"Either a DataSource or a NamedParameterJdbcTemplate is required");
 
 		Assert.notNull(this.sql, "A SQL statement is required");
 		int mappedValue = this.mapped.intValue();
@@ -177,7 +177,7 @@ public class JdbcBatchItemWriterBuilder<T> {
 
 		if (mappedValue == 1) {
 			((JdbcBatchItemWriter<Map<String, Object>>) writer)
-					.setItemPreparedStatementSetter(new ColumnMapItemPreparedStatementSetter());
+			.setItemPreparedStatementSetter(new ColumnMapItemPreparedStatementSetter());
 		}
 		else if (mappedValue == 2) {
 			writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());

@@ -45,26 +45,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Glenn Renfro
  * @since 2.1
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/mailJob.xml", "/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/mailJob.xml", "/job-runner-context.xml"})
 class MailJobFunctionalTests {
 
 	private static final String email = "to@company.com";
 
-	private static final Object[] USER1 = new Object[] { 1, "George Washington", email };
+	private static final Object[] USER1 = new Object[]{1, "George Washington", email};
 
-	private static final Object[] USER2_SKIP = new Object[] { 2, "John Adams", "FAILURE" };
+	private static final Object[] USER2_SKIP = new Object[]{2, "John Adams", "FAILURE"};
 
-	private static final Object[] USER3 = new Object[] { 3, "Thomas Jefferson", email };
+	private static final Object[] USER3 = new Object[]{3, "Thomas Jefferson", email};
 
-	private static final Object[] USER4_SKIP = new Object[] { 4, "James Madison", "FAILURE" };
+	private static final Object[] USER4_SKIP = new Object[]{4, "James Madison", "FAILURE"};
 
-	private static final Object[] USER5 = new Object[] { 5, "James Monroe", email };
+	private static final Object[] USER5 = new Object[]{5, "James Monroe", email};
 
-	private static final Object[] USER6 = new Object[] { 6, "John Quincy Adams", email };
+	private static final Object[] USER6 = new Object[]{6, "John Quincy Adams", email};
 
-	private static final Object[] USER7 = new Object[] { 7, "Andrew Jackson", email };
+	private static final Object[] USER7 = new Object[]{7, "Andrew Jackson", email};
 
-	private static final Object[] USER8 = new Object[] { 8, "Martin Van Buren", email };
+	private static final Object[] USER8 = new Object[]{8, "Martin Van Buren", email};
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -96,7 +96,7 @@ class MailJobFunctionalTests {
 
 	@Test
 	void testSkip() throws Exception {
-		this.createUsers(new Object[][] { USER1, USER2_SKIP, USER3, USER4_SKIP, USER5, USER6, USER7, USER8 });
+		this.createUsers(new Object[][]{USER1, USER2_SKIP, USER3, USER4_SKIP, USER5, USER6, USER7, USER8});
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 		assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
@@ -104,14 +104,14 @@ class MailJobFunctionalTests {
 		List<SimpleMailMessage> receivedMessages = mailSender.getReceivedMessages();
 		assertEquals(6, receivedMessages.size());
 		Iterator<SimpleMailMessage> emailIter = receivedMessages.iterator();
-		for (Object[] record : new Object[][] { USER1, USER3, USER5, USER6, USER7, USER8 }) {
+		for (Object[] record : new Object[][]{USER1, USER3, USER5, USER6, USER7, USER8}) {
 			SimpleMailMessage email = emailIter.next();
 			assertEquals("Hello " + record[1], email.getText());
 		}
 
 		assertEquals(2, this.errorHandler.getFailedMessages().size());
 		Iterator<MailMessage> failureItr = this.errorHandler.getFailedMessages().iterator();
-		for (Object[] record : new Object[][] { USER2_SKIP, USER4_SKIP }) {
+		for (Object[] record : new Object[][]{USER2_SKIP, USER4_SKIP}) {
 			SimpleMailMessage email = (SimpleMailMessage) failureItr.next();
 			assertEquals("Hello " + record[1], email.getText());
 		}

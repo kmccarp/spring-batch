@@ -91,7 +91,7 @@ import org.springframework.validation.DataBinder;
  *
  */
 public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
-		implements FieldSetMapper<T>, BeanFactoryAware, InitializingBean {
+implements FieldSetMapper<T>, BeanFactoryAware, InitializingBean {
 
 	private String name;
 
@@ -165,7 +165,7 @@ public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
 		Assert.state(name != null || type != null, "Either name or type must be provided.");
 		Assert.state(name == null || type == null, "Both name and type cannot be specified together.");
 		Assert.state(!this.isCustomEditorsSet || this.conversionService == null,
-				"Both customEditor and conversionService cannot be specified together.");
+		"Both customEditor and conversionService cannot be specified together.");
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
 		}
 		Map<String, String> matches = new HashMap<>(propertiesMatched.get(distanceKey));
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@SuppressWarnings({"unchecked", "rawtypes"})
 		Set<String> keys = new HashSet(properties.keySet());
 		for (String key : keys) {
 
@@ -269,8 +269,8 @@ public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
 			if (name != null) {
 				if (matches.containsValue(name)) {
 					throw new NotWritablePropertyException(cls, name, "Duplicate match with distance <= "
-							+ distanceLimit + " found for this property in input keys: " + keys
-							+ ". (Consider reducing the distance limit or changing the input key names to get a closer match.)");
+					+ distanceLimit + " found for this property in input keys: " + keys
+					+ ". (Consider reducing the distance limit or changing the input key names to get a closer match.)");
 				}
 				matches.put(key, name);
 				switchPropertyNames(properties, key, name);
@@ -350,7 +350,7 @@ public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
 				wrapper.setPropertyValue(nestedName, nestedValue);
 			}
 			catch (InstantiationException | IllegalAccessException | NoSuchMethodException
-					| InvocationTargetException e) {
+			| InvocationTargetException e) {
 				ReflectionUtils.handleReflectionException(e);
 			}
 		}

@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-@SpringJUnitConfig(locations = { "sql-dao-test.xml" })
+@SpringJUnitConfig(locations = {"sql-dao-test.xml"})
 class JdbcExecutionContextDaoTests extends AbstractExecutionContextDaoTests {
 
 	@Test
@@ -32,7 +32,7 @@ class JdbcExecutionContextDaoTests extends AbstractExecutionContextDaoTests {
 		JdbcExecutionContextDao jdbcExecutionContextDao = new JdbcExecutionContextDao();
 		jdbcExecutionContextDao.setJdbcTemplate(mock(JdbcOperations.class));
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> jdbcExecutionContextDao.setSerializer(null));
+		() -> jdbcExecutionContextDao.setSerializer(null));
 		assertEquals("Serializer must not be null", exception.getMessage());
 	}
 

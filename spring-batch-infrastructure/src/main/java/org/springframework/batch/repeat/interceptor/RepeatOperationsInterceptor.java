@@ -84,7 +84,7 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 						}
 						else {
 							throw new IllegalStateException(
-									"MethodInvocation of the wrong type detected - this should not happen with Spring AOP, so please raise an issue if you see this exception");
+							"MethodInvocation of the wrong type detected - this should not happen with Spring AOP, so please raise an issue if you see this exception");
 						}
 
 						Object value = clone.proceed();
@@ -124,7 +124,7 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 
 		// No result means something weird happened
 		throw new IllegalStateException("No result available for attempted repeat call to " + invocation
-				+ ".  The invocation was never called, so maybe there is a problem with the completion policy?");
+		+ ".  The invocation was never called, so maybe there is a problem with the completion policy?");
 	}
 
 	/**

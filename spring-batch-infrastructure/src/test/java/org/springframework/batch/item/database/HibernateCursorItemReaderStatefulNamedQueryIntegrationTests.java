@@ -20,7 +20,7 @@ package org.springframework.batch.item.database;
  * query.
  */
 public class HibernateCursorItemReaderStatefulNamedQueryIntegrationTests
-		extends HibernateCursorItemReaderNamedQueryIntegrationTests {
+extends HibernateCursorItemReaderNamedQueryIntegrationTests {
 
 	@Override
 	protected boolean isUseStatelessSession() {

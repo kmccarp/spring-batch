@@ -85,7 +85,7 @@ public class FlowStep extends AbstractStep {
 			stepExecution.getExecutionContext().put(STEP_TYPE_KEY, this.getClass().getName());
 			StepHandler stepHandler = new SimpleStepHandler(getJobRepository(), stepExecution.getExecutionContext());
 			FlowExecutor executor = new JobFlowExecutor(getJobRepository(), stepHandler,
-					stepExecution.getJobExecution());
+			stepExecution.getJobExecution());
 			executor.updateJobExecutionStatus(flow.start(executor).getStatus());
 			stepExecution.upgradeStatus(executor.getJobExecution().getStatus());
 			stepExecution.setExitStatus(executor.getJobExecution().getExitStatus());

@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Glenn Renfro
  *
  */
-@SpringJUnitConfig(locations = { "/data-source-context.xml" })
+@SpringJUnitConfig(locations = {"/data-source-context.xml"})
 class JdbcPlayerSummaryDaoIntegrationTests {
 
 	private JdbcPlayerSummaryDao playerSummaryDao;
@@ -77,7 +77,7 @@ class JdbcPlayerSummaryDaoIntegrationTests {
 		playerSummaryDao.write(Chunk.of(summary));
 
 		PlayerSummary testSummary = jdbcTemplate.queryForObject("SELECT * FROM PLAYER_SUMMARY",
-				new PlayerSummaryMapper());
+		new PlayerSummaryMapper());
 
 		assertEquals(summary, testSummary);
 	}

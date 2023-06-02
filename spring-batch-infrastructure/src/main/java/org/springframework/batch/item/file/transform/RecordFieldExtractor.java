@@ -87,7 +87,7 @@ public class RecordFieldExtractor<T> implements FieldExtractor<T> {
 		for (String name : names) {
 			if (getRecordComponentByName(name) == null) {
 				throw new IllegalArgumentException(
-						"Component '" + name + "' is not defined in record " + targetType.getName());
+				"Component '" + name + "' is not defined in record " + targetType.getName());
 			}
 		}
 	}
@@ -95,7 +95,7 @@ public class RecordFieldExtractor<T> implements FieldExtractor<T> {
 	@Nullable
 	private RecordComponent getRecordComponentByName(String name) {
 		return Arrays.stream(this.recordComponents).filter(recordComponent -> recordComponent.getName().equals(name))
-				.findFirst().orElse(null);
+		.findFirst().orElse(null);
 	}
 
 }

@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Jackson2ExecutionContextStringSerializerTests extends AbstractExecutionContextSerializerTests {
 
 	private final ExecutionContextSerializer serializer = new Jackson2ExecutionContextStringSerializer(
-			AbstractExecutionContextSerializerTests.Person.class.getName());
+	AbstractExecutionContextSerializerTests.Person.class.getName());
 
 	@Test
 	void mappedTypeTest() throws IOException {
@@ -75,7 +75,7 @@ class Jackson2ExecutionContextStringSerializerTests extends AbstractExecutionCon
 	void testAdditionalTrustedClass() throws IOException {
 		// given
 		Jackson2ExecutionContextStringSerializer serializer = new Jackson2ExecutionContextStringSerializer(
-				"java.util.Locale");
+		"java.util.Locale");
 		Map<String, Object> context = new HashMap<>(1);
 		context.put("locale", Locale.getDefault());
 

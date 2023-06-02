@@ -58,7 +58,7 @@ class ClassifierCompositeItemWriterBuilderTests {
 		map.put("foo", fooWriter);
 		map.put("*", defaultWriter);
 		ClassifierCompositeItemWriter<String> writer = new ClassifierCompositeItemWriterBuilder<String>()
-				.classifier(new PatternMatchingClassifier<>(map)).build();
+		.classifier(new PatternMatchingClassifier<>(map)).build();
 
 		writer.write(Chunk.of("foo", "foo", "one", "two", "three"));
 		assertIterableEquals(Chunk.of("foo", "foo"), foos);
@@ -68,7 +68,7 @@ class ClassifierCompositeItemWriterBuilderTests {
 	@Test
 	void testSetNullClassifier() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new ClassifierCompositeItemWriterBuilder<>().build());
+		() -> new ClassifierCompositeItemWriterBuilder<>().build());
 		assertEquals("A classifier is required.", exception.getMessage());
 	}
 

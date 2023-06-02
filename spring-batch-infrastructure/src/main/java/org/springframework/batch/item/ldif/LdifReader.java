@@ -64,7 +64,7 @@ import org.springframework.util.ClassUtils;
  *
  */
 public class LdifReader extends AbstractItemCountingItemStreamItemReader<LdapAttributes>
-		implements ResourceAwareItemReaderItemStream<LdapAttributes>, InitializingBean {
+implements ResourceAwareItemReaderItemStream<LdapAttributes>, InitializingBean {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LdifReader.class);
 
@@ -165,7 +165,7 @@ public class LdifReader extends AbstractItemCountingItemStreamItemReader<LdapAtt
 		}
 		catch (Exception ex) {
 			LOG.error("Parsing error at record " + recordCount + " in resource=" + resource.getDescription()
-					+ ", input=[" + attributes + "]", ex);
+			+ ", input=[" + attributes + "]", ex);
 			throw ex;
 		}
 	}

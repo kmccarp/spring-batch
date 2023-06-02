@@ -41,12 +41,12 @@ class FaultTolerantChunkProviderTests {
 	private FaultTolerantChunkProvider<String> provider;
 
 	private final StepContribution contribution = new StepContribution(
-			new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
+	new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
 
 	@Test
 	void testProvide() throws Exception {
 		provider = new FaultTolerantChunkProvider<>(new ListItemReader<>(Arrays.asList("foo", "bar")),
-				new RepeatTemplate());
+		new RepeatTemplate());
 		Chunk<String> chunk = provider.provide(contribution);
 		assertNotNull(chunk);
 		assertEquals(2, chunk.getItems().size());
@@ -62,7 +62,7 @@ class FaultTolerantChunkProviderTests {
 			}
 		}, new RepeatTemplate());
 		provider.setSkipPolicy(new LimitCheckingItemSkipPolicy(Integer.MAX_VALUE,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, Boolean.TRUE)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, Boolean.TRUE)));
 		provider.setMaxSkipsOnRead(10);
 		Chunk<String> chunk = null;
 		chunk = provider.provide(contribution);

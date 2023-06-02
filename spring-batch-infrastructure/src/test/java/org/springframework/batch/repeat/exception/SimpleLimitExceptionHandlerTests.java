@@ -59,7 +59,7 @@ class SimpleLimitExceptionHandlerTests {
 	void testDefaultBehaviour() {
 		Throwable throwable = new RuntimeException("foo");
 		Exception expected = assertThrows(RuntimeException.class,
-				() -> handler.handleException(new RepeatContextSupport(null), throwable));
+		() -> handler.handleException(new RepeatContextSupport(null), throwable));
 		assertSame(expected, throwable);
 	}
 
@@ -78,7 +78,7 @@ class SimpleLimitExceptionHandlerTests {
 		handler.afterPropertiesSet();
 
 		Exception expected = assertThrows(RuntimeException.class,
-				() -> handler.handleException(new RepeatContextSupport(null), throwable));
+		() -> handler.handleException(new RepeatContextSupport(null), throwable));
 		assertSame(expected, throwable);
 	}
 
@@ -205,7 +205,7 @@ class SimpleLimitExceptionHandlerTests {
 
 		// after reaching the limit, behaviour should be idempotent
 		expected = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("foo")));
+		() -> handler.handleException(context, new RuntimeException("foo")));
 		assertEquals("foo", expected.getMessage());
 	}
 

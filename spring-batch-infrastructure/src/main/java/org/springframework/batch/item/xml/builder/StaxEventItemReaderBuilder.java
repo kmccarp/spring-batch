@@ -216,7 +216,7 @@ public class StaxEventItemReaderBuilder<T> {
 
 		if (this.resource == null) {
 			logger.debug("The resource is null. This is only a valid scenario when "
-					+ "injecting resource later as in when using the MultiResourceItemReader");
+			+ "injecting resource later as in when using the MultiResourceItemReader");
 		}
 
 		if (this.saveState) {
@@ -229,7 +229,7 @@ public class StaxEventItemReaderBuilder<T> {
 		reader.setSaveState(this.saveState);
 		reader.setResource(this.resource);
 		reader.setFragmentRootElementNames(
-				this.fragmentRootElements.toArray(new String[this.fragmentRootElements.size()]));
+		this.fragmentRootElements.toArray(new String[this.fragmentRootElements.size()]));
 
 		reader.setStrict(this.strict);
 		reader.setUnmarshaller(this.unmarshaller);

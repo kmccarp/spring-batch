@@ -54,7 +54,7 @@ public class CompositeJobExecutionListener implements JobExecutionListener {
 	 */
 	@Override
 	public void afterJob(JobExecution jobExecution) {
-		for (Iterator<JobExecutionListener> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<JobExecutionListener> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			JobExecutionListener listener = iterator.next();
 			listener.afterJob(jobExecution);
 		}
@@ -67,7 +67,7 @@ public class CompositeJobExecutionListener implements JobExecutionListener {
 	 */
 	@Override
 	public void beforeJob(JobExecution jobExecution) {
-		for (Iterator<JobExecutionListener> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<JobExecutionListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			JobExecutionListener listener = iterator.next();
 			listener.beforeJob(jobExecution);
 		}

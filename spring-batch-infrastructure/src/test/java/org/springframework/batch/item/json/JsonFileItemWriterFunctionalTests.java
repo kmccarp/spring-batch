@@ -70,7 +70,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "trades-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
 
 		// when
 		writer.open(new ExecutionContext());
@@ -87,7 +87,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testJsonWritingWithMultipleWrite-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
 
 		// when
 		writer.open(new ExecutionContext());
@@ -97,7 +97,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 
 		// then
 		assertFileEquals(new File(EXPECTED_FILE_DIRECTORY + "expected-trades-with-multiple-writes.json"),
-				resource.getFile());
+		resource.getFile());
 	}
 
 	@Test
@@ -106,7 +106,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testJsonWritingWithPrettyPrinting-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshallerWithPrettyPrint()).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshallerWithPrettyPrint()).build();
 
 		// when
 		writer.open(new ExecutionContext());
@@ -121,13 +121,13 @@ abstract class JsonFileItemWriterFunctionalTests {
 	void testJsonWritingWithEnclosingObject() throws Exception {
 		// given
 		Path outputFilePath = Paths.get("target",
-				"testJsonWritingWithEnclosingObject-" + getMarshallerName() + ".json");
+		"testJsonWritingWithEnclosingObject-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller())
-				.headerCallback(headerWriter -> headerWriter.write("{\"trades\":["))
-				.footerCallback(footerWriter -> footerWriter.write(JsonFileItemWriter.DEFAULT_LINE_SEPARATOR + "]}"))
-				.build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller())
+		.headerCallback(headerWriter -> headerWriter.write("{\"trades\":["))
+		.footerCallback(footerWriter -> footerWriter.write(JsonFileItemWriter.DEFAULT_LINE_SEPARATOR + "]}"))
+		.build();
 
 		// when
 		writer.open(new ExecutionContext());
@@ -136,7 +136,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 
 		// then
 		assertFileEquals(new File(EXPECTED_FILE_DIRECTORY + "expected-trades-with-wrapper-object.json"),
-				resource.getFile());
+		resource.getFile());
 	}
 
 	@Test
@@ -145,7 +145,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testForcedWrite-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).forceSync(true).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).forceSync(true).build();
 
 		// when
 		writer.open(new ExecutionContext());
@@ -163,7 +163,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testWriteWithDelete-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).shouldDeleteIfExists(true).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).shouldDeleteIfExists(true).build();
 
 		// when
 		writer.open(executionContext);
@@ -184,7 +184,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testRestart-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
 
 		// when
 		writer.open(executionContext);
@@ -219,7 +219,7 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testTransactionalRestart-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
+		.resource(resource).jsonObjectMarshaller(getJsonObjectMarshaller()).build();
 
 		// when
 		writer.open(executionContext);
@@ -271,9 +271,9 @@ abstract class JsonFileItemWriterFunctionalTests {
 		Path outputFilePath = Paths.get("target", "testItemMarshallingFailure-" + getMarshallerName() + ".json");
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(resource).jsonObjectMarshaller(item -> {
-					throw new IllegalArgumentException("Bad item");
-				}).build();
+		.resource(resource).jsonObjectMarshaller(item -> {
+			throw new IllegalArgumentException("Bad item");
+		}).build();
 
 		// when
 		writer.open(executionContext);
@@ -296,8 +296,8 @@ abstract class JsonFileItemWriterFunctionalTests {
 		FileSystemResource resource = new FileSystemResource(outputFilePath);
 		Files.deleteIfExists(outputFilePath);
 		JsonFileItemWriter<Trade> writer = new JsonFileItemWriterBuilder<Trade>().name("tradesItemWriter")
-				.resource(new FileSystemResource(outputFilePath)).jsonObjectMarshaller(getJsonObjectMarshaller())
-				.append(true).build();
+		.resource(new FileSystemResource(outputFilePath)).jsonObjectMarshaller(getJsonObjectMarshaller())
+		.append(true).build();
 
 		// when
 		writer.open(executionContext);

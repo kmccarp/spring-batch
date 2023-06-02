@@ -33,7 +33,7 @@ import org.springframework.batch.item.ItemReader;
  * @see ItemReadListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface AfterRead {
 
 }

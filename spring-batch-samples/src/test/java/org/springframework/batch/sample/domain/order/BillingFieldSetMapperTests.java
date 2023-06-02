@@ -37,9 +37,9 @@ class BillingFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { PAYMENT_ID, PAYMENT_DESC };
-		String[] columnNames = new String[] { BillingFieldSetMapper.PAYMENT_TYPE_ID_COLUMN,
-				BillingFieldSetMapper.PAYMENT_DESC_COLUMN };
+		String[] tokens = new String[]{PAYMENT_ID, PAYMENT_DESC};
+		String[] columnNames = new String[]{BillingFieldSetMapper.PAYMENT_TYPE_ID_COLUMN,
+		BillingFieldSetMapper.PAYMENT_DESC_COLUMN};
 		return new DefaultFieldSet(tokens, columnNames);
 	}
 

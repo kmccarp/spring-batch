@@ -30,14 +30,14 @@ class ApplicationContextJobFactoryTests {
 	@Test
 	void testFactoryContext() {
 		ApplicationContextJobFactory factory = new ApplicationContextJobFactory("job",
-				new StubApplicationContextFactory());
+		new StubApplicationContextFactory());
 		assertNotNull(factory.createJob());
 	}
 
 	@Test
 	void testPostProcessing() {
 		ApplicationContextJobFactory factory = new ApplicationContextJobFactory("job",
-				new PostProcessingApplicationContextFactory());
+		new PostProcessingApplicationContextFactory());
 		assertEquals("bar", factory.getJobName());
 	}
 

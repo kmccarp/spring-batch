@@ -42,7 +42,7 @@ public class MultiLineTradeItemReader implements ItemReader<Trade>, ItemStream {
 	public Trade read() throws Exception {
 		Trade t = null;
 
-		for (FieldSet line; (line = this.delegate.read()) != null;) {
+		for (FieldSet line; (line = this.delegate.read()) != null; ) {
 			String prefix = line.readString(0);
 			if (prefix.equals("BEGIN")) {
 				t = new Trade(); // Record must start with 'BEGIN'

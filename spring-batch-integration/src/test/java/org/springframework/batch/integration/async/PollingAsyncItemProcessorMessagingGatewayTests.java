@@ -49,7 +49,7 @@ class PollingAsyncItemProcessorMessagingGatewayTests {
 
 	StepExecution getStepExecution() {
 		return MetaDataInstanceFactory
-				.createStepExecution(new JobParametersBuilder().addLong("factor", 2L).toJobParameters());
+		.createStepExecution(new JobParametersBuilder().addLong("factor", 2L).toJobParameters());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ class PollingAsyncItemProcessorMessagingGatewayTests {
 
 		@ServiceActivator
 		public String cat(String value, @Header(value = "stepExecution.jobExecution.jobParameters.getLong('factor')",
-				required = false) Integer input) {
+		required = false) Integer input) {
 			long factor = input == null ? 1 : input;
 			for (int i = 1; i < factor; i++) {
 				value += value;

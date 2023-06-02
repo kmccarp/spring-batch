@@ -63,9 +63,9 @@ class Jaxb2NamespaceMarshallingTests {
 	private final Resource expected = new ClassPathResource("expected-qualified-output.xml", getClass());
 
 	private final Chunk<QualifiedTrade> objects = Chunk.of(
-			new QualifiedTrade("isin1", 1, new BigDecimal(1.0), "customer1"),
-			new QualifiedTrade("isin2", 2, new BigDecimal(2.0), "customer2"),
-			new QualifiedTrade("isin3", 3, new BigDecimal(3.0), "customer3"));
+	new QualifiedTrade("isin1", 1, new BigDecimal(1.0), "customer1"),
+	new QualifiedTrade("isin2", 2, new BigDecimal(2.0), "customer2"),
+	new QualifiedTrade("isin3", 3, new BigDecimal(3.0), "customer3"));
 
 	/**
 	 * Write list of domain objects and check the output file.
@@ -96,7 +96,7 @@ class Jaxb2NamespaceMarshallingTests {
 		logger.info("Timing for XML writer: " + stopWatch);
 
 		assertThat(Input.from(expected.getFile()),
-				CompareMatcher.isSimilarTo(Input.from(resource.getFile())).normalizeWhitespace());
+		CompareMatcher.isSimilarTo(Input.from(resource.getFile())).normalizeWhitespace());
 	}
 
 	@BeforeEach
@@ -126,7 +126,7 @@ class Jaxb2NamespaceMarshallingTests {
 	protected Marshaller getMarshaller() throws Exception {
 
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setClassesToBeBound(new Class<?>[] { QualifiedTrade.class });
+		marshaller.setClassesToBeBound(new Class<?>[]{QualifiedTrade.class});
 		marshaller.afterPropertiesSet();
 
 		StringWriter string = new StringWriter();

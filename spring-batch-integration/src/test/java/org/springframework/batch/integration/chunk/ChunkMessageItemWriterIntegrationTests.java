@@ -78,8 +78,8 @@ class ChunkMessageItemWriterIntegrationTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder().generateUniqueName(true)
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -134,7 +134,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testVanillaIteration() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
 
 		Step step = factory.getObject();
 
@@ -152,7 +152,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testSimulatedRestart() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
 
 		Step step = factory.getObject();
 
@@ -177,7 +177,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testSimulatedRestartWithBadMessagesFromAnotherJob() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
 
 		Step step = factory.getObject();
 
@@ -205,10 +205,10 @@ class ChunkMessageItemWriterIntegrationTests {
 
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private GenericMessage<ChunkRequest> getSimpleMessage(Long jobId, String... items) {
 		StepContribution stepContribution = new JobExecution(new JobInstance(0L, "job"), new JobParameters())
-				.createStepExecution("step").createStepContribution();
+		.createStepExecution("step").createStepContribution();
 		ChunkRequest chunk = new ChunkRequest(0, Chunk.of(items), jobId, stepContribution);
 		GenericMessage<ChunkRequest> message = new GenericMessage<>(chunk);
 		return message;
@@ -218,7 +218,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testEarlyCompletionSignalledInHandler() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,fail,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,fail,3,4,5,6"))));
 		factory.setCommitInterval(2);
 
 		Step step = factory.getObject();
@@ -245,7 +245,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testSimulatedRestartWithNoBacklog() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("1,2,3,4,5,6"))));
 
 		Step step = factory.getObject();
 
@@ -281,7 +281,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	void testFailureInStepListener() throws Exception {
 
 		factory.setItemReader(
-				new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("wait,fail,3,4,5,6"))));
+		new ListItemReader<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray("wait,fail,3,4,5,6"))));
 
 		Step step = factory.getObject();
 
@@ -300,7 +300,7 @@ class ChunkMessageItemWriterIntegrationTests {
 
 		String exitDescription = stepExecution.getExitStatus().getExitDescription();
 		assertTrue(exitDescription.contains(AsynchronousFailureException.class.getName()),
-				"Exit description does not contain exception type name: " + exitDescription);
+		"Exit description does not contain exception type name: " + exitDescription);
 
 	}
 
@@ -315,11 +315,11 @@ class ChunkMessageItemWriterIntegrationTests {
 	}
 
 	private StepExecution getStepExecution(Step step)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 		SimpleJob job = new SimpleJob();
 		job.setName("job");
 		JobExecution jobExecution = jobRepository.createJobExecution(job.getName(),
-				new JobParametersBuilder().addLong("job.counter", jobCounter++).toJobParameters());
+		new JobParametersBuilder().addLong("job.counter", jobCounter++).toJobParameters());
 		StepExecution stepExecution = jobExecution.createStepExecution(step.getName());
 		jobRepository.add(stepExecution);
 		return stepExecution;

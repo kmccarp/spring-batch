@@ -33,7 +33,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 class TransactionAwareListFactoryTests {
 
 	private final TransactionTemplate transactionTemplate = new TransactionTemplate(
-			new ResourcelessTransactionManager());
+	new ResourcelessTransactionManager());
 
 	private List<String> list;
 
@@ -103,10 +103,10 @@ class TransactionAwareListFactoryTests {
 	@Test
 	void testTransactionalAddWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testAdd();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testAdd();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, list.size());
 	}
@@ -114,10 +114,10 @@ class TransactionAwareListFactoryTests {
 	@Test
 	void testTransactionalRemoveWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testRemove();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testRemove();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, list.size());
 	}
@@ -125,10 +125,10 @@ class TransactionAwareListFactoryTests {
 	@Test
 	void testTransactionalClearWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testClear();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testClear();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, list.size());
 	}

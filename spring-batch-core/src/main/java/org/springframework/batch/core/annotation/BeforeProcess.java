@@ -33,7 +33,7 @@ import org.springframework.batch.item.ItemProcessor;
  * @see ItemProcessListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface BeforeProcess {
 
 }

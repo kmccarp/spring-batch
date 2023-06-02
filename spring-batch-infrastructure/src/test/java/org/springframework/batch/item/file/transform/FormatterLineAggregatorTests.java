@@ -50,7 +50,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateNullRecordDescriptor() {
-		String[] args = { "does not matter what is here" };
+		String[] args = {"does not matter what is here"};
 		assertThrows(IllegalArgumentException.class, () -> aggregator.aggregate(args));
 	}
 
@@ -59,7 +59,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateInvalidInputLength() {
-		String[] args = { "Oversize" };
+		String[] args = {"Oversize"};
 		aggregator.setMaximumLength(3);
 		aggregator.setFormat("%3s");
 		assertThrows(IllegalStateException.class, () -> aggregator.aggregate(args));
@@ -70,7 +70,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregate() {
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%9s%9s");
 		String result = aggregator.aggregate(args);
 		assertEquals("MatchsizeSmallsize", result);
@@ -81,7 +81,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateWithLastRangeUnbound() {
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%-12s%s");
 		String result = aggregator.aggregate(args);
 		assertEquals("Matchsize   Smallsize", result);
@@ -92,7 +92,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateFormattedRight() {
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%13s%10s");
 		String result = aggregator.aggregate(args);
 		assertEquals(23, result.length());
@@ -105,13 +105,13 @@ class FormatterLineAggregatorTests {
 	@Test
 	void testAggregateFormattedCenter() {
 
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%13s%12s");
 		aggregator.setMinimumLength(25);
 		aggregator.setMaximumLength(25);
 
 		aggregator.setFieldExtractor(new FieldExtractor<String[]>() {
-			private int[] widths = new int[] { 13, 12 };
+			private int[] widths = new int[]{13, 12};
 
 			@Override
 			public Object[] extract(String[] item) {
@@ -140,13 +140,13 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateWithCustomPadding() {
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%13s%11s");
 		aggregator.setMinimumLength(24);
 		aggregator.setMaximumLength(24);
 
 		aggregator.setFieldExtractor(new FieldExtractor<String[]>() {
-			private int[] widths = new int[] { 13, 11 };
+			private int[] widths = new int[]{13, 11};
 
 			@Override
 			public Object[] extract(String[] item) {
@@ -174,7 +174,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateFormattedLeft() {
-		String[] args = { "Matchsize", "Smallsize" };
+		String[] args = {"Matchsize", "Smallsize"};
 		aggregator.setFormat("%-13s%-11s");
 		String result = aggregator.aggregate(args);
 		assertEquals("Matchsize    Smallsize  ", result);
@@ -186,7 +186,7 @@ class FormatterLineAggregatorTests {
 	 */
 	@Test
 	void testAggregateNullArgument() {
-		String[] args = { "foo", null, "bar" };
+		String[] args = {"foo", null, "bar"};
 		aggregator.setFormat("%3s%3s%3s");
 		assertEquals("foo   bar", aggregator.aggregate(args));
 	}

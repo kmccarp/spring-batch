@@ -31,7 +31,7 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.integration.JobSupport;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = { "/job-execution-context.xml" })
+@SpringJUnitConfig(locations = {"/job-execution-context.xml"})
 class JobLaunchingMessageHandlerTests {
 
 	JobLaunchRequestHandler messageHandler;

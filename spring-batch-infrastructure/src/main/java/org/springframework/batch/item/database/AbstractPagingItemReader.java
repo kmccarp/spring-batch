@@ -44,7 +44,7 @@ import org.springframework.util.ClassUtils;
  * @since 2.0
  */
 public abstract class AbstractPagingItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements InitializingBean {
+implements InitializingBean {
 
 	protected Log logger = LogFactory.getLog(getClass());
 

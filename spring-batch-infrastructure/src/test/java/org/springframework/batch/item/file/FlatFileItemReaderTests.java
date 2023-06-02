@@ -57,10 +57,10 @@ class FlatFileItemReaderTests {
 	private final ExecutionContext executionContext = new ExecutionContext();
 
 	private final Resource inputResource2 = getInputResource(
-			"testLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6");
+	"testLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6");
 
 	private final Resource inputResource1 = getInputResource(
-			"testLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6");
+	"testLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6");
 
 	@BeforeEach
 	void setUp() {
@@ -220,7 +220,7 @@ class FlatFileItemReaderTests {
 			}
 		};
 		reader.setResource(getInputResource("#testLine1\ntestLine2\n//testLine3\ntestLine4\n"));
-		reader.setComments(new String[] { "#", "//" });
+		reader.setComments(new String[]{"#", "//"});
 		reader.setLineMapper(new PassThroughLineMapper());
 		reader.open(executionContext);
 
@@ -250,7 +250,7 @@ class FlatFileItemReaderTests {
 		reader.close();
 
 		reader.setResource(
-				getInputResource("header\nignoreme\ntestLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6"));
+		getInputResource("header\nignoreme\ntestLine1\ntestLine2\ntestLine3\ntestLine4\ntestLine5\ntestLine6"));
 
 		// init for restart
 		reader.open(executionContext);

@@ -46,8 +46,8 @@ public class AnnotationMethodResolver implements MethodResolver {
 	public AnnotationMethodResolver(Class<? extends Annotation> annotationType) {
 		Assert.notNull(annotationType, "annotationType must not be null");
 		Assert.isTrue(
-				ObjectUtils.containsElement(annotationType.getAnnotation(Target.class).value(), ElementType.METHOD),
-				"Annotation [" + annotationType + "] is not a Method-level annotation.");
+		ObjectUtils.containsElement(annotationType.getAnnotation(Target.class).value(), ElementType.METHOD),
+		"Annotation [" + annotationType + "] is not a Method-level annotation.");
 		this.annotationType = annotationType;
 	}
 
@@ -91,7 +91,7 @@ public class AnnotationMethodResolver implements MethodResolver {
 				Annotation annotation = AnnotationUtils.findAnnotation(method, annotationType);
 				if (annotation != null) {
 					Assert.isNull(annotatedMethod.get(), "found more than one method on target class [" + clazz
-							+ "] with the annotation type [" + annotationType + "]");
+					+ "] with the annotation type [" + annotationType + "]");
 					annotatedMethod.set(method);
 				}
 			}

@@ -124,7 +124,7 @@ public class StepRunner {
 	 * @return JobExecution
 	 */
 	public JobExecution launchStep(Step step, JobParameters jobParameters,
-			@Nullable final ExecutionContext jobExecutionContext) {
+	@Nullable final ExecutionContext jobExecutionContext) {
 		//
 		// Create a fake job
 		//
@@ -140,7 +140,7 @@ public class StepRunner {
 		// Dump the given Job ExecutionContext using a listener
 		//
 		if (jobExecutionContext != null && !jobExecutionContext.isEmpty()) {
-			job.setJobExecutionListeners(new JobExecutionListener[] { new JobExecutionListener() {
+			job.setJobExecutionListeners(new JobExecutionListener[]{new JobExecutionListener() {
 				@Override
 				public void beforeJob(JobExecution jobExecution) {
 					ExecutionContext jobContext = jobExecution.getExecutionContext();
@@ -148,7 +148,7 @@ public class StepRunner {
 						jobContext.put(entry.getKey(), entry.getValue());
 					}
 				}
-			} });
+			}});
 		}
 
 		//

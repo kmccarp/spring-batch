@@ -283,7 +283,7 @@ public class FlowBuilder<Q> {
 		else if (input instanceof JobExecutionDecider) {
 			if (!states.containsKey(input)) {
 				states.put(input,
-						new DecisionState((JobExecutionDecider) input, prefix + "decision" + (decisionCounter++)));
+				new DecisionState((JobExecutionDecider) input, prefix + "decision" + (decisionCounter++)));
 			}
 			result = states.get(input);
 		}

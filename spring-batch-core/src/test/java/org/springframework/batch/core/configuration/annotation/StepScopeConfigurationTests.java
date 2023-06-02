@@ -60,7 +60,7 @@ public class StepScopeConfigurationTests {
 	@Test
 	void testXmlStepScopeWithProxyTargetClass() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsProxyTargetClass-context.xml");
+		"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsProxyTargetClass-context.xml");
 		StepSynchronizationManager.register(stepExecution);
 		SimpleHolder value = context.getBean(SimpleHolder.class);
 		assertEquals("STEP", value.call());
@@ -69,7 +69,7 @@ public class StepScopeConfigurationTests {
 	@Test
 	void testXmlStepScopeWithInterface() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsInterface-context.xml");
+		"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsInterface-context.xml");
 		StepSynchronizationManager.register(stepExecution);
 		@SuppressWarnings("unchecked")
 		Callable<String> value = context.getBean(Callable.class);
@@ -79,7 +79,7 @@ public class StepScopeConfigurationTests {
 	@Test
 	void testXmlStepScopeWithInheritance() throws Exception {
 		context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsInheritance-context.xml");
+		"org/springframework/batch/core/configuration/annotation/StepScopeConfigurationTestsInheritance-context.xml");
 		StepSynchronizationManager.register(stepExecution);
 		SimpleHolder value = (SimpleHolder) context.getBean("child");
 		assertEquals("STEP", value.call());

@@ -29,7 +29,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/headerFooterSample.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/headerFooterSample.xml", "/job-runner-context.xml"})
 class HeaderFooterSampleFunctionalTests {
 
 	@Autowired
@@ -64,7 +64,7 @@ class HeaderFooterSampleFunctionalTests {
 		// footer contains the item count
 		int itemCount = lineCount - 1; // minus 1 due to header line
 		assertTrue("OutputReader did not contain the values specified",
-				outputReader.readLine().contains(String.valueOf(itemCount)));
+		outputReader.readLine().contains(String.valueOf(itemCount)));
 
 		inputReader.close();
 		outputReader.close();

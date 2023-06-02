@@ -82,7 +82,7 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 	@SuppressWarnings("resource")
 	public static void main(String... args) {
 		new ClassPathXmlApplicationContext(ClassUtils.addResourcePathToPackagePath(DataSourceInitializer.class,
-				DataSourceInitializer.class.getSimpleName() + "-context.xml"));
+		DataSourceInitializer.class.getSimpleName() + "-context.xml"));
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 					}
 					catch (DataAccessException e) {
 						if (this.ignoreFailedDrop && trimmedScript.toLowerCase().startsWith("drop")
-								&& logger.isDebugEnabled()) {
+						&& logger.isDebugEnabled()) {
 							logger.debug("DROP script failed (ignoring): " + trimmedScript);
 						}
 						else {

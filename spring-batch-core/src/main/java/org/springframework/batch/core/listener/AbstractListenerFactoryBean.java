@@ -99,7 +99,7 @@ public abstract class AbstractListenerFactoryBean<T> implements FactoryBean<Obje
 
 			MethodInvoker invoker;
 			invoker = getMethodInvokerForInterface(metaData.getListenerInterface(), metaData.getMethodName(), delegate,
-					metaData.getParamTypes());
+			metaData.getParamTypes());
 			if (invoker != null) {
 				invokers.add(invoker);
 			}
@@ -218,15 +218,15 @@ public abstract class AbstractListenerFactoryBean<T> implements FactoryBean<Obje
 		if (target instanceof Advised) {
 			TargetSource targetSource = ((Advised) target).getTargetSource();
 			if (targetSource != null && targetSource.getTargetClass() != null
-					&& listenerType.isAssignableFrom(targetSource.getTargetClass())) {
+			&& listenerType.isAssignableFrom(targetSource.getTargetClass())) {
 				return true;
 			}
 
 			if (targetSource != null && targetSource.getTargetClass() != null
-					&& targetSource.getTargetClass().isInterface()) {
+			&& targetSource.getTargetClass().isInterface()) {
 				logger.warn(String.format(
-						"%s is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.",
-						targetSource.getTargetClass().getName()));
+				"%s is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.",
+				targetSource.getTargetClass().getName()));
 			}
 		}
 		for (ListenerMetaData metaData : metaDataValues) {

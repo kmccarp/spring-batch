@@ -41,8 +41,8 @@ public abstract class AbstractJobInstanceDaoTests {
 	private final String fooJob = "foo";
 
 	private final JobParameters fooParams = new JobParametersBuilder().addString("stringKey", "stringValue")
-			.addLong("longKey", Long.MAX_VALUE).addDouble("doubleKey", Double.MAX_VALUE)
-			.addDate("dateKey", new Date(DATE)).toJobParameters();
+	.addLong("longKey", Long.MAX_VALUE).addDouble("doubleKey", Double.MAX_VALUE)
+	.addDate("dateKey", new Date(DATE)).toJobParameters();
 
 	protected abstract JobInstanceDao getJobInstanceDao();
 
@@ -132,7 +132,7 @@ public abstract class AbstractJobInstanceDaoTests {
 		assertEquals(Integer.valueOf(0), jobInstances.get(1).getVersion());
 
 		assertTrue(jobInstances.get(0).getId() > jobInstances.get(1).getId(),
-				"Last instance should be first on the list");
+		"Last instance should be first on the list");
 
 	}
 

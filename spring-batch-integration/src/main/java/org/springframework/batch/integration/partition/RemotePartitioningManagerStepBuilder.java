@@ -194,7 +194,7 @@ public class RemotePartitioningManagerStepBuilder extends PartitionStepBuilder {
 
 	public Step build() {
 		Assert.state(this.outputChannel == null || this.messagingTemplate == null,
-				"You must specify either an outputChannel or a messagingTemplate but not both.");
+		"You must specify either an outputChannel or a messagingTemplate but not both.");
 
 		// configure messaging template
 		if (this.messagingTemplate == null) {
@@ -220,7 +220,7 @@ public class RemotePartitioningManagerStepBuilder extends PartitionStepBuilder {
 			PollableChannel replies = new QueueChannel();
 			partitionHandler.setReplyChannel(replies);
 			StandardIntegrationFlow standardIntegrationFlow = IntegrationFlow.from(this.inputChannel)
-					.aggregate(aggregatorSpec -> aggregatorSpec.processor(partitionHandler)).channel(replies).get();
+			.aggregate(aggregatorSpec -> aggregatorSpec.processor(partitionHandler)).channel(replies).get();
 			IntegrationFlowContext integrationFlowContext = this.beanFactory.getBean(IntegrationFlowContext.class);
 			integrationFlowContext.registration(standardIntegrationFlow).autoStartup(false).register();
 		}
@@ -313,11 +313,11 @@ public class RemotePartitioningManagerStepBuilder extends PartitionStepBuilder {
 	 */
 	@Override
 	public RemotePartitioningManagerStepBuilder partitionHandler(PartitionHandler partitionHandler)
-			throws UnsupportedOperationException {
+	throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("When configuring a manager step "
-				+ "for remote partitioning using the RemotePartitioningManagerStepBuilder, "
-				+ "the partition handler will be automatically set to an instance "
-				+ "of MessageChannelPartitionHandler. The partition handler must " + "not be provided in this case.");
+		+ "for remote partitioning using the RemotePartitioningManagerStepBuilder, "
+		+ "the partition handler will be automatically set to an instance "
+		+ "of MessageChannelPartitionHandler. The partition handler must " + "not be provided in this case.");
 	}
 
 }

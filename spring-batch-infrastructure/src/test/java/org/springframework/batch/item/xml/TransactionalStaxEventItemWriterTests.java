@@ -71,7 +71,7 @@ class TransactionalStaxEventItemWriterTests {
 	private final Chunk<?> items = Chunk.of(item);
 
 	private static final String TEST_STRING = "<!--" + ClassUtils.getShortName(StaxEventItemWriter.class)
-			+ "-testString-->";
+	+ "-testString-->";
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -126,15 +126,15 @@ class TransactionalStaxEventItemWriterTests {
 		});
 		writer.open(executionContext);
 		assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					try {
-						writer.write(items);
-					}
-					catch (Exception e) {
-						throw new RuntimeException(e);
-					}
-					throw new RuntimeException("Planned");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			try {
+				writer.write(items);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			throw new RuntimeException("Planned");
+		}));
 		writer.close();
 		writer.open(executionContext);
 		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
@@ -193,15 +193,15 @@ class TransactionalStaxEventItemWriterTests {
 		writer.close();
 		writer.open(executionContext);
 		assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					try {
-						writer.write(items);
-					}
-					catch (Exception e) {
-						throw new RuntimeException(e);
-					}
-					throw new RuntimeException("Planned");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			try {
+				writer.write(items);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			throw new RuntimeException("Planned");
+		}));
 		writer.close();
 		String content = outputFileContent();
 		assertEquals(1, StringUtils.countOccurrencesOf(content, ("<header/>")), "Wrong content: " + content);
@@ -224,7 +224,7 @@ class TransactionalStaxEventItemWriterTests {
 		public void marshal(Object graph, Result result) throws XmlMappingException, IOException {
 			try {
 				StaxTestUtils.getXmlEventWriter(result)
-						.add(XMLEventFactory.newInstance().createComment(graph.toString()));
+				.add(XMLEventFactory.newInstance().createComment(graph.toString()));
 			}
 			catch (Exception e) {
 				throw new RuntimeException("Exception while writing to output file", e);

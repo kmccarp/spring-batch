@@ -50,7 +50,7 @@ import org.springframework.util.ClassUtils;
  * @since 4.1
  */
 public class JsonItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements ResourceAwareItemReaderItemStream<T> {
+implements ResourceAwareItemReaderItemStream<T> {
 
 	private static final Log LOGGER = LogFactory.getLog(JsonItemReader.class);
 

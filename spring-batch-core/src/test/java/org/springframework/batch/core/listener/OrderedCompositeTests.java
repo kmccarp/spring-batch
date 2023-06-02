@@ -35,7 +35,7 @@ class OrderedCompositeTests {
 
 	@Test
 	void testSetItems() {
-		list.setItems(Arrays.asList(new Object[] { "1", "2" }));
+		list.setItems(Arrays.asList(new Object[]{"1", "2"}));
 		Iterator<Object> iterator = list.iterator();
 		assertEquals("1", iterator.next());
 		assertEquals("2", iterator.next());
@@ -43,7 +43,7 @@ class OrderedCompositeTests {
 
 	@Test
 	void testSetSameObject() {
-		list.setItems(Arrays.asList(new Object[] { "1", "1" }));
+		list.setItems(Arrays.asList(new Object[]{"1", "1"}));
 		Iterator<Object> iterator = list.iterator();
 		assertEquals("1", iterator.next());
 		assertFalse(iterator.hasNext());

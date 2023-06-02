@@ -32,9 +32,9 @@ class DefaultJobKeyGeneratorTests {
 	@Test
 	void testMixedParameters() {
 		JobParameters jobParameters1 = new JobParametersBuilder().addString("foo", "bar").addString("bar", "foo")
-				.toJobParameters();
+		.toJobParameters();
 		JobParameters jobParameters2 = new JobParametersBuilder().addString("foo", "bar", true)
-				.addString("bar", "foo", true).addString("ignoreMe", "irrelevant", false).toJobParameters();
+		.addString("bar", "foo", true).addString("ignoreMe", "irrelevant", false).toJobParameters();
 		String key1 = jobKeyGenerator.generateKey(jobParameters1);
 		String key2 = jobKeyGenerator.generateKey(jobParameters2);
 		assertEquals(key1, key2);
@@ -43,7 +43,7 @@ class DefaultJobKeyGeneratorTests {
 	@Test
 	void testCreateJobKey() {
 		JobParameters jobParameters = new JobParametersBuilder().addString("foo", "bar").addString("bar", "foo")
-				.toJobParameters();
+		.toJobParameters();
 		String key = jobKeyGenerator.generateKey(jobParameters);
 		assertEquals(32, key.length());
 	}
@@ -51,10 +51,10 @@ class DefaultJobKeyGeneratorTests {
 	@Test
 	void testCreateJobKeyOrdering() {
 		JobParameters jobParameters1 = new JobParametersBuilder().addString("foo", "bar").addString("bar", "foo")
-				.toJobParameters();
+		.toJobParameters();
 		String key1 = jobKeyGenerator.generateKey(jobParameters1);
 		JobParameters jobParameters2 = new JobParametersBuilder().addString("bar", "foo").addString("foo", "bar")
-				.toJobParameters();
+		.toJobParameters();
 		String key2 = jobKeyGenerator.generateKey(jobParameters2);
 		assertEquals(key1, key2);
 	}

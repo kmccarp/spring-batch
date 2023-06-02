@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TransactionAwareListItemReaderTests {
 
 	private final ListItemReader<String> reader = new ListItemReader<>(
-			TransactionAwareProxyFactory.createTransactionalList(List.of("a", "b", "c")));
+	TransactionAwareProxyFactory.createTransactionalList(List.of("a", "b", "c")));
 
 	@Test
 	void testNext() {
@@ -91,10 +91,10 @@ class TransactionAwareListItemReaderTests {
 		PlatformTransactionManager transactionManager = new ResourcelessTransactionManager();
 		final List<Object> taken = new ArrayList<>();
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					taken.add(reader.read());
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			taken.add(reader.read());
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(1, taken.size());
 		assertEquals("a", taken.get(0));

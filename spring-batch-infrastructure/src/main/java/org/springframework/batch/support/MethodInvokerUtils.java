@@ -46,13 +46,13 @@ public class MethodInvokerUtils {
 	 * @return MethodInvoker if the method is found, null if it is not.
 	 */
 	public static MethodInvoker getMethodInvokerByName(Object object, String methodName, boolean paramsRequired,
-			Class<?>... paramTypes) {
+	Class<?>... paramTypes) {
 		Assert.notNull(object, "Object to invoke must not be null");
 		Method method = ClassUtils.getMethodIfAvailable(object.getClass(), methodName, paramTypes);
 		if (method == null) {
 			String errorMsg = "no method found with name [" + methodName + "] on class ["
-					+ object.getClass().getSimpleName() + "] compatible with the signature ["
-					+ getParamTypesString(paramTypes) + "].";
+			+ object.getClass().getSimpleName() + "] compatible with the signature ["
+			+ getParamTypesString(paramTypes) + "].";
 			Assert.isTrue(!paramsRequired, errorMsg);
 			// if no method was found for the given parameters, and the
 			// parameters aren't required, then try with no params
@@ -88,7 +88,7 @@ public class MethodInvokerUtils {
 	 * @return MethodInvoker if the method is found, null if it is not.
 	 */
 	public static MethodInvoker getMethodInvokerForInterface(Class<?> cls, String methodName, Object object,
-			Class<?>... paramTypes) {
+	Class<?>... paramTypes) {
 
 		if (cls.isAssignableFrom(object.getClass())) {
 			return MethodInvokerUtils.getMethodInvokerByName(object, methodName, true, paramTypes);
@@ -107,10 +107,10 @@ public class MethodInvokerUtils {
 	 * @return a MethodInvoker
 	 */
 	public static MethodInvoker getMethodInvokerByAnnotation(final Class<? extends Annotation> annotationType,
-			final Object target, final Class<?>... expectedParamTypes) {
+	final Object target, final Class<?>... expectedParamTypes) {
 		MethodInvoker mi = MethodInvokerUtils.getMethodInvokerByAnnotation(annotationType, target);
 		final Class<?> targetClass = (target instanceof Advised) ? ((Advised) target).getTargetSource().getTargetClass()
-				: target.getClass();
+		: target.getClass();
 		if (mi != null) {
 			ReflectionUtils.doWithMethods(targetClass, method -> {
 				Annotation annotation = AnnotationUtils.findAnnotation(method, annotationType);
@@ -118,9 +118,9 @@ public class MethodInvokerUtils {
 					Class<?>[] paramTypes = method.getParameterTypes();
 					if (paramTypes.length > 0) {
 						String errorMsg = "The method [" + method.getName() + "] on target class ["
-								+ targetClass.getSimpleName() + "] is incompatible with the signature ["
-								+ getParamTypesString(expectedParamTypes) + "] expected for the annotation ["
-								+ annotationType.getSimpleName() + "].";
+						+ targetClass.getSimpleName() + "] is incompatible with the signature ["
+						+ getParamTypesString(expectedParamTypes) + "] expected for the annotation ["
+						+ annotationType.getSimpleName() + "].";
 
 						Assert.isTrue(paramTypes.length == expectedParamTypes.length, errorMsg);
 						for (int i = 0; i < paramTypes.length; i++) {
@@ -142,14 +142,14 @@ public class MethodInvokerUtils {
 	 * @return MethodInvoker for the provided annotation, null if none is found.
 	 */
 	public static MethodInvoker getMethodInvokerByAnnotation(final Class<? extends Annotation> annotationType,
-			final Object target) {
+	final Object target) {
 		Assert.notNull(target, "Target must not be null");
 		Assert.notNull(annotationType, "AnnotationType must not be null");
 		Assert.isTrue(
-				ObjectUtils.containsElement(annotationType.getAnnotation(Target.class).value(), ElementType.METHOD),
-				"Annotation [" + annotationType + "] is not a Method-level annotation.");
+		ObjectUtils.containsElement(annotationType.getAnnotation(Target.class).value(), ElementType.METHOD),
+		"Annotation [" + annotationType + "] is not a Method-level annotation.");
 		final Class<?> targetClass = (target instanceof Advised) ? ((Advised) target).getTargetSource().getTargetClass()
-				: target.getClass();
+		: target.getClass();
 		if (targetClass == null) {
 			// Proxy with no target cannot have annotations
 			return null;
@@ -159,8 +159,8 @@ public class MethodInvokerUtils {
 			Annotation annotation = AnnotationUtils.findAnnotation(method, annotationType);
 			if (annotation != null) {
 				Assert.isNull(annotatedMethod.get(),
-						"found more than one method on target class [" + targetClass.getSimpleName()
-								+ "] with the annotation type [" + annotationType.getSimpleName() + "].");
+				"found more than one method on target class [" + targetClass.getSimpleName()
+			+ "] with the annotation type [" + annotationType.getSimpleName() + "].");
 				annotatedMethod.set(method);
 			}
 		});
@@ -190,7 +190,7 @@ public class MethodInvokerUtils {
 				return;
 			}
 			Assert.state(methodHolder.get() == null,
-					"More than one non-void public method detected with single argument.");
+			"More than one non-void public method detected with single argument.");
 			methodHolder.set(method);
 		});
 		Method method = methodHolder.get();

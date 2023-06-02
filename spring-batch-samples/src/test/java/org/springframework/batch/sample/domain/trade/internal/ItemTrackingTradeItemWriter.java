@@ -60,7 +60,7 @@ public class ItemTrackingTradeItemWriter implements ItemWriter<Trade> {
 
 			if (jdbcTemplate != null) {
 				jdbcTemplate.update("UPDATE TRADE set VERSION=? where ID=? and version=?", t.getVersion() + 1,
-						t.getId(), t.getVersion());
+				t.getId(), t.getVersion());
 			}
 		}
 

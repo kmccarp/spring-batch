@@ -92,13 +92,13 @@ class JobOperatorFactoryBeanTests {
 
 		// then
 		Assertions.assertEquals(transactionAttributeSource,
-				getTransactionAttributesSourceSetOnJobOperator(jobOperator));
+		getTransactionAttributesSourceSetOnJobOperator(jobOperator));
 
 	}
 
 	private PlatformTransactionManager getTransactionManagerSetOnJobOperator(JobOperator jobOperator) {
 		Advised target = (Advised) jobOperator; // proxy created by
-												// AbstractJobOperatorFactoryBean
+		// AbstractJobOperatorFactoryBean
 		Advisor[] advisors = target.getAdvisors();
 		for (Advisor advisor : advisors) {
 			if (advisor.getAdvice() instanceof TransactionInterceptor transactionInterceptor) {

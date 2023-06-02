@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Glenn Renfro
  */
 
-@SpringJUnitConfig(classes = { JobRunnerConfiguration.class, ManagerConfiguration.class })
+@SpringJUnitConfig(classes = {JobRunnerConfiguration.class, ManagerConfiguration.class})
 @PropertySource("classpath:remote-chunking.properties")
 class RemoteChunkingJobFunctionalTests {
 
@@ -59,8 +59,8 @@ class RemoteChunkingJobFunctionalTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		Configuration configuration = new ConfigurationImpl().addAcceptorConfiguration("jms", "tcp://localhost:61616")
-				.setPersistenceEnabled(false).setSecurityEnabled(false).setJMXManagementEnabled(false)
-				.setJournalDatasync(false);
+		.setPersistenceEnabled(false).setSecurityEnabled(false).setJMXManagementEnabled(false)
+		.setJournalDatasync(false);
 		this.brokerService = new EmbeddedActiveMQ().setConfiguration(configuration).start();
 		this.workerApplicationContext = new AnnotationConfigApplicationContext(WorkerConfiguration.class);
 	}
@@ -82,8 +82,8 @@ class RemoteChunkingJobFunctionalTests {
 		// then
 		assertEquals(ExitStatus.COMPLETED.getExitCode(), jobExecution.getExitStatus().getExitCode());
 		assertEquals("Waited for 2 results.", // the manager sent 2 chunks ({1, 2,
-												// 3} and {4, 5, 6}) to workers
-				jobExecution.getExitStatus().getExitDescription());
+		// 3} and {4, 5, 6}) to workers
+		jobExecution.getExitStatus().getExitDescription());
 	}
 
 }

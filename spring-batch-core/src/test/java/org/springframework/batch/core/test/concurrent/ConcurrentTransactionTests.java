@@ -100,22 +100,22 @@ class ConcurrentTransactionTests {
 		@Bean
 		public Flow flow(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new FlowBuilder<Flow>("flow")
-					.start(new StepBuilder("flow.step1", jobRepository).tasklet(new Tasklet() {
-						@Nullable
-						@Override
-						public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-								throws Exception {
-							return RepeatStatus.FINISHED;
-						}
-					}, transactionManager).build())
-					.next(new StepBuilder("flow.step2", jobRepository).tasklet(new Tasklet() {
-						@Nullable
-						@Override
-						public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-								throws Exception {
-							return RepeatStatus.FINISHED;
-						}
-					}, transactionManager).build()).build();
+			.start(new StepBuilder("flow.step1", jobRepository).tasklet(new Tasklet() {
+				@Nullable
+				@Override
+				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
+			throws Exception {
+					return RepeatStatus.FINISHED;
+				}
+			}, transactionManager).build())
+			.next(new StepBuilder("flow.step2", jobRepository).tasklet(new Tasklet() {
+				@Nullable
+				@Override
+				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
+			throws Exception {
+					return RepeatStatus.FINISHED;
+				}
+			}, transactionManager).build()).build();
 		}
 
 		@Bean
@@ -144,22 +144,22 @@ class ConcurrentTransactionTests {
 
 		@Bean
 		public Job concurrentJob(JobRepository jobRepository, PlatformTransactionManager transactionManager,
-				TaskExecutor taskExecutor) {
+		TaskExecutor taskExecutor) {
 			Flow splitFlow = new FlowBuilder<Flow>("splitflow").split(taskExecutor)
-					.add(flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
-							flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
-							flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
-							flow(jobRepository, transactionManager))
-					.build();
+			.add(flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
+		flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
+		flow(jobRepository, transactionManager), flow(jobRepository, transactionManager),
+		flow(jobRepository, transactionManager))
+			.build();
 
 			return new JobBuilder("concurrentJob", jobRepository).start(firstStep(jobRepository, transactionManager))
-					.next(new StepBuilder("splitFlowStep", jobRepository).flow(splitFlow).build())
-					.next(lastStep(jobRepository, transactionManager)).build();
+			.next(new StepBuilder("splitFlowStep", jobRepository).flow(splitFlow).build())
+			.next(lastStep(jobRepository, transactionManager)).build();
 		}
 
 		@Bean
 		public JobRepository jobRepository(DataSource dataSource, PlatformTransactionManager transactionManager)
-				throws Exception {
+		throws Exception {
 			JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 			factory.setDataSource(dataSource);
 			factory.setIsolationLevelForCreateEnum(Isolation.READ_COMMITTED);
@@ -195,7 +195,7 @@ class ConcurrentTransactionTests {
 				public void configureConnectionProperties(ConnectionProperties properties, String databaseName) {
 					try {
 						properties.setDriverClass((Class<? extends Driver>) ClassUtils.forName("org.hsqldb.jdbcDriver",
-								this.getClass().getClassLoader()));
+						this.getClass().getClassLoader()));
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -219,9 +219,9 @@ class ConcurrentTransactionTests {
 
 			ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 			databasePopulator.addScript(defaultResourceLoader
-					.getResource("classpath:org/springframework/batch/core/schema-drop-hsqldb.sql"));
+			.getResource("classpath:org/springframework/batch/core/schema-drop-hsqldb.sql"));
 			databasePopulator.addScript(
-					defaultResourceLoader.getResource("classpath:org/springframework/batch/core/schema-hsqldb.sql"));
+			defaultResourceLoader.getResource("classpath:org/springframework/batch/core/schema-hsqldb.sql"));
 			embeddedDatabaseFactory.setDatabasePopulator(databasePopulator);
 			embeddedDatabaseFactory.setGenerateUniqueDatabaseName(true);
 

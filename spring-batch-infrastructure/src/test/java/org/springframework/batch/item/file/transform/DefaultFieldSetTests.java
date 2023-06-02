@@ -43,10 +43,10 @@ class DefaultFieldSetTests {
 	@BeforeEach
 	void setUp() {
 
-		tokens = new String[] { "TestString", "true", "C", "10", "-472", "354224", "543", "124.3", "424.3", "1,3245",
-				null, "2007-10-12", "12-10-2007", "" };
-		names = new String[] { "String", "Boolean", "Char", "Byte", "Short", "Integer", "Long", "Float", "Double",
-				"BigDecimal", "Null", "Date", "DatePattern", "BlankInput" };
+		tokens = new String[]{"TestString", "true", "C", "10", "-472", "354224", "543", "124.3", "424.3", "1,3245",
+		null, "2007-10-12", "12-10-2007", ""};
+		names = new String[]{"String", "Boolean", "Char", "Byte", "Short", "Integer", "Long", "Float", "Double",
+		"BigDecimal", "Null", "Date", "DatePattern", "BlankInput"};
 
 		fieldSet = new DefaultFieldSet(tokens, names);
 		assertEquals(14, fieldSet.getFieldCount());
@@ -61,7 +61,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testNamesNotKnown() {
-		fieldSet = new DefaultFieldSet(new String[] { "foo" });
+		fieldSet = new DefaultFieldSet(new String[]{"foo"});
 		assertFalse(fieldSet.hasNames());
 		assertThrows(IllegalStateException.class, fieldSet::getNames);
 	}
@@ -150,7 +150,7 @@ class DefaultFieldSetTests {
 	@Test
 	void testReadBigBigDecimal() {
 
-		fieldSet = new DefaultFieldSet(new String[] { "12345678901234567890" });
+		fieldSet = new DefaultFieldSet(new String[]{"12345678901234567890"});
 		BigDecimal bd = new BigDecimal("12345678901234567890");
 		assertEquals(bd, fieldSet.readBigDecimal(0));
 
@@ -206,7 +206,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testReadBooleanFalse() {
-		fieldSet = new DefaultFieldSet(new String[] { "false" });
+		fieldSet = new DefaultFieldSet(new String[]{"false"});
 		assertFalse(fieldSet.readBoolean(0));
 	}
 
@@ -224,13 +224,13 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testReadIntWithSeparator() {
-		fieldSet = new DefaultFieldSet(new String[] { "354,224" });
+		fieldSet = new DefaultFieldSet(new String[]{"354,224"});
 		assertEquals(354224, fieldSet.readInt(0));
 	}
 
 	@Test
 	void testReadIntWithSeparatorAndFormat() {
-		fieldSet = new DefaultFieldSet(new String[] { "354.224" });
+		fieldSet = new DefaultFieldSet(new String[]{"354.224"});
 		fieldSet.setNumberFormat(NumberFormat.getInstance(Locale.GERMAN));
 		assertEquals(354224, fieldSet.readInt(0));
 	}
@@ -251,7 +251,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testReadLongWithPadding() {
-		fieldSet = new DefaultFieldSet(new String[] { "000009" });
+		fieldSet = new DefaultFieldSet(new String[]{"000009"});
 		assertEquals(9, fieldSet.readLong(0));
 	}
 
@@ -312,7 +312,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testReadDateWithFormat() throws Exception {
-		fieldSet = new DefaultFieldSet(new String[] { "13/01/1999" });
+		fieldSet = new DefaultFieldSet(new String[]{"13/01/1999"});
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		fieldSet.setDateFormat(dateFormat);
 		assertEquals(dateFormat.parse("13/01/1999"), fieldSet.readDate(0));
@@ -357,14 +357,14 @@ class DefaultFieldSetTests {
 		assertTrue(exception.getMessage().contains("dd-MM-yyyy"));
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> fieldSet.readDate("String", "dd-MM-yyyy", defaultDate));
+		() -> fieldSet.readDate("String", "dd-MM-yyyy", defaultDate));
 		assertTrue(exception.getMessage().contains("dd-MM-yyyy"));
 		assertTrue(exception.getMessage().contains("name: [String]"));
 	}
 
 	@Test
 	void testStrictReadDateWithPattern() {
-		fieldSet = new DefaultFieldSet(new String[] { "50-2-13" });
+		fieldSet = new DefaultFieldSet(new String[]{"50-2-13"});
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> fieldSet.readDate(0, "dd-MM-yyyy"));
 		String message = exception.getMessage();
 		assertTrue(message.contains("dd-MM-yyyy"), "Message did not contain: " + message);
@@ -372,7 +372,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testStrictReadDateWithPatternAndStrangeDate() {
-		fieldSet = new DefaultFieldSet(new String[] { "5550212" });
+		fieldSet = new DefaultFieldSet(new String[]{"5550212"});
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> fieldSet.readDate(0, "yyyyMMdd"));
 		String message = exception.getMessage();
 		assertTrue(message.contains("yyyyMMdd"), "Message did not contain: " + message);
@@ -381,7 +381,7 @@ class DefaultFieldSetTests {
 	@Test
 	void testReadDateByNameInvalidWithPattern() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> fieldSet.readDate("String", "dd-MM-yyyy"));
+		() -> fieldSet.readDate("String", "dd-MM-yyyy"));
 		assertTrue(exception.getMessage().contains("dd-MM-yyyy"));
 		assertTrue(exception.getMessage().contains("String"));
 	}
@@ -392,8 +392,8 @@ class DefaultFieldSetTests {
 		assertEquals(fieldSet, fieldSet);
 		assertEquals(fieldSet, new DefaultFieldSet(tokens));
 
-		String[] tokens1 = new String[] { "token1" };
-		String[] tokens2 = new String[] { "token1" };
+		String[] tokens1 = new String[]{"token1"};
+		String[] tokens2 = new String[]{"token1"};
 		FieldSet fs1 = new DefaultFieldSet(tokens1);
 		FieldSet fs2 = new DefaultFieldSet(tokens2);
 		assertEquals(fs1, fs2);
@@ -417,8 +417,8 @@ class DefaultFieldSetTests {
 	@Test
 	void testEqualsNotEqual() {
 
-		String[] tokens1 = new String[] { "token1" };
-		String[] tokens2 = new String[] { "token1", "token2" };
+		String[] tokens1 = new String[]{"token1"};
+		String[] tokens2 = new String[]{"token1", "token2"};
 		FieldSet fs1 = new DefaultFieldSet(tokens1);
 		FieldSet fs2 = new DefaultFieldSet(tokens2);
 		assertFalse(fs1.equals(fs2));
@@ -438,18 +438,18 @@ class DefaultFieldSetTests {
 	@Test
 	void testConstructor() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new DefaultFieldSet(new String[] { "1", "2" }, new String[] { "a" }));
+		() -> new DefaultFieldSet(new String[]{"1", "2"}, new String[]{"a"}));
 	}
 
 	@Test
 	void testToStringWithNames() {
-		fieldSet = new DefaultFieldSet(new String[] { "foo", "bar" }, new String[] { "Foo", "Bar" });
+		fieldSet = new DefaultFieldSet(new String[]{"foo", "bar"}, new String[]{"Foo", "Bar"});
 		assertTrue(fieldSet.toString().contains("Foo=foo"));
 	}
 
 	@Test
 	void testToStringWithoutNames() {
-		fieldSet = new DefaultFieldSet(new String[] { "foo", "bar" });
+		fieldSet = new DefaultFieldSet(new String[]{"foo", "bar"});
 		assertTrue(fieldSet.toString().contains("foo"));
 	}
 
@@ -461,34 +461,34 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testProperties() {
-		assertEquals("foo", new DefaultFieldSet(new String[] { "foo", "bar" }, new String[] { "Foo", "Bar" })
-				.getProperties().getProperty("Foo"));
+		assertEquals("foo", new DefaultFieldSet(new String[]{"foo", "bar"}, new String[]{"Foo", "Bar"})
+		.getProperties().getProperty("Foo"));
 	}
 
 	@Test
 	void testPropertiesWithNoNames() {
 		assertThrows(IllegalStateException.class,
-				() -> new DefaultFieldSet(new String[] { "foo", "bar" }).getProperties());
+		() -> new DefaultFieldSet(new String[]{"foo", "bar"}).getProperties());
 	}
 
 	@Test
 	void testPropertiesWithWhiteSpace() {
 
-		assertEquals("bar", new DefaultFieldSet(new String[] { "foo", "bar   " }, new String[] { "Foo", "Bar" })
-				.getProperties().getProperty("Bar"));
+		assertEquals("bar", new DefaultFieldSet(new String[]{"foo", "bar   "}, new String[]{"Foo", "Bar"})
+		.getProperties().getProperty("Bar"));
 	}
 
 	@Test
 	void testPropertiesWithNullValues() {
 
-		fieldSet = new DefaultFieldSet(new String[] { null, "bar" }, new String[] { "Foo", "Bar" });
+		fieldSet = new DefaultFieldSet(new String[]{null, "bar"}, new String[]{"Foo", "Bar"});
 		assertEquals("bar", fieldSet.getProperties().getProperty("Bar"));
 		assertNull(fieldSet.getProperties().getProperty("Foo"));
 	}
 
 	@Test
 	void testAccessByNameWhenNamesMissing() {
-		assertThrows(IllegalArgumentException.class, () -> new DefaultFieldSet(new String[] { "1", "2" }).readInt("a"));
+		assertThrows(IllegalArgumentException.class, () -> new DefaultFieldSet(new String[]{"1", "2"}).readInt("a"));
 	}
 
 	@Test
@@ -502,7 +502,7 @@ class DefaultFieldSetTests {
 
 	@Test
 	void testPaddedLong() {
-		FieldSet fs = new DefaultFieldSet(new String[] { "00000009" });
+		FieldSet fs = new DefaultFieldSet(new String[]{"00000009"});
 
 		long value = fs.readLong(0);
 		assertEquals(value, 9);
@@ -512,7 +512,7 @@ class DefaultFieldSetTests {
 	void testReadRawString() {
 		String name = "fieldName";
 		String value = " string with trailing whitespace   ";
-		FieldSet fs = new DefaultFieldSet(new String[] { value }, new String[] { name });
+		FieldSet fs = new DefaultFieldSet(new String[]{value}, new String[]{name});
 
 		assertEquals(value, fs.readRawString(0));
 		assertEquals(value, fs.readRawString(name));

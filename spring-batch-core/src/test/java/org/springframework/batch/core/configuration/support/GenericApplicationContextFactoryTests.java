@@ -53,7 +53,7 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testCreateJob() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "trivial-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "trivial-context.xml")));
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 		assertNotNull(context);
 		assertTrue(context.getId().contains("trivial-context.xml"), "Wrong id: " + context);
@@ -62,16 +62,16 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testGetJobName() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "trivial-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "trivial-context.xml")));
 		assertEquals("test-job", factory.createApplicationContext().getBeanNamesForType(Job.class)[0]);
 	}
 
 	@Test
 	void testParentConfigurationInherited() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
 		factory.setApplicationContext(new ClassPathXmlApplicationContext(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 		assertEquals("test-job", context.getBeanNamesForType(Job.class)[0]);
 		assertEquals("bar", context.getBean("test-job", Job.class).getName());
@@ -81,9 +81,9 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testBeanFactoryPostProcessorOrderRespected() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "placeholder-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "placeholder-context.xml")));
 		factory.setApplicationContext(new ClassPathXmlApplicationContext(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 		assertEquals("test-job", context.getBeanNamesForType(Job.class)[0]);
 		assertEquals("spam", context.getBean("test-job", Job.class).getName());
@@ -95,9 +95,9 @@ class GenericApplicationContextFactoryTests {
 	@Disabled
 	void testBeanFactoryProfileRespected() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "profiles.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "profiles.xml")));
 		ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml"));
 		parentContext.getEnvironment().setActiveProfiles("preferred");
 		factory.setApplicationContext(parentContext);
 		ConfigurableApplicationContext context = factory.createApplicationContext();
@@ -108,9 +108,9 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testBeanFactoryPostProcessorsNotCopied() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
 		factory.setApplicationContext(new ClassPathXmlApplicationContext(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
 		@SuppressWarnings("unchecked")
 		Class<? extends BeanFactoryPostProcessor>[] classes = (Class<? extends BeanFactoryPostProcessor>[]) new Class<?>[0];
 		factory.setBeanFactoryPostProcessorClasses(classes);
@@ -123,9 +123,9 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testBeanFactoryConfigurationNotCopied() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml")));
 		factory.setApplicationContext(new ClassPathXmlApplicationContext(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "parent-context.xml")));
 		factory.setCopyConfiguration(false);
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 		assertEquals("test-job", context.getBeanNamesForType(Job.class)[0]);
@@ -138,7 +138,7 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testEquals() {
 		Resource resource = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "child-context.xml"));
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(resource);
 		GenericApplicationContextFactory other = new GenericApplicationContextFactory(resource);
 		assertEquals(other, factory);
@@ -148,9 +148,9 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testEqualsMultipleConfigs() {
 		Resource resource1 = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
 		Resource resource2 = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "child-context-with-abstract-job.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "child-context-with-abstract-job.xml"));
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(resource1, resource2);
 		GenericApplicationContextFactory other = new GenericApplicationContextFactory(resource1, resource2);
 		assertEquals(other, factory);
@@ -160,9 +160,9 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testParentConfigurationInheritedMultipleConfigs() {
 		Resource resource1 = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
 		Resource resource2 = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "child-context-with-abstract-job.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "child-context-with-abstract-job.xml"));
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(resource1, resource2);
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 		assertEquals("concrete-job", context.getBeanNamesForType(Job.class)[0]);
@@ -183,16 +183,16 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testDifferentResourceTypes() {
 		Resource resource1 = new ClassPathResource(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "abstract-context.xml"));
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(resource1,
-				Configuration1.class);
+		Configuration1.class);
 		assertThrows(IllegalArgumentException.class, factory::createApplicationContext);
 	}
 
 	@Test
 	void testPackageScanning() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				"org.springframework.batch.core.configuration.support");
+		"org.springframework.batch.core.configuration.support");
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 
 		assertEquals(context.getBean("bean1"), "bean1");
@@ -204,7 +204,7 @@ class GenericApplicationContextFactoryTests {
 	@Test
 	void testMultipleConfigurationClasses() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(Configuration1.class,
-				Configuration2.class);
+		Configuration2.class);
 		ConfigurableApplicationContext context = factory.createApplicationContext();
 
 		assertEquals(context.getBean("bean1"), "bean1");

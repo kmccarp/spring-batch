@@ -45,12 +45,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OptimisticLockingFailureTests {
 
 	private static final Set<BatchStatus> END_STATUSES = EnumSet.of(BatchStatus.COMPLETED, BatchStatus.FAILED,
-			BatchStatus.STOPPED);
+	BatchStatus.STOPPED);
 
 	@Test
 	void testAsyncStopOfStartingJob() throws Exception {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/repository/dao/OptimisticLockingFailureTests-context.xml");
+		"org/springframework/batch/core/repository/dao/OptimisticLockingFailureTests-context.xml");
 		Job job = applicationContext.getBean(Job.class);
 		JobLauncher jobLauncher = applicationContext.getBean(JobLauncher.class);
 		JobOperator jobOperator = applicationContext.getBean(JobOperator.class);
@@ -77,9 +77,9 @@ class OptimisticLockingFailureTests {
 		assertEquals(1, numStepExecutions, "Should only be one StepExecution but got: " + numStepExecutions);
 		assertEquals("step1", stepName, "Step name for execution should be step1 but got: " + stepName);
 		assertEquals(stepExecutionStatus, BatchStatus.STOPPED,
-				"Step execution status should be STOPPED but got: " + stepExecutionStatus);
+		"Step execution status should be STOPPED but got: " + stepExecutionStatus);
 		assertEquals(jobExecutionStatus, BatchStatus.STOPPED,
-				"Job execution status should be STOPPED but got:" + jobExecutionStatus);
+		"Job execution status should be STOPPED but got:" + jobExecutionStatus);
 
 		JobExecution restartJobExecution = jobLauncher.run(job, jobParameters);
 
@@ -92,18 +92,18 @@ class OptimisticLockingFailureTests {
 
 		int restartNumStepExecutions = restartJobExecution.getStepExecutions().size();
 		assertEquals(2, restartNumStepExecutions,
-				"Should be two StepExecution's on restart but got: " + restartNumStepExecutions);
+		"Should be two StepExecution's on restart but got: " + restartNumStepExecutions);
 
 		for (StepExecution restartStepExecution : restartJobExecution.getStepExecutions()) {
 			BatchStatus restartStepExecutionStatus = restartStepExecution.getStatus();
 
 			assertEquals(restartStepExecutionStatus, BatchStatus.COMPLETED,
-					"Step execution status should be COMPLETED but got: " + restartStepExecutionStatus);
+			"Step execution status should be COMPLETED but got: " + restartStepExecutionStatus);
 		}
 
 		BatchStatus restartJobExecutionStatus = restartJobExecution.getStatus();
 		assertEquals(restartJobExecutionStatus, BatchStatus.COMPLETED,
-				"Job execution status should be COMPLETED but got:" + restartJobExecutionStatus);
+		"Job execution status should be COMPLETED but got:" + restartJobExecutionStatus);
 	}
 
 	public static class Writer implements ItemWriter<String> {

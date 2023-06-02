@@ -110,7 +110,7 @@ public abstract class BatchScopeSupport implements Scope, BeanFactoryPostProcess
 		}
 
 		Assert.state(beanFactory instanceof BeanDefinitionRegistry,
-				"BeanFactory was not a BeanDefinitionRegistry, so JobScope cannot be used.");
+		"BeanFactory was not a BeanDefinitionRegistry, so JobScope cannot be used.");
 		BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
 
 		for (String beanName : beanFactory.getBeanDefinitionNames()) {
@@ -142,12 +142,12 @@ public abstract class BatchScopeSupport implements Scope, BeanFactoryPostProcess
 	 * Caller should register it if needed to be visible at top level in bean factory.
 	 */
 	protected static BeanDefinitionHolder createScopedProxy(String beanName, BeanDefinition definition,
-			BeanDefinitionRegistry registry, boolean proxyTargetClass) {
+	BeanDefinitionRegistry registry, boolean proxyTargetClass) {
 
 		BeanDefinitionHolder proxyHolder;
 
 		proxyHolder = ScopedProxyUtils.createScopedProxy(new BeanDefinitionHolder(definition, beanName), registry,
-				proxyTargetClass);
+		proxyTargetClass);
 
 		registry.registerBeanDefinition(beanName, proxyHolder.getBeanDefinition());
 

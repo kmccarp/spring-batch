@@ -72,7 +72,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Sergey Shcherbakov
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(classes = { SimpleJobExplorerIntegrationTests.Config.class })
+@SpringJUnitConfig(classes = {SimpleJobExplorerIntegrationTests.Config.class})
 class SimpleJobExplorerIntegrationTests {
 
 	/*
@@ -115,7 +115,7 @@ class SimpleJobExplorerIntegrationTests {
 			List<StateTransition> transitions = new ArrayList<>();
 			transitions.add(StateTransition.createStateTransition(new StepState(dummyStep()), "end0"));
 			transitions
-					.add(StateTransition.createEndStateTransition(new EndState(FlowExecutionStatus.COMPLETED, "end0")));
+			.add(StateTransition.createEndStateTransition(new EndState(FlowExecutionStatus.COMPLETED, "end0")));
 			simpleFlow.setStateTransitions(transitions);
 			return simpleFlow;
 		}
@@ -135,8 +135,8 @@ class SimpleJobExplorerIntegrationTests {
 			DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
 			dataSourceInitializer.setDataSource(dataSource());
 			dataSourceInitializer.setInitScripts(
-					new Resource[] { new ClassPathResource("org/springframework/batch/core/schema-drop-hsqldb.sql"),
-							new ClassPathResource("org/springframework/batch/core/schema-hsqldb.sql") });
+			new Resource[]{new ClassPathResource("org/springframework/batch/core/schema-drop-hsqldb.sql"),
+		new ClassPathResource("org/springframework/batch/core/schema-hsqldb.sql")});
 			return dataSourceInitializer;
 		}
 
@@ -169,7 +169,7 @@ class SimpleJobExplorerIntegrationTests {
 
 	@Test
 	void testGetStepExecution() throws JobExecutionAlreadyRunningException, JobRestartException,
-			JobInstanceAlreadyCompleteException, JobInterruptedException, UnexpectedJobExecutionException {
+	JobInstanceAlreadyCompleteException, JobInterruptedException, UnexpectedJobExecutionException {
 
 		// Prepare the jobRepository for the test
 		JobExecution jobExecution = jobRepository.createJobExecution("myJob", new JobParameters());
@@ -178,7 +178,7 @@ class SimpleJobExplorerIntegrationTests {
 
 		// Executed on the remote end in remote partitioning use case
 		StepExecution jobExplorerStepExecution = jobExplorer.getStepExecution(jobExecution.getId(),
-				stepExecution.getId());
+		stepExecution.getId());
 		flowStep.execute(jobExplorerStepExecution);
 
 		assertEquals(BatchStatus.COMPLETED, jobExplorerStepExecution.getStatus());
@@ -219,7 +219,7 @@ class SimpleJobExplorerIntegrationTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-					.addScript("/org/springframework/batch/core/schema-h2.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-h2.sql").generateUniqueName(true).build();
 		}
 
 		@Bean
@@ -238,9 +238,9 @@ class SimpleJobExplorerIntegrationTests {
 		Job job = context.getBean(Job.class);
 		long id = 1L;
 		JobParameters jobParameters1 = new JobParametersBuilder().addLong("id", id).addString("name", "foo", false)
-				.toJobParameters();
+		.toJobParameters();
 		JobParameters jobParameters2 = new JobParametersBuilder().addLong("id", id).addString("name", "bar", false)
-				.toJobParameters();
+		.toJobParameters();
 
 		// when
 		JobExecution jobExecution1 = jobLauncher.run(job, jobParameters1);

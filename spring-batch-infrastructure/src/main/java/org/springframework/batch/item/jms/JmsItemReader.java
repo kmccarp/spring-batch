@@ -56,9 +56,9 @@ public class JmsItemReader<T> implements ItemReader<T>, InitializingBean {
 		if (jmsTemplate instanceof JmsTemplate) {
 			JmsTemplate template = (JmsTemplate) jmsTemplate;
 			Assert.isTrue(template.getReceiveTimeout() != JmsTemplate.RECEIVE_TIMEOUT_INDEFINITE_WAIT,
-					"JmsTemplate must have a receive timeout!");
+			"JmsTemplate must have a receive timeout!");
 			Assert.isTrue(template.getDefaultDestination() != null || template.getDefaultDestinationName() != null,
-					"JmsTemplate must have a defaultDestination or defaultDestinationName!");
+			"JmsTemplate must have a defaultDestination or defaultDestinationName!");
 		}
 	}
 
@@ -83,7 +83,7 @@ public class JmsItemReader<T> implements ItemReader<T>, InitializingBean {
 		Object result = jmsTemplate.receiveAndConvert();
 		if (itemType != null && result != null) {
 			Assert.state(itemType.isAssignableFrom(result.getClass()),
-					"Received message payload of wrong type: expected [" + itemType + "]");
+			"Received message payload of wrong type: expected [" + itemType + "]");
 		}
 		return (T) result;
 	}

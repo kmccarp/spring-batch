@@ -52,7 +52,7 @@ public abstract class AbstractJobDaoTests {
 	protected JobExecutionDao jobExecutionDao;
 
 	protected JobParameters jobParameters = new JobParametersBuilder().addString("job.key", "jobKey")
-			.addLong("long", (long) 1).addDouble("double", 7.7).toJobParameters();
+	.addLong("long", (long) 1).addDouble("double", 7.7).toJobParameters();
 
 	protected JobInstance jobInstance;
 
@@ -100,7 +100,7 @@ public abstract class AbstractJobDaoTests {
 	@Test
 	void testVersionIsNotNullForJob() {
 		int version = jdbcTemplate.queryForObject(
-				"select version from BATCH_JOB_INSTANCE where JOB_INSTANCE_ID=" + jobInstance.getId(), Integer.class);
+		"select version from BATCH_JOB_INSTANCE where JOB_INSTANCE_ID=" + jobInstance.getId(), Integer.class);
 		assertEquals(0, version);
 	}
 
@@ -108,8 +108,8 @@ public abstract class AbstractJobDaoTests {
 	@Test
 	void testVersionIsNotNullForJobExecution() {
 		int version = jdbcTemplate.queryForObject(
-				"select version from BATCH_JOB_EXECUTION where JOB_EXECUTION_ID=" + jobExecution.getId(),
-				Integer.class);
+		"select version from BATCH_JOB_EXECUTION where JOB_EXECUTION_ID=" + jobExecution.getId(),
+		Integer.class);
 		assertEquals(0, version);
 	}
 
@@ -211,7 +211,7 @@ public abstract class AbstractJobDaoTests {
 		jobInstance = jobInstanceDao.createJobInstance(testJob, jobParameters);
 
 		List<Map<String, Object>> jobs = jdbcTemplate
-				.queryForList("SELECT * FROM BATCH_JOB_INSTANCE where JOB_INSTANCE_ID=?", jobInstance.getId());
+		.queryForList("SELECT * FROM BATCH_JOB_INSTANCE where JOB_INSTANCE_ID=?", jobInstance.getId());
 		assertEquals(1, jobs.size());
 		assertEquals("test", jobs.get(0).get("JOB_NAME"));
 

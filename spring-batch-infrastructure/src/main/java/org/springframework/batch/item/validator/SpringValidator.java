@@ -43,7 +43,7 @@ public class SpringValidator<T> implements Validator<T>, InitializingBean {
 
 		if (!validator.supports(item.getClass())) {
 			throw new ValidationException("Validation failed for " + item + ": " + item.getClass().getName()
-					+ " class is not supported by validator.");
+			+ " class is not supported by validator.");
 		}
 
 		BeanPropertyBindingResult errors = new BeanPropertyBindingResult(item, "item");
@@ -52,7 +52,7 @@ public class SpringValidator<T> implements Validator<T>, InitializingBean {
 
 		if (errors.hasErrors()) {
 			throw new ValidationException("Validation failed for " + item + ": " + errorsToString(errors),
-					new BindException(errors));
+			new BindException(errors));
 		}
 	}
 

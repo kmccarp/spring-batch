@@ -68,8 +68,8 @@ public class DefaultJobLoader implements JobLoader, ApplicationContextAware {
 	@Override
 	@SuppressWarnings("resource")
 	public void loadResource(String path) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { path },
-				applicationContext);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{path},
+		applicationContext);
 		String[] names = context.getBeanNamesForType(Job.class);
 		for (String name : names) {
 			configurations.put(name, path);

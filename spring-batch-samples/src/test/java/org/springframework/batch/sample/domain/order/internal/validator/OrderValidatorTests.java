@@ -279,7 +279,7 @@ class OrderValidatorTests {
 		info.setShipperId("FEDX");
 		info.setShippingTypeId("EXP");
 		info.setShippingInfo(
-				"12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+		"12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 		order.setShipping(info);
 
 		errors = new BeanPropertyBindingResult(order, "validOrder");
@@ -337,7 +337,7 @@ class OrderValidatorTests {
 	}
 
 	private LineItem buildLineItem(long itemId, double price, int discountPercentage, int discountAmount,
-			long shippingPrice, long handlingPrice, int qty, int totalPrice) {
+	long shippingPrice, long handlingPrice, int qty, int totalPrice) {
 		LineItem invalidId = new LineItem();
 		invalidId.setItemId(itemId);
 		invalidId.setPrice(new BigDecimal(price));

@@ -108,7 +108,7 @@ class AlmostStatefulRetryChunkTests {
 	 * @param chunk Chunk to recover
 	 */
 	private void recover(Chunk<String> chunk) throws Exception {
-		for (Chunk<String>.ChunkIterator iterator = chunk.iterator(); iterator.hasNext();) {
+		for (Chunk<String>.ChunkIterator iterator = chunk.iterator(); iterator.hasNext(); ) {
 			String string = iterator.next();
 			try {
 				doWrite(Collections.singletonList(string));
@@ -131,16 +131,16 @@ class AlmostStatefulRetryChunkTests {
 
 	static Stream<Arguments> testRetry() {
 		return Stream.of(Arguments.of(List.of("foo"), 0), Arguments.of(List.of("foo", "bar"), 0),
-				Arguments.of(List.of("foo", "bar", "spam"), 0),
-				Arguments.of(List.of("foo", "bar", "spam", "maps", "rab", "oof"), 0), Arguments.of(List.of("fail"), 0),
-				Arguments.of(List.of("foo", "fail"), 0), Arguments.of(List.of("fail", "bar"), 0),
-				Arguments.of(List.of("foo", "fail", "spam"), 0), Arguments.of(List.of("fail", "bar", "spam"), 0),
-				Arguments.of(List.of("foo", "fail", "spam", "maps", "rab", "oof"), 0),
-				Arguments.of(List.of("foo", "fail", "spam", "fail", "rab", "oof"), 0),
-				Arguments.of(List.of("fail", "bar", "spam", "fail", "rab", "oof"), 0),
-				Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 0), Arguments.of(List.of("fail"), 1),
-				Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 1),
-				Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 4));
+		Arguments.of(List.of("foo", "bar", "spam"), 0),
+		Arguments.of(List.of("foo", "bar", "spam", "maps", "rab", "oof"), 0), Arguments.of(List.of("fail"), 0),
+		Arguments.of(List.of("foo", "fail"), 0), Arguments.of(List.of("fail", "bar"), 0),
+		Arguments.of(List.of("foo", "fail", "spam"), 0), Arguments.of(List.of("fail", "bar", "spam"), 0),
+		Arguments.of(List.of("foo", "fail", "spam", "maps", "rab", "oof"), 0),
+		Arguments.of(List.of("foo", "fail", "spam", "fail", "rab", "oof"), 0),
+		Arguments.of(List.of("fail", "bar", "spam", "fail", "rab", "oof"), 0),
+		Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 0), Arguments.of(List.of("fail"), 1),
+		Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 1),
+		Arguments.of(List.of("foo", "fail", "fail", "fail", "rab", "oof"), 4));
 	}
 
 }

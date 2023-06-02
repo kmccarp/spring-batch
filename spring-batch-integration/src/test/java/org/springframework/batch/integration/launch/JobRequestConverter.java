@@ -31,7 +31,7 @@ public class JobRequestConverter {
 	public JobLaunchRequest convert(String jobName) {
 		Properties properties = new Properties();
 		return new JobLaunchRequest(new JobSupport(jobName),
-				new DefaultJobParametersConverter().getJobParameters(properties));
+		new DefaultJobParametersConverter().getJobParameters(properties));
 	}
 
 }

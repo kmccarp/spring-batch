@@ -94,25 +94,25 @@ class BatchRegistrarTests {
 
 		JobRepository jobRepository = context.getBean(JobRepository.class);
 		JdbcJobInstanceDao jobInstanceDao = (JdbcJobInstanceDao) ReflectionTestUtils.getField(jobRepository,
-				"jobInstanceDao");
+		"jobInstanceDao");
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(jobInstanceDao, "jdbcTemplate");
 		DataSource dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcJobExecutionDao jobExecutionDao = (JdbcJobExecutionDao) ReflectionTestUtils.getField(jobRepository,
-				"jobExecutionDao");
+		"jobExecutionDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(jobExecutionDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcStepExecutionDao stepExecutionDao = (JdbcStepExecutionDao) ReflectionTestUtils.getField(jobRepository,
-				"stepExecutionDao");
+		"stepExecutionDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(stepExecutionDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcExecutionContextDao executionContextDao = (JdbcExecutionContextDao) ReflectionTestUtils
-				.getField(jobRepository, "ecDao");
+		.getField(jobRepository, "ecDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(executionContextDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
@@ -125,29 +125,29 @@ class BatchRegistrarTests {
 	@DisplayName("When custom bean names are provided, then corresponding beans should be used to configure infrastructure beans")
 	void testConfigurationWithCustomBeanNames() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				JobConfigurationWithCustomBeanNames.class);
+		JobConfigurationWithCustomBeanNames.class);
 
 		JobRepository jobRepository = context.getBean(JobRepository.class);
 		JdbcJobInstanceDao jobInstanceDao = (JdbcJobInstanceDao) ReflectionTestUtils.getField(jobRepository,
-				"jobInstanceDao");
+		"jobInstanceDao");
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(jobInstanceDao, "jdbcTemplate");
 		DataSource dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcJobExecutionDao jobExecutionDao = (JdbcJobExecutionDao) ReflectionTestUtils.getField(jobRepository,
-				"jobExecutionDao");
+		"jobExecutionDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(jobExecutionDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcStepExecutionDao stepExecutionDao = (JdbcStepExecutionDao) ReflectionTestUtils.getField(jobRepository,
-				"stepExecutionDao");
+		"stepExecutionDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(stepExecutionDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
 
 		JdbcExecutionContextDao executionContextDao = (JdbcExecutionContextDao) ReflectionTestUtils
-				.getField(jobRepository, "ecDao");
+		.getField(jobRepository, "ecDao");
 		jdbcTemplate = (JdbcTemplate) ReflectionTestUtils.getField(executionContextDao, "jdbcTemplate");
 		dataSource = (DataSource) ReflectionTestUtils.getField(jdbcTemplate, "dataSource");
 		Assertions.assertEquals(context.getBean(DataSource.class), dataSource);
@@ -231,7 +231,7 @@ class BatchRegistrarTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean
@@ -248,7 +248,7 @@ class BatchRegistrarTests {
 		@Bean
 		public DataSource batchDataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean
@@ -260,7 +260,7 @@ class BatchRegistrarTests {
 
 	private PlatformTransactionManager getTransactionManagerSetOnJobRepository(JobRepository jobRepository) {
 		Advised target = (Advised) jobRepository; // proxy created by
-													// AbstractJobRepositoryFactoryBean
+		// AbstractJobRepositoryFactoryBean
 		Advisor[] advisors = target.getAdvisors();
 		for (Advisor advisor : advisors) {
 			if (advisor.getAdvice() instanceof TransactionInterceptor transactionInterceptor) {

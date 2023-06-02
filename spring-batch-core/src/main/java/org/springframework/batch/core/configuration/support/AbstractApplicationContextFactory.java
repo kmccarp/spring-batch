@@ -110,7 +110,7 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 	 */
 
 	public void setBeanFactoryPostProcessorClasses(
-			Class<? extends BeanFactoryPostProcessor>[] beanFactoryPostProcessorClasses) {
+	Class<? extends BeanFactoryPostProcessor>[] beanFactoryPostProcessorClasses) {
 		this.beanFactoryPostProcessorClasses = new ArrayList<>();
 		for (int i = 0; i < beanFactoryPostProcessorClasses.length; i++) {
 			this.beanFactoryPostProcessorClasses.add(beanFactoryPostProcessorClasses[i]);
@@ -173,7 +173,7 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 	}
 
 	protected abstract ConfigurableApplicationContext createApplicationContext(ConfigurableApplicationContext parent,
-			Object... resources);
+	Object... resources);
 
 	/**
 	 * Extension point for special subclasses that want to do more complex things with the
@@ -198,20 +198,20 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 	 * @see DefaultListableBeanFactory#copyConfigurationFrom(ConfigurableBeanFactory)
 	 */
 	protected void prepareBeanFactory(ConfigurableListableBeanFactory parent,
-			ConfigurableListableBeanFactory beanFactory) {
+	ConfigurableListableBeanFactory beanFactory) {
 		if (copyConfiguration && parent != null) {
 			List<BeanPostProcessor> parentPostProcessors = new ArrayList<>();
 			List<BeanPostProcessor> childPostProcessors = new ArrayList<>();
 
 			childPostProcessors.addAll(beanFactory instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>());
+			? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>());
 			parentPostProcessors.addAll(parent instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) parent).getBeanPostProcessors() : new ArrayList<>());
+			? ((AbstractBeanFactory) parent).getBeanPostProcessors() : new ArrayList<>());
 
 			try {
 				Class<?> applicationContextAwareProcessorClass = ClassUtils.forName(
-						"org.springframework.context.support.ApplicationContextAwareProcessor",
-						parent.getBeanClassLoader());
+				"org.springframework.context.support.ApplicationContextAwareProcessor",
+				parent.getBeanClassLoader());
 
 				for (BeanPostProcessor beanPostProcessor : new ArrayList<>(parentPostProcessors)) {
 					if (applicationContextAwareProcessorClass.isAssignableFrom(beanPostProcessor.getClass())) {
@@ -242,7 +242,7 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 			beanFactory.copyConfigurationFrom(parent);
 
 			List<BeanPostProcessor> beanPostProcessors = beanFactory instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>();
+			? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>();
 
 			beanPostProcessors.clear();
 			beanPostProcessors.addAll(aggregatedPostProcessors);

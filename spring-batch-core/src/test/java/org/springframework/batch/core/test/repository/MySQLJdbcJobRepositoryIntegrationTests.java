@@ -114,8 +114,8 @@ class MySQLJdbcJobRepositoryIntegrationTests {
 		// when
 		JobExecution jobExecution = this.jobLauncher.run(this.job, jobParameters);
 		this.jobOperator.restart(jobExecution.getId()); // should load the date parameter
-														// with fractional seconds
-														// precision here
+		// with fractional seconds
+		// precision here
 
 		// then
 		List<Long> jobInstances = this.jobOperator.getJobInstances("job", 0, 100);
@@ -146,14 +146,14 @@ class MySQLJdbcJobRepositoryIntegrationTests {
 		@Bean
 		public Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new JobBuilder("job", jobRepository)
-					.start(new StepBuilder("step", jobRepository).tasklet((contribution, chunkContext) -> {
-						throw new Exception("expected failure");
-					}, transactionManager).build()).build();
+			.start(new StepBuilder("step", jobRepository).tasklet((contribution, chunkContext) -> {
+				throw new Exception("expected failure");
+			}, transactionManager).build()).build();
 		}
 
 		@Bean
 		public JobOperator jobOperator(JobLauncher jobLauncher, JobRegistry jobRegistry, JobExplorer jobExplorer,
-				JobRepository jobRepository) {
+		JobRepository jobRepository) {
 			SimpleJobOperator jobOperator = new SimpleJobOperator();
 			jobOperator.setJobExplorer(jobExplorer);
 			jobOperator.setJobLauncher(jobLauncher);

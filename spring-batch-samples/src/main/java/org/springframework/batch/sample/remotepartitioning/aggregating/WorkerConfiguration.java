@@ -44,7 +44,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableBatchProcessing
 @EnableBatchIntegration
-@Import(value = { DataSourceConfiguration.class, BrokerConfiguration.class })
+@Import(value = {DataSourceConfiguration.class, BrokerConfiguration.class})
 public class WorkerConfiguration {
 
 	private final RemotePartitioningWorkerStepBuilderFactory workerStepBuilderFactory;
@@ -64,7 +64,7 @@ public class WorkerConfiguration {
 	@Bean
 	public IntegrationFlow inboundFlow(ActiveMQConnectionFactory connectionFactory) {
 		return IntegrationFlow.from(Jms.messageDrivenChannelAdapter(connectionFactory).destination("requests"))
-				.channel(requests()).get();
+		.channel(requests()).get();
 	}
 
 	/*
@@ -78,7 +78,7 @@ public class WorkerConfiguration {
 	@Bean
 	public IntegrationFlow outboundFlow(ActiveMQConnectionFactory connectionFactory) {
 		return IntegrationFlow.from(replies()).handle(Jms.outboundAdapter(connectionFactory).destination("replies"))
-				.get();
+		.get();
 	}
 
 	/*
@@ -87,7 +87,7 @@ public class WorkerConfiguration {
 	@Bean
 	public Step workerStep(PlatformTransactionManager transactionManager) {
 		return this.workerStepBuilderFactory.get("workerStep").inputChannel(requests()).outputChannel(replies())
-				.tasklet(tasklet(null), transactionManager).build();
+		.tasklet(tasklet(null), transactionManager).build();
 	}
 
 	@Bean

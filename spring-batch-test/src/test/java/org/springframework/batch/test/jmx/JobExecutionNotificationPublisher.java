@@ -32,7 +32,7 @@ import org.springframework.jmx.export.notification.NotificationPublisherAware;
  * @since 1.0
  */
 public class JobExecutionNotificationPublisher
-		implements ApplicationListener<SimpleMessageApplicationEvent>, NotificationPublisherAware {
+implements ApplicationListener<SimpleMessageApplicationEvent>, NotificationPublisherAware {
 
 	protected static final Log logger = LogFactory.getLog(JobExecutionNotificationPublisher.class);
 
@@ -70,7 +70,7 @@ public class JobExecutionNotificationPublisher
 	private void publish(String message) {
 		if (notificationPublisher != null) {
 			Notification notification = new Notification("JobExecutionApplicationEvent", this, notificationCount++,
-					message);
+			message);
 			/*
 			 * We can't create a notification with a null source, but we can set it to
 			 * null after creation(!). We want it to be null so that Spring will replace

@@ -73,7 +73,7 @@ class H2CompatibilityModeJobRepositoryIntegrationTests {
 
 	private static DataSource buildDataSource(ModeEnum compatibilityMode) {
 		var connectionUrl = String.format("jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;MODE=%s",
-				UUID.randomUUID(), compatibilityMode);
+		UUID.randomUUID(), compatibilityMode);
 		var dataSource = new SimpleDriverDataSource(new org.h2.Driver(), connectionUrl, "sa", "");
 		var populator = new ResourceDatabasePopulator();
 		var resource = new DefaultResourceLoader().getResource("/org/springframework/batch/core/schema-h2.sql");
@@ -94,9 +94,9 @@ class H2CompatibilityModeJobRepositoryIntegrationTests {
 		@Bean
 		Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new JobBuilder("job", jobRepository)
-					.start(new StepBuilder("step", jobRepository)
-							.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
-					.build();
+			.start(new StepBuilder("step", jobRepository)
+		.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
+			.build();
 		}
 
 	}

@@ -52,7 +52,7 @@ public class CompositeSkipListener<T, S> implements SkipListener<T, S> {
 	 */
 	@Override
 	public void onSkipInRead(Throwable t) {
-		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			SkipListener<? super T, ? super S> listener = iterator.next();
 			listener.onSkipInRead(t);
 		}
@@ -66,7 +66,7 @@ public class CompositeSkipListener<T, S> implements SkipListener<T, S> {
 	 */
 	@Override
 	public void onSkipInWrite(S item, Throwable t) {
-		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			SkipListener<? super T, ? super S> listener = iterator.next();
 			listener.onSkipInWrite(item, t);
 		}
@@ -80,7 +80,7 @@ public class CompositeSkipListener<T, S> implements SkipListener<T, S> {
 	 */
 	@Override
 	public void onSkipInProcess(T item, Throwable t) {
-		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<SkipListener<? super T, ? super S>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			SkipListener<? super T, ? super S> listener = iterator.next();
 			listener.onSkipInProcess(item, t);
 		}

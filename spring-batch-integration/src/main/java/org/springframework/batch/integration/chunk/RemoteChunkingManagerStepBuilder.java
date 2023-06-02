@@ -193,7 +193,7 @@ public class RemoteChunkingManagerStepBuilder<I, O> extends FaultTolerantStepBui
 	public TaskletStep build() {
 		Assert.notNull(this.inputChannel, "An InputChannel must be provided");
 		Assert.state(this.outputChannel == null || this.messagingTemplate == null,
-				"You must specify either an outputChannel or a messagingTemplate but not both.");
+		"You must specify either an outputChannel or a messagingTemplate but not both.");
 
 		// configure messaging template
 		if (this.messagingTemplate == null) {
@@ -371,11 +371,11 @@ public class RemoteChunkingManagerStepBuilder<I, O> extends FaultTolerantStepBui
 	 */
 	@Override
 	public RemoteChunkingManagerStepBuilder<I, O> writer(ItemWriter<? super O> writer)
-			throws UnsupportedOperationException {
+	throws UnsupportedOperationException {
 		throw new UnsupportedOperationException(
-				"When configuring a manager step " + "for remote chunking, the item writer will be automatically set "
-						+ "to an instance of ChunkMessageChannelItemWriter. The item writer "
-						+ "must not be provided in this case.");
+		"When configuring a manager step " + "for remote chunking, the item writer will be automatically set "
+	+ "to an instance of ChunkMessageChannelItemWriter. The item writer "
+	+ "must not be provided in this case.");
 	}
 
 	@Override

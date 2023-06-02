@@ -163,7 +163,7 @@ public class StepBuilder extends StepBuilderHelper<StepBuilder> {
 	 * @since 5.0
 	 */
 	public <I, O> SimpleStepBuilder<I, O> chunk(CompletionPolicy completionPolicy,
-			PlatformTransactionManager transactionManager) {
+	PlatformTransactionManager transactionManager) {
 		return new SimpleStepBuilder<I, O>(this).transactionManager(transactionManager).chunk(completionPolicy);
 	}
 

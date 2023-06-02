@@ -66,7 +66,7 @@ class JmsIntegrationTests {
 		assertEquals(1, after - before);
 		JobExecution jobExecution = jobExplorer.getJobExecutions(jobInstances.get(jobInstances.size() - 1)).get(0);
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus(),
-				jobExecution.getExitStatus().getExitDescription());
+		jobExecution.getExitStatus().getExitDescription());
 		assertEquals(3, jobExecution.getStepExecutions().size());
 		for (StepExecution stepExecution : jobExecution.getStepExecutions()) {
 			// BATCH-1703: we are using a map dao so the step executions in the job

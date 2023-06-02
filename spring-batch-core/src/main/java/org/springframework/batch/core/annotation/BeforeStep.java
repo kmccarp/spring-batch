@@ -36,7 +36,7 @@ import org.springframework.batch.core.StepExecutionListener;
  * @see StepExecutionListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface BeforeStep {
 
 }

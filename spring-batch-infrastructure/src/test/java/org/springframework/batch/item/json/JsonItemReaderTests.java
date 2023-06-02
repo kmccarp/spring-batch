@@ -48,11 +48,11 @@ class JsonItemReaderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new JsonItemReader<>(null, this.jsonObjectReader));
+		() -> new JsonItemReader<>(null, this.jsonObjectReader));
 		assertEquals("The resource must not be null.", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new JsonItemReader<>(new ByteArrayResource("[{}]".getBytes()), null));
+		() -> new JsonItemReader<>(new ByteArrayResource("[{}]".getBytes()), null));
 		assertEquals("The json object reader must not be null.", exception.getMessage());
 	}
 
@@ -63,7 +63,7 @@ class JsonItemReaderTests {
 
 		// when
 		final Exception expectedException = assertThrows(ItemStreamException.class,
-				() -> this.itemReader.open(new ExecutionContext()));
+		() -> this.itemReader.open(new ExecutionContext()));
 
 		// then
 		assertEquals("Failed to initialize the reader", expectedException.getMessage());
@@ -77,7 +77,7 @@ class JsonItemReaderTests {
 
 		// when
 		final Exception expectedException = assertThrows(ItemStreamException.class,
-				() -> this.itemReader.open(new ExecutionContext()));
+		() -> this.itemReader.open(new ExecutionContext()));
 
 		// then
 		assertEquals("Failed to initialize the reader", expectedException.getMessage());

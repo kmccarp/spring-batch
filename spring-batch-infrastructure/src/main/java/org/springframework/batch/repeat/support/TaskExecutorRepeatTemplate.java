@@ -98,7 +98,7 @@ public class TaskExecutorRepeatTemplate extends RepeatTemplate {
 	 */
 	@Override
 	protected RepeatStatus getNextResult(RepeatContext context, RepeatCallback callback, RepeatInternalState state)
-			throws Throwable {
+	throws Throwable {
 
 		ExecutingRunnable runnable;
 

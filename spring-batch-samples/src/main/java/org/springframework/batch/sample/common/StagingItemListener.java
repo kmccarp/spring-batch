@@ -45,10 +45,10 @@ public class StagingItemListener extends StepListenerSupport<Long, Long> impleme
 	@Override
 	public void afterRead(Long id) {
 		int count = jdbcTemplate.update("UPDATE BATCH_STAGING SET PROCESSED=? WHERE ID=? AND PROCESSED=?",
-				StagingItemWriter.DONE, id, StagingItemWriter.NEW);
+		StagingItemWriter.DONE, id, StagingItemWriter.NEW);
 		if (count != 1) {
 			throw new OptimisticLockingFailureException("The staging record with ID=" + id
-					+ " was updated concurrently when trying to mark as complete (updated " + count + " records.");
+			+ " was updated concurrently when trying to mark as complete (updated " + count + " records.");
 		}
 	}
 

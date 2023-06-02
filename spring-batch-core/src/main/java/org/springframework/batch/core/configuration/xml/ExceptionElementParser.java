@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 public class ExceptionElementParser {
 
 	public ManagedMap<TypedStringValue, Boolean> parse(Element element, ParserContext parserContext,
-			String exceptionListName) {
+	String exceptionListName) {
 		List<Element> children = DomUtils.getChildElementsByTagName(element, exceptionListName);
 		if (children.size() == 1) {
 			ManagedMap<TypedStringValue, Boolean> map = new ManagedMap<>();
@@ -39,14 +39,14 @@ public class ExceptionElementParser {
 		}
 		else if (children.size() > 1) {
 			parserContext.getReaderContext().error("The <" + exceptionListName
-					+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
-					element);
+			+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
+			element);
 		}
 		return null;
 	}
 
 	private void addExceptionClasses(String elementName, boolean include, Element exceptionClassesElement,
-			ManagedMap<TypedStringValue, Boolean> map, ParserContext parserContext) {
+	ManagedMap<TypedStringValue, Boolean> map, ParserContext parserContext) {
 		for (Element child : DomUtils.getChildElementsByTagName(exceptionClassesElement, elementName)) {
 			String className = child.getAttribute("class");
 			map.put(new TypedStringValue(className, Class.class), include);

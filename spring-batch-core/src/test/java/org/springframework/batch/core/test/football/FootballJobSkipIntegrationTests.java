@@ -40,7 +40,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @author Mahmoud Ben Hassine
  *
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/META-INF/batch/footballSkipJob.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/META-INF/batch/footballSkipJob.xml"})
 public class FootballJobSkipIntegrationTests extends AbstractIntegrationTests {
 
 	/** Logger */
@@ -76,7 +76,7 @@ public class FootballJobSkipIntegrationTests extends AbstractIntegrationTests {
 			// Ignore (wrong platform)
 		}
 		JobExecution execution = jobLauncher.run(job,
-				new JobParametersBuilder().addLong("skip.limit", 0L).toJobParameters());
+		new JobParametersBuilder().addLong("skip.limit", 0L).toJobParameters());
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		for (StepExecution stepExecution : execution.getStepExecutions()) {
 			logger.info("Processed: " + stepExecution);
@@ -85,7 +85,7 @@ public class FootballJobSkipIntegrationTests extends AbstractIntegrationTests {
 		// violation
 		long retryLimit = 2L;
 		execution = jobLauncher.run(job, new JobParametersBuilder().addLong("skip.limit", 100000L)
-				.addLong("retry.limit", retryLimit).toJobParameters());
+		.addLong("retry.limit", retryLimit).toJobParameters());
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		for (StepExecution stepExecution : execution.getStepExecutions()) {
 			logger.info("Processed: " + stepExecution);
@@ -96,7 +96,7 @@ public class FootballJobSkipIntegrationTests extends AbstractIntegrationTests {
 				// Account for the extra empty commit if the read count is
 				// commensurate with the commit interval
 				long effectiveCommitCount = stepExecution.getReadCount() % commitInterval == 0
-						? stepExecution.getCommitCount() - 1 : stepExecution.getCommitCount();
+				? stepExecution.getCommitCount() - 1 : stepExecution.getCommitCount();
 				long expectedRollbacks = Math.max(1, retryLimit) * effectiveCommitCount + stepExecution.getReadCount();
 				assertEquals(expectedRollbacks, stepExecution.getRollbackCount());
 				assertEquals(stepExecution.getReadCount(), stepExecution.getWriteSkipCount());

@@ -175,7 +175,7 @@ public class MultiResourceItemReader<T> extends AbstractItemStreamItemReader<T> 
 		if (resources.length == 0) {
 			if (strict) {
 				throw new IllegalStateException(
-						"No resources to read. Set strict=false if this is not an error condition.");
+				"No resources to read. Set strict=false if this is not an error condition.");
 			}
 			else {
 				logger.warn("No resources to read. Set strict=true if this should be an error condition.");

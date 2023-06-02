@@ -37,7 +37,7 @@ class CompositeExceptionHandlerTests {
 	@Test
 	void testDelegation() throws Throwable {
 		final List<String> list = new ArrayList<>();
-		handler.setHandlers(new ExceptionHandler[] { new ExceptionHandler() {
+		handler.setHandlers(new ExceptionHandler[]{new ExceptionHandler() {
 			@Override
 			public void handleException(RepeatContext context, Throwable throwable) throws RuntimeException {
 				list.add("1");
@@ -47,7 +47,7 @@ class CompositeExceptionHandlerTests {
 			public void handleException(RepeatContext context, Throwable throwable) throws RuntimeException {
 				list.add("2");
 			}
-		} });
+		}});
 		handler.handleException(null, new RuntimeException());
 		assertEquals(2, list.size());
 		assertEquals("1", list.get(0));

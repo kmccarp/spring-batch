@@ -43,7 +43,7 @@ class MultiResourcePartitionerTests {
 
 	@Test
 	void testMissingResource() {
-		partitioner.setResources(new Resource[] { new FileSystemResource("does-not-exist") });
+		partitioner.setResources(new Resource[]{new FileSystemResource("does-not-exist")});
 		assertThrows(IllegalStateException.class, () -> partitioner.partition(0));
 	}
 

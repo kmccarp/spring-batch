@@ -32,7 +32,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/sample-steps.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/sample-steps.xml"})
 class SampleStepTests implements ApplicationContextAware {
 
 	@Autowired
@@ -64,7 +64,7 @@ class SampleStepTests implements ApplicationContextAware {
 		Step step = (Step) context.getBean("s2");
 		assertEquals(BatchStatus.COMPLETED, stepRunner.launchStep(step).getStatus());
 		assertEquals(2, jdbcTemplate.queryForObject("SELECT ID from TESTS where NAME = 'SampleTasklet2'", Integer.class)
-				.intValue());
+		.intValue());
 	}
 
 	@Override

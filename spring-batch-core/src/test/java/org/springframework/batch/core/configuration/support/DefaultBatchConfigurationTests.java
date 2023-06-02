@@ -89,7 +89,7 @@ class DefaultBatchConfigurationTests {
 	@Test
 	void testConfigurationWithCustomInfrastructureBean() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				MyJobConfigurationWithCustomInfrastructureBean.class);
+		MyJobConfigurationWithCustomInfrastructureBean.class);
 		Map<String, JobRepository> jobRepositories = context.getBeansOfType(JobRepository.class);
 		Assertions.assertEquals(1, jobRepositories.size());
 		JobRepository jobRepository = jobRepositories.entrySet().iterator().next().getValue();
@@ -146,7 +146,7 @@ class DefaultBatchConfigurationTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean

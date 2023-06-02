@@ -115,7 +115,7 @@ public class RemoteChunkHandlerFactoryBean<T> implements FactoryBean<ChunkHandle
 
 		if (stepContributionSource == null) {
 			Assert.state(chunkWriter instanceof StepContributionSource,
-					"The chunk writer must be a StepContributionSource or else the source must be provided explicitly");
+			"The chunk writer must be a StepContributionSource or else the source must be provided explicitly");
 			stepContributionSource = (StepContributionSource) chunkWriter;
 		}
 
@@ -126,14 +126,14 @@ public class RemoteChunkHandlerFactoryBean<T> implements FactoryBean<ChunkHandle
 
 		Tasklet tasklet = getTasklet(step);
 		Assert.state(tasklet instanceof ChunkOrientedTasklet<?>,
-				"Tasklet must be ChunkOrientedTasklet in step=" + step.getName());
+		"Tasklet must be ChunkOrientedTasklet in step=" + step.getName());
 
 		ChunkProcessor<T> chunkProcessor = getChunkProcessor((ChunkOrientedTasklet<?>) tasklet);
 		Assert.state(chunkProcessor != null, "ChunkProcessor must be accessible in Tasklet in step=" + step.getName());
 
 		ItemWriter<T> itemWriter = getItemWriter(chunkProcessor);
 		Assert.state(!(itemWriter instanceof ChunkMessageChannelItemWriter<?>), "Cannot adapt step [" + step.getName()
-				+ "] because it already has a remote chunk writer.  Use a local writer in the step.");
+		+ "] because it already has a remote chunk writer.  Use a local writer in the step.");
 
 		replaceChunkProcessor((ChunkOrientedTasklet<?>) tasklet, chunkWriter, stepContributionSource);
 		if (chunkWriter instanceof StepExecutionListener) {
@@ -170,18 +170,18 @@ public class RemoteChunkHandlerFactoryBean<T> implements FactoryBean<ChunkHandle
 	 * the workers
 	 */
 	private void replaceChunkProcessor(ChunkOrientedTasklet<?> tasklet, ItemWriter<T> chunkWriter,
-			final StepContributionSource stepContributionSource) {
+	final StepContributionSource stepContributionSource) {
 		setField(tasklet, "chunkProcessor",
-				new SimpleChunkProcessor<T, T>(new PassThroughItemProcessor<>(), chunkWriter) {
-					@Override
-					protected void write(StepContribution contribution, Chunk<T> inputs, Chunk<T> outputs)
-							throws Exception {
-						doWrite(outputs);
-						// Do not update the step contribution until the chunks are
-						// actually processed
-						updateStepContribution(contribution, stepContributionSource);
-					}
-				});
+		new SimpleChunkProcessor<T, T>(new PassThroughItemProcessor<>(), chunkWriter) {
+			@Override
+			protected void write(StepContribution contribution, Chunk<T> inputs, Chunk<T> outputs)
+		throws Exception {
+				doWrite(outputs);
+				// Do not update the step contribution until the chunks are
+				// actually processed
+				updateStepContribution(contribution, stepContributionSource);
+			}
+		});
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class RemoteChunkHandlerFactoryBean<T> implements FactoryBean<ChunkHandle
 	 * @param stepContributionSource a source of StepContributions
 	 */
 	protected void updateStepContribution(StepContribution contribution,
-			StepContributionSource stepContributionSource) {
+	StepContributionSource stepContributionSource) {
 		for (StepContribution result : stepContributionSource.getStepContributions()) {
 			contribution.incrementFilterCount(result.getFilterCount());
 			contribution.incrementWriteCount(result.getWriteCount());

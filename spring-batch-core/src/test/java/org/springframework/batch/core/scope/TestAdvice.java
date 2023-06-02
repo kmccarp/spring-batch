@@ -27,7 +27,7 @@ public class TestAdvice {
 	public static final List<String> names = new ArrayList<>();
 
 	@AfterReturning(pointcut = "execution(String org.springframework.batch.core.scope.Collaborator+.getName(..))",
-			returning = "name")
+	returning = "name")
 	public void registerCollaborator(String name) {
 		names.add(name);
 	}

@@ -70,7 +70,7 @@ class FlowJobBuilderTests {
 	private final StepSupport step1 = new StepSupport("step1") {
 		@Override
 		public void execute(StepExecution stepExecution)
-				throws JobInterruptedException, UnexpectedJobExecutionException {
+		throws JobInterruptedException, UnexpectedJobExecutionException {
 			stepExecution.upgradeStatus(BatchStatus.COMPLETED);
 			stepExecution.setExitStatus(ExitStatus.COMPLETED);
 			jobRepository.update(stepExecution);
@@ -80,7 +80,7 @@ class FlowJobBuilderTests {
 	private final StepSupport fails = new StepSupport("fails") {
 		@Override
 		public void execute(StepExecution stepExecution)
-				throws JobInterruptedException, UnexpectedJobExecutionException {
+		throws JobInterruptedException, UnexpectedJobExecutionException {
 			stepExecution.upgradeStatus(BatchStatus.FAILED);
 			stepExecution.setExitStatus(ExitStatus.FAILED);
 			jobRepository.update(stepExecution);
@@ -90,7 +90,7 @@ class FlowJobBuilderTests {
 	private final StepSupport step2 = new StepSupport("step2") {
 		@Override
 		public void execute(StepExecution stepExecution)
-				throws JobInterruptedException, UnexpectedJobExecutionException {
+		throws JobInterruptedException, UnexpectedJobExecutionException {
 			stepExecution.upgradeStatus(BatchStatus.COMPLETED);
 			stepExecution.setExitStatus(ExitStatus.COMPLETED);
 			jobRepository.update(stepExecution);
@@ -100,7 +100,7 @@ class FlowJobBuilderTests {
 	private final StepSupport step3 = new StepSupport("step3") {
 		@Override
 		public void execute(StepExecution stepExecution)
-				throws JobInterruptedException, UnexpectedJobExecutionException {
+		throws JobInterruptedException, UnexpectedJobExecutionException {
 			stepExecution.upgradeStatus(BatchStatus.COMPLETED);
 			stepExecution.setExitStatus(ExitStatus.COMPLETED);
 			jobRepository.update(stepExecution);
@@ -110,8 +110,8 @@ class FlowJobBuilderTests {
 	@BeforeEach
 	void init() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(embeddedDatabase);
 		factory.setTransactionManager(new JdbcTransactionManager(embeddedDatabase));
@@ -123,7 +123,7 @@ class FlowJobBuilderTests {
 	@Test
 	void testBuildOnOneLine() {
 		FlowJobBuilder builder = new JobBuilder("flow", jobRepository).start(step1).on("COMPLETED").to(step2).end()
-				.preventRestart();
+		.preventRestart();
 		builder.build().execute(execution);
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		assertEquals(2, execution.getStepExecutions().size());
@@ -172,7 +172,7 @@ class FlowJobBuilderTests {
 		Flow subflow1 = new FlowBuilder<Flow>("subflow1").from(step2).end();
 		Flow subflow2 = new FlowBuilder<Flow>("subflow2").from(step3).end();
 		Flow splitflow = new FlowBuilder<Flow>("splitflow").start(subflow1).split(new SimpleAsyncTaskExecutor())
-				.add(subflow2).build();
+		.add(subflow2).build();
 
 		FlowJobBuilder builder = new JobBuilder("flow", jobRepository).start(splitflow).end();
 		builder.preventRestart().build().execute(execution);
@@ -185,7 +185,7 @@ class FlowJobBuilderTests {
 		Flow flow1 = new FlowBuilder<Flow>("subflow1").from(step1).end();
 		Flow flow2 = new FlowBuilder<Flow>("subflow2").from(step2).end();
 		Flow splitFlow = new FlowBuilder<Flow>("splitflow").split(new SimpleAsyncTaskExecutor()).add(flow1, flow2)
-				.build();
+		.build();
 		FlowJobBuilder builder = new JobBuilder("flow", jobRepository).start(splitFlow).end();
 		builder.preventRestart().build().execute(execution);
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
@@ -289,10 +289,10 @@ class FlowJobBuilderTests {
 		@Bean
 		@JobScope
 		public Step step(JobRepository jobRepository, PlatformTransactionManager transactionManager,
-				@Value("#{jobParameters['chunkSize']}") Integer chunkSize) {
+		@Value("#{jobParameters['chunkSize']}") Integer chunkSize) {
 			return new StepBuilder("step", jobRepository).<Integer, Integer>chunk(chunkSize, transactionManager)
-					.reader(new ListItemReader<>(Arrays.asList(1, 2, 3, 4))).writer(items -> {
-					}).build();
+			.reader(new ListItemReader<>(Arrays.asList(1, 2, 3, 4))).writer(items -> {
+			}).build();
 		}
 
 		@Bean
@@ -304,7 +304,7 @@ class FlowJobBuilderTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean

@@ -116,7 +116,7 @@ public class JdbcCursorItemReader<T> extends AbstractCursorItemReader<T> {
 		try {
 			if (isUseSharedExtendedConnection()) {
 				preparedStatement = con.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY,
-						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			}
 			else {
 				preparedStatement = con.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);

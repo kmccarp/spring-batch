@@ -29,38 +29,38 @@ class JobParserExceptionTests {
 	@Test
 	void testUnreachableStep() {
 		Exception exception = assertThrows(BeanDefinitionParsingException.class,
-				() -> new ClassPathXmlApplicationContext(
-						"org/springframework/batch/core/configuration/xml/JobParserUnreachableStepTests-context.xml"));
+		() -> new ClassPathXmlApplicationContext(
+	"org/springframework/batch/core/configuration/xml/JobParserUnreachableStepTests-context.xml"));
 		assertTrue(exception.getMessage().contains("The element [s2] is unreachable"));
 	}
 
 	@Test
 	void testUnreachableStepInFlow() {
 		Exception exception = assertThrows(BeanDefinitionParsingException.class,
-				() -> new ClassPathXmlApplicationContext(
-						"org/springframework/batch/core/configuration/xml/JobParserUnreachableStepInFlowTests-context.xml"));
+		() -> new ClassPathXmlApplicationContext(
+	"org/springframework/batch/core/configuration/xml/JobParserUnreachableStepInFlowTests-context.xml"));
 		assertTrue(exception.getMessage().contains("The element [s4] is unreachable"));
 	}
 
 	@Test
 	void testNextOutOfScope() {
 		NestedRuntimeException exception = assertThrows(BeanCreationException.class,
-				() -> new ClassPathXmlApplicationContext(
-						"org/springframework/batch/core/configuration/xml/JobParserNextOutOfScopeTests-context.xml"));
+		() -> new ClassPathXmlApplicationContext(
+	"org/springframework/batch/core/configuration/xml/JobParserNextOutOfScopeTests-context.xml"));
 		String message = exception.getRootCause().getMessage();
 		assertTrue(
-				message.matches(".*Missing state for \\[StateTransition: \\[state=.*s2, pattern=\\*, next=.*s3\\]\\]"),
-				"Wrong message: " + message);
+		message.matches(".*Missing state for \\[StateTransition: \\[state=.*s2, pattern=\\*, next=.*s3\\]\\]"),
+		"Wrong message: " + message);
 	}
 
 	@Test
 	void testWrongSchemaInRoot() {
 		Exception exception = assertThrows(BeanDefinitionParsingException.class,
-				() -> new ClassPathXmlApplicationContext(
-						"org/springframework/batch/core/configuration/xml/JobParserWrongSchemaInRootTests-context.xml"));
+		() -> new ClassPathXmlApplicationContext(
+	"org/springframework/batch/core/configuration/xml/JobParserWrongSchemaInRootTests-context.xml"));
 		String message = exception.getMessage();
 		assertTrue(message.startsWith("Configuration problem: You are using a version of the spring-batch XSD"),
-				"Wrong message: " + message);
+		"Wrong message: " + message);
 	}
 
 }

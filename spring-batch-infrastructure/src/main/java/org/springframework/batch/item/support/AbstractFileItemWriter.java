@@ -64,7 +64,7 @@ import org.springframework.util.Assert;
  * @since 4.1
  */
 public abstract class AbstractFileItemWriter<T> extends AbstractItemStreamItemWriter<T>
-		implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
+implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
 
 	public static final boolean DEFAULT_TRANSACTIONAL = true;
 
@@ -579,7 +579,7 @@ public abstract class AbstractFileItemWriter<T> extends AbstractItemStreamItemWr
 				final FileChannel channel = fileChannel;
 				if (transactional) {
 					TransactionAwareBufferedWriter writer = new TransactionAwareBufferedWriter(channel,
-							() -> closeStream());
+					() -> closeStream());
 
 					writer.setEncoding(encoding);
 					writer.setForceSync(forceSync);

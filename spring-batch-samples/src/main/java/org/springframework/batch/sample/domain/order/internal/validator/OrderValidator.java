@@ -116,34 +116,34 @@ public class OrderValidator implements Validator {
 			if (BD_MIN.compareTo(lineItem.getDiscountPerc()) != 0) {
 				// DiscountPerc must be between 0.0 and 100.0
 				if ((BD_MIN.compareTo(lineItem.getDiscountPerc()) > 0)
-						|| (BD_PERC_MAX.compareTo(lineItem.getDiscountPerc()) < 0)
-						|| (BD_MIN.compareTo(lineItem.getDiscountAmount()) != 0)) { // only
-																					// one
-																					// of
-																					// DiscountAmount
-																					// and
-																					// DiscountPerc
-																					// should
-																					// be
-																					// non-zero
+				|| (BD_PERC_MAX.compareTo(lineItem.getDiscountPerc()) < 0)
+				|| (BD_MIN.compareTo(lineItem.getDiscountAmount()) != 0)) { // only
+					// one
+					// of
+					// DiscountAmount
+					// and
+					// DiscountPerc
+					// should
+					// be
+					// non-zero
 					discounts = false;
 				}
 			}
 			else {
 				// DiscountAmount must be between 0.0 and item.price
 				if ((BD_MIN.compareTo(lineItem.getDiscountAmount()) > 0)
-						|| (lineItem.getPrice().compareTo(lineItem.getDiscountAmount()) < 0)) {
+				|| (lineItem.getPrice().compareTo(lineItem.getDiscountAmount()) < 0)) {
 					discounts = false;
 				}
 			}
 
 			if ((BD_MIN.compareTo(lineItem.getShippingPrice()) > 0)
-					|| (BD_MAX.compareTo(lineItem.getShippingPrice()) < 0)) {
+			|| (BD_MAX.compareTo(lineItem.getShippingPrice()) < 0)) {
 				shippingPrices = false;
 			}
 
 			if ((BD_MIN.compareTo(lineItem.getHandlingPrice()) > 0)
-					|| (BD_MAX.compareTo(lineItem.getHandlingPrice()) < 0)) {
+			|| (BD_MAX.compareTo(lineItem.getHandlingPrice()) < 0)) {
 				handlingPrices = false;
 			}
 
@@ -167,7 +167,7 @@ public class OrderValidator implements Validator {
 
 			// price for single item = discountedPrice + shipping + handling
 			BigDecimal singleItemPrice = discountedPrice.add(lineItem.getShippingPrice())
-					.add(lineItem.getHandlingPrice());
+			.add(lineItem.getHandlingPrice());
 
 			// total price = singleItemPrice * quantity
 			BigDecimal quantity = new BigDecimal(lineItem.getQuantity());
@@ -221,7 +221,7 @@ public class OrderValidator implements Validator {
 
 		if (StringUtils.hasText(shipping.getShippingInfo())) {
 			validateStringLength(shipping.getShippingInfo(), errors, "shipping.shippingInfo",
-					"error.shipping.shippinginfo.length", 100);
+			"error.shipping.shippinginfo.length", 100);
 		}
 	}
 
@@ -239,15 +239,15 @@ public class OrderValidator implements Validator {
 		if (address != null) {
 			if (StringUtils.hasText(address.getAddressee())) {
 				validateStringLength(address.getAddressee(), errors, prefix + ".addressee",
-						"error.baddress.addresse.length", 60);
+				"error.baddress.addresse.length", 60);
 			}
 
 			validateStringLength(address.getAddrLine1(), errors, prefix + ".addrLine1",
-					"error.baddress.addrline1.length", 50);
+			"error.baddress.addrline1.length", 50);
 
 			if (StringUtils.hasText(address.getAddrLine2())) {
 				validateStringLength(address.getAddrLine2(), errors, prefix + ".addrLine2",
-						"error.baddress.addrline2.length", 50);
+				"error.baddress.addrline2.length", 50);
 			}
 			validateStringLength(address.getCity(), errors, prefix + ".city", "error.baddress.city.length", 30);
 			validateStringLength(address.getZipCode(), errors, prefix + ".zipCode", "error.baddress.zipcode.length", 5);
@@ -257,12 +257,12 @@ public class OrderValidator implements Validator {
 			}
 
 			if ((!StringUtils.hasText(address.getState()) && ("United States".equals(address.getCountry()))
-					|| StringUtils.hasText(address.getState()) && address.getState().length() != 2)) {
+			|| StringUtils.hasText(address.getState()) && address.getState().length() != 2)) {
 				errors.rejectValue(prefix + ".state", "error.baddress.state.length");
 			}
 
 			validateStringLength(address.getCountry(), errors, prefix + ".country", "error.baddress.country.length",
-					50);
+			50);
 		}
 	}
 
@@ -290,7 +290,7 @@ public class OrderValidator implements Validator {
 		}
 
 		if (customer.isRegistered()
-				&& (customer.getRegistrationId() < 0 || customer.getRegistrationId() >= 99999999L)) {
+		&& (customer.getRegistrationId() < 0 || customer.getRegistrationId() >= 99999999L)) {
 			errors.rejectValue("customer.registrationId", "error.customer.registrationid");
 		}
 	}

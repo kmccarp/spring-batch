@@ -93,7 +93,7 @@ public class JsonJobParametersConverter extends DefaultJobParametersConverter {
 		String parameterStringValue = this.conversionService.convert(parameterTypedValue, String.class);
 		try {
 			return this.objectMapper.writeValueAsString(new JobParameterDefinition(parameterStringValue,
-					parameterType.getName(), Boolean.toString(parameterIdentifying)));
+			parameterType.getName(), Boolean.toString(parameterIdentifying)));
 		}
 		catch (JsonProcessingException e) {
 			throw new JobParametersConversionException("Unable to encode job parameter " + jobParameter, e);
@@ -104,7 +104,7 @@ public class JsonJobParametersConverter extends DefaultJobParametersConverter {
 	protected JobParameter decode(String encodedJobParameter) {
 		try {
 			JobParameterDefinition jobParameterDefinition = this.objectMapper.readValue(encodedJobParameter,
-					JobParameterDefinition.class);
+			JobParameterDefinition.class);
 			Class<?> parameterType = String.class;
 			if (jobParameterDefinition.type() != null) {
 				parameterType = Class.forName(jobParameterDefinition.type());

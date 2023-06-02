@@ -36,7 +36,7 @@ class DataFieldMaxValueJobParametersIncrementerTests {
 	@Test
 	void testInvalidKey() {
 		DataFieldMaxValueJobParametersIncrementer jobParametersIncrementer = new DataFieldMaxValueJobParametersIncrementer(
-				this.incrementer);
+		this.incrementer);
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> jobParametersIncrementer.setKey(""));
 		assertEquals("key must not be null or empty", exception.getMessage());
 	}
@@ -44,7 +44,7 @@ class DataFieldMaxValueJobParametersIncrementerTests {
 	@Test
 	void testInvalidDataFieldMaxValueIncrementer() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new DataFieldMaxValueJobParametersIncrementer(null));
+		() -> new DataFieldMaxValueJobParametersIncrementer(null));
 		assertEquals("dataFieldMaxValueIncrementer must not be null", exception.getMessage());
 	}
 
@@ -54,7 +54,7 @@ class DataFieldMaxValueJobParametersIncrementerTests {
 		JobParameters jobParameters = new JobParameters();
 		when(this.incrementer.nextLongValue()).thenReturn(10L);
 		DataFieldMaxValueJobParametersIncrementer jobParametersIncrementer = new DataFieldMaxValueJobParametersIncrementer(
-				this.incrementer);
+		this.incrementer);
 
 		// when
 		JobParameters nextParameters = jobParametersIncrementer.getNext(jobParameters);
@@ -70,7 +70,7 @@ class DataFieldMaxValueJobParametersIncrementerTests {
 		JobParameters jobParameters = new JobParametersBuilder().addString("foo", "bar").toJobParameters();
 		when(this.incrementer.nextLongValue()).thenReturn(10L);
 		DataFieldMaxValueJobParametersIncrementer jobParametersIncrementer = new DataFieldMaxValueJobParametersIncrementer(
-				this.incrementer);
+		this.incrementer);
 
 		// when
 		JobParameters nextParameters = jobParametersIncrementer.getNext(jobParameters);
@@ -88,7 +88,7 @@ class DataFieldMaxValueJobParametersIncrementerTests {
 		JobParameters jobParameters = new JobParametersBuilder().addLong("run.id", 1L).toJobParameters();
 		when(this.incrementer.nextLongValue()).thenReturn(10L);
 		DataFieldMaxValueJobParametersIncrementer jobParametersIncrementer = new DataFieldMaxValueJobParametersIncrementer(
-				this.incrementer);
+		this.incrementer);
 
 		// when
 		JobParameters nextParameters = jobParametersIncrementer.getNext(jobParameters);

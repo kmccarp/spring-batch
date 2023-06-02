@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringJUnitConfig(locations = { "/data-source-context.xml" })
+@SpringJUnitConfig(locations = {"/data-source-context.xml"})
 class JdbcTradeWriterTests implements InitializingBean {
 
 	private JdbcOperations jdbcTemplate;

@@ -124,16 +124,16 @@ class AsyncChunkOrientedStepIntegrationTests {
 	void testStatus() throws Exception {
 
 		step.setTasklet(new TestingChunkOrientedTasklet<>(
-				getReader(new String[] { "a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c" }),
-				new ItemWriter<String>() {
-					@Override
-					public void write(Chunk<? extends String> data) throws Exception {
-						written.addAll(data.getItems());
-					}
-				}, chunkOperations));
+		getReader(new String[]{"a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"}),
+		new ItemWriter<String>() {
+			@Override
+			public void write(Chunk<? extends String> data) throws Exception {
+				written.addAll(data.getItems());
+			}
+		}, chunkOperations));
 
 		final JobExecution jobExecution = jobRepository.createJobExecution(job.getName(), new JobParameters(
-				Collections.singletonMap("run.id", new JobParameter(getClass().getName() + ".1", Long.class))));
+		Collections.singletonMap("run.id", new JobParameter(getClass().getName() + ".1", Long.class))));
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecution);
 
 		jobRepository.add(stepExecution);
@@ -142,12 +142,12 @@ class AsyncChunkOrientedStepIntegrationTests {
 		// Need a transaction so one connection is enough to get job execution and its
 		// parameters
 		StepExecution lastStepExecution = new TransactionTemplate(transactionManager)
-				.execute(new TransactionCallback<StepExecution>() {
-					@Override
-					public StepExecution doInTransaction(TransactionStatus status) {
-						return jobRepository.getLastStepExecution(jobExecution.getJobInstance(), step.getName());
-					}
-				});
+		.execute(new TransactionCallback<StepExecution>() {
+			@Override
+			public StepExecution doInTransaction(TransactionStatus status) {
+				return jobRepository.getLastStepExecution(jobExecution.getJobInstance(), step.getName());
+			}
+		});
 		assertEquals(lastStepExecution, stepExecution);
 		assertNotSame(lastStepExecution, stepExecution);
 	}

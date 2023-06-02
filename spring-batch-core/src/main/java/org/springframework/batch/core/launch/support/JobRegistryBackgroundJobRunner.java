@@ -244,7 +244,7 @@ public class JobRegistryBackgroundJobRunner {
 
 		synchronized (JobRegistryBackgroundJobRunner.class) {
 			System.out.println(
-					"Started application.  Interrupt (CTRL-C) or call JobRegistryBackgroundJobRunner.stop() to exit.");
+			"Started application.  Interrupt (CTRL-C) or call JobRegistryBackgroundJobRunner.stop() to exit.");
 			JobRegistryBackgroundJobRunner.class.wait();
 		}
 		launcher.destroy();
@@ -263,7 +263,7 @@ public class JobRegistryBackgroundJobRunner {
 	private void run() {
 		final ApplicationContext parent = new ClassPathXmlApplicationContext(parentContextPath);
 		parent.getAutowireCapableBeanFactory().autowireBeanProperties(this, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE,
-				false);
+		false);
 		parent.getAutowireCapableBeanFactory().initializeBean(this, getClass().getSimpleName());
 		this.parentContext = parent;
 	}

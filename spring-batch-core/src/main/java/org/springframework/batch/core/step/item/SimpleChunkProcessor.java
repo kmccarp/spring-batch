@@ -60,7 +60,7 @@ public class SimpleChunkProcessor<I, O> implements ChunkProcessor<I>, Initializi
 	}
 
 	public SimpleChunkProcessor(@Nullable ItemProcessor<? super I, ? extends O> itemProcessor,
-			ItemWriter<? super O> itemWriter) {
+	ItemWriter<? super O> itemWriter) {
 		this.itemProcessor = itemProcessor;
 		this.itemWriter = itemWriter;
 	}
@@ -313,7 +313,7 @@ public class SimpleChunkProcessor<I, O> implements ChunkProcessor<I>, Initializi
 
 	protected Chunk<O> transform(StepContribution contribution, Chunk<I> inputs) throws Exception {
 		Chunk<O> outputs = new Chunk<>();
-		for (Chunk<I>.ChunkIterator iterator = inputs.iterator(); iterator.hasNext();) {
+		for (Chunk<I>.ChunkIterator iterator = inputs.iterator(); iterator.hasNext(); ) {
 			final I item = iterator.next();
 			O output;
 			Timer.Sample sample = BatchMetrics.createTimerSample(this.meterRegistry);
@@ -344,13 +344,13 @@ public class SimpleChunkProcessor<I, O> implements ChunkProcessor<I>, Initializi
 	}
 
 	protected void stopTimer(Timer.Sample sample, StepExecution stepExecution, String metricName, String status,
-			String description) {
+	String description) {
 		String fullyQualifiedMetricName = BatchMetrics.METRICS_PREFIX + metricName;
 		sample.stop(BatchMetrics.createTimer(this.meterRegistry, metricName, description + " duration",
-				Tag.of(fullyQualifiedMetricName + ".job.name",
-						stepExecution.getJobExecution().getJobInstance().getJobName()),
-				Tag.of(fullyQualifiedMetricName + ".step.name", stepExecution.getStepName()),
-				Tag.of(fullyQualifiedMetricName + ".status", status)));
+		Tag.of(fullyQualifiedMetricName + ".job.name",
+	stepExecution.getJobExecution().getJobInstance().getJobName()),
+		Tag.of(fullyQualifiedMetricName + ".step.name", stepExecution.getStepName()),
+		Tag.of(fullyQualifiedMetricName + ".status", status)));
 	}
 
 }

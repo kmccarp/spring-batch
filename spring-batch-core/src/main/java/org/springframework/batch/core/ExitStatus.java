@@ -281,12 +281,12 @@ public class ExitStatus implements Serializable, Comparable<ExitStatus> {
 	 */
 	public static boolean isNonDefaultExitStatus(ExitStatus status) {
 		return status == null || status.getExitCode() == null
-				|| status.getExitCode().equals(ExitStatus.COMPLETED.getExitCode())
-				|| status.getExitCode().equals(ExitStatus.EXECUTING.getExitCode())
-				|| status.getExitCode().equals(ExitStatus.FAILED.getExitCode())
-				|| status.getExitCode().equals(ExitStatus.NOOP.getExitCode())
-				|| status.getExitCode().equals(ExitStatus.STOPPED.getExitCode())
-				|| status.getExitCode().equals(ExitStatus.UNKNOWN.getExitCode());
+		|| status.getExitCode().equals(ExitStatus.COMPLETED.getExitCode())
+		|| status.getExitCode().equals(ExitStatus.EXECUTING.getExitCode())
+		|| status.getExitCode().equals(ExitStatus.FAILED.getExitCode())
+		|| status.getExitCode().equals(ExitStatus.NOOP.getExitCode())
+		|| status.getExitCode().equals(ExitStatus.STOPPED.getExitCode())
+		|| status.getExitCode().equals(ExitStatus.UNKNOWN.getExitCode());
 	}
 
 }

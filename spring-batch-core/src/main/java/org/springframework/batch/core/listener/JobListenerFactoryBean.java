@@ -70,7 +70,7 @@ public class JobListenerFactoryBean extends AbstractListenerFactoryBean<JobExecu
 	 */
 	public static boolean isListener(Object delegate) {
 		return AbstractListenerFactoryBean.isListener(delegate, JobExecutionListener.class,
-				JobListenerMetaData.values());
+		JobListenerMetaData.values());
 	}
 
 }

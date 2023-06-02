@@ -79,7 +79,7 @@ public final class StateTransition {
 	 * @return {@link StateTransition} that was created.
 	 */
 	public static StateTransition switchOriginAndDestination(StateTransition stateTransition, State state,
-			String next) {
+	String next) {
 		return createStateTransition(state, stateTransition.pattern, next);
 	}
 
@@ -167,7 +167,7 @@ public final class StateTransition {
 	@Override
 	public String toString() {
 		return String.format("StateTransition: [state=%s, pattern=%s, next=%s]", state == null ? null : state.getName(),
-				pattern, next);
+		pattern, next);
 	}
 
 }

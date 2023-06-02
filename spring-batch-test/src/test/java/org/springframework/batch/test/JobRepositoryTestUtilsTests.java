@@ -98,7 +98,7 @@ class JobRepositoryTestUtilsTests {
 	@Test
 	void testCreateJobExecutionsByName() throws Exception {
 		utils = new JobRepositoryTestUtils(jobRepository);
-		List<JobExecution> list = utils.createJobExecutions("foo", new String[] { "bar", "spam" }, 3);
+		List<JobExecution> list = utils.createJobExecutions("foo", new String[]{"bar", "spam"}, 3);
 		assertEquals(3, list.size());
 		assertEquals(beforeJobs + 3, JdbcTestUtils.countRowsInTable(jdbcTemplate, "BATCH_JOB_EXECUTION"));
 		assertEquals(beforeSteps + 6, JdbcTestUtils.countRowsInTable(jdbcTemplate, "BATCH_STEP_EXECUTION"));
@@ -139,7 +139,7 @@ class JobRepositoryTestUtilsTests {
 	void testRemoveJobExecutions() throws Exception {
 		// given
 		utils = new JobRepositoryTestUtils(jobRepository);
-		utils.createJobExecutions("foo", new String[] { "step1", "step2" }, 1);
+		utils.createJobExecutions("foo", new String[]{"step1", "step2"}, 1);
 		assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "BATCH_JOB_EXECUTION"));
 		assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "BATCH_STEP_EXECUTION"));
 

@@ -27,7 +27,7 @@ class ItemRecoveryHandlerTests {
 
 	@Test
 	void testRecover() {
-		assertDoesNotThrow(() -> recoverer.recover(new Object[] { "foo" }, null));
+		assertDoesNotThrow(() -> recoverer.recover(new Object[]{"foo"}, null));
 	}
 
 }

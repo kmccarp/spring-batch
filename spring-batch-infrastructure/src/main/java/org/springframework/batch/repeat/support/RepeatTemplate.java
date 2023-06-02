@@ -66,7 +66,7 @@ public class RepeatTemplate implements RepeatOperations {
 
 	protected Log logger = LogFactory.getLog(getClass());
 
-	private RepeatListener[] listeners = new RepeatListener[] {};
+	private RepeatListener[] listeners = new RepeatListener[]{};
 
 	private CompletionPolicy completionPolicy = new DefaultResultCompletionPolicy();
 
@@ -242,7 +242,7 @@ public class RepeatTemplate implements RepeatOperations {
 					Throwable throwable = deferred.iterator().next();
 					if (logger.isDebugEnabled()) {
 						logger.debug("Handling fatal exception explicitly (rethrowing first of " + deferred.size()
-								+ "): " + throwable.getClass().getName() + ": " + throwable.getMessage());
+						+ "): " + throwable.getClass().getName() + ": " + throwable.getMessage());
 					}
 					rethrow(throwable);
 				}
@@ -251,7 +251,7 @@ public class RepeatTemplate implements RepeatOperations {
 			finally {
 
 				try {
-					for (int i = listeners.length; i-- > 0;) {
+					for (int i = listeners.length; i-- > 0; ) {
 						RepeatListener interceptor = listeners[i];
 						interceptor.close(context);
 					}
@@ -274,20 +274,20 @@ public class RepeatTemplate implements RepeatOperations {
 		Throwable unwrappedThrowable = unwrapIfRethrown(throwable);
 		try {
 
-			for (int i = listeners.length; i-- > 0;) {
+			for (int i = listeners.length; i-- > 0; ) {
 				RepeatListener interceptor = listeners[i];
 				// This is not an error - only log at debug
 				// level.
 				if (logger.isDebugEnabled()) {
 					logger.debug("Exception intercepted (" + (i + 1) + " of " + listeners.length + ")",
-							unwrappedThrowable);
+					unwrappedThrowable);
 				}
 				interceptor.onError(context, unwrappedThrowable);
 			}
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("Handling exception: " + throwable.getClass().getName() + ", caused by: "
-						+ unwrappedThrowable.getClass().getName() + ": " + unwrappedThrowable.getMessage());
+				+ unwrappedThrowable.getClass().getName() + ": " + unwrappedThrowable.getMessage());
 			}
 			exceptionHandler.handleException(context, unwrappedThrowable);
 
@@ -354,7 +354,7 @@ public class RepeatTemplate implements RepeatOperations {
 	 * @see #createInternalState(RepeatContext)
 	 */
 	protected RepeatStatus getNextResult(RepeatContext context, RepeatCallback callback, RepeatInternalState state)
-			throws Throwable {
+	throws Throwable {
 		update(context);
 		if (logger.isDebugEnabled()) {
 			logger.debug("Repeat operation about to start at count=" + context.getStartedCount());
@@ -407,7 +407,7 @@ public class RepeatTemplate implements RepeatOperations {
 		// that...
 
 		if (value != null && value.isContinuable()) {
-			for (int i = listeners.length; i-- > 0;) {
+			for (int i = listeners.length; i-- > 0; ) {
 				RepeatListener interceptor = listeners[i];
 				interceptor.after(context, value);
 			}

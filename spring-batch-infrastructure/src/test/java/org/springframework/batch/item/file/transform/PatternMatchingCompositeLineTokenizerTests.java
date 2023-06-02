@@ -86,7 +86,7 @@ class PatternMatchingCompositeLineTokenizerTests {
 		tokenizer.setTokenizers(Collections.singletonMap("foo*", (LineTokenizer) new LineTokenizer() {
 			@Override
 			public FieldSet tokenize(@Nullable String line) {
-				return new DefaultFieldSet(new String[] { line });
+				return new DefaultFieldSet(new String[]{line});
 			}
 		}));
 		tokenizer.afterPropertiesSet();

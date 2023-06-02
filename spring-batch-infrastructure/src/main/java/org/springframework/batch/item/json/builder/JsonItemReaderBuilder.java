@@ -151,7 +151,7 @@ public class JsonItemReaderBuilder<T> {
 
 		if (this.resource == null) {
 			logger.debug("The resource is null. This is only a valid scenario when "
-					+ "injecting it later as in when using the MultiResourceItemReader");
+			+ "injecting it later as in when using the MultiResourceItemReader");
 		}
 
 		JsonItemReader<T> reader = new JsonItemReader<>();

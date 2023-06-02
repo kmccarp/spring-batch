@@ -74,7 +74,7 @@ class MultiResourceItemReaderIntegrationTests {
 				return 0; // do not change ordering
 			}
 		});
-		tested.setResources(new Resource[] { r1, r2, r3, r4, r5 });
+		tested.setResources(new Resource[]{r1, r2, r3, r4, r5});
 	}
 
 	/**
@@ -210,7 +210,7 @@ class MultiResourceItemReaderIntegrationTests {
 		Resource r2 = new ByteArrayResource("".getBytes(), "a");
 		Resource r3 = new ByteArrayResource("".getBytes(), "c");
 
-		Resource[] resources = new Resource[] { r1, r2, r3 };
+		Resource[] resources = new Resource[]{r1, r2, r3};
 
 		Comparator<Resource> comp = new Comparator<Resource>() {
 
@@ -242,7 +242,7 @@ class MultiResourceItemReaderIntegrationTests {
 	 */
 	@Test
 	void testNoResourcesFound() throws Exception {
-		tested.setResources(new Resource[] {});
+		tested.setResources(new Resource[]{});
 		tested.open(new ExecutionContext());
 
 		assertNull(tested.read());
@@ -255,7 +255,7 @@ class MultiResourceItemReaderIntegrationTests {
 	 */
 	@Test
 	void testNonExistentResources() throws Exception {
-		tested.setResources(new Resource[] { new FileSystemResource("no/such/file.txt") });
+		tested.setResources(new Resource[]{new FileSystemResource("no/such/file.txt")});
 		itemReader.setStrict(false);
 		tested.open(new ExecutionContext());
 
@@ -271,7 +271,7 @@ class MultiResourceItemReaderIntegrationTests {
 	void testNonExistentResourcesItemStreamLifecycle() throws Exception {
 		ItemStreamReaderImpl delegate = new ItemStreamReaderImpl();
 		tested.setDelegate(delegate);
-		tested.setResources(new Resource[] {});
+		tested.setResources(new Resource[]{});
 		itemReader.setStrict(false);
 		tested.open(new ExecutionContext());
 
@@ -291,7 +291,7 @@ class MultiResourceItemReaderIntegrationTests {
 		FileSystemResource resource = new FileSystemResource("target/data");
 		resource.getFile().mkdirs();
 		assertTrue(resource.getFile().isDirectory());
-		tested.setResources(new Resource[] { resource });
+		tested.setResources(new Resource[]{resource});
 		itemReader.setStrict(false);
 		tested.open(new ExecutionContext());
 
@@ -316,7 +316,7 @@ class MultiResourceItemReaderIntegrationTests {
 			}
 		};
 
-		tested.setResources(new Resource[] { r1, badResource, r3, r4, r5 });
+		tested.setResources(new Resource[]{r1, badResource, r3, r4, r5});
 
 		tested.open(ctx);
 
@@ -342,7 +342,7 @@ class MultiResourceItemReaderIntegrationTests {
 			}
 		};
 
-		tested.setResources(new Resource[] { badResource, r2, r3, r4, r5 });
+		tested.setResources(new Resource[]{badResource, r2, r3, r4, r5});
 
 		tested.open(ctx);
 
@@ -372,7 +372,7 @@ class MultiResourceItemReaderIntegrationTests {
 			}
 		};
 
-		tested.setResources(new Resource[] { badResource, r2, r3, r4, r5 });
+		tested.setResources(new Resource[]{badResource, r2, r3, r4, r5});
 
 		tested.open(ctx);
 
@@ -388,7 +388,7 @@ class MultiResourceItemReaderIntegrationTests {
 	 */
 	@Test
 	void testStrictModeEnabled() {
-		tested.setResources(new Resource[] {});
+		tested.setResources(new Resource[]{});
 		tested.setStrict(true);
 
 		assertThrows(IllegalStateException.class, () -> tested.open(ctx));
@@ -399,7 +399,7 @@ class MultiResourceItemReaderIntegrationTests {
 	 */
 	@Test
 	void testStrictModeDisabled() {
-		tested.setResources(new Resource[] {});
+		tested.setResources(new Resource[]{});
 		tested.setStrict(false);
 
 		tested.open(ctx);

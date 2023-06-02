@@ -73,13 +73,13 @@ class AvroItemReaderTests extends AvroItemReaderTestSupport {
 	@Test
 	void dataResourceDoesNotExist() {
 		assertThrows(IllegalStateException.class,
-				() -> new AvroItemReader<User>(new ClassPathResource("doesnotexist"), schemaResource));
+		() -> new AvroItemReader<User>(new ClassPathResource("doesnotexist"), schemaResource));
 	}
 
 	@Test
 	void schemaResourceDoesNotExist() {
 		assertThrows(IllegalStateException.class,
-				() -> new AvroItemReader<User>(dataResource, new ClassPathResource("doesnotexist")));
+		() -> new AvroItemReader<User>(dataResource, new ClassPathResource("doesnotexist")));
 	}
 
 }

@@ -51,7 +51,7 @@ class MultiResourceItemReaderFlatFileTests extends AbstractItemStreamItemReaderT
 		Resource r3 = new ByteArrayResource("3\n".getBytes());
 		Resource r4 = new ByteArrayResource("4\n5\n".getBytes());
 
-		multiReader.setResources(new Resource[] { r1, r2, r3, r4 });
+		multiReader.setResources(new Resource[]{r1, r2, r3, r4});
 		multiReader.setSaveState(true);
 		multiReader.setComparator(new Comparator<Resource>() {
 			@Override
@@ -68,7 +68,7 @@ class MultiResourceItemReaderFlatFileTests extends AbstractItemStreamItemReaderT
 	protected void pointToEmptyInput(ItemReader<Foo> tested) throws Exception {
 		MultiResourceItemReader<Foo> multiReader = (MultiResourceItemReader<Foo>) tested;
 		multiReader.close();
-		multiReader.setResources(new Resource[] { new ByteArrayResource("".getBytes()) });
+		multiReader.setResources(new Resource[]{new ByteArrayResource("".getBytes())});
 		multiReader.open(new ExecutionContext());
 	}
 

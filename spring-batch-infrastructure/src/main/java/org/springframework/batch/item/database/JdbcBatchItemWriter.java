@@ -149,13 +149,13 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 		if (namedParameters.size() > 0) {
 			if (parameterCount != namedParameters.size()) {
 				throw new InvalidDataAccessApiUsageException(
-						"You can't use both named parameters and classic \"?\" placeholders: " + sql);
+				"You can't use both named parameters and classic \"?\" placeholders: " + sql);
 			}
 			usingNamedParameters = true;
 		}
 		if (!usingNamedParameters) {
 			Assert.state(itemPreparedStatementSetter != null,
-					"Using SQL statement with '?' placeholders requires an ItemPreparedStatementSetter");
+			"Using SQL statement with '?' placeholders requires an ItemPreparedStatementSetter");
 		}
 	}
 
@@ -179,7 +179,7 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 			if (usingNamedParameters) {
 				if (chunk.getItems().get(0) instanceof Map && this.itemSqlParameterSourceProvider == null) {
 					updateCounts = namedParameterJdbcTemplate.batchUpdate(sql,
-							chunk.getItems().toArray(new Map[chunk.size()]));
+					chunk.getItems().toArray(new Map[chunk.size()]));
 				}
 				else {
 					SqlParameterSource[] batchArgs = new SqlParameterSource[chunk.size()];
@@ -192,17 +192,17 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 			}
 			else {
 				updateCounts = namedParameterJdbcTemplate.getJdbcOperations().execute(sql,
-						new PreparedStatementCallback<int[]>() {
-							@Override
-							public int[] doInPreparedStatement(PreparedStatement ps)
-									throws SQLException, DataAccessException {
-								for (T item : chunk) {
-									itemPreparedStatementSetter.setValues(item, ps);
-									ps.addBatch();
-								}
-								return ps.executeBatch();
-							}
-						});
+				new PreparedStatementCallback<int[]>() {
+					@Override
+					public int[] doInPreparedStatement(PreparedStatement ps)
+				throws SQLException, DataAccessException {
+						for (T item : chunk) {
+							itemPreparedStatementSetter.setValues(item, ps);
+							ps.addBatch();
+						}
+						return ps.executeBatch();
+					}
+				});
 			}
 
 			if (assertUpdates) {
@@ -210,7 +210,7 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 					int value = updateCounts[i];
 					if (value == 0) {
 						throw new EmptyResultDataAccessException("Item " + i + " of " + updateCounts.length
-								+ " did not update any rows: [" + chunk.getItems().get(i) + "]", 1);
+						+ " did not update any rows: [" + chunk.getItems().get(i) + "]", 1);
 					}
 				}
 			}

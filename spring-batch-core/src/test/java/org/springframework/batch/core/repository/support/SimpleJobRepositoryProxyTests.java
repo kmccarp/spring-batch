@@ -55,7 +55,7 @@ class SimpleJobRepositoryProxyTests {
 	void testCreateAndFindWithExistingTransaction() {
 		assertFalse(advice.invoked);
 		assertThrows(IllegalStateException.class,
-				() -> jobRepository.createJobExecution(job.getName(), new JobParameters()));
+		() -> jobRepository.createJobExecution(job.getName(), new JobParameters()));
 	}
 
 	@Test

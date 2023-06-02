@@ -53,7 +53,7 @@ public class SynchronizedItemStreamReader<T> implements ItemStreamReader<T>, Ini
 	 */
 	@Nullable
 	public synchronized T read()
-			throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+	throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 		return this.delegate.read();
 	}
 

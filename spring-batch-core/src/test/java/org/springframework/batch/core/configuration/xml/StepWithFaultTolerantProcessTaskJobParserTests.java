@@ -83,9 +83,9 @@ class StepWithFaultTolerantProcessTaskJobParserTests {
 		Object cc = ReflectionTestUtils.getField(factory, "cacheCapacity");
 		assertEquals(100, cc, "wrong cache-capacity:");
 		assertEquals(Propagation.REQUIRED, ReflectionTestUtils.getField(factory, "propagation"),
-				"wrong transaction-attribute:");
+		"wrong transaction-attribute:");
 		assertEquals(Isolation.DEFAULT, ReflectionTestUtils.getField(factory, "isolation"),
-				"wrong transaction-attribute:");
+		"wrong transaction-attribute:");
 		assertEquals(10, ReflectionTestUtils.getField(factory, "transactionTimeout"), "wrong transaction-attribute:");
 		Object txq = ReflectionTestUtils.getField(factory, "readerTransactionalQueue");
 		assertEquals(true, txq, "wrong reader-transactional-queue:");

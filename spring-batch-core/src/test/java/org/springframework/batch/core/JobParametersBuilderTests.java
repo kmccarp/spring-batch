@@ -70,12 +70,12 @@ class JobParametersBuilderTests {
 	@Test
 	void testAddingExistingJobParameters() {
 		JobParameters params1 = new JobParametersBuilder().addString("foo", "bar").addString("bar", "baz")
-				.toJobParameters();
+		.toJobParameters();
 
 		JobParameters params2 = new JobParametersBuilder().addString("foo", "baz").toJobParameters();
 
 		JobParameters finalParams = new JobParametersBuilder().addString("baz", "quix").addJobParameters(params1)
-				.addJobParameters(params2).toJobParameters();
+		.addJobParameters(params2).toJobParameters();
 
 		assertEquals(finalParams.getString("foo"), "baz");
 		assertEquals(finalParams.getString("bar"), "baz");
@@ -160,7 +160,7 @@ class JobParametersBuilderTests {
 	void testGetNextJobParametersNoIncrementer() {
 		initializeForNextJobParameters();
 		final Exception expectedException = assertThrows(IllegalArgumentException.class,
-				() -> this.parametersBuilder.getNextJobParameters(this.job));
+		() -> this.parametersBuilder.getNextJobParameters(this.job));
 		assertEquals("No job parameters incrementer found for job=simpleJob", expectedException.getMessage());
 	}
 

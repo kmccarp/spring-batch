@@ -52,7 +52,7 @@ public class JmsItemWriter<T> implements ItemWriter<T> {
 		if (jmsTemplate instanceof JmsTemplate) {
 			JmsTemplate template = (JmsTemplate) jmsTemplate;
 			Assert.isTrue(template.getDefaultDestination() != null || template.getDefaultDestinationName() != null,
-					"JmsTemplate must have a defaultDestination or defaultDestinationName!");
+			"JmsTemplate must have a defaultDestination or defaultDestinationName!");
 		}
 	}
 

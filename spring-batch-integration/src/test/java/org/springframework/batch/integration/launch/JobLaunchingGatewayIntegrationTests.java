@@ -101,7 +101,7 @@ class JobLaunchingGatewayIntegrationTests {
 		map.put(MessageHeaders.REPLY_CHANNEL, "response");
 		MessageHeaders headers = new MessageHeaders(map);
 		GenericMessage<JobLaunchRequest> trigger = new GenericMessage<>(
-				new JobLaunchRequest(job, builder.toJobParameters()), headers);
+		new JobLaunchRequest(job, builder.toJobParameters()), headers);
 		requestChannel.send(trigger);
 		Message<JobExecution> executionMessage = (Message<JobExecution>) responseChannel.receive(1000);
 
@@ -137,7 +137,7 @@ class JobLaunchingGatewayIntegrationTests {
 		map.put(MessageHeaders.REPLY_CHANNEL, "response");
 		MessageHeaders headers = new MessageHeaders(map);
 		GenericMessage<JobLaunchRequest> trigger = new GenericMessage<>(
-				new JobLaunchRequest(testJob, builder.toJobParameters()), headers);
+		new JobLaunchRequest(testJob, builder.toJobParameters()), headers);
 		requestChannel.send(trigger);
 
 		Message<JobExecution> executionMessage = (Message<JobExecution>) responseChannel.receive(1000);

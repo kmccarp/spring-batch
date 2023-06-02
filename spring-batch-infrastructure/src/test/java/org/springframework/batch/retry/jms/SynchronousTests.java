@@ -122,7 +122,7 @@ public class SynchronousTests {
 						list.add(text);
 						System.err.println("Inserting: [" + list.size() + "," + text + "]");
 						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								text);
+						text);
 						if (list.size() == 1) {
 							throw new RuntimeException("Rollback!");
 						}
@@ -176,7 +176,7 @@ public class SynchronousTests {
 						list.add(item);
 						System.err.println("Inserting: [" + list.size() + "," + item + "]");
 						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								item);
+						item);
 						if (list.size() == 1) {
 							throw new RuntimeException("Rollback!");
 						}
@@ -241,7 +241,7 @@ public class SynchronousTests {
 									list.add(text);
 									System.err.println("Inserting: [" + list.size() + "," + text + "]");
 									jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)",
-											list.size(), text);
+									list.size(), text);
 									return text;
 
 								}
@@ -303,7 +303,7 @@ public class SynchronousTests {
 						final String text = (String) jmsTemplate.receiveAndConvert("queue");
 						list.add(text);
 						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								text);
+						text);
 						if (list.size() == 1) {
 							throw new RuntimeException("Rollback!");
 						}
@@ -338,23 +338,23 @@ public class SynchronousTests {
 		assertInitialState();
 
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> retryTemplate.execute((RetryCallback<String, Exception>) status -> {
+		() -> retryTemplate.execute((RetryCallback<String, Exception>) status -> {
 
-					// use REQUIRES_NEW so that the retry executes in its own transaction
-					TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
-					transactionTemplate.setPropagationBehavior(TransactionTemplate.PROPAGATION_REQUIRES_NEW);
-					return transactionTemplate.execute(status1 -> {
+			// use REQUIRES_NEW so that the retry executes in its own transaction
+			TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+			transactionTemplate.setPropagationBehavior(TransactionTemplate.PROPAGATION_REQUIRES_NEW);
+			return transactionTemplate.execute(status1 -> {
 
-						// The receive is inside the retry and the
-						// transaction...
-						final String text = (String) jmsTemplate.receiveAndConvert("queue");
-						list.add(text);
-						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								text);
-						throw new RuntimeException("Rollback!");
+				// The receive is inside the retry and the
+				// transaction...
+				final String text = (String) jmsTemplate.receiveAndConvert("queue");
+				list.add(text);
+				jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
+			text);
+				throw new RuntimeException("Rollback!");
 
-					});
-				}));
+			});
+		}));
 		/*
 		 * N.B. the message can be re-directed to an error queue by setting an error
 		 * destination in a JmsItemProvider.

@@ -29,7 +29,7 @@ import org.springframework.core.convert.converter.Converter;
  * @since 5.0.1
  */
 public class StringToLocalDateTimeConverter extends AbstractDateTimeConverter
-		implements Converter<String, LocalDateTime> {
+implements Converter<String, LocalDateTime> {
 
 	@Override
 	public LocalDateTime convert(String source) {

@@ -104,13 +104,13 @@ class MongoItemReaderBuilderTests {
 		assertNull(reader.read(), "reader should not return result");
 
 		verify(this.template).find(assertArg(query -> assertEquals("{ $natural : 1}", query.getHint())),
-				eq(String.class));
+		eq(String.class));
 	}
 
 	@Test
 	void testCollection() throws Exception {
 		MongoItemReader<String> reader = getBasicBuilder().parameterValues(Collections.singletonList("foo"))
-				.jsonQuery("{ name : ?0 }").collection("collection").build();
+		.jsonQuery("{ name : ?0 }").collection("collection").build();
 
 		when(this.template.find(any(), any(), anyString())).thenReturn(new ArrayList<>());
 
@@ -125,7 +125,7 @@ class MongoItemReaderBuilderTests {
 	@Test
 	void testVarargs() throws Exception {
 		MongoItemReader<String> reader = getBasicBuilder().parameterValues("foo").jsonQuery("{ name : ?0 }")
-				.collection("collection").build();
+		.collection("collection").build();
 
 		when(this.template.find(any(), any(), anyString())).thenReturn(new ArrayList<>());
 
@@ -140,8 +140,8 @@ class MongoItemReaderBuilderTests {
 	@Test
 	void testWithoutQueryLimit() throws Exception {
 		MongoItemReader<String> reader = new MongoItemReaderBuilder<String>().template(this.template)
-				.targetType(String.class).query(new Query()).sorts(this.sortOptions).name("mongoReaderTest")
-				.pageSize(50).build();
+		.targetType(String.class).query(new Query()).sorts(this.sortOptions).name("mongoReaderTest")
+		.pageSize(50).build();
 
 		when(template.find(any(), any())).thenReturn(new ArrayList<>());
 
@@ -153,7 +153,7 @@ class MongoItemReaderBuilderTests {
 	@Test
 	void testWithoutQueryLimitAndPageSize() throws Exception {
 		MongoItemReader<String> reader = new MongoItemReaderBuilder<String>().template(this.template)
-				.targetType(String.class).query(new Query()).sorts(this.sortOptions).name("mongoReaderTest").build();
+		.targetType(String.class).query(new Query()).sorts(this.sortOptions).name("mongoReaderTest").build();
 
 		when(template.find(any(), any())).thenReturn(new ArrayList<>());
 
@@ -165,40 +165,40 @@ class MongoItemReaderBuilderTests {
 	@Test
 	void testNullTemplate() {
 		validateExceptionMessage(new MongoItemReaderBuilder<String>().targetType(String.class).jsonQuery("{ }")
-				.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "template is required.");
+		.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "template is required.");
 	}
 
 	@Test
 	void testNullTargetType() {
 		validateExceptionMessage(new MongoItemReaderBuilder<String>().template(this.template).jsonQuery("{ }")
-				.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "targetType is required.");
+		.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "targetType is required.");
 	}
 
 	@Test
 	void testNullQuery() {
 		validateExceptionMessage(new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class)
-				.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "A query is required");
+		.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50), "A query is required");
 	}
 
 	@Test
 	void testNullSortsWithQueryString() {
 		validateExceptionMessage(new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class)
-				.jsonQuery("{ }").name("mongoReaderTest").pageSize(50), "sorts map is required.");
+		.jsonQuery("{ }").name("mongoReaderTest").pageSize(50), "sorts map is required.");
 	}
 
 	@Test
 	void testNullSortsWithQuery() {
 		validateExceptionMessage(
-				new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class)
-						.query(query(where("_id").is("10"))).name("mongoReaderTest").pageSize(50),
-				"sorts map is required.");
+		new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class)
+	.query(query(where("_id").is("10"))).name("mongoReaderTest").pageSize(50),
+		"sorts map is required.");
 	}
 
 	@Test
 	void testNullName() {
 		validateExceptionMessage(new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class)
-				.jsonQuery("{ }").sorts(this.sortOptions).pageSize(50),
-				"A name is required when saveState is set to true");
+	.jsonQuery("{ }").sorts(this.sortOptions).pageSize(50),
+		"A name is required when saveState is set to true");
 	}
 
 	private void validateExceptionMessage(MongoItemReaderBuilder<String> builder, String message) {
@@ -209,7 +209,7 @@ class MongoItemReaderBuilderTests {
 
 	private MongoItemReaderBuilder<String> getBasicBuilder() {
 		return new MongoItemReaderBuilder<String>().template(this.template).targetType(String.class).jsonQuery("{ }")
-				.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50);
+		.sorts(this.sortOptions).name("mongoReaderTest").pageSize(50);
 	}
 
 }

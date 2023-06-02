@@ -40,10 +40,10 @@ class ShippingFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { SHIPPER_ID, SHIPPING_INFO, SHIPPING_TYPE_ID };
-		String[] columnNames = new String[] { ShippingFieldSetMapper.SHIPPER_ID_COLUMN,
-				ShippingFieldSetMapper.ADDITIONAL_SHIPPING_INFO_COLUMN,
-				ShippingFieldSetMapper.SHIPPING_TYPE_ID_COLUMN };
+		String[] tokens = new String[]{SHIPPER_ID, SHIPPING_INFO, SHIPPING_TYPE_ID};
+		String[] columnNames = new String[]{ShippingFieldSetMapper.SHIPPER_ID_COLUMN,
+		ShippingFieldSetMapper.ADDITIONAL_SHIPPING_INFO_COLUMN,
+		ShippingFieldSetMapper.SHIPPING_TYPE_ID_COLUMN};
 		return new DefaultFieldSet(tokens, columnNames);
 	}
 

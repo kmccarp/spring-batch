@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml"})
 class JdbcJobRepositoryTests extends AbstractIntegrationTests {
 
 	private JobSupport job;
@@ -122,7 +122,7 @@ class JdbcJobRepositoryTests extends AbstractIntegrationTests {
 		assertEquals(before + 1, after);
 
 		logger.info("Duration: " + (t1 - t0)
-				+ " - the second transaction did not block if this number is less than about 1000.");
+		+ " - the second transaction did not block if this number is less than about 1000.");
 	}
 
 	@Test
@@ -150,7 +150,7 @@ class JdbcJobRepositoryTests extends AbstractIntegrationTests {
 		assertEquals(before, after);
 
 		logger.info("Duration: " + (t1 - t0)
-				+ " - the second transaction did not block if this number is less than about 1000.");
+		+ " - the second transaction did not block if this number is less than about 1000.");
 	}
 
 	private void cacheJobIds(JobExecution execution) {

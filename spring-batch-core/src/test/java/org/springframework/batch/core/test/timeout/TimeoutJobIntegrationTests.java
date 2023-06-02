@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/META-INF/batch/timeoutJob.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/META-INF/batch/timeoutJob.xml"})
 public class TimeoutJobIntegrationTests extends AbstractIntegrationTests {
 
 	/** Logger */
@@ -58,14 +58,14 @@ public class TimeoutJobIntegrationTests extends AbstractIntegrationTests {
 	@Test
 	void testChunkTimeoutShouldFail() throws Exception {
 		JobExecution execution = jobLauncher.run(chunkTimeoutJob,
-				new JobParametersBuilder().addLong("id", System.currentTimeMillis()).toJobParameters());
+		new JobParametersBuilder().addLong("id", System.currentTimeMillis()).toJobParameters());
 		assertEquals(BatchStatus.FAILED, execution.getStatus());
 	}
 
 	@Test
 	void testTaskletTimeoutShouldFail() throws Exception {
 		JobExecution execution = jobLauncher.run(taskletTimeoutJob,
-				new JobParametersBuilder().addLong("id", System.currentTimeMillis()).toJobParameters());
+		new JobParametersBuilder().addLong("id", System.currentTimeMillis()).toJobParameters());
 		assertEquals(BatchStatus.FAILED, execution.getStatus());
 	}
 

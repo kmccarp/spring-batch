@@ -44,7 +44,7 @@ public abstract class AvroItemReaderTestSupport extends AvroTestFixtures {
 		assertThat(users).hasSize(4);
 		List<T> actualItems = actual.getItems();
 		assertThat(users).containsExactlyInAnyOrder(actualItems.get(0), actualItems.get(1), actualItems.get(2),
-				actualItems.get(3));
+		actualItems.get(3));
 
 		avroItemReader.close();
 	}

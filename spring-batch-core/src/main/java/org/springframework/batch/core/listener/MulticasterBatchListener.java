@@ -39,7 +39,7 @@ import org.springframework.lang.Nullable;
  * @author Mahmoud Ben Hassine
  */
 public class MulticasterBatchListener<T, S> implements StepExecutionListener, ChunkListener, ItemReadListener<T>,
-		ItemProcessListener<T, S>, ItemWriteListener<S>, SkipListener<T, S> {
+ItemProcessListener<T, S>, ItemWriteListener<S>, SkipListener<T, S> {
 
 	private CompositeStepExecutionListener stepListener = new CompositeStepExecutionListener();
 

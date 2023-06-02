@@ -88,7 +88,7 @@ class AsyncTaskletStepTests {
 		RepeatTemplate chunkTemplate = new RepeatTemplate();
 		chunkTemplate.setCompletionPolicy(new SimpleCompletionPolicy(2));
 		step.setTasklet(new TestingChunkOrientedTasklet<>(new ListItemReader<>(items), itemProcessor, itemWriter,
-				chunkTemplate));
+		chunkTemplate));
 
 		jobRepository = new JobRepositorySupport();
 		step.setJobRepository(jobRepository);
@@ -119,7 +119,7 @@ class AsyncTaskletStepTests {
 	void testStepExecutionUpdates() throws Exception {
 
 		items = new ArrayList<>(Arrays.asList(StringUtils
-				.commaDelimitedListToStringArray("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25")));
+		.commaDelimitedListToStringArray("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25")));
 
 		setUp();
 
@@ -139,9 +139,9 @@ class AsyncTaskletStepTests {
 		// Check commit count didn't spin out of control waiting for other
 		// threads to finish...
 		assertTrue(stepExecution.getCommitCount() > processed.size() / 2,
-				"Not enough commits: " + stepExecution.getCommitCount());
+		"Not enough commits: " + stepExecution.getCommitCount());
 		assertTrue(stepExecution.getCommitCount() <= processed.size() / 2 + throttleLimit + 1,
-				"Too many commits: " + stepExecution.getCommitCount());
+		"Too many commits: " + stepExecution.getCommitCount());
 
 	}
 

@@ -67,7 +67,7 @@ class StepNameTests {
 			for (String registeredName : stepNames) {
 				String stepName = stepLocator.getStep(registeredName).getName();
 				assertEquals(stepName, registeredName, "Step name not equal to registered value: " + stepName + "!="
-						+ registeredName + ", " + jobName);
+				+ registeredName + ", " + jobName);
 			}
 		}
 	}

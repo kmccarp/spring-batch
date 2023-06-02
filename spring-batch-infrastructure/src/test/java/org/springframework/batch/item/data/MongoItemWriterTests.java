@@ -165,10 +165,10 @@ class MongoItemWriterTests {
 		writer.setCollection("collection");
 
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					assertDoesNotThrow(() -> writer.write(items));
-					throw new RuntimeException("force rollback");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			assertDoesNotThrow(() -> writer.write(items));
+			throw new RuntimeException("force rollback");
+		}));
 		assertEquals(exception.getMessage(), "force rollback");
 
 		verifyNoInteractions(template);

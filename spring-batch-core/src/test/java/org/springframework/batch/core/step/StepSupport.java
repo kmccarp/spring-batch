@@ -118,7 +118,7 @@ public class StepSupport implements Step, BeanNameAware {
 	@Override
 	public void execute(StepExecution stepExecution) throws JobInterruptedException, UnexpectedJobExecutionException {
 		throw new UnsupportedOperationException(
-				"Cannot process a StepExecution.  Use a smarter subclass of StepSupport.");
+		"Cannot process a StepExecution.  Use a smarter subclass of StepSupport.");
 	}
 
 }

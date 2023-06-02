@@ -163,10 +163,10 @@ public class SimpleChunkProvider<I> implements ChunkProvider<I> {
 	private void stopTimer(Timer.Sample sample, StepExecution stepExecution, String status) {
 		String fullyQualifiedMetricName = BatchMetrics.METRICS_PREFIX + "item.read";
 		sample.stop(BatchMetrics.createTimer(this.meterRegistry, "item.read", "Item reading duration",
-				Tag.of(fullyQualifiedMetricName + ".job.name",
-						stepExecution.getJobExecution().getJobInstance().getJobName()),
-				Tag.of(fullyQualifiedMetricName + ".step.name", stepExecution.getStepName()),
-				Tag.of(fullyQualifiedMetricName + ".status", status)));
+		Tag.of(fullyQualifiedMetricName + ".job.name",
+	stepExecution.getJobExecution().getJobInstance().getJobName()),
+		Tag.of(fullyQualifiedMetricName + ".step.name", stepExecution.getStepName()),
+		Tag.of(fullyQualifiedMetricName + ".status", status)));
 	}
 
 	@Override

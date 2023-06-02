@@ -50,15 +50,15 @@ public class BatchTestContextCustomizer implements ContextCustomizer {
 
 		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
 		Assert.isInstanceOf(BeanDefinitionRegistry.class, beanFactory,
-				"The bean factory must be an instance of BeanDefinitionRegistry");
+		"The bean factory must be an instance of BeanDefinitionRegistry");
 		BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
 
 		registry.registerBeanDefinition(JOB_LAUNCHER_TEST_UTILS_BEAN_NAME,
-				new RootBeanDefinition(JobLauncherTestUtils.class));
+		new RootBeanDefinition(JobLauncherTestUtils.class));
 		registry.registerBeanDefinition(JOB_REPOSITORY_TEST_UTILS_BEAN_NAME,
-				new RootBeanDefinition(JobRepositoryTestUtils.class));
+		new RootBeanDefinition(JobRepositoryTestUtils.class));
 		registry.registerBeanDefinition(BATCH_TEST_CONTEXT_BEAN_POST_PROCESSOR_BEAN_NAME,
-				new RootBeanDefinition(BatchTestContextBeanPostProcessor.class));
+		new RootBeanDefinition(BatchTestContextBeanPostProcessor.class));
 	}
 
 	@Override

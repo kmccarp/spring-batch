@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/delegatingJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/delegatingJob.xml", "/job-runner-context.xml"})
 class DelegatingJobFunctionalTests {
 
 	@Autowired

@@ -65,20 +65,20 @@ public class StepListenerParser extends AbstractListenerParser {
 
 	@SuppressWarnings("unchecked")
 	public void handleListenersElement(Element stepElement, BeanDefinition beanDefinition,
-			ParserContext parserContext) {
+	ParserContext parserContext) {
 		MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
 		List<Element> listenersElements = DomUtils.getChildElementsByTagName(stepElement, LISTENERS_ELE);
 		if (listenersElements.size() == 1) {
 			Element listenersElement = listenersElements.get(0);
 			CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(listenersElement.getTagName(),
-					parserContext.extractSource(stepElement));
+			parserContext.extractSource(stepElement));
 			parserContext.pushContainingComponent(compositeDef);
 			ManagedList<BeanDefinition> listenerBeans = new ManagedList<>();
 			if (propertyValues.contains("listeners")) {
 				listenerBeans = (ManagedList<BeanDefinition>) propertyValues.getPropertyValue("listeners").getValue();
 			}
 			listenerBeans.setMergeEnabled(listenersElement.hasAttribute(MERGE_ATTR)
-					&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
+			&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
 			List<Element> listenerElements = DomUtils.getChildElementsByTagName(listenersElement, "listener");
 			if (listenerElements != null) {
 				for (Element listenerElement : listenerElements) {

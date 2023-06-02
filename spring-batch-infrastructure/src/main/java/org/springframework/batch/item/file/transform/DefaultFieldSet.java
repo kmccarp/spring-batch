@@ -107,7 +107,7 @@ public class DefaultFieldSet implements FieldSet {
 		Assert.notNull(names, "Names must not be null");
 		if (tokens.length != names.length) {
 			throw new IllegalArgumentException("Field names must be same length as values: names="
-					+ Arrays.asList(names) + ", values=" + Arrays.asList(tokens));
+			+ Arrays.asList(names) + ", values=" + Arrays.asList(tokens));
 		}
 		this.tokens = tokens.clone();
 		this.names = Arrays.asList(names);

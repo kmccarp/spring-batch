@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  */
 
-@SpringJUnitConfig(locations = { "/data-source-context.xml" })
+@SpringJUnitConfig(locations = {"/data-source-context.xml"})
 class JdbcGameDaoIntegrationTests {
 
 	private JdbcGameDao gameDao;
@@ -83,7 +83,7 @@ class JdbcGameDaoIntegrationTests {
 		gameDao.write(Chunk.of(game));
 
 		Game tempGame = jdbcTemplate.queryForObject("SELECT * FROM GAMES where PLAYER_ID=? AND YEAR_NO=?",
-				new GameRowMapper(), "XXXXX00 ", game.getYear());
+		new GameRowMapper(), "XXXXX00 ", game.getYear());
 		assertEquals(tempGame, game);
 	}
 

@@ -42,7 +42,7 @@ class CompositeStepExecutionListenerTests {
 	void testSetListeners() {
 		JobExecution jobExecution = new JobExecution(1L);
 		StepExecution stepExecution = new StepExecution("s1", jobExecution);
-		listener.setListeners(new StepExecutionListener[] { new StepExecutionListener() {
+		listener.setListeners(new StepExecutionListener[]{new StepExecutionListener() {
 			@Nullable
 			@Override
 			public ExitStatus afterStep(StepExecution stepExecution) {
@@ -57,7 +57,7 @@ class CompositeStepExecutionListenerTests {
 				list.add("continue");
 				return ExitStatus.STOPPED;
 			}
-		} });
+		}});
 		assertEquals(ExitStatus.FAILED, listener.afterStep(stepExecution));
 		assertEquals(2, list.size());
 	}

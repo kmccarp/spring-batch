@@ -22,8 +22,8 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/beanWrapperMapperSampleJob.xml",
-		"/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/beanWrapperMapperSampleJob.xml",
+"/job-runner-context.xml"})
 class BeanWrapperMapperSampleJobFunctionalTests {
 
 	@Autowired

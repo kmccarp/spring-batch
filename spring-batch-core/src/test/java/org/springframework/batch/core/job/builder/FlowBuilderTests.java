@@ -51,7 +51,7 @@ class FlowBuilderTests {
 		builder.start(new StepSupport("step") {
 			@Override
 			public void execute(StepExecution stepExecution)
-					throws JobInterruptedException, UnexpectedJobExecutionException {
+			throws JobInterruptedException, UnexpectedJobExecutionException {
 			}
 		}).end().start(new JobFlowExecutor(jobRepository, new SimpleStepHandler(jobRepository), execution));
 	}
@@ -65,7 +65,7 @@ class FlowBuilderTests {
 		StepSupport stepA = new StepSupport("stepA") {
 			@Override
 			public void execute(StepExecution stepExecution)
-					throws JobInterruptedException, UnexpectedJobExecutionException {
+			throws JobInterruptedException, UnexpectedJobExecutionException {
 				stepExecution.setExitStatus(new ExitStatus("FAILED"));
 			}
 		};
@@ -73,19 +73,19 @@ class FlowBuilderTests {
 		StepSupport stepB = new StepSupport("stepB") {
 			@Override
 			public void execute(StepExecution stepExecution)
-					throws JobInterruptedException, UnexpectedJobExecutionException {
+			throws JobInterruptedException, UnexpectedJobExecutionException {
 			}
 		};
 
 		StepSupport stepC = new StepSupport("stepC") {
 			@Override
 			public void execute(StepExecution stepExecution)
-					throws JobInterruptedException, UnexpectedJobExecutionException {
+			throws JobInterruptedException, UnexpectedJobExecutionException {
 			}
 		};
 
 		FlowExecution flowExecution = builder.start(stepA).on("*").to(stepB).from(stepA).on("FAILED").to(stepC).end()
-				.start(new JobFlowExecutor(jobRepository, new SimpleStepHandler(jobRepository), execution));
+		.start(new JobFlowExecutor(jobRepository, new SimpleStepHandler(jobRepository), execution));
 
 		Iterator<StepExecution> stepExecutions = execution.getStepExecutions().iterator();
 		StepExecution stepExecutionA = stepExecutions.next();

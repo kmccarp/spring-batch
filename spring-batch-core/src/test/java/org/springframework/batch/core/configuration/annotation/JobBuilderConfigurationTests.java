@@ -79,7 +79,7 @@ public class JobBuilderConfigurationTests {
 	}
 
 	private void testJob(String jobName, BatchStatus status, int stepExecutionCount, Class<?>... config)
-			throws Exception {
+	throws Exception {
 
 		Class<?>[] configs = new Class<?>[config.length + 1];
 		System.arraycopy(config, 0, configs, 1, config.length);
@@ -88,7 +88,7 @@ public class JobBuilderConfigurationTests {
 		Job job = jobName == null ? context.getBean(Job.class) : context.getBean(jobName, Job.class);
 		JobLauncher jobLauncher = context.getBean(JobLauncher.class);
 		JobExecution execution = jobLauncher.run(job, new JobParametersBuilder()
-				.addLong("run.id", (long) (Math.random() * Long.MAX_VALUE)).toJobParameters());
+		.addLong("run.id", (long) (Math.random() * Long.MAX_VALUE)).toJobParameters());
 		assertEquals(status, execution.getStatus());
 		assertEquals(stepExecutionCount, execution.getStepExecutions().size());
 		context.close();
@@ -196,7 +196,7 @@ public class JobBuilderConfigurationTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean

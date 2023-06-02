@@ -71,7 +71,7 @@ public class DataSourceInitializer implements InitializingBean {
 	@SuppressWarnings("resource")
 	public static void main(String... args) {
 		new ClassPathXmlApplicationContext(ClassUtils.addResourcePathToPackagePath(DataSourceInitializer.class,
-				DataSourceInitializer.class.getSimpleName() + "-context.xml"));
+		DataSourceInitializer.class.getSimpleName() + "-context.xml"));
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class DataSourceInitializer implements InitializingBean {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	private void doExecuteScript(final Resource scriptResource) {
 		if (scriptResource == null || !scriptResource.exists()) {
 			throw new IllegalArgumentException("Script resource is null or does not exist");
@@ -107,7 +107,7 @@ public class DataSourceInitializer implements InitializingBean {
 				String[] scripts;
 				try {
 					scripts = StringUtils.delimitedListToStringArray(
-							stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
+					stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
 				}
 				catch (IOException e) {
 					throw new BeanInitializationException("Cannot load script from [" + scriptResource + "]", e);

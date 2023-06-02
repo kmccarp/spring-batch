@@ -25,7 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  *
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(classes = { JobRunnerConfiguration.class, ManagerConfiguration.class })
+@SpringJUnitConfig(classes = {JobRunnerConfiguration.class, ManagerConfiguration.class})
 class RemotePartitioningJobWithRepositoryPollingFunctionalTests extends RemotePartitioningJobFunctionalTests {
 
 	@Override

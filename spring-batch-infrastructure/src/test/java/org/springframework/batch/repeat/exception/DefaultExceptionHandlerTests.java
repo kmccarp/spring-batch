@@ -31,7 +31,7 @@ class DefaultExceptionHandlerTests {
 	@Test
 	void testRuntimeException() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("Foo")));
+		() -> handler.handleException(context, new RuntimeException("Foo")));
 		assertEquals("Foo", exception.getMessage());
 	}
 

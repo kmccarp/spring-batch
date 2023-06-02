@@ -57,14 +57,14 @@ class OrderItemFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { String.valueOf(DISCOUNT_AMOUNT), String.valueOf(DISCOUNT_PERC),
-				String.valueOf(HANDLING_PRICE), String.valueOf(ITEM_ID), String.valueOf(PRICE),
-				String.valueOf(QUANTITY), String.valueOf(SHIPPING_PRICE), String.valueOf(TOTAL_PRICE) };
-		String[] columnNames = new String[] { OrderItemFieldSetMapper.DISCOUNT_AMOUNT_COLUMN,
-				OrderItemFieldSetMapper.DISCOUNT_PERC_COLUMN, OrderItemFieldSetMapper.HANDLING_PRICE_COLUMN,
-				OrderItemFieldSetMapper.ITEM_ID_COLUMN, OrderItemFieldSetMapper.PRICE_COLUMN,
-				OrderItemFieldSetMapper.QUANTITY_COLUMN, OrderItemFieldSetMapper.SHIPPING_PRICE_COLUMN,
-				OrderItemFieldSetMapper.TOTAL_PRICE_COLUMN };
+		String[] tokens = new String[]{String.valueOf(DISCOUNT_AMOUNT), String.valueOf(DISCOUNT_PERC),
+		String.valueOf(HANDLING_PRICE), String.valueOf(ITEM_ID), String.valueOf(PRICE),
+		String.valueOf(QUANTITY), String.valueOf(SHIPPING_PRICE), String.valueOf(TOTAL_PRICE)};
+		String[] columnNames = new String[]{OrderItemFieldSetMapper.DISCOUNT_AMOUNT_COLUMN,
+		OrderItemFieldSetMapper.DISCOUNT_PERC_COLUMN, OrderItemFieldSetMapper.HANDLING_PRICE_COLUMN,
+		OrderItemFieldSetMapper.ITEM_ID_COLUMN, OrderItemFieldSetMapper.PRICE_COLUMN,
+		OrderItemFieldSetMapper.QUANTITY_COLUMN, OrderItemFieldSetMapper.SHIPPING_PRICE_COLUMN,
+		OrderItemFieldSetMapper.TOTAL_PRICE_COLUMN};
 		return new DefaultFieldSet(tokens, columnNames);
 	}
 

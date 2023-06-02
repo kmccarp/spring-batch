@@ -182,27 +182,27 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 		if (this.transactionAttributeSource == null) {
 			Properties transactionAttributes = new Properties();
 			transactionAttributes.setProperty("create*",
-					TRANSACTION_PROPAGATION_PREFIX + Propagation.REQUIRES_NEW + "," + this.isolationLevelForCreate);
+			TRANSACTION_PROPAGATION_PREFIX + Propagation.REQUIRES_NEW + "," + this.isolationLevelForCreate);
 			transactionAttributes.setProperty("getLastJobExecution*",
-					TRANSACTION_PROPAGATION_PREFIX + Propagation.REQUIRES_NEW + "," + this.isolationLevelForCreate);
+			TRANSACTION_PROPAGATION_PREFIX + Propagation.REQUIRES_NEW + "," + this.isolationLevelForCreate);
 			transactionAttributes.setProperty("*", "PROPAGATION_REQUIRED");
 			this.transactionAttributeSource = new NameMatchTransactionAttributeSource();
 			((NameMatchTransactionAttributeSource) this.transactionAttributeSource)
-					.setProperties(transactionAttributes);
+			.setProperties(transactionAttributes);
 		}
 	}
 
 	@Override
 	public JobRepository getObject() throws Exception {
 		TransactionInterceptor advice = new TransactionInterceptor((TransactionManager) this.transactionManager,
-				this.transactionAttributeSource);
+		this.transactionAttributeSource);
 		if (this.validateTransactionState) {
 			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(new MethodInterceptor() {
 				@Override
 				public Object invoke(MethodInvocation invocation) throws Throwable {
 					if (TransactionSynchronizationManager.isActualTransactionActive()) {
 						throw new IllegalStateException("Existing transaction detected in JobRepository. "
-								+ "Please fix this and try again (e.g. remove @Transactional annotations from client).");
+						+ "Please fix this and try again (e.g. remove @Transactional annotations from client).");
 					}
 					return invocation.proceed();
 				}
@@ -221,7 +221,7 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 
 	private Object getTarget() throws Exception {
 		return new SimpleJobRepository(createJobInstanceDao(), createJobExecutionDao(), createStepExecutionDao(),
-				createExecutionContextDao());
+		createExecutionContextDao());
 	}
 
 }

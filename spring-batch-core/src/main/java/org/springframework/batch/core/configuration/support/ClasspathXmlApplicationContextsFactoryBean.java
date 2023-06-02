@@ -38,7 +38,7 @@ import org.springframework.core.io.Resource;
  *
  */
 public class ClasspathXmlApplicationContextsFactoryBean
-		implements FactoryBean<ApplicationContextFactory[]>, ApplicationContextAware {
+implements FactoryBean<ApplicationContextFactory[]>, ApplicationContextAware {
 
 	private List<Resource> resources = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class ClasspathXmlApplicationContextsFactoryBean
 	 */
 
 	public void setBeanFactoryPostProcessorClasses(
-			Class<? extends BeanFactoryPostProcessor>[] beanFactoryPostProcessorClasses) {
+	Class<? extends BeanFactoryPostProcessor>[] beanFactoryPostProcessorClasses) {
 		this.beanFactoryPostProcessorClasses = beanFactoryPostProcessorClasses;
 	}
 

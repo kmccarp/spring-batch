@@ -82,7 +82,7 @@ public enum JobListenerMetaData implements ListenerMetaData {
 
 	@Override
 	public Class<?>[] getParamTypes() {
-		return new Class<?>[] { JobExecution.class };
+		return new Class<?>[]{JobExecution.class};
 	}
 
 	/**

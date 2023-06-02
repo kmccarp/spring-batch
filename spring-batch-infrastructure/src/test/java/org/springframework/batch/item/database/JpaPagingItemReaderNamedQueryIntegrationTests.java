@@ -28,7 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @author Parikshit Dutta
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(locations = { "JpaPagingItemReaderCommonTests-context.xml" })
+@SpringJUnitConfig(locations = {"JpaPagingItemReaderCommonTests-context.xml"})
 public class JpaPagingItemReaderNamedQueryIntegrationTests extends AbstractPagingItemReaderParameterTests {
 
 	@Autowired

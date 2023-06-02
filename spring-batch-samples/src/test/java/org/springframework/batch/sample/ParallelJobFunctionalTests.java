@@ -31,7 +31,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/parallelJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/parallelJob.xml", "/job-runner-context.xml"})
 class ParallelJobFunctionalTests {
 
 	@Autowired

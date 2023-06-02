@@ -102,12 +102,12 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer {
 
 		if (lineLength < maxRange && isStrict()) {
 			throw new IncorrectLineLengthException("Line is shorter than max range " + maxRange, maxRange, lineLength,
-					line);
+			line);
 		}
 
 		if (!open && lineLength > maxRange && isStrict()) {
 			throw new IncorrectLineLengthException("Line is longer than max range " + maxRange, maxRange, lineLength,
-					line);
+			line);
 		}
 
 		for (int i = 0; i < ranges.length; i++) {

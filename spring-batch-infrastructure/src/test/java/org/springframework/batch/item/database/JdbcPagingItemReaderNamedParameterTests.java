@@ -34,11 +34,12 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @author Michael Minella
  */
 @SpringJUnitConfig(
-		locations = "/org/springframework/batch/item/database/JdbcPagingItemReaderParameterTests-context.xml")
-@Disabled("This test fails when integration tests are skipped..") // FIXME make this test
-																	// independent of
-																	// other
-																	// tests
+locations = "/org/springframework/batch/item/database/JdbcPagingItemReaderParameterTests-context.xml")
+@Disabled("This test fails when integration tests are skipped..")
+// FIXME make this test
+// independent of
+// other
+// tests
 class JdbcPagingItemReaderNamedParameterTests extends AbstractJdbcPagingItemReaderParameterTests {
 
 	@Override

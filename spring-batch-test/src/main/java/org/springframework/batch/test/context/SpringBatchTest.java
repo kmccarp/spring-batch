@@ -140,8 +140,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@TestExecutionListeners(listeners = { StepScopeTestExecutionListener.class, JobScopeTestExecutionListener.class },
-		mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS)
+@TestExecutionListeners(listeners = {StepScopeTestExecutionListener.class, JobScopeTestExecutionListener.class},
+mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS)
 @ExtendWith(SpringExtension.class)
 public @interface SpringBatchTest {
 

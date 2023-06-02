@@ -98,8 +98,8 @@ public class SimpleJobLauncher implements JobLauncher, InitializingBean {
 	 */
 	@Override
 	public JobExecution run(final Job job, final JobParameters jobParameters)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException,
-			JobParametersInvalidException {
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException,
+	JobParametersInvalidException {
 
 		Assert.notNull(job, "The Job must not be null.");
 		Assert.notNull(jobParameters, "The JobParameters must not be null.");
@@ -121,13 +121,13 @@ public class SimpleJobLauncher implements JobLauncher, InitializingBean {
 				BatchStatus status = execution.getStatus();
 				if (status.isRunning()) {
 					throw new JobExecutionAlreadyRunningException(
-							"A job execution for this job is already running: " + lastExecution);
+					"A job execution for this job is already running: " + lastExecution);
 				}
 				else if (status == BatchStatus.UNKNOWN) {
 					throw new JobRestartException(
-							"Cannot restart step [" + execution.getStepName() + "] from UNKNOWN status. "
-									+ "The last execution ended with a failure that could not be rolled back, "
-									+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
+					"Cannot restart step [" + execution.getStepName() + "] from UNKNOWN status. "
+				+ "The last execution ended with a failure that could not be rolled back, "
+				+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
 				}
 			}
 		}
@@ -152,23 +152,23 @@ public class SimpleJobLauncher implements JobLauncher, InitializingBean {
 					try {
 						if (logger.isInfoEnabled()) {
 							logger.info("Job: [" + job + "] launched with the following parameters: [" + jobParameters
-									+ "]");
+							+ "]");
 						}
 						job.execute(jobExecution);
 						if (logger.isInfoEnabled()) {
 							Duration jobExecutionDuration = BatchMetrics.calculateDuration(jobExecution.getStartTime(),
-									jobExecution.getEndTime());
+							jobExecution.getEndTime());
 							logger.info("Job: [" + job + "] completed with the following parameters: [" + jobParameters
-									+ "] and the following status: [" + jobExecution.getStatus() + "]"
-									+ (jobExecutionDuration == null ? ""
-											: " in " + BatchMetrics.formatDuration(jobExecutionDuration)));
+							+ "] and the following status: [" + jobExecution.getStatus() + "]"
+							+ (jobExecutionDuration == null ? ""
+							: " in " + BatchMetrics.formatDuration(jobExecutionDuration)));
 						}
 					}
 					catch (Throwable t) {
 						if (logger.isInfoEnabled()) {
 							logger.info("Job: [" + job
-									+ "] failed unexpectedly and fatally with the following parameters: ["
-									+ jobParameters + "]", t);
+							+ "] failed unexpectedly and fatally with the following parameters: ["
+							+ jobParameters + "]", t);
 						}
 						rethrow(t);
 					}

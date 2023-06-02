@@ -82,9 +82,9 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testLocateJob() throws Exception {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/job.xml"),
-				new ClassPathResource("org/springframework/batch/core/launch/support/job2.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/job.xml"),
+		new ClassPathResource("org/springframework/batch/core/launch/support/job2.xml")};
 
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
 		applicationContext.refresh();
@@ -106,8 +106,8 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testNoJobFound() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/test-environment.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/test-environment.xml")};
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
 		applicationContext.refresh();
 		setUpApplicationContextFactories(jobPaths, applicationContext);
@@ -118,8 +118,8 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testDuplicateJobsInFile() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml")};
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
 		applicationContext.refresh();
 		setUpApplicationContextFactories(jobPaths, applicationContext);
@@ -131,10 +131,10 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testChildContextOverridesBeanPostProcessor() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml")};
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"/org/springframework/batch/core/launch/support/test-environment-with-registry-and-auto-register.xml");
+		"/org/springframework/batch/core/launch/support/test-environment-with-registry-and-auto-register.xml");
 		registrar.setApplicationContext(applicationContext);
 		setUpApplicationContextFactories(jobPaths, applicationContext);
 		registrar.start();
@@ -144,9 +144,9 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testErrorInContext() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml"),
-				new ClassPathResource("org/springframework/batch/core/launch/support/error.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml"),
+		new ClassPathResource("org/springframework/batch/core/launch/support/error.xml")};
 		setUpApplicationContextFactories(jobPaths, null);
 		assertThrows(BeanCreationException.class, registrar::start);
 
@@ -155,8 +155,8 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testClear() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml")};
 		setUpApplicationContextFactories(jobPaths, null);
 		registrar.start();
 		assertEquals(2, registry.getJobNames().size());
@@ -168,8 +168,8 @@ class AutomaticJobRegistrarTests {
 	@Test
 	void testStartStopRunning() {
 
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml")};
 		setUpApplicationContextFactories(jobPaths, null);
 		registrar.start();
 		assertTrue(registrar.isRunning());
@@ -184,8 +184,8 @@ class AutomaticJobRegistrarTests {
 	void testStartStopRunningWithCallback() {
 
 		Runnable callback = Mockito.mock(Runnable.class);
-		Resource[] jobPaths = new Resource[] {
-				new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml") };
+		Resource[] jobPaths = new Resource[]{
+		new ClassPathResource("org/springframework/batch/core/launch/support/2jobs.xml")};
 		setUpApplicationContextFactories(jobPaths, null);
 		registrar.start();
 		assertTrue(registrar.isRunning());
@@ -206,7 +206,7 @@ class AutomaticJobRegistrarTests {
 			applicationContextFactories.add(factory);
 		}
 		registrar.setApplicationContextFactories(
-				applicationContextFactories.toArray(new ApplicationContextFactory[jobPaths.length]));
+		applicationContextFactories.toArray(new ApplicationContextFactory[jobPaths.length]));
 	}
 
 }

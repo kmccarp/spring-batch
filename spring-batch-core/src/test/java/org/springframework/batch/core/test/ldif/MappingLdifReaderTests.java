@@ -39,7 +39,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.Assert;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/applicationContext-test2.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/applicationContext-test2.xml"})
 public class MappingLdifReaderTests {
 
 	private static final Logger log = LoggerFactory.getLogger(MappingLdifReaderTests.class);
@@ -75,7 +75,7 @@ public class MappingLdifReaderTests {
 
 		// Ensure job completed successfully.
 		Assert.isTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED),
-				"Step Execution did not complete normally: " + jobExecution.getExitStatus());
+		"Step Execution did not complete normally: " + jobExecution.getExitStatus());
 
 		// Check output.
 		Assert.isTrue(actual.exists(), "Actual does not exist.");
@@ -87,10 +87,10 @@ public class MappingLdifReaderTests {
 		JobExecution jobExecution = launcher.run(job2, new JobParameters());
 
 		Assert.isTrue(jobExecution.getExitStatus().getExitCode().equals("FAILED"),
-				"The job exit status is not FAILED.");
+		"The job exit status is not FAILED.");
 		Assert.isTrue(
-				jobExecution.getAllFailureExceptions().get(0).getMessage().contains("Failed to initialize the reader"),
-				"The job failed for the wrong reason.");
+		jobExecution.getAllFailureExceptions().get(0).getMessage().contains("Failed to initialize the reader"),
+		"The job failed for the wrong reason.");
 	}
 
 	private boolean compareFiles(File expected, File actual) throws Exception {

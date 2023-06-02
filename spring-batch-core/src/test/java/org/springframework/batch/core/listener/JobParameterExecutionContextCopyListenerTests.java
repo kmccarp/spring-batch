@@ -50,7 +50,7 @@ class JobParameterExecutionContextCopyListenerTests {
 
 	@Test
 	void testSetKeys() {
-		listener.setKeys(new String[] {});
+		listener.setKeys(new String[]{});
 		listener.beforeStep(stepExecution);
 		assertFalse(stepExecution.getExecutionContext().containsKey("foo"));
 	}

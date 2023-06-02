@@ -47,7 +47,7 @@ public class JobExecutionListenerParserTests {
 	@Test
 	void testListeners() throws Exception {
 		JobExecution jobExecution = jobRepository.createJobExecution("testJob",
-				new JobParametersBuilder().addLong("now", System.currentTimeMillis()).toJobParameters());
+		new JobParametersBuilder().addLong("now", System.currentTimeMillis()).toJobParameters());
 		job.execute(jobExecution);
 		assertTrue(beforeCalled);
 		assertTrue(afterCalled);

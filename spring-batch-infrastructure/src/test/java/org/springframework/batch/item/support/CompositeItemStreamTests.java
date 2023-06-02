@@ -92,13 +92,13 @@ class CompositeItemStreamTests {
 
 	@Test
 	void testCloseDoesNotUnregister() {
-		manager.setStreams(new ItemStream[] { new ItemStreamSupport() {
+		manager.setStreams(new ItemStream[]{new ItemStreamSupport() {
 			@Override
 			public void open(ExecutionContext executionContext) {
 				super.open(executionContext);
 				list.add("bar");
 			}
-		} });
+		}});
 		manager.open(null);
 		manager.close();
 		manager.open(null);

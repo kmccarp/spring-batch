@@ -77,7 +77,7 @@ class ThrottleLimitResultQueueTests {
 		assertEquals("foo", queue.take());
 		assertTrue(queue.isExpecting());
 		assertTrue(t1 - t0 > 50,
-				"Did not block on expect (throttle limit should have been hit): time taken=" + (t1 - t0));
+		"Did not block on expect (throttle limit should have been hit): time taken=" + (t1 - t0));
 	}
 
 }

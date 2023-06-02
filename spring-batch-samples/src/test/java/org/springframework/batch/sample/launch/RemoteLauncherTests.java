@@ -155,9 +155,9 @@ class RemoteLauncherTests {
 
 			try {
 				launcher = (JobOperator) getMBean(connectionFactory, "spring:service=batch,bean=jobOperator",
-						JobOperator.class);
+				JobOperator.class);
 				loader = (JobLoader) getMBean(connectionFactory, "spring:service=batch,bean=jobLoader",
-						JobLoader.class);
+				JobLoader.class);
 			}
 			catch (MBeanServerNotFoundException e) {
 				return false;
@@ -176,7 +176,7 @@ class RemoteLauncherTests {
 	}
 
 	private static Object getMBean(MBeanServerConnectionFactoryBean connectionFactory, String objectName,
-			Class<?> interfaceType) throws MalformedObjectNameException {
+	Class<?> interfaceType) throws MalformedObjectNameException {
 		MBeanProxyFactoryBean factory = new MBeanProxyFactoryBean();
 		factory.setObjectName(objectName);
 		factory.setProxyInterface(interfaceType);

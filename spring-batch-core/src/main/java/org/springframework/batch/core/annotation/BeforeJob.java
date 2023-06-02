@@ -39,7 +39,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @see JobExecutionListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Qualifier("JobExecutionListener")
 public @interface BeforeJob {
 

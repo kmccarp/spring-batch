@@ -85,7 +85,7 @@ class SimpleMethodInvokerTests {
 	@Test
 	void testMethodByNameWithTooManyArguments() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new SimpleMethodInvoker(testClass, "beforeWithTooManyArguments", String.class));
+		() -> new SimpleMethodInvoker(testClass, "beforeWithTooManyArguments", String.class));
 	}
 
 	@Test

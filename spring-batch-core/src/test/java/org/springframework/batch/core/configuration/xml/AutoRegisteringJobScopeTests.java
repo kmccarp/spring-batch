@@ -33,7 +33,7 @@ class AutoRegisteringJobScopeTests {
 	@Test
 	void testJobElement() {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/AutoRegisteringJobScopeForJobElementTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/AutoRegisteringJobScopeForJobElementTests-context.xml");
 		Map<String, JobScope> beans = ctx.getBeansOfType(JobScope.class);
 		assertEquals(1, beans.size(), "JobScope not defined properly");
 	}
@@ -41,7 +41,7 @@ class AutoRegisteringJobScopeTests {
 	@Test
 	void testStepElement() {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/AutoRegisteringJobScopeForStepElementTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/AutoRegisteringJobScopeForStepElementTests-context.xml");
 		Map<String, JobScope> beans = ctx.getBeansOfType(JobScope.class);
 		assertEquals(1, beans.size(), "JobScope not defined properly");
 	}

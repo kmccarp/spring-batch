@@ -47,7 +47,7 @@ class DefaultLineMapperTests {
 	@Test
 	void testMapping() throws Exception {
 		final String line = "TEST";
-		final FieldSet fs = new DefaultFieldSet(new String[] { "token1", "token2" });
+		final FieldSet fs = new DefaultFieldSet(new String[]{"token1", "token2"});
 		final String item = "ITEM";
 
 		LineTokenizer tokenizer = mock(LineTokenizer.class);

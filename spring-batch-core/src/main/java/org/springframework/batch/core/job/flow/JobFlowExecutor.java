@@ -63,7 +63,7 @@ public class JobFlowExecutor implements FlowExecutor {
 
 	@Override
 	public String executeStep(Step step)
-			throws JobInterruptedException, JobRestartException, StartLimitExceededException {
+	throws JobInterruptedException, JobRestartException, StartLimitExceededException {
 		boolean isRerun = isStepRestart(step);
 		StepExecution stepExecution = stepHandler.handleStep(step, execution);
 		stepExecutionHolder.set(stepExecution);
@@ -73,7 +73,7 @@ public class JobFlowExecutor implements FlowExecutor {
 		}
 		if (stepExecution.isTerminateOnly()) {
 			throw new JobInterruptedException("Step requested termination: " + stepExecution,
-					stepExecution.getStatus());
+			stepExecution.getStatus());
 		}
 
 		if (isRerun) {

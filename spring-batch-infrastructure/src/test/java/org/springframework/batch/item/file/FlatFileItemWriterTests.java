@@ -292,7 +292,7 @@ class FlatFileItemWriterTests {
 	void testWriteRecordWithrecordSeparator() throws Exception {
 		writer.setLineSeparator("|");
 		writer.open(executionContext);
-		writer.write(Chunk.of(new String[] { "1", "2" }));
+		writer.write(Chunk.of(new String[]{"1", "2"}));
 		String lineFromFile = readLine();
 		assertEquals("1|2|", lineFromFile);
 	}
@@ -311,9 +311,9 @@ class FlatFileItemWriterTests {
 
 		writer.open(executionContext);
 		// write some lines
-		writer.write(Chunk.of(new String[] { "testLine1", "testLine2", "testLine3" }));
+		writer.write(Chunk.of(new String[]{"testLine1", "testLine2", "testLine3"}));
 		// write more lines
-		writer.write(Chunk.of(new String[] { "testLine4", "testLine5" }));
+		writer.write(Chunk.of(new String[]{"testLine4", "testLine5"}));
 		// get restart data
 		writer.update(executionContext);
 		// close template
@@ -322,7 +322,7 @@ class FlatFileItemWriterTests {
 		// init with correct data
 		writer.open(executionContext);
 		// write more lines
-		writer.write(Chunk.of(new String[] { "testLine6", "testLine7", "testLine8" }));
+		writer.write(Chunk.of(new String[]{"testLine6", "testLine7", "testLine8"}));
 		// get statistics
 		writer.update(executionContext);
 		// close template
@@ -394,9 +394,9 @@ class FlatFileItemWriterTests {
 			public Void doInTransaction(TransactionStatus status) {
 				try {
 					// write some lines
-					writer.write(Chunk.of(new String[] { "testLine1", "testLine2", "testLine3" }));
+					writer.write(Chunk.of(new String[]{"testLine1", "testLine2", "testLine3"}));
 					// write more lines
-					writer.write(Chunk.of(new String[] { "testLine4", "testLine5" }));
+					writer.write(Chunk.of(new String[]{"testLine4", "testLine5"}));
 				}
 				catch (Exception e) {
 					throw new UnexpectedInputException("Could not write data", e);
@@ -417,7 +417,7 @@ class FlatFileItemWriterTests {
 			public Void doInTransaction(TransactionStatus status) {
 				try {
 					// write more lines
-					writer.write(Chunk.of(new String[] { "testLine6", "testLine7", "testLine8" }));
+					writer.write(Chunk.of(new String[]{"testLine6", "testLine7", "testLine8"}));
 				}
 				catch (Exception e) {
 					throw new UnexpectedInputException("Could not write data", e);
@@ -474,9 +474,9 @@ class FlatFileItemWriterTests {
 			public Void doInTransaction(TransactionStatus status) {
 				try {
 					// write some lines
-					writer.write(Chunk.of(new String[] { "téstLine1", "téstLine2", "téstLine3" }));
+					writer.write(Chunk.of(new String[]{"téstLine1", "téstLine2", "téstLine3"}));
 					// write more lines
-					writer.write(Chunk.of(new String[] { "téstLine4", "téstLine5" }));
+					writer.write(Chunk.of(new String[]{"téstLine4", "téstLine5"}));
 				}
 				catch (Exception e) {
 					throw new UnexpectedInputException("Could not write data", e);
@@ -497,7 +497,7 @@ class FlatFileItemWriterTests {
 			public Void doInTransaction(TransactionStatus status) {
 				try {
 					// write more lines
-					writer.write(Chunk.of(new String[] { "téstLine6", "téstLine7", "téstLine8" }));
+					writer.write(Chunk.of(new String[]{"téstLine6", "téstLine7", "téstLine8"}));
 				}
 				catch (Exception e) {
 					throw new UnexpectedInputException("Could not write data", e);
@@ -812,7 +812,7 @@ class FlatFileItemWriterTests {
 		WritableResource toBeCreated = new FileSystemResource("target/FlatFileItemWriterTests.out");
 
 		outputFile = toBeCreated.getFile(); // enable easy content reading and auto-delete
-											// the file
+		// the file
 
 		assertFalse(toBeCreated.exists(), "output file does not exist yet");
 		writer.setResource(toBeCreated);

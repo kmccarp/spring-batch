@@ -120,12 +120,12 @@ public abstract class AbstractJobExplorerFactoryBean implements FactoryBean<JobE
 		if (this.transactionAttributeSource == null) {
 			Properties transactionAttributes = new Properties();
 			String transactionProperties = String.join(",", TRANSACTION_PROPAGATION_PREFIX + Propagation.SUPPORTS,
-					TRANSACTION_ISOLATION_LEVEL_PREFIX + Isolation.DEFAULT);
+			TRANSACTION_ISOLATION_LEVEL_PREFIX + Isolation.DEFAULT);
 			transactionAttributes.setProperty("get*", transactionProperties);
 			transactionAttributes.setProperty("find*", transactionProperties);
 			this.transactionAttributeSource = new NameMatchTransactionAttributeSource();
 			((NameMatchTransactionAttributeSource) this.transactionAttributeSource)
-					.setProperties(transactionAttributes);
+			.setProperties(transactionAttributes);
 		}
 	}
 
@@ -147,7 +147,7 @@ public abstract class AbstractJobExplorerFactoryBean implements FactoryBean<JobE
 	@Override
 	public JobExplorer getObject() throws Exception {
 		TransactionInterceptor advice = new TransactionInterceptor((TransactionManager) this.transactionManager,
-				this.transactionAttributeSource);
+		this.transactionAttributeSource);
 		proxyFactory.addAdvice(advice);
 		proxyFactory.setProxyTargetClass(false);
 		proxyFactory.addInterface(JobExplorer.class);
@@ -157,7 +157,7 @@ public abstract class AbstractJobExplorerFactoryBean implements FactoryBean<JobE
 
 	private JobExplorer getTarget() throws Exception {
 		return new SimpleJobExplorer(createJobInstanceDao(), createJobExecutionDao(), createStepExecutionDao(),
-				createExecutionContextDao());
+		createExecutionContextDao());
 	}
 
 }

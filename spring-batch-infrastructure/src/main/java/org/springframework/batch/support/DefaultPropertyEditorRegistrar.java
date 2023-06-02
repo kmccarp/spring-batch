@@ -73,7 +73,7 @@ public class DefaultPropertyEditorRegistrar implements PropertyEditorRegistrar {
 			}
 			else {
 				throw new IllegalArgumentException(
-						"Invalid key [" + key + "] for custom editor: needs to be Class or String.");
+				"Invalid key [" + key + "] for custom editor: needs to be Class or String.");
 			}
 			PropertyEditor value = entry.getValue();
 			this.customEditors.put(requiredType, value);

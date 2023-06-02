@@ -37,7 +37,7 @@ public class RemoteChunkingManagerStepBuilderFactory {
 	 * @param transactionManager the transaction manager to use
 	 */
 	public RemoteChunkingManagerStepBuilderFactory(JobRepository jobRepository,
-			PlatformTransactionManager transactionManager) {
+	PlatformTransactionManager transactionManager) {
 
 		this.jobRepository = jobRepository;
 		this.transactionManager = transactionManager;
@@ -53,7 +53,7 @@ public class RemoteChunkingManagerStepBuilderFactory {
 	 */
 	public <I, O> RemoteChunkingManagerStepBuilder<I, O> get(String name) {
 		return new RemoteChunkingManagerStepBuilder<I, O>(name, this.jobRepository)
-				.transactionManager(this.transactionManager);
+		.transactionManager(this.transactionManager);
 	}
 
 }

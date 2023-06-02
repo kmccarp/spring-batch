@@ -45,7 +45,7 @@ public class SqlPagingQueryUtils {
 	 * @return the generated query
 	 */
 	public static String generateLimitSqlQuery(AbstractSqlPagingQueryProvider provider, boolean remainingPageQuery,
-			String limitClause) {
+	String limitClause) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ").append(provider.getSelectClause());
 		sql.append(" FROM ").append(provider.getFromClause());
@@ -70,7 +70,7 @@ public class SqlPagingQueryUtils {
 	 */
 	@Deprecated
 	public static String generateLimitGroupedSqlQuery(AbstractSqlPagingQueryProvider provider,
-			boolean remainingPageQuery, String limitClause) {
+	boolean remainingPageQuery, String limitClause) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * ");
 		sql.append(" FROM (");
@@ -121,7 +121,7 @@ public class SqlPagingQueryUtils {
 	 * @return the generated query
 	 */
 	public static String generateTopSqlQuery(AbstractSqlPagingQueryProvider provider, boolean remainingPageQuery,
-			String topClause) {
+	String topClause) {
 		StringBuilder sql = new StringBuilder(128);
 		sql.append("SELECT ").append(topClause).append(" ").append(provider.getSelectClause());
 		sql.append(" FROM ").append(provider.getFromClause());
@@ -142,7 +142,7 @@ public class SqlPagingQueryUtils {
 	 * @return the generated query
 	 */
 	public static String generateGroupedTopSqlQuery(AbstractSqlPagingQueryProvider provider, boolean remainingPageQuery,
-			String topClause) {
+	String topClause) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ").append(topClause).append(" * FROM (");
 		sql.append("SELECT ").append(provider.getSelectClause());
@@ -167,7 +167,7 @@ public class SqlPagingQueryUtils {
 	 * @return the generated query
 	 */
 	public static String generateRowNumSqlQuery(AbstractSqlPagingQueryProvider provider, boolean remainingPageQuery,
-			String rowNumClause) {
+	String rowNumClause) {
 
 		return generateRowNumSqlQuery(provider, provider.getSelectClause(), remainingPageQuery, rowNumClause);
 
@@ -184,7 +184,7 @@ public class SqlPagingQueryUtils {
 	 * @return the generated query
 	 */
 	public static String generateRowNumSqlQuery(AbstractSqlPagingQueryProvider provider, String selectClause,
-			boolean remainingPageQuery, String rowNumClause) {
+	boolean remainingPageQuery, String rowNumClause) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ").append(selectClause);
 		sql.append(" FROM ").append(provider.getFromClause());
@@ -293,7 +293,7 @@ public class SqlPagingQueryUtils {
 	}
 
 	private static void buildWhereClause(AbstractSqlPagingQueryProvider provider, boolean remainingPageQuery,
-			StringBuilder sql) {
+	StringBuilder sql) {
 		if (remainingPageQuery) {
 			sql.append(" WHERE ");
 			if (provider.getWhereClause() != null) {

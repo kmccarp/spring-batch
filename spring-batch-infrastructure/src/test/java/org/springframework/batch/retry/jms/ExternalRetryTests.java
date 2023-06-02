@@ -112,19 +112,19 @@ class ExternalRetryTests {
 		};
 
 		Exception exception = assertThrows(Exception.class,
-				() -> new TransactionTemplate(transactionManager).execute(status -> {
-					try {
-						final Object item = provider.read();
-						RetryCallback<Object, Exception> callback = context -> {
-							writer.write(Chunk.of(item));
-							return null;
-						};
-						return retryTemplate.execute(callback, new DefaultRetryState(item));
-					}
-					catch (Exception e) {
-						throw new RuntimeException(e.getMessage(), e);
-					}
-				}));
+		() -> new TransactionTemplate(transactionManager).execute(status -> {
+			try {
+				final Object item = provider.read();
+				RetryCallback<Object, Exception> callback = context -> {
+					writer.write(Chunk.of(item));
+					return null;
+				};
+				return retryTemplate.execute(callback, new DefaultRetryState(item));
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 
 		// Client of retry template has to take care of rollback. This would

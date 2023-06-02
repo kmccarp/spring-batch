@@ -75,7 +75,7 @@ public final class FileUtils {
 						}
 						if (!createNewFile(file)) {
 							throw new ItemStreamException(
-									"Output file was not created: [" + file.getAbsolutePath() + "]");
+							"Output file was not created: [" + file.getAbsolutePath() + "]");
 						}
 					}
 				}

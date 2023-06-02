@@ -162,7 +162,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 
 		SplitParser splitParser = new SplitParser(jobFactoryRef);
 		CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(element.getTagName(),
-				parserContext.extractSource(element));
+		parserContext.extractSource(element));
 		parserContext.pushContainingComponent(compositeDef);
 
 		boolean stepExists = false;
@@ -187,7 +187,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 				}
 				else if (nodeName.equals(SPLIT_ELE)) {
 					stateTransitions.addAll(splitParser.parse(child, new ParserContext(parserContext.getReaderContext(),
-							parserContext.getDelegate(), builder.getBeanDefinition())));
+					parserContext.getDelegate(), builder.getBeanDefinition())));
 					stepExists = true;
 				}
 
@@ -203,7 +203,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 		String flowName = (String) builder.getRawBeanDefinition().getAttribute("flowName");
 		if (!stepExists && !StringUtils.hasText(element.getAttribute("parent"))) {
 			parserContext.getReaderContext()
-					.error("The flow [" + flowName + "] must contain at least one step, flow or split", element);
+			.error("The flow [" + flowName + "] must contain at least one step, flow or split", element);
 		}
 
 		// Ensure that all elements are reachable
@@ -257,7 +257,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * @param accumulator A collection of reachable element names
 	 */
 	protected void findAllReachableElements(String startElement, Map<String, Set<String>> reachableElementMap,
-			Set<String> accumulator) {
+	Set<String> accumulator) {
 		Set<String> reachableIds = reachableElementMap.get(startElement);
 		accumulator.add(startElement);
 		if (reachableIds != null) {
@@ -278,7 +278,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * {@link org.springframework.batch.core.job.flow.support.StateTransition} references
 	 */
 	public static Collection<BeanDefinition> getNextElements(ParserContext parserContext, BeanDefinition stateDef,
-			Element element) {
+	Element element) {
 		return getNextElements(parserContext, null, stateDef, element);
 	}
 
@@ -294,7 +294,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * {@link org.springframework.batch.core.job.flow.support.StateTransition} references
 	 */
 	public static Collection<BeanDefinition> getNextElements(ParserContext parserContext, String stepId,
-			BeanDefinition stateDef, Element element) {
+	BeanDefinition stateDef, Element element) {
 
 		Collection<BeanDefinition> list = new ArrayList<>();
 
@@ -306,7 +306,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 
 		boolean transitionElementExists = false;
 		List<String> patterns = new ArrayList<>();
-		for (String transitionName : new String[] { NEXT_ELE, STOP_ELE, END_ELE, FAIL_ELE }) {
+		for (String transitionName : new String[]{NEXT_ELE, STOP_ELE, END_ELE, FAIL_ELE}) {
 			List<Element> transitionElements = DomUtils.getChildElementsByTagName(element, transitionName);
 			for (Element transitionElement : transitionElements) {
 				verifyUniquePattern(transitionElement, patterns, element, parserContext);
@@ -317,17 +317,17 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 
 		if (!transitionElementExists) {
 			list.addAll(createTransition(FlowExecutionStatus.FAILED, FlowExecutionStatus.FAILED.getName(), null, null,
-					stateDef, parserContext, false));
+			stateDef, parserContext, false));
 			list.addAll(createTransition(FlowExecutionStatus.UNKNOWN, FlowExecutionStatus.UNKNOWN.getName(), null, null,
-					stateDef, parserContext, false));
+			stateDef, parserContext, false));
 			if (!hasNextAttribute) {
 				list.addAll(createTransition(FlowExecutionStatus.COMPLETED, null, null, null, stateDef, parserContext,
-						false));
+				false));
 			}
 		}
 		else if (hasNextAttribute) {
 			parserContext.getReaderContext().error("The <" + element.getNodeName() + "/> may not contain a '"
-					+ NEXT_ATTR + "' attribute and a transition element", element);
+			+ NEXT_ATTR + "' attribute and a transition element", element);
 		}
 
 		return list;
@@ -342,11 +342,11 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * @param parserContext The parser context for the bean factory
 	 */
 	protected static void verifyUniquePattern(Element transitionElement, List<String> patterns, Element element,
-			ParserContext parserContext) {
+	ParserContext parserContext) {
 		String onAttribute = transitionElement.getAttribute(ON_ATTR);
 		if (patterns.contains(onAttribute)) {
 			parserContext.getReaderContext().error("Duplicate transition pattern found for '" + onAttribute + "'",
-					element);
+			element);
 		}
 		patterns.add(onAttribute);
 	}
@@ -359,7 +359,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * {@link org.springframework.batch.core.job.flow.support.StateTransition} references
 	 */
 	private static Collection<BeanDefinition> parseTransitionElement(Element transitionElement, String stateId,
-			BeanDefinition stateDef, ParserContext parserContext) {
+	BeanDefinition stateDef, ParserContext parserContext) {
 
 		FlowExecutionStatus status = getBatchStatusFromEndTransitionName(transitionElement.getNodeName());
 		String onAttribute = transitionElement.getAttribute(ON_ATTR);
@@ -372,7 +372,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 		String exitCodeAttribute = transitionElement.getAttribute(EXIT_CODE_ATTR);
 
 		return createTransition(status, onAttribute, nextAttribute, exitCodeAttribute, stateDef, parserContext,
-				abandon);
+		abandon);
 	}
 
 	/**
@@ -391,14 +391,14 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * {@link org.springframework.batch.core.job.flow.support.StateTransition} references
 	 */
 	protected static Collection<BeanDefinition> createTransition(FlowExecutionStatus status, String on, String next,
-			String exitCode, BeanDefinition stateDef, ParserContext parserContext, boolean abandon) {
+	String exitCode, BeanDefinition stateDef, ParserContext parserContext, boolean abandon) {
 
 		BeanDefinition endState = null;
 
 		if (status.isEnd()) {
 
 			BeanDefinitionBuilder endBuilder = BeanDefinitionBuilder
-					.genericBeanDefinition("org.springframework.batch.core.job.flow.support.state.EndState");
+			.genericBeanDefinition("org.springframework.batch.core.job.flow.support.state.EndState");
 
 			boolean exitCodeExists = StringUtils.hasText(exitCode);
 
@@ -407,7 +407,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 			endBuilder.addConstructorArgValue(exitCodeExists ? exitCode : status.getName());
 
 			String endName = (status == FlowExecutionStatus.STOPPED ? STOP_ELE
-					: status == FlowExecutionStatus.FAILED ? FAIL_ELE : END_ELE) + (endCounter++);
+			: status == FlowExecutionStatus.FAILED ? FAIL_ELE : END_ELE) + (endCounter++);
 			endBuilder.addConstructorArgValue(endName);
 
 			endBuilder.addConstructorArgValue(abandon);
@@ -474,10 +474,10 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * {@link org.springframework.batch.core.job.flow.support.StateTransition}
 	 */
 	public static BeanDefinition getStateTransitionReference(ParserContext parserContext,
-			BeanDefinition stateDefinition, String on, String next) {
+	BeanDefinition stateDefinition, String on, String next) {
 
 		BeanDefinitionBuilder nextBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition("org.springframework.batch.core.job.flow.support.StateTransition");
+		.genericBeanDefinition("org.springframework.batch.core.job.flow.support.StateTransition");
 		nextBuilder.addConstructorArgValue(stateDefinition);
 
 		if (StringUtils.hasText(on)) {

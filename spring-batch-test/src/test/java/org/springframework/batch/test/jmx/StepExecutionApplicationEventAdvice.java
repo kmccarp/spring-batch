@@ -55,7 +55,7 @@ public class StepExecutionApplicationEventAdvice implements ApplicationEventPubl
 
 	public void onError(JoinPoint jp, StepExecution stepExecution, Throwable t) {
 		String msg = "Error in: " + jp.toShortString() + " with: " + stepExecution + " (" + t.getClass() + ":"
-				+ t.getMessage() + ")";
+		+ t.getMessage() + ")";
 		publish(jp.getTarget(), msg);
 	}
 

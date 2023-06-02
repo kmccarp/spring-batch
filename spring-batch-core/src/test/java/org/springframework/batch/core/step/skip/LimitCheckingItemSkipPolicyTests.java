@@ -49,7 +49,7 @@ class LimitCheckingItemSkipPolicyTests {
 	@Test
 	void testLimitExceed() {
 		assertThrows(SkipLimitExceededException.class,
-				() -> failurePolicy.shouldSkip(new FlatFileParseException("", ""), 2));
+		() -> failurePolicy.shouldSkip(new FlatFileParseException("", ""), 2));
 	}
 
 	@Test

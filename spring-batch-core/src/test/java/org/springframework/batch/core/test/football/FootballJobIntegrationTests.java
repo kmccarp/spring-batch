@@ -38,7 +38,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @author Mahmoud Ben Hassine
  *
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/META-INF/batch/footballJob.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/META-INF/batch/footballJob.xml"})
 public class FootballJobIntegrationTests extends AbstractIntegrationTests {
 
 	/** Logger */
@@ -58,7 +58,7 @@ public class FootballJobIntegrationTests extends AbstractIntegrationTests {
 	@Test
 	void testLaunchJob() throws Exception {
 		JobExecution execution = jobLauncher.run(job,
-				new JobParametersBuilder().addLong("commit.interval", 10L).toJobParameters());
+		new JobParametersBuilder().addLong("commit.interval", 10L).toJobParameters());
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		for (StepExecution stepExecution : execution.getStepExecutions()) {
 			logger.info("Processed: " + stepExecution);

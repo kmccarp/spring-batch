@@ -143,7 +143,7 @@ class SimpleJobRepositoryIntegrationTests {
 
 		assertEquals(2, jobRepository.getStepExecutionCount(secondJobExec.getJobInstance(), step.getName()));
 		assertEquals(secondStepExec,
-				jobRepository.getLastStepExecution(secondJobExec.getJobInstance(), step.getName()));
+		jobRepository.getLastStepExecution(secondJobExec.getJobInstance(), step.getName()));
 	}
 
 	/*
@@ -191,7 +191,7 @@ class SimpleJobRepositoryIntegrationTests {
 		jobRepository.update(jobExecution);
 
 		assertThrows(JobExecutionAlreadyRunningException.class,
-				() -> jobRepository.createJobExecution(job.getName(), jobParameters));
+		() -> jobRepository.createJobExecution(job.getName(), jobParameters));
 	}
 
 	@Transactional
@@ -235,7 +235,7 @@ class SimpleJobRepositoryIntegrationTests {
 	@Test
 	public void testReExecuteWithSameJobParametersWhenRunning() throws Exception {
 		JobParameters jobParameters = new JobParametersBuilder().addString("stringKey", "stringValue")
-				.toJobParameters();
+		.toJobParameters();
 
 		// jobExecution with status STARTING
 		JobExecution jobExecution = jobRepository.createJobExecution(job.getName(), jobParameters);

@@ -105,7 +105,7 @@ class JdbcPagingItemReaderAsyncTests {
 		}
 		if (!throwables.isEmpty()) {
 			throw new IllegalStateException(String.format("Failed %d out of %d", throwables.size(), max),
-					throwables.get(0));
+			throwables.get(0));
 		}
 	}
 
@@ -117,7 +117,7 @@ class JdbcPagingItemReaderAsyncTests {
 	private void doTest() throws Exception, InterruptedException, ExecutionException {
 		final ItemReader<Foo> reader = getItemReader();
 		CompletionService<List<Foo>> completionService = new ExecutorCompletionService<>(
-				Executors.newFixedThreadPool(THREAD_COUNT));
+		Executors.newFixedThreadPool(THREAD_COUNT));
 		for (int i = 0; i < THREAD_COUNT; i++) {
 			completionService.submit(new Callable<List<Foo>>() {
 				@Override

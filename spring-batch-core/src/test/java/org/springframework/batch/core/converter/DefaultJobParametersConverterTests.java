@@ -45,7 +45,7 @@ class DefaultJobParametersConverterTests {
 		String scheduleDate = "schedule.date=2008-01-23T10:15:30Z,java.util.Date,true";
 		String vendorId = "vendor.id=33243243,java.lang.Long,true";
 
-		String[] args = new String[] { jobKey, scheduleDate, vendorId };
+		String[] args = new String[]{jobKey, scheduleDate, vendorId};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -60,7 +60,7 @@ class DefaultJobParametersConverterTests {
 		String scheduleDate = "schedule.date=2008-01-23T10:15:30Z,java.util.Date";
 		String vendorId = "vendor.id=33243243,java.lang.Long";
 
-		String[] args = new String[] { jobKey, scheduleDate, vendorId };
+		String[] args = new String[]{jobKey, scheduleDate, vendorId};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -75,7 +75,7 @@ class DefaultJobParametersConverterTests {
 		String scheduleDate = "schedule.date=2008-01-23T10:15:30Z,java.util.Date,false";
 		String vendorId = "vendor.id=33243243,java.lang.Long,false";
 
-		String[] args = new String[] { jobKey, scheduleDate, vendorId };
+		String[] args = new String[]{jobKey, scheduleDate, vendorId};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -90,7 +90,7 @@ class DefaultJobParametersConverterTests {
 		String scheduleDate = "schedule.date=2008-01-23T10:15:30Z,java.util.Date";
 		String vendorId = "vendor.id=33243243,java.lang.Long,false";
 
-		String[] args = new String[] { jobKey, scheduleDate, vendorId };
+		String[] args = new String[]{jobKey, scheduleDate, vendorId};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -105,7 +105,7 @@ class DefaultJobParametersConverterTests {
 		String scheduleDate = "schedule.date=2008-01-23,java.time.LocalDate,true";
 		String vendorId = "vendor.id=33243243,java.lang.Long,true";
 
-		String[] args = new String[] { jobKey, scheduleDate, vendorId };
+		String[] args = new String[]{jobKey, scheduleDate, vendorId};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -118,7 +118,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithBogusLong() {
 
-		String[] args = new String[] { "value=foo,java.lang.Long" };
+		String[] args = new String[]{"value=foo,java.lang.Long"};
 
 		try {
 			factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
@@ -132,7 +132,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithDoubleValueDeclaredAsLong() {
 
-		String[] args = new String[] { "value=1.03,java.lang.Long" };
+		String[] args = new String[]{"value=1.03,java.lang.Long"};
 
 		try {
 			factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
@@ -146,7 +146,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithBogusDouble() {
 
-		String[] args = new String[] { "value=foo,java.lang.Double" };
+		String[] args = new String[]{"value=foo,java.lang.Double"};
 
 		try {
 			factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
@@ -160,7 +160,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithDouble() {
 
-		String[] args = new String[] { "value=1.38,java.lang.Double" };
+		String[] args = new String[]{"value=1.38,java.lang.Double"};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -170,7 +170,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithRoundDouble() {
 
-		String[] args = new String[] { "value=1.0,java.lang.Double" };
+		String[] args = new String[]{"value=1.0,java.lang.Double"};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -180,7 +180,7 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testGetParametersWithVeryRoundDouble() {
 
-		String[] args = new String[] { "value=1,java.lang.Double" };
+		String[] args = new String[]{"value=1,java.lang.Double"};
 
 		JobParameters props = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 		assertNotNull(props);
@@ -191,8 +191,8 @@ class DefaultJobParametersConverterTests {
 	void testGetProperties() throws Exception {
 		LocalDate date = LocalDate.of(2008, 1, 23);
 		JobParameters parameters = new JobParametersBuilder()
-				.addJobParameter("schedule.date", date, LocalDate.class, true).addString("job.key", "myKey")
-				.addLong("vendor.id", 33243243L).addDouble("double.key", 1.23).toJobParameters();
+		.addJobParameter("schedule.date", date, LocalDate.class, true).addString("job.key", "myKey")
+		.addLong("vendor.id", 33243243L).addDouble("double.key", 1.23).toJobParameters();
 
 		Properties props = factory.getProperties(parameters);
 		assertNotNull(props);
@@ -205,8 +205,8 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testRoundTrip() {
 
-		String[] args = new String[] { "schedule.date=2008-01-23,java.time.LocalDate", "job.key=myKey",
-				"vendor.id=33243243,java.lang.Long", "double.key=1.23,java.lang.Double" };
+		String[] args = new String[]{"schedule.date=2008-01-23,java.time.LocalDate", "job.key=myKey",
+		"vendor.id=33243243,java.lang.Long", "double.key=1.23,java.lang.Double"};
 
 		JobParameters parameters = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 
@@ -221,8 +221,8 @@ class DefaultJobParametersConverterTests {
 	@Test
 	void testRoundTripWithIdentifyingAndNonIdentifying() {
 
-		String[] args = new String[] { "schedule.date=2008-01-23,java.time.LocalDate", "job.key=myKey",
-				"vendor.id=33243243,java.lang.Long,false", "double.key=1.23,java.lang.Double" };
+		String[] args = new String[]{"schedule.date=2008-01-23,java.time.LocalDate", "job.key=myKey",
+		"vendor.id=33243243,java.lang.Long,false", "double.key=1.23,java.lang.Double"};
 
 		JobParameters parameters = factory.getJobParameters(StringUtils.splitArrayElementsIntoProperties(args, "="));
 

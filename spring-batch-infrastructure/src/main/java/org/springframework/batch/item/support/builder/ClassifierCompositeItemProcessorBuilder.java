@@ -38,7 +38,7 @@ public class ClassifierCompositeItemProcessorBuilder<I, O> {
 	 * @see ClassifierCompositeItemProcessor#setClassifier(Classifier)
 	 */
 	public ClassifierCompositeItemProcessorBuilder<I, O> classifier(
-			Classifier<? super I, ItemProcessor<?, ? extends O>> classifier) {
+	Classifier<? super I, ItemProcessor<?, ? extends O>> classifier) {
 		this.classifier = classifier;
 
 		return this;

@@ -116,7 +116,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [customer=" + customer + ", date=" + date + ", lineItems=" + lineItems + ", shipper=" + shipper
-				+ "]";
+		+ "]";
 	}
 
 }

@@ -34,7 +34,7 @@ class ParentStepFactoryBeanParserTests {
 	@Test
 	void testSimpleAttributes() {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/ParentStepFactoryBeanParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/ParentStepFactoryBeanParserTests-context.xml");
 		Object step = context.getBean("s1", Step.class);
 		assertNotNull(step, "Step not parsed");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
@@ -45,7 +45,7 @@ class ParentStepFactoryBeanParserTests {
 	@Test
 	void testSkippableAttributes() {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/ParentSkippableStepFactoryBeanParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/ParentSkippableStepFactoryBeanParserTests-context.xml");
 		Object step = context.getBean("s1", Step.class);
 		assertNotNull(step, "Step not parsed");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
@@ -56,7 +56,7 @@ class ParentStepFactoryBeanParserTests {
 	@Test
 	void testRetryableAttributes() {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/ParentRetryableStepFactoryBeanParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/ParentRetryableStepFactoryBeanParserTests-context.xml");
 		Object step = context.getBean("s1", Step.class);
 		assertNotNull(step, "Step not parsed");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
@@ -68,7 +68,7 @@ class ParentStepFactoryBeanParserTests {
 	@Test
 	void testRetryableLateBindingAttributes() {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/ParentRetryableLateBindingStepFactoryBeanParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/ParentRetryableLateBindingStepFactoryBeanParserTests-context.xml");
 		Object step = context.getBean("s1", Step.class);
 		assertNotNull(step, "Step not parsed");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
@@ -80,7 +80,7 @@ class ParentStepFactoryBeanParserTests {
 	@Test
 	void testSkippableLateBindingAttributes() {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/ParentSkippableLateBindingStepFactoryBeanParserTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/ParentSkippableLateBindingStepFactoryBeanParserTests-context.xml");
 		Object step = context.getBean("s1", Step.class);
 		assertNotNull(step, "Step not parsed");
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");

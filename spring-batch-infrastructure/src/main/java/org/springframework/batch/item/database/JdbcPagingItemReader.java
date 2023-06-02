@@ -188,11 +188,11 @@ public class JdbcPagingItemReader<T> extends AbstractPagingItemReader<T> impleme
 			if (parameterValues != null && parameterValues.size() > 0) {
 				if (this.queryProvider.isUsingNamedParameters()) {
 					query = namedParameterJdbcTemplate.query(firstPageSql, getParameterMap(parameterValues, null),
-							rowCallback);
+					rowCallback);
 				}
 				else {
 					query = getJdbcTemplate().query(firstPageSql, rowCallback,
-							getParameterList(parameterValues, null).toArray());
+					getParameterList(parameterValues, null).toArray());
 				}
 			}
 			else {
@@ -207,11 +207,11 @@ public class JdbcPagingItemReader<T> extends AbstractPagingItemReader<T> impleme
 			}
 			if (this.queryProvider.isUsingNamedParameters()) {
 				query = namedParameterJdbcTemplate.query(remainingPagesSql,
-						getParameterMap(parameterValues, startAfterValues), rowCallback);
+				getParameterMap(parameterValues, startAfterValues), rowCallback);
 			}
 			else {
 				query = getJdbcTemplate().query(remainingPagesSql, rowCallback,
-						getParameterList(parameterValues, startAfterValues).toArray());
+				getParameterList(parameterValues, startAfterValues).toArray());
 			}
 		}
 		else {

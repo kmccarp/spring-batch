@@ -121,7 +121,7 @@ class TransactionAwareBufferedWriterTests {
 		ArgumentCaptor<ByteBuffer> byteBufferCaptor = ArgumentCaptor.forClass(ByteBuffer.class);
 
 		when(fileChannel.write(byteBufferCaptor.capture()))
-				.thenAnswer(invocation -> ((ByteBuffer) invocation.getArguments()[0]).remaining());
+		.thenAnswer(invocation -> ((ByteBuffer) invocation.getArguments()[0]).remaining());
 
 		writer.write("foo");
 		writer.close();
@@ -252,15 +252,15 @@ class TransactionAwareBufferedWriterTests {
 	@Test
 	void testWriteWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					try {
-						writer.write("foo");
-					}
-					catch (IOException e) {
-						throw new IllegalStateException("Unexpected IOException", e);
-					}
-					throw new RuntimeException("Planned failure");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			try {
+				writer.write("foo");
+			}
+			catch (IOException e) {
+				throw new IllegalStateException("Unexpected IOException", e);
+			}
+			throw new RuntimeException("Planned failure");
+		}));
 		String message = exception.getMessage();
 		assertEquals("Planned failure", message, "Wrong message:  " + message);
 		assertEquals(0, writer.getBufferSize());
@@ -278,15 +278,15 @@ class TransactionAwareBufferedWriterTests {
 		});
 
 		Exception exception = assertThrows(FlushFailedException.class,
-				() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
-					try {
-						writer.write("foo");
-					}
-					catch (IOException e) {
-						throw new IllegalStateException("Unexpected IOException", e);
-					}
-					return null;
-				}));
+		() -> new TransactionTemplate(transactionManager).execute((TransactionCallback<Void>) status -> {
+			try {
+				writer.write("foo");
+			}
+			catch (IOException e) {
+				throw new IllegalStateException("Unexpected IOException", e);
+			}
+			return null;
+		}));
 		assertEquals("Could not write to output buffer", exception.getMessage());
 	}
 

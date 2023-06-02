@@ -59,7 +59,7 @@ class MapStepRegistryTests {
 		final StepRegistry stepRegistry = createRegistry();
 
 		launchRegisterGetRegistered(stepRegistry, "myJob",
-				getStepCollection(createStep("myStep"), createStep("myOtherStep"), createStep("myThirdStep")));
+		getStepCollection(createStep("myStep"), createStep("myOtherStep"), createStep("myThirdStep")));
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class MapStepRegistryTests {
 
 		final String aStepName = "myStep";
 		launchRegisterGetRegistered(stepRegistry, "myJob",
-				getStepCollection(createStep(aStepName), createStep("myOtherStep"), createStep("myThirdStep")));
+		getStepCollection(createStep(aStepName), createStep("myOtherStep"), createStep("myThirdStep")));
 
 		assertJobNotRegistered(stepRegistry, "a ghost");
 	}
@@ -86,7 +86,7 @@ class MapStepRegistryTests {
 
 		final String jobName = "myJob";
 		launchRegisterGetRegistered(stepRegistry, jobName,
-				getStepCollection(createStep("myStep"), createStep("myOtherStep"), createStep("myThirdStep")));
+		getStepCollection(createStep("myStep"), createStep("myOtherStep"), createStep("myThirdStep")));
 
 		assertStepNameNotRegistered(stepRegistry, jobName, "fsdfsdfsdfsd");
 	}
@@ -97,14 +97,14 @@ class MapStepRegistryTests {
 
 		final String jobName = "myJob";
 		final Collection<Step> stepsFirstRegistration = getStepCollection(createStep("myStep"),
-				createStep("myOtherStep"), createStep("myThirdStep"));
+		createStep("myOtherStep"), createStep("myThirdStep"));
 
 		// first registration
 		launchRegisterGetRegistered(stepRegistry, jobName, stepsFirstRegistration);
 
 		// Second registration with same name should fail
 		assertThrows(DuplicateJobException.class, () -> stepRegistry.register(jobName,
-				getStepCollection(createStep("myFourthStep"), createStep("lastOne"))));
+		getStepCollection(createStep("myFourthStep"), createStep("lastOne"))));
 	}
 
 	@Test
@@ -127,7 +127,7 @@ class MapStepRegistryTests {
 		final StepRegistry stepRegistry = createRegistry();
 
 		final Collection<Step> steps = getStepCollection(createStep("myStep"), createStep("myOtherStep"),
-				createStep("myThirdStep"));
+		createStep("myThirdStep"));
 
 		final String jobName = "myJob";
 		launchRegisterGetRegistered(stepRegistry, jobName, steps);
@@ -162,7 +162,7 @@ class MapStepRegistryTests {
 	}
 
 	protected void launchRegisterGetRegistered(StepRegistry stepRegistry, String jobName, Collection<Step> steps)
-			throws DuplicateJobException {
+	throws DuplicateJobException {
 		stepRegistry.register(jobName, steps);
 		assertStepsRegistered(stepRegistry, jobName, steps);
 	}

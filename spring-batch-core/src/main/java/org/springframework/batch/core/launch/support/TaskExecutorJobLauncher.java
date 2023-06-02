@@ -55,7 +55,7 @@ public class TaskExecutorJobLauncher extends SimpleJobLauncher {
 
 	@Override
 	public JobExecution run(Job job, JobParameters jobParameters) throws JobExecutionAlreadyRunningException,
-			JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+	JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		return super.run(job, jobParameters);
 	}
 

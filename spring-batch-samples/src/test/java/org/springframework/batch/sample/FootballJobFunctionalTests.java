@@ -28,7 +28,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/footballJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/footballJob.xml", "/job-runner-context.xml"})
 class FootballJobFunctionalTests {
 
 	@Autowired

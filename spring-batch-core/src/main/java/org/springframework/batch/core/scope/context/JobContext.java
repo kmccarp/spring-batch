@@ -174,7 +174,7 @@ public class JobContext extends SynchronizedAttributeAccessor {
 		}
 		else {
 			throw new UnexpectedJobExecutionException(
-					"Could not close step context, rethrowing first of " + errors.size() + " exceptions.", error);
+			"Could not close step context, rethrowing first of " + errors.size() + " exceptions.", error);
 		}
 	}
 
@@ -191,7 +191,7 @@ public class JobContext extends SynchronizedAttributeAccessor {
 	 */
 	public String getId() {
 		Assert.state(jobExecution.getId() != null,
-				"JobExecution has no id.  " + "It must be saved before it can be used in job scope.");
+		"JobExecution has no id.  " + "It must be saved before it can be used in job scope.");
 		return "jobExecution#" + jobExecution.getId();
 	}
 
@@ -226,7 +226,7 @@ public class JobContext extends SynchronizedAttributeAccessor {
 	@Override
 	public String toString() {
 		return super.toString() + ", jobExecutionContext=" + getJobExecutionContext() + ", jobParameters="
-				+ getJobParameters();
+		+ getJobParameters();
 	}
 
 }

@@ -56,7 +56,7 @@ public class CompositeItemWriteListener<S> implements ItemWriteListener<S> {
 	 */
 	@Override
 	public void afterWrite(Chunk<? extends S> items) {
-		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ItemWriteListener<? super S> listener = iterator.next();
 			listener.afterWrite(items);
 		}
@@ -69,7 +69,7 @@ public class CompositeItemWriteListener<S> implements ItemWriteListener<S> {
 	 */
 	@Override
 	public void beforeWrite(Chunk<? extends S> items) {
-		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			ItemWriteListener<? super S> listener = iterator.next();
 			listener.beforeWrite(items);
 		}
@@ -82,7 +82,7 @@ public class CompositeItemWriteListener<S> implements ItemWriteListener<S> {
 	 */
 	@Override
 	public void onWriteError(Exception ex, Chunk<? extends S> items) {
-		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ItemWriteListener<? super S>> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ItemWriteListener<? super S> listener = iterator.next();
 			listener.onWriteError(ex, items);
 		}

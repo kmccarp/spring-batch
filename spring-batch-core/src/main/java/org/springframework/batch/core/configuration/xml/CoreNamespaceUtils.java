@@ -72,7 +72,7 @@ public class CoreNamespaceUtils {
 
 	private static void checkForStepScope(ParserContext parserContext, Object source) {
 		checkForScope(parserContext, source, XML_CONFIG_STEP_SCOPE_PROCESSOR_CLASS_NAME,
-				STEP_SCOPE_PROCESSOR_BEAN_NAME);
+		STEP_SCOPE_PROCESSOR_BEAN_NAME);
 	}
 
 	private static void checkForJobScope(ParserContext parserContext, Object source) {
@@ -80,13 +80,13 @@ public class CoreNamespaceUtils {
 	}
 
 	private static void checkForScope(ParserContext parserContext, Object source, String scopeClassName,
-			String scopeBeanName) {
+	String scopeBeanName) {
 		boolean foundScope = false;
 		String[] beanNames = parserContext.getRegistry().getBeanDefinitionNames();
 		for (String beanName : beanNames) {
 			BeanDefinition bd = parserContext.getRegistry().getBeanDefinition(beanName);
 			if (scopeClassName.equals(bd.getBeanClassName())
-					|| JAVA_CONFIG_SCOPE_CLASS_NAME.equals(bd.getBeanClassName())) {
+			|| JAVA_CONFIG_SCOPE_CLASS_NAME.equals(bd.getBeanClassName())) {
 				foundScope = true;
 				break;
 			}
@@ -108,9 +108,9 @@ public class CoreNamespaceUtils {
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
 		if (!stateTransitionComparatorAlreadyDefined(registry)) {
 			AbstractBeanDefinition defaultStateTransitionComparator = BeanDefinitionBuilder
-					.genericBeanDefinition(DefaultStateTransitionComparator.class).getBeanDefinition();
+			.genericBeanDefinition(DefaultStateTransitionComparator.class).getBeanDefinition();
 			registry.registerBeanDefinition(DefaultStateTransitionComparator.STATE_TRANSITION_COMPARATOR,
-					defaultStateTransitionComparator);
+			defaultStateTransitionComparator);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class CoreNamespaceUtils {
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
 		if (!rangeArrayEditorAlreadyDefined(registry)) {
 			AbstractBeanDefinition customEditorConfigurer = BeanDefinitionBuilder
-					.genericBeanDefinition(CUSTOM_EDITOR_CONFIGURER_CLASS_NAME).getBeanDefinition();
+			.genericBeanDefinition(CUSTOM_EDITOR_CONFIGURER_CLASS_NAME).getBeanDefinition();
 			customEditorConfigurer.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 			ManagedMap<String, String> editors = new ManagedMap<>();
 			editors.put(RANGE_ARRAY_CLASS_NAME, RANGE_ARRAY_EDITOR_CLASS_NAME);
@@ -167,7 +167,7 @@ public class CoreNamespaceUtils {
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
 		if (!coreNamespaceBeanPostProcessorAlreadyDefined(registry)) {
 			AbstractBeanDefinition postProcessorBeanDef = BeanDefinitionBuilder
-					.genericBeanDefinition(CORE_NAMESPACE_POST_PROCESSOR_CLASS_NAME).getBeanDefinition();
+			.genericBeanDefinition(CORE_NAMESPACE_POST_PROCESSOR_CLASS_NAME).getBeanDefinition();
 			postProcessorBeanDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 			registry.registerBeanDefinition(CORE_NAMESPACE_POST_PROCESSOR_CLASS_NAME, postProcessorBeanDef);
 		}
@@ -210,15 +210,15 @@ public class CoreNamespaceUtils {
 	 */
 	public static boolean namespaceMatchesVersion(Element element) {
 		return matchesVersionInternal(element)
-				&& matchesVersionInternal(element.getOwnerDocument().getDocumentElement());
+		&& matchesVersionInternal(element.getOwnerDocument().getDocumentElement());
 	}
 
 	private static boolean matchesVersionInternal(Element element) {
 		String schemaLocation = element.getAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "schemaLocation");
 		return schemaLocation.matches("(?m).*spring-batch-3.0.xsd.*")
-				|| schemaLocation.matches("(?m).*spring-batch-2.2.xsd.*")
-				|| schemaLocation.matches("(?m).*spring-batch.xsd.*")
-				|| !schemaLocation.matches("(?m).*spring-batch.*");
+		|| schemaLocation.matches("(?m).*spring-batch-2.2.xsd.*")
+		|| schemaLocation.matches("(?m).*spring-batch.xsd.*")
+		|| !schemaLocation.matches("(?m).*spring-batch.*");
 	}
 
 }

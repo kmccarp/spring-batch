@@ -221,10 +221,10 @@ public class JobLauncherTestUtils {
 	 * @return JobExecution
 	 */
 	public JobExecution launchStep(String stepName, JobParameters jobParameters,
-			@Nullable ExecutionContext jobExecutionContext) {
+	@Nullable ExecutionContext jobExecutionContext) {
 		if (!(job instanceof StepLocator)) {
 			throw new UnsupportedOperationException("Cannot locate step from a Job that is not a StepLocator: job="
-					+ job.getName() + " does not implement StepLocator");
+			+ job.getName() + " does not implement StepLocator");
 		}
 		StepLocator locator = (StepLocator) this.job;
 		Step step = locator.getStep(stepName);

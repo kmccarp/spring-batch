@@ -51,8 +51,8 @@ class RemoteStepExecutionAggregatorTests {
 	@BeforeEach
 	void init() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(embeddedDatabase);
@@ -97,7 +97,7 @@ class RemoteStepExecutionAggregatorTests {
 		stepExecution1.setStatus(BatchStatus.COMPLETED);
 		stepExecution2.setStatus(BatchStatus.COMPLETED);
 		assertThrows(IllegalStateException.class,
-				() -> aggregator.aggregate(result, List.of(stepExecution1, stepExecution2)));
+		() -> aggregator.aggregate(result, List.of(stepExecution1, stepExecution2)));
 	}
 
 }

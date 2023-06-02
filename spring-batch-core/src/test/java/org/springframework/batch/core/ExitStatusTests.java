@@ -102,7 +102,7 @@ class ExitStatusTests {
 	@Test
 	void testAndExitStatusWhenCustomCompletedAddedToCompleted() {
 		assertEquals("COMPLETED_CUSTOM",
-				ExitStatus.COMPLETED.and(ExitStatus.EXECUTING.replaceExitCode("COMPLETED_CUSTOM")).getExitCode());
+		ExitStatus.COMPLETED.and(ExitStatus.EXECUTING.replaceExitCode("COMPLETED_CUSTOM")).getExitCode());
 	}
 
 	@Test

@@ -43,7 +43,7 @@ class AmqpItemReaderBuilderTests {
 		when(this.amqpTemplate.receiveAndConvert()).thenReturn("foo");
 
 		final AmqpItemReader<String> amqpItemReader = new AmqpItemReaderBuilder<String>()
-				.amqpTemplate(this.amqpTemplate).build();
+		.amqpTemplate(this.amqpTemplate).build();
 		assertEquals("foo", amqpItemReader.read());
 	}
 
@@ -52,7 +52,7 @@ class AmqpItemReaderBuilderTests {
 		when(this.amqpTemplate.receiveAndConvert()).thenReturn("foo");
 
 		final AmqpItemReader<String> amqpItemReader = new AmqpItemReaderBuilder<String>()
-				.amqpTemplate(this.amqpTemplate).itemType(String.class).build();
+		.amqpTemplate(this.amqpTemplate).itemType(String.class).build();
 
 		assertEquals("foo", amqpItemReader.read());
 	}
@@ -64,7 +64,7 @@ class AmqpItemReaderBuilderTests {
 		when(this.amqpTemplate.receive()).thenReturn(message);
 
 		final AmqpItemReader<Message> amqpItemReader = new AmqpItemReaderBuilder<Message>()
-				.amqpTemplate(this.amqpTemplate).itemType(Message.class).build();
+		.amqpTemplate(this.amqpTemplate).itemType(Message.class).build();
 
 		assertEquals(message, amqpItemReader.read());
 	}
@@ -72,7 +72,7 @@ class AmqpItemReaderBuilderTests {
 	@Test
 	void testNullAmqpTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new AmqpItemReaderBuilder<Message>().build());
+		() -> new AmqpItemReaderBuilder<Message>().build());
 		assertEquals("amqpTemplate is required.", exception.getMessage());
 	}
 

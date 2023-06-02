@@ -89,7 +89,7 @@ public abstract class AbstractStepParser {
 	private static final String JOB_REPO_ATTR = "job-repository";
 
 	private static final StepListenerParser stepListenerParser = new StepListenerParser(
-			StepListenerMetaData.stepExecutionListenerMetaData());
+	StepListenerMetaData.stepExecutionListenerMetaData());
 
 	/**
 	 * @param stepElement The &lt;step/&gt; element
@@ -141,9 +141,9 @@ public abstract class AbstractStepParser {
 
 					// Spring NS
 					if ((ns == null && name.equals(BeanDefinitionParserDelegate.BEAN_ELEMENT))
-							|| ns.equals(BeanDefinitionParserDelegate.BEANS_NAMESPACE_URI)) {
+					|| ns.equals(BeanDefinitionParserDelegate.BEANS_NAMESPACE_URI)) {
 						BeanDefinitionHolder holder = parserContext.getDelegate()
-								.parseBeanDefinitionElement(nestedElement);
+						.parseBeanDefinitionElement(nestedElement);
 						value = parserContext.getDelegate().decorateBeanDefinitionIfRequired(nestedElement, holder);
 					}
 					// Spring Batch transitions
@@ -199,7 +199,7 @@ public abstract class AbstractStepParser {
 	}
 
 	private void parsePartition(Element stepElement, Element partitionElement, AbstractBeanDefinition bd,
-			ParserContext parserContext, boolean stepUnderspecified, String jobFactoryRef) {
+	ParserContext parserContext, boolean stepUnderspecified, String jobFactoryRef) {
 
 		bd.setBeanClass(StepParserStepFactoryBean.class);
 		bd.setAttribute("isNamespaceStep", true);
@@ -259,7 +259,7 @@ public abstract class AbstractStepParser {
 	}
 
 	private void parseJob(Element stepElement, Element jobElement, AbstractBeanDefinition bd,
-			ParserContext parserContext, boolean stepUnderspecified) {
+	ParserContext parserContext, boolean stepUnderspecified) {
 
 		bd.setBeanClass(StepParserStepFactoryBean.class);
 		bd.setAttribute("isNamespaceStep", true);
@@ -286,7 +286,7 @@ public abstract class AbstractStepParser {
 	}
 
 	private void parseFlow(Element stepElement, Element flowElement, AbstractBeanDefinition bd,
-			ParserContext parserContext, boolean stepUnderspecified) {
+	ParserContext parserContext, boolean stepUnderspecified) {
 
 		bd.setBeanClass(StepParserStepFactoryBean.class);
 		bd.setAttribute("isNamespaceStep", true);

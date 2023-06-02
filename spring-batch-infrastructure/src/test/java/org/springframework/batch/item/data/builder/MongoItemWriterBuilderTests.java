@@ -98,7 +98,7 @@ class MongoItemWriterBuilderTests {
 	@Test
 	void testWriteToCollection() throws Exception {
 		MongoItemWriter<Item> writer = new MongoItemWriterBuilder<Item>().collection("collection")
-				.template(this.template).build();
+		.template(this.template).build();
 
 		writer.write(this.saveItems);
 
@@ -122,7 +122,7 @@ class MongoItemWriterBuilderTests {
 	@Test
 	void testNullTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new MongoItemWriterBuilder<>().build());
+		() -> new MongoItemWriterBuilder<>().build());
 		assertEquals("template is required.", exception.getMessage());
 	}
 

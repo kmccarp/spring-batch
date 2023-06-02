@@ -115,8 +115,8 @@ public class SpringBatchTestJUnit5Tests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
-					.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+			.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		}
 
 		@Bean
@@ -139,8 +139,8 @@ public class SpringBatchTestJUnit5Tests {
 		@Bean
 		public Job job(JobRepository jobRepository) {
 			return new JobBuilder("job", jobRepository).start(new StepBuilder("step", jobRepository)
-					.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager(dataSource()))
-					.build()).build();
+			.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager(dataSource()))
+			.build()).build();
 		}
 
 	}

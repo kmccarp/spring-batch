@@ -70,7 +70,7 @@ public class SplitParser {
 		String idAttribute = element.getAttribute("id");
 
 		BeanDefinitionBuilder stateBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition("org.springframework.batch.core.job.flow.support.state.SplitState");
+		.genericBeanDefinition("org.springframework.batch.core.job.flow.support.state.SplitState");
 
 		String taskExecutorBeanId = element.getAttribute("task-executor");
 		if (StringUtils.hasText(taskExecutorBeanId)) {
@@ -92,7 +92,7 @@ public class SplitParser {
 			if (StringUtils.hasText(ref)) {
 				if (nextElement.getElementsByTagName("*").getLength() > 0) {
 					parserContext.getReaderContext().error(
-							"A <flow/> in a <split/> must have ref= or nested <flow/>, but not both.", nextElement);
+					"A <flow/> in a <split/> must have ref= or nested <flow/>, but not both.", nextElement);
 				}
 				AbstractBeanDefinition flowDefinition = new GenericBeanDefinition();
 				flowDefinition.setParentName(ref);

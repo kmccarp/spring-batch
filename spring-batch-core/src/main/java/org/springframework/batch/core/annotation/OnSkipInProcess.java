@@ -35,7 +35,7 @@ import org.springframework.batch.item.ItemProcessor;
  * @see SkipListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface OnSkipInProcess {
 
 }

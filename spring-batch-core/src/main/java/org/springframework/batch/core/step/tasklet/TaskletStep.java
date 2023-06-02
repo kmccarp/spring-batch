@@ -242,7 +242,7 @@ public class TaskletStep extends AbstractStep {
 
 			@Override
 			public RepeatStatus doInChunkContext(RepeatContext repeatContext, ChunkContext chunkContext)
-					throws Exception {
+			throws Exception {
 
 				StepExecution stepExecution = chunkContext.getStepContext().getStepExecution();
 
@@ -253,7 +253,7 @@ public class TaskletStep extends AbstractStep {
 				RepeatStatus result;
 				try {
 					result = new TransactionTemplate(transactionManager, transactionAttribute)
-							.execute(new ChunkTransactionCallback(chunkContext, semaphore));
+					.execute(new ChunkTransactionCallback(chunkContext, semaphore));
 				}
 				catch (UncheckedTransactionException e) {
 					// Allow checked exceptions to be thrown inside callback
@@ -340,7 +340,7 @@ public class TaskletStep extends AbstractStep {
 						// Wah! the commit failed. We need to rescue the step
 						// execution data.
 						logger.info("Commit failed while step execution data was already updated. "
-								+ "Reverting to old version.");
+						+ "Reverting to old version.");
 						copy(oldVersion, stepExecution);
 						if (status == TransactionSynchronization.STATUS_ROLLED_BACK) {
 							rollback(stepExecution);

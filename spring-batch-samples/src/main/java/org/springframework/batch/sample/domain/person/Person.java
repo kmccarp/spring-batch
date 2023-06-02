@@ -129,7 +129,7 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [address=" + address + ", age=" + age + ", children=" + children + ", firstName=" + firstName
-				+ ", last_name=" + last_name + ", title=" + title + "]";
+		+ ", last_name=" + last_name + ", title=" + title + "]";
 	}
 
 	@Override

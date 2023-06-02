@@ -36,7 +36,7 @@ class JsonJobParametersConverterTests {
 
 		// then
 		Assertions.assertEquals("{\"value\":\"foo\",\"type\":\"java.lang.String\",\"identifying\":\"false\"}",
-				encodedJobParameter);
+		encodedJobParameter);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ class JsonJobParametersConverterTests {
 
 		// then
 		Assertions.assertEquals("{\"value\":\"foo\",\"type\":\"java.lang.String\",\"identifying\":\"true\"}",
-				encodedJobParameter);
+		encodedJobParameter);
 	}
 
 	@Test

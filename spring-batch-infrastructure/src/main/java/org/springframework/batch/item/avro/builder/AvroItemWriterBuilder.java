@@ -105,8 +105,8 @@ public class AvroItemWriterBuilder<T> {
 		Assert.notNull(this.type, "A 'type' is required.");
 
 		AvroItemWriter<T> avroItemWriter = this.schema != null
-				? new AvroItemWriter<>(this.resource, this.schema, this.type)
-				: new AvroItemWriter<>(this.resource, this.type);
+		? new AvroItemWriter<>(this.resource, this.schema, this.type)
+		: new AvroItemWriter<>(this.resource, this.type);
 		avroItemWriter.setName(this.name);
 		return avroItemWriter;
 	}

@@ -49,7 +49,7 @@ class JmsItemReaderBuilderTests {
 	@Test
 	void testBasicRead() {
 		JmsItemReader<String> itemReader = new JmsItemReaderBuilder<String>().jmsTemplate(this.defaultJmsTemplate)
-				.build();
+		.build();
 		assertEquals("foo", itemReader.read());
 	}
 
@@ -61,14 +61,14 @@ class JmsItemReaderBuilderTests {
 		when(jmsTemplate.receiveAndConvert()).thenReturn(date);
 
 		JmsItemReader<Date> itemReader = new JmsItemReaderBuilder<Date>().jmsTemplate(jmsTemplate).itemType(Date.class)
-				.build();
+		.build();
 		assertEquals(date, itemReader.read());
 	}
 
 	@Test
 	void testSetItemTypeMismatch() {
 		JmsItemReader<Date> itemReader = new JmsItemReaderBuilder<Date>().jmsTemplate(this.defaultJmsTemplate)
-				.itemType(Date.class).build();
+		.itemType(Date.class).build();
 		Exception exception = assertThrows(IllegalStateException.class, itemReader::read);
 		assertTrue(exception.getMessage().contains("wrong type"));
 	}
@@ -80,14 +80,14 @@ class JmsItemReaderBuilderTests {
 		when(jmsTemplate.receive()).thenReturn(message);
 
 		JmsItemReader<Message> itemReader = new JmsItemReaderBuilder<Message>().jmsTemplate(jmsTemplate)
-				.itemType(Message.class).build();
+		.itemType(Message.class).build();
 		assertEquals(message, itemReader.read());
 	}
 
 	@Test
 	void testNullJmsTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new JmsItemReaderBuilder<String>().itemType(String.class).build());
+		() -> new JmsItemReaderBuilder<String>().itemType(String.class).build());
 		assertEquals("jmsTemplate is required.", exception.getMessage());
 	}
 

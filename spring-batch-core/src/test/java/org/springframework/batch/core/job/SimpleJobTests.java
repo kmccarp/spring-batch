@@ -98,8 +98,8 @@ class SimpleJobTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -116,7 +116,7 @@ class SimpleJobTests {
 
 		ObservationRegistry observationRegistry = ObservationRegistry.create();
 		observationRegistry.observationConfig()
-				.observationHandler(new DefaultMeterObservationHandler(Metrics.globalRegistry));
+		.observationHandler(new DefaultMeterObservationHandler(Metrics.globalRegistry));
 		job.setObservationRegistry(observationRegistry);
 
 		step1 = new StubStep("TestStep1", jobRepository);
@@ -227,8 +227,8 @@ class SimpleJobTests {
 
 		// Observability
 		MeterRegistryAssert.assertThat(Metrics.globalRegistry).hasTimerWithNameAndTags(
-				BatchJobObservation.BATCH_JOB_OBSERVATION.getName(), Tags.of(Tag.of("error", "none"),
-						Tag.of("spring.batch.job.name", "testJob"), Tag.of("spring.batch.job.status", "COMPLETED")));
+		BatchJobObservation.BATCH_JOB_OBSERVATION.getName(), Tags.of(Tag.of("error", "none"),
+	Tag.of("spring.batch.job.name", "testJob"), Tag.of("spring.batch.job.status", "COMPLETED")));
 	}
 
 	@AfterEach
@@ -238,7 +238,7 @@ class SimpleJobTests {
 
 	@Test
 	void testRunNormallyWithListener() {
-		job.setJobExecutionListeners(new JobExecutionListener[] { new JobExecutionListener() {
+		job.setJobExecutionListeners(new JobExecutionListener[]{new JobExecutionListener() {
 			@Override
 			public void beforeJob(JobExecution jobExecution) {
 				list.add("before");
@@ -248,7 +248,7 @@ class SimpleJobTests {
 			public void afterJob(JobExecution jobExecution) {
 				list.add("after");
 			}
-		} });
+		}});
 		job.execute(jobExecution);
 		assertEquals(4, list.size());
 	}
@@ -318,12 +318,12 @@ class SimpleJobTests {
 
 	@Test
 	void testFailedWithListener() {
-		job.setJobExecutionListeners(new JobExecutionListener[] { new JobExecutionListener() {
+		job.setJobExecutionListeners(new JobExecutionListener[]{new JobExecutionListener() {
 			@Override
 			public void afterJob(JobExecution jobExecution) {
 				list.add("afterJob");
 			}
-		} });
+		}});
 		final RuntimeException exception = new RuntimeException("Foo!");
 		step1.setProcessException(exception);
 
@@ -398,7 +398,7 @@ class SimpleJobTests {
 		job.execute(jobExecution);
 		ExitStatus exitStatus = jobExecution.getExitStatus();
 		assertTrue(exitStatus.getExitDescription().contains("no steps configured"),
-				"Wrong message in execution: " + exitStatus);
+		"Wrong message in execution: " + exitStatus);
 	}
 
 	@Test
@@ -427,7 +427,7 @@ class SimpleJobTests {
 		listener.beforeJob(jobExecution);
 		listener.afterJob(jobExecution);
 
-		job.setJobExecutionListeners(new JobExecutionListener[] { listener });
+		job.setJobExecutionListeners(new JobExecutionListener[]{listener});
 
 		job.execute(jobExecution);
 		assertEquals(BatchStatus.STOPPED, jobExecution.getStatus());
@@ -470,7 +470,7 @@ class SimpleJobTests {
 	void testGetStepExists() {
 		step1 = new StubStep("step1", jobRepository);
 		step2 = new StubStep("step2", jobRepository);
-		job.setSteps(Arrays.asList(new Step[] { step1, step2 }));
+		job.setSteps(Arrays.asList(new Step[]{step1, step2}));
 		Step step = job.getStep("step2");
 		assertNotNull(step);
 		assertEquals("step2", step.getName());
@@ -480,7 +480,7 @@ class SimpleJobTests {
 	void testGetStepNotExists() {
 		step1 = new StubStep("step1", jobRepository);
 		step2 = new StubStep("step2", jobRepository);
-		job.setSteps(Arrays.asList(new Step[] { step1, step2 }));
+		job.setSteps(Arrays.asList(new Step[]{step1, step2}));
 		Step step = job.getStep("foo");
 		assertNull(step);
 	}
@@ -497,10 +497,10 @@ class SimpleJobTests {
 		});
 
 		job.setName("parametersTestJob");
-		job.setSteps(Arrays.asList(new Step[] { failStep }));
+		job.setSteps(Arrays.asList(new Step[]{failStep}));
 
 		JobParameters firstJobParameters = new JobParametersBuilder().addString("JobExecutionParameter", "first", false)
-				.toJobParameters();
+		.toJobParameters();
 		JobExecution jobexecution = jobRepository.createJobExecution(job.getName(), firstJobParameters);
 		job.execute(jobexecution);
 
@@ -510,7 +510,7 @@ class SimpleJobTests {
 		assertEquals(jobExecutionList.get(0).getJobParameters().getString("JobExecutionParameter"), "first");
 
 		JobParameters secondJobParameters = new JobParametersBuilder()
-				.addString("JobExecutionParameter", "second", false).toJobParameters();
+		.addString("JobExecutionParameter", "second", false).toJobParameters();
 		jobexecution = jobRepository.createJobExecution(job.getName(), secondJobParameters);
 		job.execute(jobexecution);
 
@@ -527,7 +527,7 @@ class SimpleJobTests {
 	 */
 	private void checkRepository(BatchStatus status, ExitStatus exitStatus) {
 		assertEquals(jobInstance,
-				this.jobRepository.getLastJobExecution(job.getName(), jobParameters).getJobInstance());
+		this.jobRepository.getLastJobExecution(job.getName(), jobParameters).getJobInstance());
 		JobExecution jobExecution = this.jobExplorer.getJobExecutions(jobInstance).get(0);
 		assertEquals(jobInstance.getId(), jobExecution.getJobId());
 		assertEquals(status, jobExecution.getStatus());
@@ -582,7 +582,7 @@ class SimpleJobTests {
 		 */
 		@Override
 		public void execute(StepExecution stepExecution)
-				throws JobInterruptedException, UnexpectedJobExecutionException {
+		throws JobInterruptedException, UnexpectedJobExecutionException {
 
 			passedInJobContext = new ExecutionContext(stepExecution.getJobExecution().getExecutionContext());
 			passedInStepContext = new ExecutionContext(stepExecution.getExecutionContext());

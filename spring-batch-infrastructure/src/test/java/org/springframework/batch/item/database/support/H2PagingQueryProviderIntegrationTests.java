@@ -64,11 +64,11 @@ class H2PagingQueryProviderIntegrationTests {
 			queryProvider.setSortKeys(sortKeys);
 
 			List<String> firstPage = jdbcTemplate.queryForList(queryProvider.generateFirstPageQuery(2), String.class);
-			assertArrayEquals(new String[] { "Spring", "Batch" }, firstPage.toArray(), "firstPage");
+			assertArrayEquals(new String[]{"Spring", "Batch"}, firstPage.toArray(), "firstPage");
 
 			List<String> secondPage = jdbcTemplate.queryForList(queryProvider.generateRemainingPagesQuery(2),
-					String.class, 2);
-			assertArrayEquals(new String[] { "Infrastructure" }, secondPage.toArray(), "secondPage");
+			String.class, 2);
+			assertArrayEquals(new String[]{"Infrastructure"}, secondPage.toArray(), "secondPage");
 		});
 	}
 

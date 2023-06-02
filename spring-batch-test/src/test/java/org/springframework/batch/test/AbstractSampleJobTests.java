@@ -40,7 +40,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
  * @author Mahmoud Ben Hassine
  * @since 2.0
  */
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/job-runner-context.xml"})
 abstract class AbstractSampleJobTests {
 
 	@Autowired
@@ -107,9 +107,9 @@ abstract class AbstractSampleJobTests {
 
 	private void verifyTasklet(int id) {
 		assertEquals(id,
-				jdbcTemplate
-						.queryForObject("SELECT ID from TESTS where NAME = 'SampleTasklet" + id + "'", Integer.class)
-						.intValue());
+		jdbcTemplate
+	.queryForObject("SELECT ID from TESTS where NAME = 'SampleTasklet" + id + "'", Integer.class)
+	.intValue());
 	}
 
 }

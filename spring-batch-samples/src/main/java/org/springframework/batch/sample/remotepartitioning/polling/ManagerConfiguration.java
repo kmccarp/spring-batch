@@ -43,7 +43,7 @@ import org.springframework.integration.jms.dsl.Jms;
 @Configuration
 @EnableBatchProcessing
 @EnableBatchIntegration
-@Import(value = { DataSourceConfiguration.class, BrokerConfiguration.class })
+@Import(value = {DataSourceConfiguration.class, BrokerConfiguration.class})
 public class ManagerConfiguration {
 
 	private static final int GRID_SIZE = 3;
@@ -66,7 +66,7 @@ public class ManagerConfiguration {
 	@Bean
 	public IntegrationFlow outboundFlow(ActiveMQConnectionFactory connectionFactory) {
 		return IntegrationFlow.from(requests()).handle(Jms.outboundAdapter(connectionFactory).destination("requests"))
-				.get();
+		.get();
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class ManagerConfiguration {
 	@Bean
 	public Step managerStep() {
 		return this.managerStepBuilderFactory.get("managerStep").partitioner("workerStep", new BasicPartitioner())
-				.gridSize(GRID_SIZE).outputChannel(requests()).build();
+		.gridSize(GRID_SIZE).outputChannel(requests()).build();
 	}
 
 	@Bean

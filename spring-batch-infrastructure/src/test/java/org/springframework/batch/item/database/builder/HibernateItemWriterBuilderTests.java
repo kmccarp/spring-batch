@@ -54,7 +54,7 @@ class HibernateItemWriterBuilderTests {
 	@Test
 	void testConfiguration() {
 		HibernateItemWriter<Foo> itemWriter = new HibernateItemWriterBuilder<Foo>().sessionFactory(this.sessionFactory)
-				.build();
+		.build();
 
 		itemWriter.afterPropertiesSet();
 
@@ -70,7 +70,7 @@ class HibernateItemWriterBuilderTests {
 	@Test
 	void testConfigurationClearSession() {
 		HibernateItemWriter<Foo> itemWriter = new HibernateItemWriterBuilder<Foo>().sessionFactory(this.sessionFactory)
-				.clearSession(false).build();
+		.clearSession(false).build();
 
 		itemWriter.afterPropertiesSet();
 
@@ -87,7 +87,7 @@ class HibernateItemWriterBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new HibernateItemWriterBuilder<Foo>().build());
+		() -> new HibernateItemWriterBuilder<Foo>().build());
 		assertEquals("SessionFactory must be provided", exception.getMessage());
 	}
 

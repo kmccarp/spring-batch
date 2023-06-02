@@ -45,8 +45,8 @@ public class DerbyPagingQueryProvider extends SqlWindowingPagingQueryProvider {
 		String version = JdbcUtils.extractDatabaseMetaData(dataSource, DatabaseMetaData::getDatabaseProductVersion);
 		if (!isDerbyVersionSupported(version)) {
 			throw new InvalidDataAccessResourceUsageException(
-					"Apache Derby version " + version + " is not supported by this class,  Only version "
-							+ MINIMAL_DERBY_VERSION + " or later is supported");
+			"Apache Derby version " + version + " is not supported by this class,  Only version "
+		+ MINIMAL_DERBY_VERSION + " or later is supported");
 		}
 	}
 

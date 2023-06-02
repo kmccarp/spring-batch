@@ -78,7 +78,7 @@ class SpringValidatorTests {
 	@Test
 	void testValidateFailureWithErrors() {
 		ValidationException e = assertThrows(ValidationException.class,
-				() -> validator.validate(MockSpringValidator.REJECT_VALUE));
+		() -> validator.validate(MockSpringValidator.REJECT_VALUE));
 		assertTrue(e.getCause() instanceof BindException);
 	}
 
@@ -88,7 +88,7 @@ class SpringValidatorTests {
 	@Test
 	void testValidateFailureWithFields() {
 		Exception expected = assertThrows(ValidationException.class,
-				() -> validator.validate(MockSpringValidator.REJECT_MULTI_VALUE));
+		() -> validator.validate(MockSpringValidator.REJECT_MULTI_VALUE));
 		String message = expected.getMessage();
 		assertTrue(message.contains("TestBeanToString"), "message should contain the item#toString() value");
 		assertTrue(message.contains("foo"), "message should contain names of the invalid fields");

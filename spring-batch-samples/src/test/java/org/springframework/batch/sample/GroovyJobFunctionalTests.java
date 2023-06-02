@@ -30,7 +30,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/groovyJob.xml", "/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/groovyJob.xml", "/job-runner-context.xml"})
 public class GroovyJobFunctionalTests {
 
 	@Autowired

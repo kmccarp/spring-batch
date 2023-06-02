@@ -30,7 +30,7 @@ public class HeaderFieldExtractor implements FieldExtractor<Order> {
 
 	@Override
 	public Object[] extract(Order order) {
-		return new Object[] { "BEGIN_ORDER:", order.getOrderId(), dateFormat.format(order.getOrderDate()) };
+		return new Object[]{"BEGIN_ORDER:", order.getOrderId(), dateFormat.format(order.getOrderDate())};
 	}
 
 }

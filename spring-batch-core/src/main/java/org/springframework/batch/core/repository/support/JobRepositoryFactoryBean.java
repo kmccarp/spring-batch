@@ -236,8 +236,8 @@ public class JobRepositoryFactoryBean extends AbstractJobRepositoryFactoryBean i
 		}
 
 		Assert.state(incrementerFactory.isSupportedIncrementerType(databaseType),
-				() -> "'" + databaseType + "' is an unsupported database type.  The supported database types are "
-						+ StringUtils.arrayToCommaDelimitedString(incrementerFactory.getSupportedIncrementerTypes()));
+		() -> "'" + databaseType + "' is an unsupported database type.  The supported database types are "
+	+ StringUtils.arrayToCommaDelimitedString(incrementerFactory.getSupportedIncrementerTypes()));
 
 		if (clobType != null) {
 			Assert.state(isValidTypes(clobType), "lobType must be a value from the java.sql.Types class");
@@ -274,7 +274,7 @@ public class JobRepositoryFactoryBean extends AbstractJobRepositoryFactoryBean i
 		JdbcJobExecutionDao dao = new JdbcJobExecutionDao();
 		dao.setJdbcTemplate(jdbcOperations);
 		dao.setJobExecutionIncrementer(
-				incrementerFactory.getIncrementer(databaseType, tablePrefix + "JOB_EXECUTION_SEQ"));
+		incrementerFactory.getIncrementer(databaseType, tablePrefix + "JOB_EXECUTION_SEQ"));
 		dao.setTablePrefix(tablePrefix);
 		dao.setClobTypeToUse(determineClobTypeToUse(this.databaseType));
 		dao.setExitMessageLength(maxVarCharLength);
@@ -288,7 +288,7 @@ public class JobRepositoryFactoryBean extends AbstractJobRepositoryFactoryBean i
 		JdbcStepExecutionDao dao = new JdbcStepExecutionDao();
 		dao.setJdbcTemplate(jdbcOperations);
 		dao.setStepExecutionIncrementer(
-				incrementerFactory.getIncrementer(databaseType, tablePrefix + "STEP_EXECUTION_SEQ"));
+		incrementerFactory.getIncrementer(databaseType, tablePrefix + "STEP_EXECUTION_SEQ"));
 		dao.setTablePrefix(tablePrefix);
 		dao.setClobTypeToUse(determineClobTypeToUse(this.databaseType));
 		dao.setExitMessageLength(maxVarCharLength);

@@ -33,7 +33,7 @@ class BeanWrapperFieldExtractorTests {
 
 	@Test
 	void testExtract() {
-		extractor.setNames(new String[] { "first", "last", "born" });
+		extractor.setNames(new String[]{"first", "last", "born"});
 		extractor.afterPropertiesSet();
 
 		String first = "Alan";
@@ -51,7 +51,7 @@ class BeanWrapperFieldExtractorTests {
 
 	@Test
 	void testExtract_invalidProperty() {
-		extractor.setNames(new String[] { "first", "last", "birthday" });
+		extractor.setNames(new String[]{"first", "last", "birthday"});
 		extractor.afterPropertiesSet();
 
 		String first = "Alan";

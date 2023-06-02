@@ -77,7 +77,7 @@ class RangeArrayPropertyEditorTests {
 	@Test
 	void testGetAsText() {
 
-		ranges = new Range[] { new Range(20), new Range(6, 15), new Range(2), new Range(26, 95) };
+		ranges = new Range[]{new Range(20), new Range(6, 15), new Range(2), new Range(26, 95)};
 		assertEquals("20, 6-15, 2, 26-95", pe.getAsText());
 	}
 

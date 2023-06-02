@@ -38,41 +38,41 @@ class DefaultJobParametersValidatorTests {
 
 	@Test
 	void testValidateRequiredValues() throws Exception {
-		validator.setRequiredKeys(new String[] { "name", "value" });
+		validator.setRequiredKeys(new String[]{"name", "value"});
 		validator
-				.validate(new JobParametersBuilder().addString("name", "foo").addLong("value", 111L).toJobParameters());
+		.validate(new JobParametersBuilder().addString("name", "foo").addLong("value", 111L).toJobParameters());
 	}
 
 	@Test
 	void testValidateRequiredValuesMissing() {
-		validator.setRequiredKeys(new String[] { "name", "value" });
+		validator.setRequiredKeys(new String[]{"name", "value"});
 		assertThrows(JobParametersInvalidException.class, () -> validator.validate(new JobParameters()));
 	}
 
 	@Test
 	void testValidateOptionalValues() throws Exception {
-		validator.setOptionalKeys(new String[] { "name", "value" });
+		validator.setOptionalKeys(new String[]{"name", "value"});
 		validator.validate(new JobParameters());
 	}
 
 	@Test
 	void testValidateOptionalWithImplicitRequiredKey() {
-		validator.setOptionalKeys(new String[] { "name", "value" });
+		validator.setOptionalKeys(new String[]{"name", "value"});
 		JobParameters jobParameters = new JobParametersBuilder().addString("foo", "bar").toJobParameters();
 		assertThrows(JobParametersInvalidException.class, () -> validator.validate(jobParameters));
 	}
 
 	@Test
 	void testValidateOptionalWithExplicitRequiredKey() throws Exception {
-		validator.setOptionalKeys(new String[] { "name", "value" });
-		validator.setRequiredKeys(new String[] { "foo" });
+		validator.setOptionalKeys(new String[]{"name", "value"});
+		validator.setRequiredKeys(new String[]{"foo"});
 		validator.validate(new JobParametersBuilder().addString("foo", "bar").toJobParameters());
 	}
 
 	@Test
 	void testOptionalValuesAlsoRequired() {
-		validator.setOptionalKeys(new String[] { "name", "value" });
-		validator.setRequiredKeys(new String[] { "foo", "value" });
+		validator.setOptionalKeys(new String[]{"name", "value"});
+		validator.setRequiredKeys(new String[]{"foo", "value"});
 		assertThrows(IllegalStateException.class, validator::afterPropertiesSet);
 	}
 

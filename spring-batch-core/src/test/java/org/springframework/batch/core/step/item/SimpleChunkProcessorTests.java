@@ -36,27 +36,27 @@ import org.springframework.lang.Nullable;
 class SimpleChunkProcessorTests {
 
 	private final SimpleChunkProcessor<String, String> processor = new SimpleChunkProcessor<>(
-			new ItemProcessor<String, String>() {
-				@Nullable
-				@Override
-				public String process(String item) throws Exception {
-					if (item.equals("err")) {
-						return null;
-					}
-					return item;
-				}
-			}, new ItemWriter<String>() {
-				@Override
-				public void write(Chunk<? extends String> chunk) throws Exception {
-					if (chunk.getItems().contains("fail")) {
-						throw new RuntimeException("Planned failure!");
-					}
-					list.addAll(chunk.getItems());
-				}
-			});
+	new ItemProcessor<String, String>() {
+		@Nullable
+		@Override
+		public String process(String item) throws Exception {
+			if (item.equals("err")) {
+				return null;
+			}
+			return item;
+		}
+	}, new ItemWriter<String>() {
+		@Override
+		public void write(Chunk<? extends String> chunk) throws Exception {
+			if (chunk.getItems().contains("fail")) {
+				throw new RuntimeException("Planned failure!");
+			}
+			list.addAll(chunk.getItems());
+		}
+	});
 
 	private final StepContribution contribution = new StepContribution(
-			new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
+	new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
 
 	private final List<String> list = new ArrayList<>();
 

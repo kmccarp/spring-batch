@@ -114,15 +114,15 @@ class ResourcelessTransactionManagerTests {
 	@Test
 	void testRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> new TransactionTemplate(transactionManager).execute(status -> {
-					TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-						@Override
-						public void afterCompletion(int status) {
-							txStatus = status;
-						}
-					});
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> new TransactionTemplate(transactionManager).execute(status -> {
+			TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+				@Override
+				public void afterCompletion(int status) {
+					txStatus = status;
+				}
+			});
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(TransactionSynchronization.STATUS_ROLLED_BACK, txStatus);
 	}

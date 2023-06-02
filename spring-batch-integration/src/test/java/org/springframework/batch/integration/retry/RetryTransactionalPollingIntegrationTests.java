@@ -83,7 +83,7 @@ public class RetryTransactionalPollingIntegrationTests implements ApplicationCon
 	@DirtiesContext
 	void testSunnyDay() throws Exception {
 		list = TransactionAwareProxyFactory.createTransactionalList(
-				Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
+		Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
 		List<String> expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d"));
 		service.setExpected(expected);
 		waitForResults(bus, expected.size(), 60);
@@ -95,7 +95,7 @@ public class RetryTransactionalPollingIntegrationTests implements ApplicationCon
 	@DirtiesContext
 	void testRollback() throws Exception {
 		list = TransactionAwareProxyFactory.createTransactionalList(
-				Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
+		Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
 
 		List<String> expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,fail,d,e"));
 		service.setExpected(expected);

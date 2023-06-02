@@ -98,9 +98,9 @@ public class RemoteStepExecutionAggregator implements StepExecutionAggregator, I
 		}).collect(Collectors.toSet());
 		JobExecution jobExecution = jobExplorer.getJobExecution(result.getJobExecutionId());
 		Assert.state(jobExecution != null,
-				"Could not load JobExecution from JobRepository for id " + result.getJobExecutionId());
+		"Could not load JobExecution from JobRepository for id " + result.getJobExecutionId());
 		List<StepExecution> updates = jobExecution.getStepExecutions().stream()
-				.filter(stepExecution -> stepExecutionIds.contains(stepExecution.getId())).collect(Collectors.toList());
+		.filter(stepExecution -> stepExecutionIds.contains(stepExecution.getId())).collect(Collectors.toList());
 		delegate.aggregate(result, updates);
 	}
 

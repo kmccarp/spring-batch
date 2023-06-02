@@ -26,6 +26,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  */
 @SpringJUnitConfig(locations = "data-source-context.xml")
 abstract class AbstractGenericDataSourceItemReaderIntegrationTests
-		extends AbstractDataSourceItemReaderIntegrationTests {
+extends AbstractDataSourceItemReaderIntegrationTests {
 
 }

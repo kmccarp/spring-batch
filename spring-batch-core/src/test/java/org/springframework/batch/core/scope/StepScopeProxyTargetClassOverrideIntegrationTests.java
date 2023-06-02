@@ -129,7 +129,7 @@ public class StepScopeProxyTargetClassOverrideIntegrationTests implements BeanFa
 		assertNotNull(parent);
 		assertEquals("bar", parent);
 		assertTrue(((String) TestStep.getContext().getAttribute("parent.class")).matches(CGLIB_PROXY_TO_STRING_REGEX),
-				"Scoped proxy not created");
+		"Scoped proxy not created");
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class StepScopeProxyTargetClassOverrideIntegrationTests implements BeanFa
 		String parent = (String) TestStep.getContext().getAttribute("parent");
 		assertEquals("bar", parent);
 		assertTrue(((String) TestStep.getContext().getAttribute("parent.class")).matches(CGLIB_PROXY_TO_STRING_REGEX),
-				"Scoped proxy not created");
+		"Scoped proxy not created");
 	}
 
 	@Test
@@ -147,7 +147,7 @@ public class StepScopeProxyTargetClassOverrideIntegrationTests implements BeanFa
 		String parent = (String) TestStep.getContext().getAttribute("parent");
 		assertEquals("bar", parent);
 		assertTrue(((String) TestStep.getContext().getAttribute("parent.class")).matches(JDK_PROXY_TO_STRING_REGEX),
-				"Scoped proxy not created");
+		"Scoped proxy not created");
 	}
 
 }

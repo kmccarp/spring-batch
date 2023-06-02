@@ -35,7 +35,7 @@ import org.springframework.batch.item.ItemReader;
  * @see SkipListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface OnSkipInRead {
 
 }

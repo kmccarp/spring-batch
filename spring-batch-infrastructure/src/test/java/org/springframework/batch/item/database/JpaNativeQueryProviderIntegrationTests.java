@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Dave Syer
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(locations = { "JpaPagingItemReaderCommonTests-context.xml" })
+@SpringJUnitConfig(locations = {"JpaPagingItemReaderCommonTests-context.xml"})
 public class JpaNativeQueryProviderIntegrationTests {
 
 	@Autowired

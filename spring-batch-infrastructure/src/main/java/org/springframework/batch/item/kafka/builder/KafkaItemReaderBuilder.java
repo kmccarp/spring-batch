@@ -158,13 +158,13 @@ public class KafkaItemReaderBuilder<K, V> {
 		}
 		Assert.notNull(consumerProperties, "Consumer properties must not be null");
 		Assert.isTrue(consumerProperties.containsKey(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG),
-				ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG + " property must be provided");
+		ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG + " property must be provided");
 		Assert.isTrue(consumerProperties.containsKey(ConsumerConfig.GROUP_ID_CONFIG),
-				ConsumerConfig.GROUP_ID_CONFIG + " property must be provided");
+		ConsumerConfig.GROUP_ID_CONFIG + " property must be provided");
 		Assert.isTrue(consumerProperties.containsKey(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG),
-				ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG + " property must be provided");
+		ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG + " property must be provided");
 		Assert.isTrue(consumerProperties.containsKey(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG),
-				ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG + " property must be provided");
+		ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG + " property must be provided");
 		Assert.hasLength(topic, "Topic name must not be null or empty");
 		Assert.notNull(pollTimeout, "pollTimeout must not be null");
 		Assert.isTrue(!pollTimeout.isZero(), "pollTimeout must not be zero");

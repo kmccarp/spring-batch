@@ -172,7 +172,7 @@ public class ResultHolderResultQueue implements ResultQueue<ResultHolder> {
 				return 1;
 			}
 			if ((result1.isContinuable() && result2.isContinuable())
-					|| (!result1.isContinuable() && !result2.isContinuable())) {
+			|| (!result1.isContinuable() && !result2.isContinuable())) {
 				return 0;
 			}
 			if (result1.isContinuable()) {

@@ -49,7 +49,7 @@ abstract class TransactionManagerConfigurationTests {
 	 */
 	PlatformTransactionManager getTransactionManagerSetOnJobRepository(JobRepository jobRepository) throws Exception {
 		Advised target = (Advised) jobRepository; // proxy created in
-													// AbstractJobRepositoryFactoryBean.initializeProxy
+		// AbstractJobRepositoryFactoryBean.initializeProxy
 		Advisor[] advisors = target.getAdvisors();
 		for (Advisor advisor : advisors) {
 			if (advisor.getAdvice() instanceof TransactionInterceptor transactionInterceptor) {
@@ -61,8 +61,8 @@ abstract class TransactionManagerConfigurationTests {
 
 	static DataSource createDataSource() {
 		return new EmbeddedDatabaseBuilder().generateUniqueName(true)
-				.addScript("classpath:org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("classpath:org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("classpath:org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("classpath:org/springframework/batch/core/schema-hsqldb.sql").build();
 	}
 
 }

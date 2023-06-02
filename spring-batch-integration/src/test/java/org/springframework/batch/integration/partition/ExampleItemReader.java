@@ -15,7 +15,7 @@ public class ExampleItemReader implements ItemReader<String>, ItemStream {
 
 	private Log logger = LogFactory.getLog(getClass());
 
-	private String[] input = { "Hello", "world!", "Go", "on", "punk", "make", "my", "day!" };
+	private String[] input = {"Hello", "world!", "Go", "on", "punk", "make", "my", "day!"};
 
 	private int index = 0;
 
@@ -36,7 +36,7 @@ public class ExampleItemReader implements ItemReader<String>, ItemStream {
 					// Only fail once per flag setting...
 					fail = false;
 					logger.info(
-							String.format("Throwing exception index=%s, item=%s, in (%s)", index, input[index], this));
+					String.format("Throwing exception index=%s, item=%s, in (%s)", index, input[index], this));
 					index++;
 					throw new RuntimeException("Planned failure");
 				}

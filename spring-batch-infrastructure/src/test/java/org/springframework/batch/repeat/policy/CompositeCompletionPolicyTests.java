@@ -40,7 +40,7 @@ class CompositeCompletionPolicyTests {
 	void testTrivialPolicies() {
 		CompositeCompletionPolicy policy = new CompositeCompletionPolicy();
 		policy.setPolicies(
-				new CompletionPolicy[] { new MockCompletionPolicySupport(), new MockCompletionPolicySupport() });
+		new CompletionPolicy[]{new MockCompletionPolicySupport(), new MockCompletionPolicySupport()});
 		RepeatContext context = policy.start(null);
 		assertEquals(0, context.getStartedCount());
 		assertFalse(policy.isComplete(context));
@@ -53,12 +53,12 @@ class CompositeCompletionPolicyTests {
 	void testNonTrivialPolicies() {
 		CompositeCompletionPolicy policy = new CompositeCompletionPolicy();
 		policy.setPolicies(
-				new CompletionPolicy[] { new MockCompletionPolicySupport(), new MockCompletionPolicySupport() {
-					@Override
-					public boolean isComplete(RepeatContext context) {
-						return true;
-					}
-				} });
+		new CompletionPolicy[]{new MockCompletionPolicySupport(), new MockCompletionPolicySupport() {
+			@Override
+			public boolean isComplete(RepeatContext context) {
+				return true;
+			}
+		}});
 		RepeatContext context = policy.start(null);
 		assertTrue(policy.isComplete(context));
 	}
@@ -67,12 +67,12 @@ class CompositeCompletionPolicyTests {
 	void testNonTrivialPoliciesWithResult() {
 		CompositeCompletionPolicy policy = new CompositeCompletionPolicy();
 		policy.setPolicies(
-				new CompletionPolicy[] { new MockCompletionPolicySupport(), new MockCompletionPolicySupport() {
-					@Override
-					public boolean isComplete(RepeatContext context, RepeatStatus result) {
-						return true;
-					}
-				} });
+		new CompletionPolicy[]{new MockCompletionPolicySupport(), new MockCompletionPolicySupport() {
+			@Override
+			public boolean isComplete(RepeatContext context, RepeatStatus result) {
+				return true;
+			}
+		}});
 		RepeatContext context = policy.start(null);
 		assertTrue(policy.isComplete(context, null));
 	}

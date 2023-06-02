@@ -65,7 +65,7 @@ public class TaskletParser {
 	private static final StepListenerParser stepListenerParser = new StepListenerParser();
 
 	public void parseTasklet(Element stepElement, Element taskletElement, AbstractBeanDefinition bd,
-			ParserContext parserContext, boolean stepUnderspecified) {
+	ParserContext parserContext, boolean stepUnderspecified) {
 
 		bd.setBeanClass(StepParserStepFactoryBean.class);
 		bd.setAttribute("isNamespaceStep", true);
@@ -77,7 +77,7 @@ public class TaskletParser {
 		List<Element> refElements = DomUtils.getChildElementsByTagName(taskletElement, REF_ELE);
 
 		validateTaskletAttributesAndSubelements(taskletElement, parserContext, stepUnderspecified, taskletRef,
-				chunkElements, beanElements, refElements);
+		chunkElements, beanElements, refElements);
 
 		if (!chunkElements.isEmpty()) {
 			chunkElementParser.parse(chunkElements.get(0), bd, parserContext, stepUnderspecified);
@@ -90,13 +90,13 @@ public class TaskletParser {
 			else if (beanElements.size() == 1) {
 				Element beanElement = beanElements.get(0);
 				BeanDefinitionHolder beanDefinitionHolder = parserContext.getDelegate()
-						.parseBeanDefinitionElement(beanElement, bd);
+				.parseBeanDefinitionElement(beanElement, bd);
 				parserContext.getDelegate().decorateBeanDefinitionIfRequired(beanElement, beanDefinitionHolder);
 				bme = beanDefinitionHolder;
 			}
 			else if (refElements.size() == 1) {
 				bme = (BeanMetadataElement) parserContext.getDelegate().parsePropertySubElement(refElements.get(0),
-						null);
+				null);
 			}
 
 			if (StringUtils.hasText(taskletMethod)) {
@@ -122,10 +122,10 @@ public class TaskletParser {
 	}
 
 	private void validateTaskletAttributesAndSubelements(Element taskletElement, ParserContext parserContext,
-			boolean stepUnderspecified, String taskletRef, List<Element> chunkElements, List<Element> beanElements,
-			List<Element> refElements) {
+	boolean stepUnderspecified, String taskletRef, List<Element> chunkElements, List<Element> beanElements,
+	List<Element> refElements) {
 		int total = (StringUtils.hasText(taskletRef) ? 1 : 0) + chunkElements.size() + beanElements.size()
-				+ refElements.size();
+		+ refElements.size();
 
 		StringBuilder found = new StringBuilder();
 		if (total > 1) {
@@ -168,9 +168,9 @@ public class TaskletParser {
 
 		if (error != null) {
 			parserContext.getReaderContext()
-					.error("The <" + taskletElement.getTagName() + "/> element " + error + " one of: '"
-							+ TASKLET_REF_ATTR + "' attribute, <" + CHUNK_ELE + "/> element, <" + BEAN_ELE
-							+ "/> attribute, or <" + REF_ELE + "/> element.  Found: " + found + ".", taskletElement);
+			.error("The <" + taskletElement.getTagName() + "/> element " + error + " one of: '"
+		+ TASKLET_REF_ATTR + "' attribute, <" + CHUNK_ELE + "/> element, <" + BEAN_ELE
+		+ "/> attribute, or <" + REF_ELE + "/> element.  Found: " + found + ".", taskletElement);
 		}
 	}
 
@@ -180,7 +180,7 @@ public class TaskletParser {
 		handleTransactionAttributesElement(taskletElement, propertyValues);
 		stepListenerParser.handleListenersElement(taskletElement, bd, parserContext);
 		handleExceptionElement(taskletElement, parserContext, propertyValues, "no-rollback-exception-classes",
-				"noRollbackExceptionClasses");
+		"noRollbackExceptionClasses");
 		bd.setRole(BeanDefinition.ROLE_SUPPORT);
 		bd.setSource(parserContext.extractSource(taskletElement));
 	}
@@ -205,25 +205,25 @@ public class TaskletParser {
 	}
 
 	private void handleExceptionElement(Element element, ParserContext parserContext,
-			MutablePropertyValues propertyValues, String exceptionListName, String propertyName) {
+	MutablePropertyValues propertyValues, String exceptionListName, String propertyName) {
 		List<Element> children = DomUtils.getChildElementsByTagName(element, exceptionListName);
 		if (children.size() == 1) {
 			Element exceptionClassesElement = children.get(0);
 			ManagedList<TypedStringValue> list = new ManagedList<>();
 			list.setMergeEnabled(exceptionClassesElement.hasAttribute(MERGE_ATTR)
-					&& Boolean.valueOf(exceptionClassesElement.getAttribute(MERGE_ATTR)));
+			&& Boolean.valueOf(exceptionClassesElement.getAttribute(MERGE_ATTR)));
 			addExceptionClasses("include", exceptionClassesElement, list, parserContext);
 			propertyValues.addPropertyValue(propertyName, list);
 		}
 		else if (children.size() > 1) {
 			parserContext.getReaderContext().error("The <" + exceptionListName
-					+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
-					element);
+			+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
+			element);
 		}
 	}
 
 	private void addExceptionClasses(String elementName, Element exceptionClassesElement,
-			ManagedList<TypedStringValue> list, ParserContext parserContext) {
+	ManagedList<TypedStringValue> list, ParserContext parserContext) {
 		for (Element child : DomUtils.getChildElementsByTagName(exceptionClassesElement, elementName)) {
 			String className = child.getAttribute("class");
 			list.add(new TypedStringValue(className, Class.class));

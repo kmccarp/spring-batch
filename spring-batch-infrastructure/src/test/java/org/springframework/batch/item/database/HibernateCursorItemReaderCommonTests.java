@@ -46,7 +46,7 @@ public class HibernateCursorItemReaderCommonTests extends AbstractDatabaseItemSt
 	private SessionFactory createSessionFactory() throws Exception {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(getDataSource());
-		factoryBean.setMappingLocations(new Resource[] { new ClassPathResource("Foo.hbm.xml", getClass()) });
+		factoryBean.setMappingLocations(new Resource[]{new ClassPathResource("Foo.hbm.xml", getClass())});
 		factoryBean.afterPropertiesSet();
 
 		return factoryBean.getObject();

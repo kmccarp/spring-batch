@@ -52,7 +52,7 @@ public class BatchIntegrationConfiguration implements InitializingBean {
 
 	@Autowired
 	public BatchIntegrationConfiguration(JobRepository jobRepository, JobExplorer jobExplorer,
-			PlatformTransactionManager transactionManager) {
+	PlatformTransactionManager transactionManager) {
 
 		this.jobRepository = jobRepository;
 		this.jobExplorer = jobExplorer;
@@ -82,12 +82,12 @@ public class BatchIntegrationConfiguration implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.remoteChunkingManagerStepBuilderFactory = new RemoteChunkingManagerStepBuilderFactory(this.jobRepository,
-				this.transactionManager);
+		this.transactionManager);
 		this.remoteChunkingWorkerBuilder = new RemoteChunkingWorkerBuilder<>();
 		this.remotePartitioningManagerStepBuilderFactory = new RemotePartitioningManagerStepBuilderFactory(
-				this.jobRepository, this.jobExplorer);
+		this.jobRepository, this.jobExplorer);
 		this.remotePartitioningWorkerStepBuilderFactory = new RemotePartitioningWorkerStepBuilderFactory(
-				this.jobRepository, this.jobExplorer);
+		this.jobRepository, this.jobExplorer);
 	}
 
 }

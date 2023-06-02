@@ -29,7 +29,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/multilineOrderJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/multilineOrderJob.xml", "/job-runner-context.xml"})
 class MultilineOrderJobFunctionalTests {
 
 	private static final String ACTUAL = "target/test-outputs/multilineOrderOutput.txt";

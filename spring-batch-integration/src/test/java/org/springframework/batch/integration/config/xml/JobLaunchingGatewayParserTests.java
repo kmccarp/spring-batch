@@ -47,16 +47,16 @@ class JobLaunchingGatewayParserTests {
 		setUp("JobLaunchingGatewayParserTests-context.xml", getClass());
 
 		final AbstractMessageChannel inputChannel = TestUtils.getPropertyValue(this.consumer, "inputChannel",
-				AbstractMessageChannel.class);
+		AbstractMessageChannel.class);
 		assertEquals("requestChannel", inputChannel.getComponentName());
 
 		final JobLaunchingMessageHandler jobLaunchingMessageHandler = TestUtils.getPropertyValue(this.consumer,
-				"handler.jobLaunchingMessageHandler", JobLaunchingMessageHandler.class);
+		"handler.jobLaunchingMessageHandler", JobLaunchingMessageHandler.class);
 
 		assertNotNull(jobLaunchingMessageHandler);
 
 		final MessagingTemplate messagingTemplate = TestUtils.getPropertyValue(this.consumer,
-				"handler.messagingTemplate", MessagingTemplate.class);
+		"handler.messagingTemplate", MessagingTemplate.class);
 		final Long sendTimeout = TestUtils.getPropertyValue(messagingTemplate, "sendTimeout", Long.class);
 
 		assertEquals(123L, sendTimeout, "Wrong sendTimeout");
@@ -69,7 +69,7 @@ class JobLaunchingGatewayParserTests {
 		assertTrue(this.consumer.isRunning());
 
 		final MessagingTemplate messagingTemplate = TestUtils.getPropertyValue(this.consumer,
-				"handler.messagingTemplate", MessagingTemplate.class);
+		"handler.messagingTemplate", MessagingTemplate.class);
 		final Long sendTimeout = TestUtils.getPropertyValue(messagingTemplate, "sendTimeout", Long.class);
 
 		assertEquals(-1L, sendTimeout, "Wrong sendTimeout");
@@ -78,7 +78,7 @@ class JobLaunchingGatewayParserTests {
 	@Test
 	void testJobLaunchingGatewayNoJobLauncher() {
 		Exception exception = assertThrows(BeanCreationException.class,
-				() -> setUp("JobLaunchingGatewayParserTestsNoJobLauncher-context.xml", getClass()));
+		() -> setUp("JobLaunchingGatewayParserTestsNoJobLauncher-context.xml", getClass()));
 		assertEquals("No bean named 'jobLauncher' available", exception.getCause().getMessage());
 	}
 
@@ -87,11 +87,11 @@ class JobLaunchingGatewayParserTests {
 
 		setUp("JobLaunchingGatewayParserTestsWithEnableBatchProcessing-context.xml", getClass());
 		final JobLaunchingMessageHandler jobLaunchingMessageHandler = TestUtils.getPropertyValue(this.consumer,
-				"handler.jobLaunchingMessageHandler", JobLaunchingMessageHandler.class);
+		"handler.jobLaunchingMessageHandler", JobLaunchingMessageHandler.class);
 		assertNotNull(jobLaunchingMessageHandler);
 
 		final JobLauncher jobLauncher = TestUtils.getPropertyValue(jobLaunchingMessageHandler, "jobLauncher",
-				JobLauncher.class);
+		JobLauncher.class);
 		assertNotNull(jobLauncher);
 
 	}

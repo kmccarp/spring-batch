@@ -176,7 +176,7 @@ public class JobSupport implements BeanNameAware, Job {
 	@Override
 	public void execute(JobExecution execution) throws UnexpectedJobExecutionException {
 		throw new UnsupportedOperationException(
-				"JobSupport does not provide an implementation of run().  Use a smarter subclass.");
+		"JobSupport does not provide an implementation of run().  Use a smarter subclass.");
 	}
 
 	@Override

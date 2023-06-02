@@ -135,7 +135,7 @@ class SynchronousTests implements ApplicationContextAware {
 						String text = (String) jmsTemplate.receiveAndConvert("queue");
 						list.add(text);
 						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								text);
+						text);
 						return RepeatStatus.continueIf(text != null);
 					}
 				});
@@ -168,7 +168,7 @@ class SynchronousTests implements ApplicationContextAware {
 		// The JmsTemplate is used elsewhere outside a transaction, so
 		// we need to use one here that is transaction aware.
 		final JmsTemplate txJmsTemplate = new JmsTemplate(
-				(ConnectionFactory) applicationContext.getBean("txAwareConnectionFactory"));
+		(ConnectionFactory) applicationContext.getBean("txAwareConnectionFactory"));
 		txJmsTemplate.setReceiveTimeout(100L);
 		txJmsTemplate.setSessionTransacted(true);
 
@@ -184,7 +184,7 @@ class SynchronousTests implements ApplicationContextAware {
 						String text = (String) txJmsTemplate.receiveAndConvert("queue");
 						list.add(text);
 						jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(),
-								text);
+						text);
 						return RepeatStatus.continueIf(text != null);
 					}
 				});

@@ -54,7 +54,7 @@ public class ExecutionContextTestUtils {
 		}
 		if (stepExecution == null) {
 			throw new IllegalArgumentException(
-					"No such step in this job execution: " + stepName + " not in " + stepNames);
+			"No such step in this job execution: " + stepName + " not in " + stepNames);
 		}
 		@SuppressWarnings("unchecked")
 		T result = (T) stepExecution.getExecutionContext().get(key);

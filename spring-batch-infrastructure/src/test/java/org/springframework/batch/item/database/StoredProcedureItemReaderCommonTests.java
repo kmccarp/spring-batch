@@ -46,7 +46,7 @@ class StoredProcedureItemReaderCommonTests extends AbstractDatabaseItemStreamIte
 	@Override
 	protected void initializeContext() {
 		ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/item/database/stored-procedure-context.xml");
+		"org/springframework/batch/item/database/stored-procedure-context.xml");
 	}
 
 	@Test
@@ -66,8 +66,8 @@ class StoredProcedureItemReaderCommonTests extends AbstractDatabaseItemStreamIte
 		reader.close();
 		reader.setDataSource(getDataSource());
 		reader.setProcedureName("read_some_foos");
-		reader.setParameters(new SqlParameter[] { new SqlParameter("from_id", Types.NUMERIC),
-				new SqlParameter("to_id", Types.NUMERIC) });
+		reader.setParameters(new SqlParameter[]{new SqlParameter("from_id", Types.NUMERIC),
+		new SqlParameter("to_id", Types.NUMERIC)});
 		reader.setPreparedStatementSetter(new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {

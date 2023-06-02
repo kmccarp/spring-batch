@@ -32,7 +32,7 @@ class Jaxb2MarshallingTests extends AbstractStaxEventWriterItemWriterTests {
 	protected Marshaller getMarshaller() throws Exception {
 
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setClassesToBeBound(new Class<?>[] { Trade.class });
+		marshaller.setClassesToBeBound(new Class<?>[]{Trade.class});
 		marshaller.afterPropertiesSet();
 
 		StringWriter string = new StringWriter();

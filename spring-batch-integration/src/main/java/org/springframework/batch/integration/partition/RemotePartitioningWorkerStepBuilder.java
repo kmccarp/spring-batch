@@ -222,7 +222,7 @@ public class RemotePartitioningWorkerStepBuilder extends StepBuilder {
 
 	@Override
 	public <I, O> SimpleStepBuilder<I, O> chunk(CompletionPolicy completionPolicy,
-			PlatformTransactionManager transactionManager) {
+	PlatformTransactionManager transactionManager) {
 		configureWorkerIntegrationFlow();
 		return super.chunk(completionPolicy, transactionManager);
 	}
@@ -268,7 +268,7 @@ public class RemotePartitioningWorkerStepBuilder extends StepBuilder {
 		if (this.outputChannel == null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("The output channel is set to a NullChannel. "
-						+ "The manager step must poll the job repository for workers status.");
+				+ "The manager step must poll the job repository for workers status.");
 			}
 			this.outputChannel = new NullChannel();
 		}
@@ -278,7 +278,7 @@ public class RemotePartitioningWorkerStepBuilder extends StepBuilder {
 		stepExecutionRequestHandler.setStepLocator(this.stepLocator);
 
 		StandardIntegrationFlow standardIntegrationFlow = IntegrationFlow.from(this.inputChannel)
-				.handle(stepExecutionRequestHandler, SERVICE_ACTIVATOR_METHOD_NAME).channel(this.outputChannel).get();
+		.handle(stepExecutionRequestHandler, SERVICE_ACTIVATOR_METHOD_NAME).channel(this.outputChannel).get();
 		IntegrationFlowContext integrationFlowContext = this.beanFactory.getBean(IntegrationFlowContext.class);
 		integrationFlowContext.registration(standardIntegrationFlow).autoStartup(false).register();
 	}

@@ -179,40 +179,40 @@ class RepeatOperationsInterceptorTests {
 	@Test
 	void testIllegalMethodInvocationType() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> interceptor.invoke(new MethodInvocation() {
-					@Override
-					public Method getMethod() {
-						try {
-							return Object.class.getMethod("toString");
-						}
-						catch (Exception e) {
-							throw new RuntimeException(e);
-						}
-					}
+		() -> interceptor.invoke(new MethodInvocation() {
+			@Override
+			public Method getMethod() {
+				try {
+					return Object.class.getMethod("toString");
+				}
+				catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
 
-					@Override
-					public Object[] getArguments() {
-						return null;
-					}
+			@Override
+			public Object[] getArguments() {
+				return null;
+			}
 
-					@Override
-					public AccessibleObject getStaticPart() {
-						return null;
-					}
+			@Override
+			public AccessibleObject getStaticPart() {
+				return null;
+			}
 
-					@Override
-					public Object getThis() {
-						return null;
-					}
+			@Override
+			public Object getThis() {
+				return null;
+			}
 
-					@Override
-					public Object proceed() throws Throwable {
-						return null;
-					}
-				}));
+			@Override
+			public Object proceed() throws Throwable {
+				return null;
+			}
+		}));
 		String message = exception.getMessage();
 		assertTrue(message.contains("MethodInvocation"),
-				"Exception message should contain MethodInvocation: " + message);
+		"Exception message should contain MethodInvocation: " + message);
 	}
 
 	private interface Service {

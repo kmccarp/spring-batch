@@ -84,7 +84,7 @@ public class TransactionAwareProxyFactory<T> {
 	 * @param target the target object (List, Set or Map)
 	 * @return an independent copy
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	protected final T begin(T target) {
 		// Unfortunately in Java 5 this method has to synchronized
 		// (works OK without in Java 6).
@@ -119,7 +119,7 @@ public class TransactionAwareProxyFactory<T> {
 	 * @param copy the working copy.
 	 * @param target the original target of the factory.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	protected void commit(T copy, T target) {
 		// Unfortunately in Java 5 this method has to be synchronized
 		// (works OK without in Java 6).
@@ -240,8 +240,8 @@ public class TransactionAwareProxyFactory<T> {
 			if (appendOnly) {
 				String methodName = invocation.getMethod().getName();
 				if ((result == null && methodName.equals("get"))
-						|| (Boolean.FALSE.equals(result) && (methodName.startsWith("contains"))
-								|| (Boolean.TRUE.equals(result) && methodName.startsWith("isEmpty")))) {
+				|| (Boolean.FALSE.equals(result) && (methodName.startsWith("contains"))
+				|| (Boolean.TRUE.equals(result) && methodName.startsWith("isEmpty")))) {
 					// In appendOnly mode the result of a get might not be
 					// in the cache...
 					return invocation.proceed();

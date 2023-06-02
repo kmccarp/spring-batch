@@ -43,7 +43,7 @@ class CompositeRepeatListenerTests {
 	 */
 	@Test
 	void testSetListeners() {
-		listener.setListeners(new RepeatListener[] { new RepeatListener() {
+		listener.setListeners(new RepeatListener[]{new RepeatListener() {
 			@Override
 			public void open(RepeatContext context) {
 				list.add("fail");
@@ -53,7 +53,7 @@ class CompositeRepeatListenerTests {
 			public void open(RepeatContext context) {
 				list.add("continue");
 			}
-		} });
+		}});
 		listener.open(context);
 		assertEquals(2, list.size());
 	}

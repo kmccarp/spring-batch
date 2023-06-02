@@ -57,7 +57,7 @@ import org.springframework.util.ClassUtils;
  */
 @Deprecated(since = "5.0", forRemoval = true)
 public class HibernateCursorItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements InitializingBean {
+implements InitializingBean {
 
 	private HibernateItemReaderHelper<T> helper = new HibernateItemReaderHelper<>();
 

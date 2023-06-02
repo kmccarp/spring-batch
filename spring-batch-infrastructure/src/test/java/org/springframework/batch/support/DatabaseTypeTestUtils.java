@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 public class DatabaseTypeTestUtils {
 
 	public static DataSource getDataSource(Class<?> driver, String url, String username, String password)
-			throws Exception {
+	throws Exception {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(driver.getName());
 		dataSource.setUrl(url);

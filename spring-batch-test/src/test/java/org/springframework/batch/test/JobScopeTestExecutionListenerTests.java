@@ -93,7 +93,7 @@ class JobScopeTestExecutionListenerTests {
 
 		public JobExecution getJobExecution() {
 			JobExecution jobExecution = MetaDataInstanceFactory.createJobExecution("job", 11L, 123L,
-					new JobParametersBuilder().addString("foo", "spam").toJobParameters());
+			new JobParametersBuilder().addString("foo", "spam").toJobParameters());
 			jobExecution.getExecutionContext().putString("foo", "bar");
 			return jobExecution;
 		}

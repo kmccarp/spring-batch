@@ -77,10 +77,10 @@ public class CoreRuntimeHints implements RuntimeHintsRegistrar {
 	public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
 
 		Set<String> jdkTypes = Set.of("java.time.Ser", "java.util.Collections$SynchronizedSet",
-				"java.util.Collections$SynchronizedCollection", "java.util.concurrent.locks.ReentrantLock$Sync",
-				"java.util.concurrent.locks.ReentrantLock$FairSync",
-				"java.util.concurrent.locks.ReentrantLock$NonfairSync",
-				"java.util.concurrent.ConcurrentHashMap$Segment");
+		"java.util.Collections$SynchronizedCollection", "java.util.concurrent.locks.ReentrantLock$Sync",
+		"java.util.concurrent.locks.ReentrantLock$FairSync",
+		"java.util.concurrent.locks.ReentrantLock$NonfairSync",
+		"java.util.concurrent.ConcurrentHashMap$Segment");
 
 		// resource hints
 		hints.resources().registerPattern("org/springframework/batch/core/schema-h2.sql");
@@ -98,15 +98,15 @@ public class CoreRuntimeHints implements RuntimeHintsRegistrar {
 
 		// proxy hints
 		hints.proxies()
-				.registerJdkProxy(builder -> builder
-						.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.repository.JobRepository"))
-						.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class))
-				.registerJdkProxy(builder -> builder
-						.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.explore.JobExplorer"))
-						.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class))
-				.registerJdkProxy(builder -> builder
-						.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.launch.JobOperator"))
-						.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class));
+		.registerJdkProxy(builder -> builder
+	.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.repository.JobRepository"))
+	.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class))
+		.registerJdkProxy(builder -> builder
+	.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.explore.JobExplorer"))
+	.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class))
+		.registerJdkProxy(builder -> builder
+	.proxiedInterfaces(TypeReference.of("org.springframework.batch.core.launch.JobOperator"))
+	.proxiedInterfaces(SpringProxy.class, Advised.class, DecoratingProxy.class));
 
 		// reflection hints
 		hints.reflection().registerType(Types.class, MemberCategory.DECLARED_FIELDS);
@@ -123,19 +123,19 @@ public class CoreRuntimeHints implements RuntimeHintsRegistrar {
 		hints.reflection().registerType(ExecutionContext.class, MemberCategory.values());
 		hints.reflection().registerType(Chunk.class, MemberCategory.values());
 		jdkTypes.stream().map(TypeReference::of)
-				.forEach(type -> hints.reflection().registerType(type, MemberCategory.values()));
+		.forEach(type -> hints.reflection().registerType(type, MemberCategory.values()));
 
 		// serialization hints
 		SerializationHints serializationHints = hints.serialization();
 		Stream.of(LinkedHashSet.class, LinkedHashMap.class, HashSet.class, ReentrantLock.class, ConcurrentHashMap.class,
-				AbstractOwnableSynchronizer.class, AbstractQueuedSynchronizer.class, Number.class, Byte.class,
-				Short.class, Integer.class, Long.class, Double.class, Float.class, Character.class, String.class,
-				Boolean.class, Date.class, Calendar.class, LocalDate.class, LocalTime.class, LocalDateTime.class,
-				OffsetTime.class, OffsetDateTime.class, ZonedDateTime.class, Instant.class, Duration.class,
-				Period.class, HashMap.class, Hashtable.class, ArrayList.class, JobParameter.class, JobParameters.class,
-				ExitStatus.class, JobInstance.class, JobExecution.class, StepExecution.class, StepContribution.class,
-				Entity.class, ExecutionContext.class, Chunk.class, Properties.class, Exception.class, UUID.class)
-				.forEach(serializationHints::registerType);
+		AbstractOwnableSynchronizer.class, AbstractQueuedSynchronizer.class, Number.class, Byte.class,
+		Short.class, Integer.class, Long.class, Double.class, Float.class, Character.class, String.class,
+		Boolean.class, Date.class, Calendar.class, LocalDate.class, LocalTime.class, LocalDateTime.class,
+		OffsetTime.class, OffsetDateTime.class, ZonedDateTime.class, Instant.class, Duration.class,
+		Period.class, HashMap.class, Hashtable.class, ArrayList.class, JobParameter.class, JobParameters.class,
+		ExitStatus.class, JobInstance.class, JobExecution.class, StepExecution.class, StepContribution.class,
+		Entity.class, ExecutionContext.class, Chunk.class, Properties.class, Exception.class, UUID.class)
+		.forEach(serializationHints::registerType);
 		jdkTypes.stream().map(TypeReference::of).forEach(serializationHints::registerType);
 	}
 

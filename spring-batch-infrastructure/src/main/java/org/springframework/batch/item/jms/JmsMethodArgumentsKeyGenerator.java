@@ -54,7 +54,7 @@ public class JmsMethodArgumentsKeyGenerator implements MethodArgumentsKeyGenerat
 		}
 		if (items.length == 0) {
 			throw new IllegalArgumentException(
-					"Method parameters are empty.  The key generator cannot determine a unique key.");
+			"Method parameters are empty.  The key generator cannot determine a unique key.");
 		}
 		return items[0];
 	}

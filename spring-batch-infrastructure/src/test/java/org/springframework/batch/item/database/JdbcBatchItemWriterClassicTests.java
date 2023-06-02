@@ -88,7 +88,7 @@ class JdbcBatchItemWriterClassicTests {
 		writer = new JdbcBatchItemWriter<>();
 		Exception exception = assertThrows(IllegalStateException.class, writer::afterPropertiesSet);
 		assertTrue(exception.getMessage().contains("NamedParameterJdbcTemplate"),
-				"Message does not contain ' NamedParameterJdbcTemplate'.");
+		"Message does not contain ' NamedParameterJdbcTemplate'.");
 
 		writer.setJdbcTemplate(new NamedParameterJdbcTemplate(jdbcTemplate));
 		exception = assertThrows(IllegalStateException.class, writer::afterPropertiesSet);
@@ -98,7 +98,7 @@ class JdbcBatchItemWriterClassicTests {
 		writer.setSql("select * from foo where id = ?");
 		exception = assertThrows(IllegalStateException.class, writer::afterPropertiesSet);
 		assertTrue(exception.getMessage().contains("ItemPreparedStatementSetter"),
-				"Message does not contain 'ItemPreparedStatementSetter'.");
+		"Message does not contain 'ItemPreparedStatementSetter'.");
 
 		writer.setItemPreparedStatementSetter((item, ps) -> {
 		});
@@ -108,7 +108,7 @@ class JdbcBatchItemWriterClassicTests {
 	@Test
 	void testWriteAndFlush() throws Exception {
 		ps.addBatch();
-		when(ps.executeBatch()).thenReturn(new int[] { 123 });
+		when(ps.executeBatch()).thenReturn(new int[]{123});
 		writer.write(Chunk.of("bar"));
 		assertEquals(2, list.size());
 		assertTrue(list.contains("SQL"));
@@ -117,7 +117,7 @@ class JdbcBatchItemWriterClassicTests {
 	@Test
 	void testWriteAndFlushWithEmptyUpdate() throws Exception {
 		ps.addBatch();
-		when(ps.executeBatch()).thenReturn(new int[] { 0 });
+		when(ps.executeBatch()).thenReturn(new int[]{0});
 		Exception exception = assertThrows(EmptyResultDataAccessException.class, () -> writer.write(Chunk.of("bar")));
 		String message = exception.getMessage();
 		assertTrue(message.contains("did not update"), "Wrong message: " + message);
@@ -136,7 +136,7 @@ class JdbcBatchItemWriterClassicTests {
 			}
 		});
 		ps.addBatch();
-		when(ps.executeBatch()).thenReturn(new int[] { 123 });
+		when(ps.executeBatch()).thenReturn(new int[]{123});
 		Exception exception = assertThrows(RuntimeException.class, () -> writer.write(Chunk.of("foo")));
 		assertEquals("bar", exception.getMessage());
 		assertEquals(2, list.size());

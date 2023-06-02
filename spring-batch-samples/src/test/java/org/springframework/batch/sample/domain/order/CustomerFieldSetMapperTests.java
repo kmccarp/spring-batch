@@ -52,12 +52,12 @@ class CustomerFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { Customer.LINE_ID_NON_BUSINESS_CUST, FIRST_NAME, LAST_NAME, MIDDLE_NAME,
-				CustomerFieldSetMapper.TRUE_SYMBOL, String.valueOf(REG_ID), CustomerFieldSetMapper.TRUE_SYMBOL };
-		String[] columnNames = new String[] { CustomerFieldSetMapper.LINE_ID_COLUMN,
-				CustomerFieldSetMapper.FIRST_NAME_COLUMN, CustomerFieldSetMapper.LAST_NAME_COLUMN,
-				CustomerFieldSetMapper.MIDDLE_NAME_COLUMN, CustomerFieldSetMapper.REGISTERED_COLUMN,
-				CustomerFieldSetMapper.REG_ID_COLUMN, CustomerFieldSetMapper.VIP_COLUMN };
+		String[] tokens = new String[]{Customer.LINE_ID_NON_BUSINESS_CUST, FIRST_NAME, LAST_NAME, MIDDLE_NAME,
+		CustomerFieldSetMapper.TRUE_SYMBOL, String.valueOf(REG_ID), CustomerFieldSetMapper.TRUE_SYMBOL};
+		String[] columnNames = new String[]{CustomerFieldSetMapper.LINE_ID_COLUMN,
+		CustomerFieldSetMapper.FIRST_NAME_COLUMN, CustomerFieldSetMapper.LAST_NAME_COLUMN,
+		CustomerFieldSetMapper.MIDDLE_NAME_COLUMN, CustomerFieldSetMapper.REGISTERED_COLUMN,
+		CustomerFieldSetMapper.REG_ID_COLUMN, CustomerFieldSetMapper.VIP_COLUMN};
 
 		return new DefaultFieldSet(tokens, columnNames);
 	}

@@ -98,7 +98,7 @@ class TaskletStepExceptionTests {
 
 	@Test
 	void testInterrupted() throws Exception {
-		taskletStep.setStepExecutionListeners(new StepExecutionListener[] { new InterruptionListener() });
+		taskletStep.setStepExecutionListeners(new StepExecutionListener[]{new InterruptionListener()});
 		taskletStep.execute(stepExecution);
 		assertEquals(STOPPED, stepExecution.getStatus());
 		assertEquals(STOPPED.toString(), stepExecution.getExitStatus().getExitCode());
@@ -122,12 +122,12 @@ class TaskletStepExceptionTests {
 	@Test
 	void testOpenFailure() throws Exception {
 		final RuntimeException exception = new RuntimeException();
-		taskletStep.setStreams(new ItemStream[] { new ItemStreamSupport() {
+		taskletStep.setStreams(new ItemStream[]{new ItemStreamSupport() {
 			@Override
 			public void open(ExecutionContext executionContext) throws ItemStreamException {
 				throw exception;
 			}
-		} });
+		}});
 
 		taskletStep.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
@@ -139,12 +139,12 @@ class TaskletStepExceptionTests {
 	void testBeforeStepFailure() throws Exception {
 
 		final RuntimeException exception = new RuntimeException();
-		taskletStep.setStepExecutionListeners(new StepExecutionListener[] { new StepExecutionListener() {
+		taskletStep.setStepExecutionListeners(new StepExecutionListener[]{new StepExecutionListener() {
 			@Override
 			public void beforeStep(StepExecution stepExecution) {
 				throw exception;
 			}
-		} });
+		}});
 		taskletStep.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
 		assertTrue(stepExecution.getFailureExceptions().contains(exception));
@@ -155,13 +155,13 @@ class TaskletStepExceptionTests {
 	void testAfterStepFailureWhenTaskletSucceeds() throws Exception {
 
 		final RuntimeException exception = new RuntimeException();
-		taskletStep.setStepExecutionListeners(new StepExecutionListener[] { new StepExecutionListener() {
+		taskletStep.setStepExecutionListeners(new StepExecutionListener[]{new StepExecutionListener() {
 			@Nullable
 			@Override
 			public ExitStatus afterStep(StepExecution stepExecution) {
 				throw exception;
 			}
-		} });
+		}});
 		taskletStep.setTasklet(new Tasklet() {
 
 			@Nullable
@@ -184,13 +184,13 @@ class TaskletStepExceptionTests {
 	void testAfterStepFailureWhenTaskletFails() throws Exception {
 
 		final RuntimeException exception = new RuntimeException();
-		taskletStep.setStepExecutionListeners(new StepExecutionListener[] { new StepExecutionListener() {
+		taskletStep.setStepExecutionListeners(new StepExecutionListener[]{new StepExecutionListener() {
 			@Nullable
 			@Override
 			public ExitStatus afterStep(StepExecution stepExecution) {
 				throw exception;
 			}
-		} });
+		}});
 		taskletStep.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
 		assertTrue(stepExecution.getFailureExceptions().contains(taskletException));
@@ -202,13 +202,13 @@ class TaskletStepExceptionTests {
 	void testCloseError() throws Exception {
 
 		final RuntimeException exception = new RuntimeException();
-		taskletStep.setStreams(new ItemStream[] { new ItemStreamSupport() {
+		taskletStep.setStreams(new ItemStream[]{new ItemStreamSupport() {
 			@Override
 			public void close() throws ItemStreamException {
 				super.close();
 				throw exception;
 			}
-		} });
+		}});
 
 		taskletStep.execute(stepExecution);
 		assertEquals(FAILED, stepExecution.getStatus());
@@ -516,7 +516,7 @@ class TaskletStepExceptionTests {
 
 		@Override
 		public JobExecution createJobExecution(String jobName, JobParameters jobParameters)
-				throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+		throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 			return null;
 		}
 
@@ -550,7 +550,7 @@ class TaskletStepExceptionTests {
 		public void update(StepExecution stepExecution) {
 			if (updateCount++ == failOnUpdateExecution) {
 				if (!failInTransaction
-						|| (failInTransaction && TransactionSynchronizationManager.isActualTransactionActive())) {
+				|| (failInTransaction && TransactionSynchronizationManager.isActualTransactionActive())) {
 					throw new RuntimeException("Expected exception in step execution persistence");
 				}
 			}
@@ -560,7 +560,7 @@ class TaskletStepExceptionTests {
 		public void updateExecutionContext(StepExecution stepExecution) {
 			if (failOnUpdateContext) {
 				if (!failInTransaction
-						|| (failInTransaction && TransactionSynchronizationManager.isActualTransactionActive())) {
+				|| (failInTransaction && TransactionSynchronizationManager.isActualTransactionActive())) {
 					throw new RuntimeException("Expected exception in step execution context persistence");
 				}
 			}

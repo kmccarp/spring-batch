@@ -58,7 +58,7 @@ class SystemCommandTaskletIntegrationTests {
 	private SystemCommandTasklet tasklet;
 
 	private final StepExecution stepExecution = new StepExecution("systemCommandStep",
-			new JobExecution(new JobInstance(1L, "systemCommandJob"), 1L, new JobParameters()));
+	new JobExecution(new JobInstance(1L, "systemCommandJob"), 1L, new JobParameters()));
 
 	@Mock
 	private JobExplorer jobExplorer;
@@ -103,7 +103,7 @@ class SystemCommandTaskletIntegrationTests {
 	 */
 	@Test
 	void testExecute() throws Exception {
-		String[] command = new String[] { getJavaCommand(), "--version" };
+		String[] command = new String[]{getJavaCommand(), "--version"};
 		tasklet.setCommand(command);
 		tasklet.afterPropertiesSet();
 
@@ -118,7 +118,7 @@ class SystemCommandTaskletIntegrationTests {
 	 */
 	@Test
 	void testExecuteFailure() throws Exception {
-		String[] command = new String[] { getJavaCommand() + " org.springframework.batch.sample.tasklet.UnknownClass" };
+		String[] command = new String[]{getJavaCommand() + " org.springframework.batch.sample.tasklet.UnknownClass"};
 		tasklet.setCommand(command);
 		tasklet.setTimeout(200L);
 		tasklet.afterPropertiesSet();
@@ -141,7 +141,7 @@ class SystemCommandTaskletIntegrationTests {
 	 */
 	@Test
 	void testExecuteException() throws Exception {
-		String[] command = new String[] { "non-sense-that-should-cause-exception-when-attempted-to-execute" };
+		String[] command = new String[]{"non-sense-that-should-cause-exception-when-attempted-to-execute"};
 		tasklet.setCommand(command);
 		tasklet.afterPropertiesSet();
 
@@ -153,7 +153,7 @@ class SystemCommandTaskletIntegrationTests {
 	 */
 	@Test
 	void testExecuteTimeout() throws Exception {
-		String[] command = isRunningOnWindows() ? new String[] { "ping", "127.0.0.1" } : new String[] { "sleep", "3" };
+		String[] command = isRunningOnWindows() ? new String[]{"ping", "127.0.0.1"} : new String[]{"sleep", "3"};
 		tasklet.setCommand(command);
 		tasklet.setTimeout(10);
 		tasklet.afterPropertiesSet();
@@ -168,7 +168,7 @@ class SystemCommandTaskletIntegrationTests {
 	 */
 	@Test
 	void testInterruption() throws Exception {
-		String[] command = isRunningOnWindows() ? new String[] { "ping", "127.0.0.1" } : new String[] { "sleep", "5" };
+		String[] command = isRunningOnWindows() ? new String[]{"ping", "127.0.0.1"} : new String[]{"sleep", "5"};
 		tasklet.setCommand(command);
 		tasklet.setTerminationCheckInterval(10);
 		tasklet.afterPropertiesSet();
@@ -222,14 +222,14 @@ class SystemCommandTaskletIntegrationTests {
 		Assert.state(!notExistingFile.exists(), "not-existing-path does actually exist");
 
 		assertThrows(IllegalArgumentException.class,
-				() -> tasklet.setWorkingDirectory(notExistingFile.getCanonicalPath()));
+		() -> tasklet.setWorkingDirectory(notExistingFile.getCanonicalPath()));
 
 		File notDirectory = File.createTempFile(this.getClass().getName(), null);
 		Assert.state(notDirectory.exists(), "The file does not exist");
 		Assert.state(!notDirectory.isDirectory(), "The file is actually a directory");
 
 		assertThrows(IllegalArgumentException.class,
-				() -> tasklet.setWorkingDirectory(notDirectory.getCanonicalPath()));
+		() -> tasklet.setWorkingDirectory(notDirectory.getCanonicalPath()));
 
 		File directory = notDirectory.getParentFile();
 		Assert.state(directory.exists(), "The directory does not exist");
@@ -253,10 +253,10 @@ class SystemCommandTaskletIntegrationTests {
 		stoppedJobExecution.setStatus(BatchStatus.STOPPING);
 
 		when(jobExplorer.getJobExecution(1L)).thenReturn(stepExecution.getJobExecution(),
-				stepExecution.getJobExecution(), stoppedJobExecution);
+		stepExecution.getJobExecution(), stoppedJobExecution);
 
-		String[] command = isRunningOnWindows() ? new String[] { "ping", "127.0.0.1", "-n", "5" }
-				: new String[] { "sleep", "15" };
+		String[] command = isRunningOnWindows() ? new String[]{"ping", "127.0.0.1", "-n", "5"}
+		: new String[]{"sleep", "15"};
 		tasklet.setCommand(command);
 		tasklet.setTerminationCheckInterval(10);
 		tasklet.afterPropertiesSet();
@@ -295,7 +295,7 @@ class SystemCommandTaskletIntegrationTests {
 		StepContribution stepContribution = stepExecution.createStepContribution();
 		CommandRunner commandRunner = mock(CommandRunner.class);
 		Process process = mock(Process.class);
-		String[] command = new String[] { "invalid command" };
+		String[] command = new String[]{"invalid command"};
 
 		when(commandRunner.exec(eq(command), any(), any())).thenReturn(process);
 		when(process.waitFor()).thenReturn(0);
@@ -315,7 +315,7 @@ class SystemCommandTaskletIntegrationTests {
 		StepContribution stepContribution = stepExecution.createStepContribution();
 		CommandRunner commandRunner = mock(CommandRunner.class);
 		Process process = mock(Process.class);
-		String[] command = new String[] { "invalid command" };
+		String[] command = new String[]{"invalid command"};
 
 		when(commandRunner.exec(eq(command), any(), any())).thenReturn(process);
 		when(process.waitFor()).thenReturn(1);

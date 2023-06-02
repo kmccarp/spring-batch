@@ -89,7 +89,7 @@ public class QualifiedTrade {
 	@Override
 	public String toString() {
 		return "Trade: [isin=" + this.isin + ",quantity=" + this.quantity + ",price=" + this.price + ",customer="
-				+ this.customer + "]";
+		+ this.customer + "]";
 	}
 
 	@Override

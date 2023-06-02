@@ -28,8 +28,8 @@ public class CustomerFieldExtractor implements FieldExtractor<Order> {
 	@Override
 	public Object[] extract(Order order) {
 		Customer customer = order.getCustomer();
-		return new Object[] { "CUSTOMER:", customer.getRegistrationId(), emptyIfNull(customer.getFirstName()),
-				emptyIfNull(customer.getMiddleName()), emptyIfNull(customer.getLastName()) };
+		return new Object[]{"CUSTOMER:", customer.getRegistrationId(), emptyIfNull(customer.getFirstName()),
+		emptyIfNull(customer.getMiddleName()), emptyIfNull(customer.getLastName())};
 	}
 
 	private String emptyIfNull(String s) {

@@ -58,7 +58,7 @@ class HibernatePagingItemReaderBuilderTests {
 	@BeforeEach
 	void setUp() {
 		this.context = new AnnotationConfigApplicationContext(
-				HibernatePagingItemReaderBuilderTests.TestDataSourceConfiguration.class);
+		HibernatePagingItemReaderBuilderTests.TestDataSourceConfiguration.class);
 		this.sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	}
 
@@ -73,8 +73,8 @@ class HibernatePagingItemReaderBuilderTests {
 	@SuppressWarnings("unchecked")
 	void testConfiguration() throws Exception {
 		HibernatePagingItemReader<Foo> reader = new HibernatePagingItemReaderBuilder<Foo>().name("fooReader")
-				.sessionFactory(this.sessionFactory).fetchSize(2).currentItemCount(2).maxItemCount(4).pageSize(5)
-				.queryName("allFoos").useStatelessSession(false).build();
+		.sessionFactory(this.sessionFactory).fetchSize(2).currentItemCount(2).maxItemCount(4).pageSize(5)
+		.queryName("allFoos").useStatelessSession(false).build();
 
 		reader.afterPropertiesSet();
 
@@ -98,7 +98,7 @@ class HibernatePagingItemReaderBuilderTests {
 		assertEquals(5, ReflectionTestUtils.getField(reader, "pageSize"));
 
 		HibernateItemReaderHelper<Foo> helper = (HibernateItemReaderHelper<Foo>) ReflectionTestUtils.getField(reader,
-				"helper");
+		"helper");
 		assertEquals(false, ReflectionTestUtils.getField(helper, "useStatelessSession"));
 	}
 
@@ -108,8 +108,8 @@ class HibernatePagingItemReaderBuilderTests {
 		parameters.put("value", 2);
 
 		HibernatePagingItemReader<Foo> reader = new HibernatePagingItemReaderBuilder<Foo>().name("fooReader")
-				.sessionFactory(this.sessionFactory).queryString("from Foo foo where foo.id > :value")
-				.parameterValues(parameters).saveState(false).build();
+		.sessionFactory(this.sessionFactory).queryString("from Foo foo where foo.id > :value")
+		.parameterValues(parameters).saveState(false).build();
 
 		reader.afterPropertiesSet();
 
@@ -138,7 +138,7 @@ class HibernatePagingItemReaderBuilderTests {
 		provider.afterPropertiesSet();
 
 		HibernatePagingItemReader<Foo> reader = new HibernatePagingItemReaderBuilder<Foo>().name("fooReader")
-				.sessionFactory(this.sessionFactory).queryProvider(provider).build();
+		.sessionFactory(this.sessionFactory).queryProvider(provider).build();
 
 		reader.afterPropertiesSet();
 
@@ -160,20 +160,20 @@ class HibernatePagingItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new HibernatePagingItemReaderBuilder<Foo>().sessionFactory(this.sessionFactory).fetchSize(-2)
-						.build());
+		() -> new HibernatePagingItemReaderBuilder<Foo>().sessionFactory(this.sessionFactory).fetchSize(-2)
+	.build());
 		assertEquals("fetchSize must not be negative", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new HibernatePagingItemReaderBuilder<Foo>().build());
+		() -> new HibernatePagingItemReaderBuilder<Foo>().build());
 		assertEquals("A SessionFactory must be provided", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class, () -> new HibernatePagingItemReaderBuilder<Foo>()
-				.sessionFactory(this.sessionFactory).saveState(true).build());
+		.sessionFactory(this.sessionFactory).saveState(true).build());
 		assertEquals("A name is required when saveState is set to true", exception.getMessage());
 
 		exception = assertThrows(IllegalStateException.class, () -> new HibernatePagingItemReaderBuilder<Foo>()
-				.sessionFactory(this.sessionFactory).saveState(false).build());
+		.sessionFactory(this.sessionFactory).saveState(false).build());
 		assertEquals("queryString or queryName must be set", exception.getMessage());
 	}
 
@@ -191,7 +191,7 @@ class HibernatePagingItemReaderBuilderTests {
 			dataSourceInitializer.setDataSource(dataSource);
 
 			Resource create = new ClassPathResource(
-					"org/springframework/batch/item/database/init-foo-schema-hsqldb.sql");
+			"org/springframework/batch/item/database/init-foo-schema-hsqldb.sql");
 			dataSourceInitializer.setDatabasePopulator(new ResourceDatabasePopulator(create));
 
 			return dataSourceInitializer;
@@ -202,7 +202,7 @@ class HibernatePagingItemReaderBuilderTests {
 			LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 			factoryBean.setDataSource(dataSource());
 			factoryBean.setMappingLocations(
-					new ClassPathResource("/org/springframework/batch/item/database/Foo.hbm.xml", getClass()));
+			new ClassPathResource("/org/springframework/batch/item/database/Foo.hbm.xml", getClass()));
 			factoryBean.afterPropertiesSet();
 
 			return factoryBean.getObject();

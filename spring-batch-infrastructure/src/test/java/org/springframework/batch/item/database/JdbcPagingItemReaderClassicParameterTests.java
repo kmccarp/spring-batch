@@ -33,7 +33,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  *
  */
 @SpringJUnitConfig(
-		locations = "/org/springframework/batch/item/database/JdbcPagingItemReaderParameterTests-context.xml")
+locations = "/org/springframework/batch/item/database/JdbcPagingItemReaderParameterTests-context.xml")
 class JdbcPagingItemReaderClassicParameterTests extends AbstractJdbcPagingItemReaderParameterTests {
 
 	@Override

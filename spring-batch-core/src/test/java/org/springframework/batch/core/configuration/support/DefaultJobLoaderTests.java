@@ -65,7 +65,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testClear() throws Exception {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ByteArrayResource(JOB_XML.getBytes()));
+		new ByteArrayResource(JOB_XML.getBytes()));
 		jobLoader.load(factory);
 		assertEquals(1, ((Map<?, ?>) ReflectionTestUtils.getField(jobLoader, "contexts")).size());
 		assertEquals(1, ((Map<?, ?>) ReflectionTestUtils.getField(jobLoader, "contextToJobNames")).size());
@@ -77,7 +77,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testLoadWithExplicitName() throws Exception {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ByteArrayResource(JOB_XML.getBytes()));
+		new ByteArrayResource(JOB_XML.getBytes()));
 		jobLoader.load(factory);
 		assertEquals(1, jobRegistry.getJobNames().size());
 		jobLoader.reload(factory);
@@ -104,7 +104,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testRegistryUpdated() throws DuplicateJobException {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("trivial-context.xml", getClass()));
+		new ClassPathResource("trivial-context.xml", getClass()));
 		jobLoader.load(factory);
 		assertEquals(1, jobRegistry.getJobNames().size());
 		assertStepExist(TEST_JOB_NAME, TEST_STEP_NAME);
@@ -113,7 +113,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testMultipleJobsInTheSameContext() throws DuplicateJobException {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("job-context-with-steps.xml", getClass()));
+		new ClassPathResource("job-context-with-steps.xml", getClass()));
 		jobLoader.load(factory);
 		assertEquals(2, jobRegistry.getJobNames().size());
 		assertStepExist("job1", "step11", "step12");
@@ -125,7 +125,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testMultipleJobsInTheSameContextWithSeparateSteps() throws DuplicateJobException {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("job-context-with-separate-steps.xml", getClass()));
+		new ClassPathResource("job-context-with-separate-steps.xml", getClass()));
 		jobLoader.load(factory);
 		assertEquals(2, jobRegistry.getJobNames().size());
 		assertStepExist("job1", "step11", "step12", "genericStep1", "genericStep2");
@@ -138,7 +138,7 @@ class DefaultJobLoaderTests {
 	void testNoStepRegistryAvailable() throws DuplicateJobException {
 		final JobLoader loader = new DefaultJobLoader(jobRegistry);
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("job-context-with-steps.xml", getClass()));
+		new ClassPathResource("job-context-with-steps.xml", getClass()));
 		loader.load(factory);
 		// No step registry available so just registering the jobs
 		assertEquals(2, jobRegistry.getJobNames().size());
@@ -147,7 +147,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testLoadWithJobThatIsNotAStepLocator() {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ByteArrayResource(BASIC_JOB_XML.getBytes()));
+		new ByteArrayResource(BASIC_JOB_XML.getBytes()));
 		assertThrows(UnsupportedOperationException.class, () -> jobLoader.load(factory));
 	}
 
@@ -155,14 +155,14 @@ class DefaultJobLoaderTests {
 	void testLoadWithJobThatIsNotAStepLocatorNoStepRegistry() {
 		final JobLoader loader = new DefaultJobLoader(jobRegistry);
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ByteArrayResource(BASIC_JOB_XML.getBytes()));
+		new ByteArrayResource(BASIC_JOB_XML.getBytes()));
 		assertDoesNotThrow(() -> loader.load(factory));
 	}
 
 	@Test
 	void testReload() throws Exception {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("trivial-context.xml", getClass()));
+		new ClassPathResource("trivial-context.xml", getClass()));
 		jobLoader.load(factory);
 		assertEquals(1, jobRegistry.getJobNames().size());
 		assertStepExist(TEST_JOB_NAME, TEST_STEP_NAME);
@@ -174,7 +174,7 @@ class DefaultJobLoaderTests {
 	@Test
 	void testReloadWithAutoRegister() throws Exception {
 		GenericApplicationContextFactory factory = new GenericApplicationContextFactory(
-				new ClassPathResource("trivial-context-autoregister.xml", getClass()));
+		new ClassPathResource("trivial-context-autoregister.xml", getClass()));
 		jobLoader.load(factory);
 		assertEquals(1, jobRegistry.getJobNames().size());
 		assertStepExist(TEST_JOB_NAME, TEST_STEP_NAME);
@@ -196,14 +196,14 @@ class DefaultJobLoaderTests {
 	}
 
 	private static final String BASIC_JOB_XML = String.format(
-			"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
-					+ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$BasicStubJob'/></beans>",
-			DefaultJobLoaderTests.class.getName());
+	"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
++ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$BasicStubJob'/></beans>",
+	DefaultJobLoaderTests.class.getName());
 
 	private static final String JOB_XML = String.format(
-			"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
-					+ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$StubJob'/></beans>",
-			DefaultJobLoaderTests.class.getName());
+	"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
++ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$StubJob'/></beans>",
+	DefaultJobLoaderTests.class.getName());
 
 	public static class BasicStubJob implements Job {
 

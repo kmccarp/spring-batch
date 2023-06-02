@@ -160,7 +160,7 @@ public class TransactionAwareBufferedWriter extends Writer {
 		}
 		catch (UnsupportedEncodingException e) {
 			throw new WriteFailedException(
-					"Could not determine buffer size because of unsupported encoding: " + encoding, e);
+			"Could not determine buffer size because of unsupported encoding: " + encoding, e);
 		}
 	}
 
@@ -214,7 +214,7 @@ public class TransactionAwareBufferedWriter extends Writer {
 			int bytesWritten = channel.write(bb);
 			if (bytesWritten != length) {
 				throw new IOException(
-						"Unable to write all data.  Bytes to write: " + len + ".  Bytes written: " + bytesWritten);
+				"Unable to write all data.  Bytes to write: " + len + ".  Bytes written: " + bytesWritten);
 			}
 			return;
 		}
@@ -238,7 +238,7 @@ public class TransactionAwareBufferedWriter extends Writer {
 			int bytesWritten = channel.write(bb);
 			if (bytesWritten != length) {
 				throw new IOException(
-						"Unable to write all data.  Bytes to write: " + len + ".  Bytes written: " + bytesWritten);
+				"Unable to write all data.  Bytes to write: " + len + ".  Bytes written: " + bytesWritten);
 			}
 			return;
 		}

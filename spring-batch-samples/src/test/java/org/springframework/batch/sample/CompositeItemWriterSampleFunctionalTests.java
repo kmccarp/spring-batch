@@ -38,17 +38,17 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/jobs/compositeItemWriterSampleJob.xml",
-		"/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/jobs/compositeItemWriterSampleJob.xml",
+"/job-runner-context.xml"})
 class CompositeItemWriterSampleFunctionalTests {
 
 	private static final String GET_TRADES = "SELECT isin, quantity, price, customer FROM TRADE order by isin";
 
 	private static final String EXPECTED_OUTPUT_FILE = "Trade: [isin=UK21341EAH41,quantity=211,price=31.11,customer=customer1]"
-			+ "Trade: [isin=UK21341EAH42,quantity=212,price=32.11,customer=customer2]"
-			+ "Trade: [isin=UK21341EAH43,quantity=213,price=33.11,customer=customer3]"
-			+ "Trade: [isin=UK21341EAH44,quantity=214,price=34.11,customer=customer4]"
-			+ "Trade: [isin=UK21341EAH45,quantity=215,price=35.11,customer=customer5]";
+	+ "Trade: [isin=UK21341EAH42,quantity=212,price=32.11,customer=customer2]"
+	+ "Trade: [isin=UK21341EAH43,quantity=213,price=33.11,customer=customer3]"
+	+ "Trade: [isin=UK21341EAH44,quantity=214,price=34.11,customer=customer4]"
+	+ "Trade: [isin=UK21341EAH45,quantity=215,price=35.11,customer=customer5]";
 
 	private JdbcTemplate jdbcTemplate;
 

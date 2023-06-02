@@ -42,7 +42,7 @@ class AvroItemWriterBuilderTests extends AvroItemWriterTestSupport {
 	void itemWriterForAvroGeneratedClass() throws Exception {
 
 		AvroItemWriter<User> avroItemWriter = new AvroItemWriterBuilder<User>().resource(output).schema(schemaResource)
-				.type(User.class).build();
+		.type(User.class).build();
 
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.avroGeneratedUsers());
@@ -55,7 +55,7 @@ class AvroItemWriterBuilderTests extends AvroItemWriterTestSupport {
 	void itemWriterForGenericRecords() throws Exception {
 
 		AvroItemWriter<GenericRecord> avroItemWriter = new AvroItemWriterBuilder<GenericRecord>()
-				.type(GenericRecord.class).schema(plainOldUserSchemaResource).resource(output).build();
+		.type(GenericRecord.class).schema(plainOldUserSchemaResource).resource(output).build();
 
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.genericPlainOldUsers());
@@ -69,7 +69,7 @@ class AvroItemWriterBuilderTests extends AvroItemWriterTestSupport {
 	void itemWriterForPojos() throws Exception {
 
 		AvroItemWriter<PlainOldUser> avroItemWriter = new AvroItemWriterBuilder<PlainOldUser>().resource(output)
-				.schema(plainOldUserSchemaResource).type(PlainOldUser.class).build();
+		.schema(plainOldUserSchemaResource).type(PlainOldUser.class).build();
 
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.plainOldUsers());
@@ -83,7 +83,7 @@ class AvroItemWriterBuilderTests extends AvroItemWriterTestSupport {
 	void itemWriterWithNoEmbeddedSchema() throws Exception {
 
 		AvroItemWriter<PlainOldUser> avroItemWriter = new AvroItemWriterBuilder<PlainOldUser>().resource(output)
-				.type(PlainOldUser.class).build();
+		.type(PlainOldUser.class).build();
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.plainOldUsers());
 		avroItemWriter.close();
@@ -95,13 +95,13 @@ class AvroItemWriterBuilderTests extends AvroItemWriterTestSupport {
 	@Test
 	void shouldFailWitNoOutput() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemWriterBuilder<GenericRecord>().type(GenericRecord.class).build());
+		() -> new AvroItemWriterBuilder<GenericRecord>().type(GenericRecord.class).build());
 	}
 
 	@Test
 	void shouldFailWitNoType() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemWriterBuilder<>().resource(output).schema(schemaResource).build());
+		() -> new AvroItemWriterBuilder<>().resource(output).schema(schemaResource).build());
 	}
 
 }

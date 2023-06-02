@@ -62,7 +62,7 @@ class JobLauncherDetailsTests {
 		details.setJobLauncher(new JobLauncher() {
 			@Override
 			public JobExecution run(org.springframework.batch.core.Job job, JobParameters jobParameters)
-					throws JobExecutionAlreadyRunningException, JobRestartException {
+			throws JobExecutionAlreadyRunningException, JobRestartException {
 				list.add(jobParameters);
 				return null;
 			}
@@ -79,7 +79,7 @@ class JobLauncherDetailsTests {
 
 	private JobExecutionContext createContext(JobDetail jobDetail) {
 		firedBundle = new TriggerFiredBundle(jobDetail, new SimpleTriggerImpl(), null, false, new Date(), new Date(),
-				new Date(), new Date());
+		new Date(), new Date());
 		return new StubJobExecutionContext();
 	}
 

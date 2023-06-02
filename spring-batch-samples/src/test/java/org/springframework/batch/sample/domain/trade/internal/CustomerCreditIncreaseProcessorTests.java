@@ -42,7 +42,7 @@ class CustomerCreditIncreaseProcessorTests {
 		customerCredit.setCredit(oldCredit);
 
 		assertEquals(oldCredit.add(CustomerCreditIncreaseProcessor.FIXED_AMOUNT),
-				tested.process(customerCredit).getCredit());
+		tested.process(customerCredit).getCredit());
 	}
 
 }

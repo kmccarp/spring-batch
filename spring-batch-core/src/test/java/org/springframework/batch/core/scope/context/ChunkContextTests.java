@@ -36,8 +36,8 @@ import org.springframework.batch.core.JobParameters;
 class ChunkContextTests {
 
 	private final ChunkContext context = new ChunkContext(new StepContext(new JobExecution(new JobInstance(0L, "job"),
-			1L, new JobParameters(Collections.singletonMap("foo", new JobParameter("bar", String.class))))
-					.createStepExecution("foo")));
+	1L, new JobParameters(Collections.singletonMap("foo", new JobParameter("bar", String.class))))
+	.createStepExecution("foo")));
 
 	@Test
 	void testGetStepContext() {

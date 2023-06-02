@@ -82,7 +82,7 @@ public class StepContext extends SynchronizedAttributeAccessor {
 	public String getJobName() {
 		Assert.state(stepExecution.getJobExecution() != null, "StepExecution does not have a JobExecution");
 		Assert.state(stepExecution.getJobExecution().getJobInstance() != null,
-				"StepExecution does not have a JobInstance");
+		"StepExecution does not have a JobInstance");
 		return stepExecution.getJobExecution().getJobInstance().getJobName();
 	}
 
@@ -94,7 +94,7 @@ public class StepContext extends SynchronizedAttributeAccessor {
 	public Long getJobInstanceId() {
 		Assert.state(stepExecution.getJobExecution() != null, "StepExecution does not have a JobExecution");
 		Assert.state(stepExecution.getJobExecution().getJobInstance() != null,
-				"StepExecution does not have a JobInstance");
+		"StepExecution does not have a JobInstance");
 		return stepExecution.getJobExecution().getJobInstance().getInstanceId();
 	}
 
@@ -214,7 +214,7 @@ public class StepContext extends SynchronizedAttributeAccessor {
 		}
 		else {
 			throw new UnexpectedJobExecutionException(
-					"Could not close step context, rethrowing first of " + errors.size() + " exceptions.", error);
+			"Could not close step context, rethrowing first of " + errors.size() + " exceptions.", error);
 		}
 	}
 
@@ -231,7 +231,7 @@ public class StepContext extends SynchronizedAttributeAccessor {
 	 */
 	public String getId() {
 		Assert.state(stepExecution.getId() != null,
-				"StepExecution has no id.  " + "It must be saved before it can be used in step scope.");
+		"StepExecution has no id.  " + "It must be saved before it can be used in step scope.");
 		return "execution#" + stepExecution.getId();
 	}
 
@@ -270,7 +270,7 @@ public class StepContext extends SynchronizedAttributeAccessor {
 	@Override
 	public String toString() {
 		return super.toString() + ", stepExecutionContext=" + getStepExecutionContext() + ", jobExecutionContext="
-				+ getJobExecutionContext() + ", jobParameters=" + getJobParameters();
+		+ getJobExecutionContext() + ", jobParameters=" + getJobParameters();
 	}
 
 }

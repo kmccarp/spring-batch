@@ -43,7 +43,7 @@ class DefaultMailErrorHandlerTests {
 		handler.setMaxMessageLength(20);
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		Exception exception = assertThrows(MailException.class,
-				() -> handler.handle(mailMessage, new MessagingException()));
+		() -> handler.handle(mailMessage, new MessagingException()));
 		String message = exception.getMessage();
 		assertTrue(message.matches(".*SimpleMailMessage: f.*"), "Wrong message: " + message);
 	}

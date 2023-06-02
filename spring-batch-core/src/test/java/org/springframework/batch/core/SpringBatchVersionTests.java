@@ -65,7 +65,7 @@ public class SpringBatchVersionTests {
 		assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
 		assertTrue(jobExecution.getExecutionContext().containsKey(SpringBatchVersion.BATCH_VERSION_KEY));
 		assertTrue(jobExecution.getStepExecutions().iterator().next().getExecutionContext()
-				.containsKey(SpringBatchVersion.BATCH_VERSION_KEY));
+		.containsKey(SpringBatchVersion.BATCH_VERSION_KEY));
 	}
 
 	@Configuration
@@ -75,7 +75,7 @@ public class SpringBatchVersionTests {
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
-					.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		}
 
 		@Bean
@@ -86,9 +86,9 @@ public class SpringBatchVersionTests {
 		@Bean
 		public Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new JobBuilder("job", jobRepository)
-					.start(new StepBuilder("step", jobRepository)
-							.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
-					.build();
+			.start(new StepBuilder("step", jobRepository)
+		.tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
+			.build();
 		}
 
 	}

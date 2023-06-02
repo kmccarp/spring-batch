@@ -34,7 +34,7 @@ class AvroItemReaderBuilderTests extends AvroItemReaderTestSupport {
 	void itemReaderWithSchemaResource() throws Exception {
 
 		AvroItemReader<GenericRecord> avroItemReader = new AvroItemReaderBuilder<GenericRecord>().resource(dataResource)
-				.embeddedSchema(false).schema(schemaResource).build();
+		.embeddedSchema(false).schema(schemaResource).build();
 
 		verify(avroItemReader, genericAvroGeneratedUsers());
 	}
@@ -42,14 +42,14 @@ class AvroItemReaderBuilderTests extends AvroItemReaderTestSupport {
 	@Test
 	void itemReaderWithGeneratedData() throws Exception {
 		AvroItemReader<GenericRecord> avroItemReader = new AvroItemReaderBuilder<GenericRecord>()
-				.resource(dataResourceWithSchema).schema(schemaResource).build();
+		.resource(dataResourceWithSchema).schema(schemaResource).build();
 		verify(avroItemReader, genericAvroGeneratedUsers());
 	}
 
 	@Test
 	void itemReaderWithSchemaString() throws Exception {
 		AvroItemReader<GenericRecord> avroItemReader = new AvroItemReaderBuilder<GenericRecord>()
-				.schema(schemaString(schemaResource)).resource(dataResourceWithSchema).build();
+		.schema(schemaString(schemaResource)).resource(dataResourceWithSchema).build();
 
 		verify(avroItemReader, genericAvroGeneratedUsers());
 	}
@@ -57,33 +57,33 @@ class AvroItemReaderBuilderTests extends AvroItemReaderTestSupport {
 	@Test
 	void itemReaderWithEmbeddedHeader() throws Exception {
 		AvroItemReader<User> avroItemReader = new AvroItemReaderBuilder<User>().resource(dataResourceWithSchema)
-				.type(User.class).build();
+		.type(User.class).build();
 		verify(avroItemReader, avroGeneratedUsers());
 	}
 
 	@Test
 	void itemReaderForSpecificType() throws Exception {
 		AvroItemReader<User> avroItemReader = new AvroItemReaderBuilder<User>().type(User.class)
-				.resource(dataResourceWithSchema).build();
+		.resource(dataResourceWithSchema).build();
 		verify(avroItemReader, avroGeneratedUsers());
 	}
 
 	@Test
 	void itemReaderWithNoSchemaStringShouldFail() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemReaderBuilder<GenericRecord>().schema("").resource(dataResource).build());
+		() -> new AvroItemReaderBuilder<GenericRecord>().schema("").resource(dataResource).build());
 	}
 
 	@Test
 	void itemReaderWithPartialConfigurationShouldFail() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemReaderBuilder<GenericRecord>().resource(dataResource).build());
+		() -> new AvroItemReaderBuilder<GenericRecord>().resource(dataResource).build());
 	}
 
 	@Test
 	void itemReaderWithNoInputsShouldFail() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemReaderBuilder<GenericRecord>().schema(schemaResource).build());
+		() -> new AvroItemReaderBuilder<GenericRecord>().schema(schemaResource).build());
 	}
 
 }

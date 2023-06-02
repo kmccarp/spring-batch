@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 2.0
  */
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/restartFileSampleJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/restartFileSampleJob.xml", "/job-runner-context.xml"})
 class RestartFileSampleFunctionalTests {
 
 	@Autowired

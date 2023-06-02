@@ -61,7 +61,7 @@ public class GenericApplicationContextFactory extends AbstractApplicationContext
 	 */
 	@Override
 	protected ConfigurableApplicationContext createApplicationContext(ConfigurableApplicationContext parent,
-			Object... resources) {
+	Object... resources) {
 		ConfigurableApplicationContext context;
 
 		if (allObjectsOfType(resources, Resource.class)) {
@@ -79,7 +79,7 @@ public class GenericApplicationContextFactory extends AbstractApplicationContext
 				types.add(resource.getClass());
 			}
 			throw new IllegalArgumentException(
-					"No application context could be created for resource types: " + Arrays.toString(types.toArray()));
+			"No application context could be created for resource types: " + Arrays.toString(types.toArray()));
 		}
 
 		return context;
@@ -101,11 +101,11 @@ public class GenericApplicationContextFactory extends AbstractApplicationContext
 		private final ConfigurableApplicationContext parent;
 
 		public ApplicationContextHelper(ConfigurableApplicationContext parent, GenericApplicationContext context,
-				Object... config) {
+		Object... config) {
 			this.parent = parent;
 			if (parent != null) {
 				Assert.isTrue(parent.getBeanFactory() instanceof DefaultListableBeanFactory,
-						"The parent application context must have a bean factory of type DefaultListableBeanFactory");
+				"The parent application context must have a bean factory of type DefaultListableBeanFactory");
 				parentBeanFactory = (DefaultListableBeanFactory) parent.getBeanFactory();
 			}
 			else {
@@ -146,7 +146,7 @@ public class GenericApplicationContextFactory extends AbstractApplicationContext
 			class ResourceXmlApplicationContextHelper extends ApplicationContextHelper {
 
 				ResourceXmlApplicationContextHelper(ConfigurableApplicationContext parent,
-						GenericApplicationContext context, Object... config) {
+				GenericApplicationContext context, Object... config) {
 					super(parent, context, config);
 				}
 
@@ -198,7 +198,7 @@ public class GenericApplicationContextFactory extends AbstractApplicationContext
 			class ResourceAnnotationApplicationContextHelper extends ApplicationContextHelper {
 
 				public ResourceAnnotationApplicationContextHelper(ConfigurableApplicationContext parent,
-						GenericApplicationContext context, Object... config) {
+				GenericApplicationContext context, Object... config) {
 					super(parent, context, config);
 				}
 

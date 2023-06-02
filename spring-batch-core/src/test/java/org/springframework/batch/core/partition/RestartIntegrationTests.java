@@ -74,9 +74,9 @@ public class RestartIntegrationTests {
 		JobParameters jobParameters = new JobParametersBuilder().addString("restart", "yes").toJobParameters();
 
 		int beforeManager = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME='step1:manager'");
+		"STEP_NAME='step1:manager'");
 		int beforePartition = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME like 'step1:partition%'");
+		"STEP_NAME like 'step1:partition%'");
 
 		ExampleItemWriter.clear();
 		JobExecution execution = jobLauncher.run(job, jobParameters);
@@ -90,9 +90,9 @@ public class RestartIntegrationTests {
 		assertEquals(4, ExampleItemWriter.getItems().size());
 
 		int afterManager = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME='step1:manager'");
+		"STEP_NAME='step1:manager'");
 		int afterPartition = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "BATCH_STEP_EXECUTION",
-				"STEP_NAME like 'step1:partition%'");
+		"STEP_NAME like 'step1:partition%'");
 
 		// Two attempts
 		assertEquals(2, afterManager - beforeManager);

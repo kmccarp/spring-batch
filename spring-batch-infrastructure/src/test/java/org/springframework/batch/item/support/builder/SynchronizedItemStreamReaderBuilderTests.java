@@ -46,12 +46,12 @@ class SynchronizedItemStreamReaderBuilderTests {
 
 		final SynchronizedItemStreamReaderBuilderTests.TestItemReader testItemReader = new SynchronizedItemStreamReaderBuilderTests.TestItemReader();
 		final SynchronizedItemStreamReader<Integer> synchronizedItemStreamReader = new SynchronizedItemStreamReaderBuilder<Integer>()
-				.delegate(testItemReader).build();
+		.delegate(testItemReader).build();
 
 		// Open the ItemReader and make sure it's initialized properly.
 		synchronizedItemStreamReader.open(executionContext);
 		assertEquals(true,
-				executionContext.get(SynchronizedItemStreamReaderBuilderTests.TestItemReader.HAS_BEEN_OPENED));
+		executionContext.get(SynchronizedItemStreamReaderBuilderTests.TestItemReader.HAS_BEEN_OPENED));
 		assertFalse(testItemReader.isClosed());
 
 		/*
@@ -94,7 +94,7 @@ class SynchronizedItemStreamReaderBuilderTests {
 		}
 		assertTrue(testItemReader.isClosed());
 		assertEquals(SIZE,
-				executionContext.getInt(SynchronizedItemStreamReaderBuilderTests.TestItemReader.UPDATE_COUNT_KEY));
+		executionContext.getInt(SynchronizedItemStreamReaderBuilderTests.TestItemReader.UPDATE_COUNT_KEY));
 	}
 
 	/**

@@ -36,7 +36,7 @@ class XStreamUnmarshallingTests extends AbstractStaxEventReaderItemReaderTests {
 		aliasesMap.put("customer", String.class);
 		aliasesMap.put("price", BigDecimal.class);
 		unmarshaller.setAliases(aliasesMap);
-		ExplicitTypePermission typePermission = new ExplicitTypePermission(new Class[] { Trade.class });
+		ExplicitTypePermission typePermission = new ExplicitTypePermission(new Class[]{Trade.class});
 		unmarshaller.setTypePermissions(typePermission);
 		return unmarshaller;
 	}

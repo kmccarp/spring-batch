@@ -56,7 +56,7 @@ public abstract class AbstractListenerParser {
 
 	public void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
 		builder.addPropertyValue("delegate",
-				parseListenerElement(element, parserContext, builder.getRawBeanDefinition()));
+		parseListenerElement(element, parserContext, builder.getRawBeanDefinition()));
 
 		ManagedMap<String, String> metaDataMap = new ManagedMap<>();
 		for (String metaDataPropertyName : getMethodNameAttributes()) {
@@ -69,7 +69,7 @@ public abstract class AbstractListenerParser {
 	}
 
 	public static BeanMetadataElement parseListenerElement(Element element, ParserContext parserContext,
-			BeanDefinition enclosing) {
+	BeanDefinition enclosing) {
 		String listenerRef = element.getAttribute(REF_ATTR);
 		List<Element> beanElements = DomUtils.getChildElementsByTagName(element, BEAN_ELE);
 		List<Element> refElements = DomUtils.getChildElementsByTagName(element, REF_ELE);
@@ -82,7 +82,7 @@ public abstract class AbstractListenerParser {
 		else if (beanElements.size() == 1) {
 			Element beanElement = beanElements.get(0);
 			BeanDefinitionHolder beanDefinitionHolder = parserContext.getDelegate()
-					.parseBeanDefinitionElement(beanElement, enclosing);
+			.parseBeanDefinitionElement(beanElement, enclosing);
 			parserContext.getDelegate().decorateBeanDefinitionIfRequired(beanElement, beanDefinitionHolder);
 			return beanDefinitionHolder;
 		}
@@ -92,7 +92,7 @@ public abstract class AbstractListenerParser {
 	}
 
 	private static void verifyListenerAttributesAndSubelements(String listenerRef, List<Element> beanElements,
-			List<Element> refElements, Element element, ParserContext parserContext) {
+	List<Element> refElements, Element element, ParserContext parserContext) {
 		int total = (StringUtils.hasText(listenerRef) ? 1 : 0) + beanElements.size() + refElements.size();
 		if (total != 1) {
 			StringBuilder found = new StringBuilder();
@@ -120,9 +120,9 @@ public abstract class AbstractListenerParser {
 
 			String id = element.getAttribute(ID_ATTR);
 			parserContext.getReaderContext()
-					.error("The <" + element.getTagName() + (StringUtils.hasText(id) ? " id=\"" + id + "\"" : "")
-							+ "/> element must have exactly one of: '" + REF_ATTR + "' attribute, <" + BEAN_ELE
-							+ "/> attribute, or <" + REF_ELE + "/> element.  Found: " + found + ".", element);
+			.error("The <" + element.getTagName() + (StringUtils.hasText(id) ? " id=\"" + id + "\"" : "")
+		+ "/> element must have exactly one of: '" + REF_ATTR + "' attribute, <" + BEAN_ELE
+		+ "/> attribute, or <" + REF_ELE + "/> element.  Found: " + found + ".", element);
 		}
 	}
 

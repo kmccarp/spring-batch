@@ -29,12 +29,12 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase
-		implements org.apache.avro.specific.SpecificRecord {
+implements org.apache.avro.specific.SpecificRecord {
 
 	private static final long serialVersionUID = 1293362237195430714L;
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
-			"{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"org.springframework.batch.item.avro.example\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"int\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}");
+	"{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"org.springframework.batch.item.avro.example\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"int\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}");
 
 	public static org.apache.avro.Schema getClassSchema() {
 		return SCHEMA$;
@@ -236,7 +236,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	 * RecordBuilder for User instances.
 	 */
 	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
-			implements org.apache.avro.data.RecordBuilder<User> {
+	implements org.apache.avro.data.RecordBuilder<User> {
 
 		private CharSequence name;
 
@@ -410,9 +410,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 				User record = new User();
 				record.name = fieldSetFlags()[0] ? this.name : (CharSequence) defaultValue(fields()[0]);
 				record.favorite_number = fieldSetFlags()[1] ? this.favorite_number
-						: (Integer) defaultValue(fields()[1]);
+				: (Integer) defaultValue(fields()[1]);
 				record.favorite_color = fieldSetFlags()[2] ? this.favorite_color
-						: (CharSequence) defaultValue(fields()[2]);
+				: (CharSequence) defaultValue(fields()[2]);
 				return record;
 			}
 			catch (org.apache.avro.AvroMissingFieldException e) {
@@ -427,7 +427,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 
 	@SuppressWarnings("unchecked")
 	private static final org.apache.avro.io.DatumWriter<User> WRITER$ = (org.apache.avro.io.DatumWriter<User>) MODEL$
-			.createDatumWriter(SCHEMA$);
+	.createDatumWriter(SCHEMA$);
 
 	@Override
 	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException {
@@ -436,7 +436,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 
 	@SuppressWarnings("unchecked")
 	private static final org.apache.avro.io.DatumReader<User> READER$ = (org.apache.avro.io.DatumReader<User>) MODEL$
-			.createDatumReader(SCHEMA$);
+	.createDatumReader(SCHEMA$);
 
 	@Override
 	public void readExternal(java.io.ObjectInput in) throws java.io.IOException {
@@ -492,7 +492,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 			}
 			else {
 				this.favorite_color = in
-						.readString(this.favorite_color instanceof Utf8 ? (Utf8) this.favorite_color : null);
+				.readString(this.favorite_color instanceof Utf8 ? (Utf8) this.favorite_color : null);
 			}
 
 		}
@@ -516,7 +516,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 						}
 						else {
 							this.favorite_color = in.readString(
-									this.favorite_color instanceof Utf8 ? (Utf8) this.favorite_color : null);
+							this.favorite_color instanceof Utf8 ? (Utf8) this.favorite_color : null);
 						}
 					}
 					default -> throw new java.io.IOException("Corrupt ResolvingDecoder.");

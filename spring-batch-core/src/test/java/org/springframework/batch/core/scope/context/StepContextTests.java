@@ -43,7 +43,7 @@ class StepContextTests {
 	private final List<String> list = new ArrayList<>();
 
 	private StepExecution stepExecution = new StepExecution("step",
-			new JobExecution(new JobInstance(2L, "job"), 0L, null), 1L);
+	new JobExecution(new JobInstance(2L, "job"), 0L, null), 1L);
 
 	private StepContext context = new StepContext(stepExecution);
 

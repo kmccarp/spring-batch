@@ -422,7 +422,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		SkipPolicy readSkipPolicy = createSkipPolicy();
 		readSkipPolicy = getFatalExceptionAwareProxy(readSkipPolicy);
 		FaultTolerantChunkProvider<I> chunkProvider = new FaultTolerantChunkProvider<>(getReader(),
-				createChunkOperations());
+		createChunkOperations());
 		chunkProvider.setMaxSkipsOnRead(Math.max(getChunkSize(), FaultTolerantChunkProvider.DEFAULT_MAX_SKIPS_ON_READ));
 		chunkProvider.setSkipPolicy(readSkipPolicy);
 		chunkProvider.setRollbackClassifier(getRollbackClassifier());
@@ -439,7 +439,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		BatchRetryTemplate batchRetryTemplate = createRetryOperations();
 
 		FaultTolerantChunkProcessor<I, O> chunkProcessor = new FaultTolerantChunkProcessor<>(getProcessor(),
-				getWriter(), batchRetryTemplate);
+		getWriter(), batchRetryTemplate);
 		chunkProcessor.setBuffering(!isReaderTransactionalQueue());
 		chunkProcessor.setProcessorTransactional(processorTransactional);
 
@@ -463,12 +463,12 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 	@SuppressWarnings("unchecked")
 	private void addSpecialExceptions() {
 		addNonSkippableExceptionIfMissing(SkipLimitExceededException.class, NonSkippableReadException.class,
-				SkipListenerFailedException.class, SkipPolicyFailedException.class, RetryException.class,
-				JobInterruptedException.class, Error.class, BeanCreationException.class);
+		SkipListenerFailedException.class, SkipPolicyFailedException.class, RetryException.class,
+		JobInterruptedException.class, Error.class, BeanCreationException.class);
 		addNonRetryableExceptionIfMissing(SkipLimitExceededException.class, NonSkippableReadException.class,
-				TransactionException.class, FatalStepExecutionException.class, SkipListenerFailedException.class,
-				SkipPolicyFailedException.class, RetryException.class, JobInterruptedException.class, Error.class,
-				BeanCreationException.class);
+		TransactionException.class, FatalStepExecutionException.class, SkipListenerFailedException.class,
+		SkipPolicyFailedException.class, RetryException.class, JobInterruptedException.class, Error.class,
+		BeanCreationException.class);
 	}
 
 	protected void detectStreamInReader() {
@@ -478,7 +478,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 			}
 			else {
 				logger.warn("Asynchronous TaskExecutor detected with ItemStream reader.  This is probably an error, "
-						+ "and may lead to incorrect restart data being stored.");
+				+ "and may lead to incorrect restart data being stored.");
 			}
 		}
 	}
@@ -489,7 +489,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 	 */
 	private void registerSkipListeners() {
 		// auto-register reader, processor and writer
-		for (Object itemHandler : new Object[] { getReader(), getWriter(), getProcessor() }) {
+		for (Object itemHandler : new Object[]{getReader(), getWriter(), getProcessor()}) {
 			if (StepListenerFactoryBean.isListener(itemHandler)) {
 				StepListener listener = StepListenerFactoryBean.getListener(itemHandler);
 				if (listener instanceof SkipListener<?, ?>) {
@@ -514,7 +514,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		// Try to avoid pathological cases where we cannot force a rollback
 		// (should be pretty uncommon):
 		if (!classifier.classify(new ForceRollbackForWriteSkipException("test", new RuntimeException()))
-				|| !classifier.classify(new ExhaustedRetryException("test"))) {
+		|| !classifier.classify(new ExhaustedRetryException("test"))) {
 
 			final Classifier<Throwable, Boolean> binary = classifier;
 
@@ -555,11 +555,11 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		LimitCheckingItemSkipPolicy limitCheckingItemSkipPolicy = new LimitCheckingItemSkipPolicy(skipLimit, map);
 		if (skipPolicy == null) {
 			Assert.state(!(skippableExceptionClasses.isEmpty() && skipLimit > 0),
-					"If a skip limit is provided then skippable exceptions must also be specified");
+			"If a skip limit is provided then skippable exceptions must also be specified");
 			skipPolicy = limitCheckingItemSkipPolicy;
 		}
 		else if (limitCheckingItemSkipPolicy != null) {
-			skipPolicy = new CompositeSkipPolicy(new SkipPolicy[] { skipPolicy, limitCheckingItemSkipPolicy });
+			skipPolicy = new CompositeSkipPolicy(new SkipPolicy[]{skipPolicy, limitCheckingItemSkipPolicy});
 		}
 		return skipPolicy;
 	}
@@ -578,12 +578,12 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 
 		if (retryPolicy == null) {
 			Assert.state(!(retryableExceptionClasses.isEmpty() && retryLimit > 0),
-					"If a retry limit is provided then retryable exceptions must also be specified");
+			"If a retry limit is provided then retryable exceptions must also be specified");
 			retryPolicy = simpleRetryPolicy;
 		}
 		else if ((!retryableExceptionClasses.isEmpty() && retryLimit > 0)) {
 			CompositeRetryPolicy compositeRetryPolicy = new CompositeRetryPolicy();
-			compositeRetryPolicy.setPolicies(new RetryPolicy[] { retryPolicy, simpleRetryPolicy });
+			compositeRetryPolicy.setPolicies(new RetryPolicy[]{retryPolicy, simpleRetryPolicy});
 			retryPolicy = compositeRetryPolicy;
 		}
 
@@ -599,7 +599,7 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 		RepeatOperations stepOperations = getStepOperations();
 		if (stepOperations instanceof RepeatTemplate) {
 			SimpleRetryExceptionHandler exceptionHandler = new SimpleRetryExceptionHandler(retryPolicyWrapper,
-					getExceptionHandler(), nonRetryableExceptionClasses);
+			getExceptionHandler(), nonRetryableExceptionClasses);
 			((RepeatTemplate) stepOperations).setExceptionHandler(exceptionHandler);
 		}
 

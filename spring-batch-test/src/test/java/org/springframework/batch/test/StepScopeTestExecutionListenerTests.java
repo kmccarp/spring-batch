@@ -94,7 +94,7 @@ class StepScopeTestExecutionListenerTests {
 
 		public StepExecution getStepExecution() {
 			JobExecution jobExecution = MetaDataInstanceFactory.createJobExecution("job", 11L, 123L,
-					new JobParametersBuilder().addString("foo", "spam").toJobParameters());
+			new JobParametersBuilder().addString("foo", "spam").toJobParameters());
 			StepExecution stepExecution = jobExecution.createStepExecution("step");
 			stepExecution.getExecutionContext().putString("foo", "bar");
 			return stepExecution;

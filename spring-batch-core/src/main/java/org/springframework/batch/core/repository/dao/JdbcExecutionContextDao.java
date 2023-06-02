@@ -152,7 +152,7 @@ public class JdbcExecutionContextDao extends AbstractJdbcBatchMetadataDao implem
 		Assert.notNull(executionId, "ExecutionId must not be null.");
 
 		List<ExecutionContext> results = getJdbcTemplate().query(getQuery(FIND_JOB_EXECUTION_CONTEXT),
-				new ExecutionContextRowMapper(), executionId);
+		new ExecutionContextRowMapper(), executionId);
 		if (results.size() > 0) {
 			return results.get(0);
 		}
@@ -167,7 +167,7 @@ public class JdbcExecutionContextDao extends AbstractJdbcBatchMetadataDao implem
 		Assert.notNull(executionId, "ExecutionId must not be null.");
 
 		List<ExecutionContext> results = getJdbcTemplate().query(getQuery(FIND_STEP_EXECUTION_CONTEXT),
-				new ExecutionContextRowMapper(), executionId);
+		new ExecutionContextRowMapper(), executionId);
 		if (results.size() > 0) {
 			return results.get(0);
 		}

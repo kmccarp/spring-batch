@@ -51,7 +51,8 @@ import org.springframework.util.Assert;
  * @author Mahmoud Ben Hassine
  *
  */
-@DisabledOnOs(value = OS.WINDOWS, disabledReason = "Intermittent false-negative failures") // #3847
+@DisabledOnOs(value = OS.WINDOWS, disabledReason = "Intermittent false-negative failures")
+// #3847
 class ConcurrentTransactionAwareProxyTests {
 
 	private static final Log logger = LogFactory.getLog(ConcurrentTransactionAwareProxyTests.class);
@@ -246,7 +247,7 @@ class ConcurrentTransactionAwareProxyTests {
 	}
 
 	private Map<String, String> saveInMapAndAssert(final Map<Long, Map<String, String>> map, final Long id,
-			final String value) {
+	final String value) {
 
 		new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
 			@Override

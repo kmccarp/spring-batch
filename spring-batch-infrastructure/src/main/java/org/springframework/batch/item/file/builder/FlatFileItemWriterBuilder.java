@@ -380,7 +380,7 @@ public class FlatFileItemWriterBuilder<T> {
 		public FormatterLineAggregator<T> build() {
 			Assert.notNull(this.format, "A format is required");
 			Assert.isTrue((this.names != null && !this.names.isEmpty()) || this.fieldExtractor != null,
-					"A list of field names or a field extractor is required");
+			"A list of field names or a field extractor is required");
 
 			FormatterLineAggregator<T> formatterLineAggregator = new FormatterLineAggregator<>();
 			formatterLineAggregator.setFormat(this.format);
@@ -483,7 +483,7 @@ public class FlatFileItemWriterBuilder<T> {
 
 		public DelimitedLineAggregator<T> build() {
 			Assert.isTrue((this.names != null && !this.names.isEmpty()) || this.fieldExtractor != null,
-					"A list of field names or a field extractor is required");
+			"A list of field names or a field extractor is required");
 
 			DelimitedLineAggregator<T> delimitedLineAggregator = new DelimitedLineAggregator<>();
 			if (this.delimiter != null) {
@@ -520,7 +520,7 @@ public class FlatFileItemWriterBuilder<T> {
 	public FlatFileItemWriter<T> build() {
 
 		Assert.isTrue(this.lineAggregator != null || this.delimitedBuilder != null || this.formattedBuilder != null,
-				"A LineAggregator or a DelimitedBuilder or a FormattedBuilder is required");
+		"A LineAggregator or a DelimitedBuilder or a FormattedBuilder is required");
 
 		if (this.saveState) {
 			Assert.hasText(this.name, "A name is required when saveState is true");
@@ -528,7 +528,7 @@ public class FlatFileItemWriterBuilder<T> {
 
 		if (this.resource == null) {
 			logger.debug("The resource is null. This is only a valid scenario when "
-					+ "injecting it later as in when using the MultiResourceItemWriter");
+			+ "injecting it later as in when using the MultiResourceItemWriter");
 		}
 
 		FlatFileItemWriter<T> writer = new FlatFileItemWriter<>();
@@ -541,7 +541,7 @@ public class FlatFileItemWriterBuilder<T> {
 		writer.setHeaderCallback(this.headerCallback);
 		if (this.lineAggregator == null) {
 			Assert.state(this.delimitedBuilder == null || this.formattedBuilder == null,
-					"Either a DelimitedLineAggregator or a FormatterLineAggregator should be provided, but not both");
+			"Either a DelimitedLineAggregator or a FormatterLineAggregator should be provided, but not both");
 			if (this.delimitedBuilder != null) {
 				this.lineAggregator = this.delimitedBuilder.build();
 			}

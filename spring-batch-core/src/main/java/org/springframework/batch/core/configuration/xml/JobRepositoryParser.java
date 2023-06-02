@@ -44,7 +44,7 @@ public class JobRepositoryParser extends AbstractSingleBeanDefinitionParser {
 
 	@Override
 	protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext)
-			throws BeanDefinitionStoreException {
+	throws BeanDefinitionStoreException {
 
 		String id = element.getAttribute(ID_ATTRIBUTE);
 		if (!StringUtils.hasText(id)) {
@@ -92,7 +92,7 @@ public class JobRepositoryParser extends AbstractSingleBeanDefinitionParser {
 		}
 		if (StringUtils.hasText(isolationLevelForCreate)) {
 			builder.addPropertyValue("isolationLevelForCreate",
-					DefaultTransactionDefinition.PREFIX_ISOLATION + isolationLevelForCreate);
+			DefaultTransactionDefinition.PREFIX_ISOLATION + isolationLevelForCreate);
 		}
 		if (StringUtils.hasText(tablePrefix)) {
 			builder.addPropertyValue("tablePrefix", tablePrefix);

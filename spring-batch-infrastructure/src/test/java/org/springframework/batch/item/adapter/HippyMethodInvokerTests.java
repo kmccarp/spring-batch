@@ -169,7 +169,7 @@ class HippyMethodInvokerTests {
 		@Override
 		public String getMessage(double value, String input) {
 			try {
-				return invokeDelegateMethodWithArguments(new Object[] { value, input });
+				return invokeDelegateMethodWithArguments(new Object[]{value, input});
 			}
 			catch (RuntimeException e) {
 				throw e;

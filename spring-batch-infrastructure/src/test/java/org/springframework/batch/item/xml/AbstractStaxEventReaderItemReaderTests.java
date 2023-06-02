@@ -56,7 +56,7 @@ abstract class AbstractStaxEventReaderItemReaderTests {
 	@Test
 	void testReadNested() throws Exception {
 		reader.setResource(
-				new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "input-nested.xml")));
+		new ClassPathResource(ClassUtils.addResourcePathToPackagePath(getClass(), "input-nested.xml")));
 		reader.open(new ExecutionContext());
 		Trade result;
 		List<Trade> results = new ArrayList<>();

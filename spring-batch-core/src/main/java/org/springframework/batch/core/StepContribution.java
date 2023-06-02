@@ -203,8 +203,8 @@ public class StepContribution implements Serializable {
 	@Override
 	public String toString() {
 		return "[StepContribution: read=" + readCount + ", written=" + writeCount + ", filtered=" + filterCount
-				+ ", readSkips=" + readSkipCount + ", writeSkips=" + writeSkipCount + ", processSkips="
-				+ processSkipCount + ", exitStatus=" + exitStatus.getExitCode() + "]";
+		+ ", readSkips=" + readSkipCount + ", writeSkips=" + writeSkipCount + ", processSkips="
+		+ processSkipCount + ", exitStatus=" + exitStatus.getExitCode() + "]";
 	}
 
 	/**

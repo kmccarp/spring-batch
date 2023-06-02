@@ -133,7 +133,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 	}
 
 	public FaultTolerantChunkProcessor(ItemProcessor<? super I, ? extends O> itemProcessor,
-			ItemWriter<? super O> itemWriter, BatchRetryTemplate batchRetryTemplate) {
+	ItemWriter<? super O> itemWriter, BatchRetryTemplate batchRetryTemplate) {
 		super(itemProcessor, itemWriter);
 		this.batchRetryTemplate = batchRetryTemplate;
 	}
@@ -211,7 +211,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 		// final int scanLimit = processorTransactional && data.scanning() ? 1 :
 		// 0;
 
-		for (final Chunk<I>.ChunkIterator iterator = inputs.iterator(); iterator.hasNext();) {
+		for (final Chunk<I>.ChunkIterator iterator = inputs.iterator(); iterator.hasNext(); ) {
 
 			final I item = iterator.next();
 
@@ -258,8 +258,8 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 							// configuration - it doesn't make sense to not roll
 							// back if we are also not allowed to skip
 							throw new NonSkippableProcessException(
-									"Non-skippable exception in processor.  Make sure any exceptions that do not cause a rollback are skippable.",
-									e);
+							"Non-skippable exception in processor.  Make sure any exceptions that do not cause a rollback are skippable.",
+							e);
 						}
 					}
 					finally {
@@ -299,7 +299,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 			};
 
 			O output = batchRetryTemplate.execute(retryCallback, recoveryCallback,
-					new DefaultRetryState(getInputKey(item), rollbackClassifier));
+			new DefaultRetryState(getInputKey(item), rollbackClassifier));
 			if (output != null) {
 				outputs.add(output);
 			}
@@ -323,7 +323,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 
 	@Override
 	protected void write(final StepContribution contribution, final Chunk<I> inputs, final Chunk<O> outputs)
-			throws Exception {
+	throws Exception {
 		@SuppressWarnings("unchecked")
 		final UserData<O> data = (UserData<O>) inputs.getUserData();
 		final AtomicReference<RetryContext> contextHolder = new AtomicReference<>();
@@ -351,7 +351,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 						 * or to honour the skip listener contract.
 						 */
 						throw new ForceRollbackForWriteSkipException(
-								"Force rollback on skippable exception so that skipped item can be located.", e);
+						"Force rollback on skippable exception so that skipped item can be located.", e);
 					}
 					finally {
 						stopTimer(sample, contribution.getStepExecution(), "chunk.write", status, "Chunk writing");
@@ -376,11 +376,11 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 					Throwable e = context.getLastThrowable();
 					if (outputs.size() > 1 && !rollbackClassifier.classify(e)) {
 						throw new RetryException("Invalid retry state during write caused by "
-								+ "exception that does not classify for rollback: ", e);
+						+ "exception that does not classify for rollback: ", e);
 					}
 
 					Chunk<I>.ChunkIterator inputIterator = inputs.iterator();
-					for (Chunk<O>.ChunkIterator outputIterator = outputs.iterator(); outputIterator.hasNext();) {
+					for (Chunk<O>.ChunkIterator outputIterator = outputs.iterator(); outputIterator.hasNext(); ) {
 
 						inputIterator.next();
 						outputIterator.next();
@@ -388,8 +388,8 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 						checkSkipPolicy(inputIterator, outputIterator, e, contribution, true);
 						if (!rollbackClassifier.classify(e)) {
 							throw new RetryException(
-									"Invalid retry state during recovery caused by exception that does not classify for rollback: ",
-									e);
+							"Invalid retry state during recovery caused by exception that does not classify for rollback: ",
+							e);
 						}
 
 					}
@@ -401,7 +401,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 			};
 
 			batchRetryTemplate.execute(retryCallback, batchRecoveryCallback,
-					BatchRetryTemplate.createState(getInputKeys(inputs), rollbackClassifier));
+			BatchRetryTemplate.createState(getInputKeys(inputs), rollbackClassifier));
 
 		}
 		else {
@@ -416,8 +416,8 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 					 */
 					if (!shouldSkip(itemWriteSkipPolicy, context.getLastThrowable(), -1)) {
 						throw new ExhaustedRetryException(
-								"Retry exhausted after last attempt in recovery path, but exception is not skippable.",
-								context.getLastThrowable());
+						"Retry exhausted after last attempt in recovery path, but exception is not skippable.",
+						context.getLastThrowable());
 					}
 
 					inputs.setBusy(true);
@@ -433,7 +433,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 			}
 			try {
 				batchRetryTemplate.execute(retryCallback, recoveryCallback,
-						new DefaultRetryState(inputs, rollbackClassifier));
+				new DefaultRetryState(inputs, rollbackClassifier));
 			}
 			catch (Exception e) {
 				RetryContext context = contextHolder.get();
@@ -533,7 +533,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 	}
 
 	private void checkSkipPolicy(Chunk<I>.ChunkIterator inputIterator, Chunk<O>.ChunkIterator outputIterator,
-			Throwable e, StepContribution contribution, boolean recovery) throws Exception {
+	Throwable e, StepContribution contribution, boolean recovery) throws Exception {
 		logger.debug("Checking skip policy after failed write");
 		if (shouldSkip(itemWriteSkipPolicy, e, contribution.getStepSkipCount())) {
 			contribution.incrementWriteSkipCount();
@@ -561,7 +561,7 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 	}
 
 	private void scan(final StepContribution contribution, final Chunk<I> inputs, final Chunk<O> outputs,
-			ChunkMonitor chunkMonitor, boolean recovery) throws Exception {
+	ChunkMonitor chunkMonitor, boolean recovery) throws Exception {
 
 		@SuppressWarnings("unchecked")
 		final UserData<O> data = (UserData<O>) inputs.getUserData();

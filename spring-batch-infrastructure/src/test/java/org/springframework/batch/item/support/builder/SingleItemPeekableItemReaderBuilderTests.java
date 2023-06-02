@@ -41,7 +41,7 @@ class SingleItemPeekableItemReaderBuilderTests {
 	@Test
 	void testPeek() throws Exception {
 		SingleItemPeekableItemReader<String> reader = new SingleItemPeekableItemReaderBuilder<String>()
-				.delegate(new ListItemReader<>(Arrays.asList("a", "b"))).build();
+		.delegate(new ListItemReader<>(Arrays.asList("a", "b"))).build();
 		assertEquals("a", reader.peek());
 		assertEquals("a", reader.read());
 		assertEquals("b", reader.read());
@@ -56,7 +56,7 @@ class SingleItemPeekableItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new SingleItemPeekableItemReaderBuilder<Foo>().build());
+		() -> new SingleItemPeekableItemReaderBuilder<Foo>().build());
 		assertEquals("A delegate is required", exception.getMessage());
 	}
 

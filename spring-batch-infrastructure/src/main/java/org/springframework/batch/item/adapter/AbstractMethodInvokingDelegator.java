@@ -68,7 +68,7 @@ public abstract class AbstractMethodInvokingDelegator<T> implements Initializing
 	 */
 	protected T invokeDelegateMethodWithArgument(Object object) throws Exception {
 		MethodInvoker invoker = createMethodInvoker(targetObject, targetMethod);
-		invoker.setArguments(new Object[] { object });
+		invoker.setArguments(new Object[]{object});
 		return doInvoke(invoker);
 	}
 
@@ -130,7 +130,7 @@ public abstract class AbstractMethodInvokingDelegator<T> implements Initializing
 		Assert.state(targetObject != null, "targetObject must not be null");
 		Assert.state(StringUtils.hasText(targetMethod), "targetMethod must not be empty");
 		Assert.state(targetClassDeclaresTargetMethod(),
-				"target class must declare a method with matching name and parameter types");
+		"target class must declare a method with matching name and parameter types");
 	}
 
 	/**

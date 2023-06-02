@@ -83,12 +83,12 @@ public class FormatterLineAggregator<T> extends ExtractorLineAggregator<T> {
 
 		if (maximumLength > 0) {
 			Assert.state(value.length() <= maximumLength, String.format(
-					"String overflowed in formatter -" + " longer than %d characters: [%s", maximumLength, value));
+			"String overflowed in formatter -" + " longer than %d characters: [%s", maximumLength, value));
 		}
 
 		if (minimumLength > 0) {
 			Assert.state(value.length() >= minimumLength, String.format(
-					"String underflowed in formatter -" + " shorter than %d characters: [%s", minimumLength, value));
+			"String underflowed in formatter -" + " shorter than %d characters: [%s", minimumLength, value));
 		}
 
 		return value;

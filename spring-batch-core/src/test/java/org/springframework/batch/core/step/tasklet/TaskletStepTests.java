@@ -120,7 +120,7 @@ class TaskletStepTests {
 		RepeatTemplate template = new RepeatTemplate();
 		template.setCompletionPolicy(new SimpleCompletionPolicy(1));
 
-		step = getStep(new String[] { "foo", "bar", "spam" });
+		step = getStep(new String[]{"foo", "bar", "spam"});
 		step.setStepOperations(template);
 
 		job = new JobSupport("FOO");
@@ -144,7 +144,7 @@ class TaskletStepTests {
 	@Test
 	void testCommitCount_Even() throws Exception {
 		JobExecution jobExecutionContext = new JobExecution(jobInstance, jobParameters);
-		step = getStep(new String[] { "foo", "bar", "spam", "eggs" }, 2);
+		step = getStep(new String[]{"foo", "bar", "spam", "eggs"}, 2);
 		step.setTransactionManager(transactionManager);
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecutionContext);
 		step.execute(stepExecution);
@@ -158,7 +158,7 @@ class TaskletStepTests {
 	@Test
 	void testCommitCount_Uneven() throws Exception {
 		JobExecution jobExecutionContext = new JobExecution(jobInstance, jobParameters);
-		step = getStep(new String[] { "foo", "bar", "spam" }, 2);
+		step = getStep(new String[]{"foo", "bar", "spam"}, 2);
 		step.setTransactionManager(transactionManager);
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecutionContext);
 		step.execute(stepExecution);
@@ -226,8 +226,8 @@ class TaskletStepTests {
 	@Test
 	void testRepository() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -456,13 +456,13 @@ class TaskletStepTests {
 
 	@Test
 	void testDirectlyInjectedItemStream() throws Exception {
-		step.setStreams(new ItemStream[] { new ItemStreamSupport() {
+		step.setStreams(new ItemStream[]{new ItemStreamSupport() {
 			@Override
 			public void update(ExecutionContext executionContext) {
 				super.update(executionContext);
 				executionContext.putString("foo", "bar");
 			}
-		} });
+		}});
 		JobExecution jobExecution = new JobExecution(jobInstance, jobParameters);
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecution);
 
@@ -508,7 +508,7 @@ class TaskletStepTests {
 				assertEquals(1, list.size());
 			}
 		};
-		step.setStreams(new ItemStream[] { reader });
+		step.setStreams(new ItemStream[]{reader});
 		step.registerStepExecutionListener(reader);
 		StepExecution stepExecution = new StepExecution(step.getName(), new JobExecution(jobInstance, jobParameters));
 		step.execute(stepExecution);
@@ -520,14 +520,14 @@ class TaskletStepTests {
 
 		final ExitStatus customStatus = new ExitStatus("COMPLETED_CUSTOM");
 
-		step.setStepExecutionListeners(new StepExecutionListener[] { new StepExecutionListener() {
+		step.setStepExecutionListeners(new StepExecutionListener[]{new StepExecutionListener() {
 			@Nullable
 			@Override
 			public ExitStatus afterStep(StepExecution stepExecution) {
 				list.add("afterStepCalled");
 				return customStatus;
 			}
-		} });
+		}});
 
 		RepeatTemplate stepTemplate = new RepeatTemplate();
 		stepTemplate.setCompletionPolicy(new SimpleCompletionPolicy(5));
@@ -582,7 +582,7 @@ class TaskletStepTests {
 			}
 		};
 		step.setTasklet(new TestingChunkOrientedTasklet<>(reader, itemWriter));
-		step.setStreams(new ItemStream[] { reader });
+		step.setStreams(new ItemStream[]{reader});
 		JobExecution jobExecution = new JobExecution(jobInstance, jobParameters);
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecution);
 
@@ -630,7 +630,7 @@ class TaskletStepTests {
 		assertEquals(BatchStatus.STOPPED, stepExecution.getStatus());
 		String msg = stepExecution.getExitStatus().getExitDescription();
 		assertTrue(msg.contains("JobInterruptedException"),
-				"Message does not contain 'JobInterruptedException': " + msg);
+		"Message does not contain 'JobInterruptedException': " + msg);
 	}
 
 	@Test
@@ -751,13 +751,13 @@ class TaskletStepTests {
 	void testStatusForFinalUpdateFailedException() throws Exception {
 
 		step.setJobRepository(new JobRepositorySupport());
-		step.setStreams(new ItemStream[] { new ItemStreamSupport() {
+		step.setStreams(new ItemStream[]{new ItemStreamSupport() {
 			@Override
 			public void close() throws ItemStreamException {
 				super.close();
 				throw new RuntimeException("Bar");
 			}
-		} });
+		}});
 
 		JobExecution jobExecutionContext = new JobExecution(jobInstance, jobParameters);
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecutionContext);
@@ -861,7 +861,7 @@ class TaskletStepTests {
 				throw new RuntimeException("exception thrown in afterStep to signal failure");
 			}
 		};
-		step.setStepExecutionListeners(new StepExecutionListener[] { listener });
+		step.setStepExecutionListeners(new StepExecutionListener[]{listener});
 		StepExecution stepExecution = new StepExecution(step.getName(), new JobExecution(jobInstance, jobParameters));
 
 		step.execute(stepExecution);
@@ -939,7 +939,7 @@ class TaskletStepTests {
 	}
 
 	private class MockRestartableItemReader extends AbstractItemStreamItemReader<String>
-			implements StepExecutionListener {
+	implements StepExecutionListener {
 
 		private boolean getExecutionAttributesCalled = false;
 

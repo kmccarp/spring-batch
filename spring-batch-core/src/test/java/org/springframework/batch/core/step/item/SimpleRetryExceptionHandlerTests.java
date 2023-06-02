@@ -62,7 +62,7 @@ class SimpleRetryExceptionHandlerTests {
 
 		// Then pretend to handle the exception in the parent context...
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context.getParent(), ex));
+		() -> handler.handleException(context.getParent(), ex));
 		assertEquals(ex, exception);
 
 		assertEquals(0, context.attributeNames().length);
@@ -78,7 +78,7 @@ class SimpleRetryExceptionHandlerTests {
 		RuntimeException ex = new RuntimeException("foo");
 
 		SimpleRetryExceptionHandler handler = getHandlerAfterRetry(retryPolicy, ex,
-				Collections.<Class<? extends Throwable>>singleton(Error.class));
+		Collections.<Class<? extends Throwable>>singleton(Error.class));
 
 		// Then pretend to handle the exception in the parent context...
 		handler.handleException(context.getParent(), ex);
@@ -94,11 +94,11 @@ class SimpleRetryExceptionHandlerTests {
 		RuntimeException ex = new RuntimeException("foo");
 
 		SimpleRetryExceptionHandler handler = getHandlerAfterRetry(retryPolicy, ex,
-				Collections.<Class<? extends Throwable>>singleton(RuntimeException.class));
+		Collections.<Class<? extends Throwable>>singleton(RuntimeException.class));
 
 		// Then pretend to handle the exception in the parent context...
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context.getParent(), ex));
+		() -> handler.handleException(context.getParent(), ex));
 		assertEquals(ex, exception);
 
 		assertEquals(0, context.attributeNames().length);
@@ -107,11 +107,11 @@ class SimpleRetryExceptionHandlerTests {
 	}
 
 	private SimpleRetryExceptionHandler getHandlerAfterRetry(RetryPolicy retryPolicy, RuntimeException ex,
-			Collection<Class<? extends Throwable>> fatalExceptions) {
+	Collection<Class<? extends Throwable>> fatalExceptions) {
 
 		// Always rethrow if the retry is exhausted
 		SimpleRetryExceptionHandler handler = new SimpleRetryExceptionHandler(retryPolicy,
-				new SimpleLimitExceptionHandler(0), fatalExceptions);
+		new SimpleLimitExceptionHandler(0), fatalExceptions);
 
 		// Simulate a failed retry...
 		RetryContext retryContext = retryPolicy.open(null);

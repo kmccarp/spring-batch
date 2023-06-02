@@ -54,7 +54,7 @@ public class ChunkResponse implements Serializable {
 	}
 
 	public ChunkResponse(boolean status, int sequence, Long jobId, StepContribution stepContribution,
-			@Nullable String message) {
+	@Nullable String message) {
 		this(status, sequence, jobId, stepContribution, message, false);
 	}
 
@@ -63,7 +63,7 @@ public class ChunkResponse implements Serializable {
 	}
 
 	public ChunkResponse(boolean status, int sequence, Long jobId, StepContribution stepContribution,
-			@Nullable String message, boolean redelivered) {
+	@Nullable String message, boolean redelivered) {
 		this.status = status;
 		this.sequence = sequence;
 		this.jobId = jobId;
@@ -102,7 +102,7 @@ public class ChunkResponse implements Serializable {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + ": jobId=" + jobId + ", sequence=" + sequence + ", stepContribution="
-				+ stepContribution + ", successful=" + status;
+		+ stepContribution + ", successful=" + status;
 	}
 
 }

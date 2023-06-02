@@ -42,9 +42,9 @@ class HeaderFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { String.valueOf(ORDER_ID), DATE };
-		String[] columnNames = new String[] { HeaderFieldSetMapper.ORDER_ID_COLUMN,
-				HeaderFieldSetMapper.ORDER_DATE_COLUMN };
+		String[] tokens = new String[]{String.valueOf(ORDER_ID), DATE};
+		String[] columnNames = new String[]{HeaderFieldSetMapper.ORDER_ID_COLUMN,
+		HeaderFieldSetMapper.ORDER_DATE_COLUMN};
 		return new DefaultFieldSet(tokens, columnNames);
 	}
 

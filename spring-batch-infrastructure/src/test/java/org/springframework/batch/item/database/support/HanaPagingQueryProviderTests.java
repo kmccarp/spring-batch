@@ -82,11 +82,11 @@ class HanaPagingQueryProviderTests extends AbstractSqlPagingQueryProviderTests {
 		String remainingPagesQuery = this.pagingQueryProvider.generateRemainingPagesQuery(5);
 
 		assertEquals(
-				"SELECT owner.id as ownerid, first_name, last_name, dog_name FROM dog_owner owner INNER JOIN dog ON owner.id = dog.id ORDER BY owner.id ASC LIMIT 5",
-				firstPage);
+		"SELECT owner.id as ownerid, first_name, last_name, dog_name FROM dog_owner owner INNER JOIN dog ON owner.id = dog.id ORDER BY owner.id ASC LIMIT 5",
+		firstPage);
 		assertEquals(
-				"SELECT owner.id as ownerid, first_name, last_name, dog_name FROM dog_owner owner INNER JOIN dog ON owner.id = dog.id WHERE ((owner.id > ?)) ORDER BY owner.id ASC LIMIT 5",
-				remainingPagesQuery);
+		"SELECT owner.id as ownerid, first_name, last_name, dog_name FROM dog_owner owner INNER JOIN dog ON owner.id = dog.id WHERE ((owner.id > ?)) ORDER BY owner.id ASC LIMIT 5",
+		remainingPagesQuery);
 	}
 
 	@Override

@@ -156,9 +156,9 @@ public class StoredProcedureItemReader<T> extends AbstractCursorItemReader<T> {
 
 		Assert.state(procedureName != null, "Procedure Name must not be null.");
 		Assert.state(refCursorPosition >= 0, "invalid refCursorPosition specified as " + refCursorPosition
-				+ "; it can't be " + "specified as a negative number.");
+		+ "; it can't be " + "specified as a negative number.");
 		Assert.state(refCursorPosition == 0 || refCursorPosition > 0, "invalid refCursorPosition specified as "
-				+ refCursorPosition + "; there are " + parameters.length + " parameters defined.");
+		+ refCursorPosition + "; there are " + parameters.length + " parameters defined.");
 
 		CallMetaDataContext callContext = new CallMetaDataContext();
 		callContext.setAccessCallParameterMetaData(false);
@@ -188,11 +188,11 @@ public class StoredProcedureItemReader<T> extends AbstractCursorItemReader<T> {
 		try {
 			if (isUseSharedExtendedConnection()) {
 				callableStatement = con.prepareCall(callString, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY,
-						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			}
 			else {
 				callableStatement = con.prepareCall(callString, ResultSet.TYPE_FORWARD_ONLY,
-						ResultSet.CONCUR_READ_ONLY);
+				ResultSet.CONCUR_READ_ONLY);
 			}
 			applyStatementSettings(callableStatement);
 			if (this.preparedStatementSetter != null) {

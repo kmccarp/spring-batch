@@ -234,7 +234,7 @@ public class StoredProcedureItemReaderBuilder<T> {
 	 * @see StoredProcedureItemReader#setPreparedStatementSetter(PreparedStatementSetter)
 	 */
 	public StoredProcedureItemReaderBuilder<T> preparedStatementSetter(
-			PreparedStatementSetter preparedStatementSetter) {
+	PreparedStatementSetter preparedStatementSetter) {
 		this.preparedStatementSetter = preparedStatementSetter;
 
 		return this;

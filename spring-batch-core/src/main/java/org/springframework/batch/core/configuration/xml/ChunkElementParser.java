@@ -65,7 +65,7 @@ public class ChunkElementParser {
 	private static final String ITEM_WRITER_ADAPTER_CLASS = "org.springframework.batch.item.adapter.ItemWriterAdapter";
 
 	private static final StepListenerParser stepListenerParser = new StepListenerParser(
-			StepListenerMetaData.itemListenerMetaData());
+	StepListenerMetaData.itemListenerMetaData());
 
 	/**
 	 * Do the parsing.
@@ -76,25 +76,25 @@ public class ChunkElementParser {
 	 * element is missing.
 	 */
 	protected void parse(Element element, AbstractBeanDefinition bd, ParserContext parserContext,
-			boolean underspecified) {
+	boolean underspecified) {
 
 		MutablePropertyValues propertyValues = bd.getPropertyValues();
 
 		propertyValues.addPropertyValue("hasChunkElement", Boolean.TRUE);
 
 		handleItemHandler(bd, "reader", "itemReader", ITEM_READER_ADAPTER_CLASS, true, element, parserContext,
-				propertyValues, underspecified);
+		propertyValues, underspecified);
 		handleItemHandler(bd, "processor", "itemProcessor", ITEM_PROCESSOR_ADAPTER_CLASS, false, element, parserContext,
-				propertyValues, underspecified);
+		propertyValues, underspecified);
 		handleItemHandler(bd, "writer", "itemWriter", ITEM_WRITER_ADAPTER_CLASS, true, element, parserContext,
-				propertyValues, underspecified);
+		propertyValues, underspecified);
 
 		String commitInterval = element.getAttribute(COMMIT_INTERVAL_ATTR);
 		if (StringUtils.hasText(commitInterval)) {
 			if (commitInterval.startsWith("#")) {
 				// It's a late binding expression, so we need step scope...
 				BeanDefinitionBuilder completionPolicy = BeanDefinitionBuilder
-						.genericBeanDefinition(SimpleCompletionPolicy.class);
+				.genericBeanDefinition(SimpleCompletionPolicy.class);
 				completionPolicy.addConstructorArgValue(commitInterval);
 				completionPolicy.setScope("step");
 				propertyValues.addPropertyValue("chunkCompletionPolicy", completionPolicy.getBeanDefinition());
@@ -111,26 +111,26 @@ public class ChunkElementParser {
 		}
 
 		if (!underspecified
-				&& propertyValues.contains("commitInterval") == propertyValues.contains("chunkCompletionPolicy")) {
+		&& propertyValues.contains("commitInterval") == propertyValues.contains("chunkCompletionPolicy")) {
 			if (propertyValues.contains("commitInterval")) {
 				parserContext.getReaderContext()
-						.error("The <" + element.getNodeName() + "/> element must contain either '"
-								+ COMMIT_INTERVAL_ATTR + "' " + "or '" + CHUNK_COMPLETION_POLICY_ATTR
-								+ "', but not both.", element);
+				.error("The <" + element.getNodeName() + "/> element must contain either '"
+			+ COMMIT_INTERVAL_ATTR + "' " + "or '" + CHUNK_COMPLETION_POLICY_ATTR
+			+ "', but not both.", element);
 			}
 			else {
 				parserContext
-						.getReaderContext().error(
-								"The <" + element.getNodeName() + "/> element must contain either '"
-										+ COMMIT_INTERVAL_ATTR + "' " + "or '" + CHUNK_COMPLETION_POLICY_ATTR + "'.",
-								element);
+				.getReaderContext().error(
+				"The <" + element.getNodeName() + "/> element must contain either '"
+			+ COMMIT_INTERVAL_ATTR + "' " + "or '" + CHUNK_COMPLETION_POLICY_ATTR + "'.",
+				element);
 
 			}
 		}
 
 		String skipLimit = element.getAttribute("skip-limit");
 		ManagedMap<TypedStringValue, Boolean> skippableExceptions = new ExceptionElementParser().parse(element,
-				parserContext, "skippable-exception-classes");
+		parserContext, "skippable-exception-classes");
 		if (StringUtils.hasText(skipLimit)) {
 			if (skippableExceptions == null) {
 				skippableExceptions = new ManagedMap<>();
@@ -140,11 +140,11 @@ public class ChunkElementParser {
 		}
 		if (skippableExceptions != null) {
 			List<Element> exceptionClassElements = DomUtils.getChildElementsByTagName(element,
-					"skippable-exception-classes");
+			"skippable-exception-classes");
 
 			if (!CollectionUtils.isEmpty(exceptionClassElements)) {
 				skippableExceptions.setMergeEnabled(exceptionClassElements.get(0).hasAttribute(MERGE_ATTR)
-						&& Boolean.valueOf(exceptionClassElements.get(0).getAttribute(MERGE_ATTR)));
+				&& Boolean.valueOf(exceptionClassElements.get(0).getAttribute(MERGE_ATTR)));
 			}
 			// Even if there is no retryLimit, we can still accept exception
 			// classes for an abstract parent bean definition
@@ -152,11 +152,11 @@ public class ChunkElementParser {
 		}
 
 		handleItemHandler(bd, "skip-policy", "skipPolicy", null, false, element, parserContext, propertyValues,
-				underspecified);
+		underspecified);
 
 		String retryLimit = element.getAttribute("retry-limit");
 		ManagedMap<TypedStringValue, Boolean> retryableExceptions = new ExceptionElementParser().parse(element,
-				parserContext, "retryable-exception-classes");
+		parserContext, "retryable-exception-classes");
 		if (StringUtils.hasText(retryLimit)) {
 			if (retryableExceptions == null) {
 				retryableExceptions = new ManagedMap<>();
@@ -166,11 +166,11 @@ public class ChunkElementParser {
 		}
 		if (retryableExceptions != null) {
 			List<Element> exceptionClassElements = DomUtils.getChildElementsByTagName(element,
-					"retryable-exception-classes");
+			"retryable-exception-classes");
 
 			if (!CollectionUtils.isEmpty(exceptionClassElements)) {
 				retryableExceptions.setMergeEnabled(exceptionClassElements.get(0).hasAttribute(MERGE_ATTR)
-						&& Boolean.valueOf(exceptionClassElements.get(0).getAttribute(MERGE_ATTR)));
+				&& Boolean.valueOf(exceptionClassElements.get(0).getAttribute(MERGE_ATTR)));
 			}
 			// Even if there is no retryLimit, we can still accept exception
 			// classes for an abstract parent bean definition
@@ -178,7 +178,7 @@ public class ChunkElementParser {
 		}
 
 		handleItemHandler(bd, "retry-policy", "retryPolicy", null, false, element, parserContext, propertyValues,
-				underspecified);
+		underspecified);
 
 		String cacheCapacity = element.getAttribute("cache-capacity");
 		if (StringUtils.hasText(cacheCapacity)) {
@@ -207,30 +207,30 @@ public class ChunkElementParser {
 	 * Handle the ItemReader, ItemProcessor, and ItemWriter attributes and elements.
 	 */
 	private void handleItemHandler(AbstractBeanDefinition enclosing, String handlerName, String propertyName,
-			String adapterClassName, boolean required, Element element, ParserContext parserContext,
-			MutablePropertyValues propertyValues, boolean underspecified) {
+	String adapterClassName, boolean required, Element element, ParserContext parserContext,
+	MutablePropertyValues propertyValues, boolean underspecified) {
 		String refName = element.getAttribute(handlerName);
 		List<Element> children = DomUtils.getChildElementsByTagName(element, handlerName);
 		if (children.size() == 1) {
 			if (StringUtils.hasText(refName)) {
 				parserContext.getReaderContext()
-						.error("The <" + element.getNodeName() + "/> element may not have both a '" + handlerName
-								+ "' attribute and a <" + handlerName + "/> element.", element);
+				.error("The <" + element.getNodeName() + "/> element may not have both a '" + handlerName
+			+ "' attribute and a <" + handlerName + "/> element.", element);
 			}
 			handleItemHandlerElement(enclosing, propertyName, adapterClassName, propertyValues, children.get(0),
-					parserContext);
+			parserContext);
 		}
 		else if (children.size() > 1) {
 			parserContext.getReaderContext().error("The <" + handlerName
-					+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
-					element);
+			+ "/> element may not appear more than once in a single <" + element.getNodeName() + "/>.",
+			element);
 		}
 		else if (StringUtils.hasText(refName)) {
 			propertyValues.addPropertyValue(propertyName, new RuntimeBeanReference(refName));
 		}
 		else if (required && !underspecified) {
 			parserContext.getReaderContext().error("The <" + element.getNodeName() + "/> element has neither a '"
-					+ handlerName + "' attribute nor a <" + handlerName + "/> element.", element);
+			+ handlerName + "' attribute nor a <" + handlerName + "/> element.", element);
 		}
 	}
 
@@ -239,26 +239,26 @@ public class ChunkElementParser {
 	 * within the item handler.
 	 */
 	private void handleItemHandlerElement(AbstractBeanDefinition enclosing, String propertyName,
-			String adapterClassName, MutablePropertyValues propertyValues, Element element,
-			ParserContext parserContext) {
+	String adapterClassName, MutablePropertyValues propertyValues, Element element,
+	ParserContext parserContext) {
 		List<Element> beanElements = DomUtils.getChildElementsByTagName(element, BEAN_ELE);
 		List<Element> refElements = DomUtils.getChildElementsByTagName(element, REF_ELE);
 		if (beanElements.size() + refElements.size() != 1) {
 			parserContext.getReaderContext()
-					.error("The <" + element.getNodeName() + "/> must have exactly one of either a <" + BEAN_ELE
-							+ "/> element or a <" + REF_ELE + "/> element.", element);
+			.error("The <" + element.getNodeName() + "/> must have exactly one of either a <" + BEAN_ELE
+		+ "/> element or a <" + REF_ELE + "/> element.", element);
 		}
 		else if (beanElements.size() == 1) {
 			Element beanElement = beanElements.get(0);
 			BeanDefinitionHolder beanDefinitionHolder = parserContext.getDelegate()
-					.parseBeanDefinitionElement(beanElement, enclosing);
+			.parseBeanDefinitionElement(beanElement, enclosing);
 			parserContext.getDelegate().decorateBeanDefinitionIfRequired(beanElement, beanDefinitionHolder);
 
 			propertyValues.addPropertyValue(propertyName, beanDefinitionHolder);
 		}
 		else if (refElements.size() == 1) {
 			propertyValues.addPropertyValue(propertyName,
-					parserContext.getDelegate().parsePropertySubElement(refElements.get(0), null));
+			parserContext.getDelegate().parsePropertySubElement(refElements.get(0), null));
 		}
 
 		handleAdapterMethodAttribute(propertyName, adapterClassName, propertyValues, element);
@@ -269,7 +269,7 @@ public class ChunkElementParser {
 	 * {@link AbstractMethodInvokingDelegator}.
 	 */
 	private void handleAdapterMethodAttribute(String propertyName, String adapterClassName,
-			MutablePropertyValues stepPvs, Element element) {
+	MutablePropertyValues stepPvs, Element element) {
 		String adapterMethodName = element.getAttribute("adapter-method");
 		if (StringUtils.hasText(adapterMethodName)) {
 			//
@@ -290,15 +290,15 @@ public class ChunkElementParser {
 	}
 
 	private void handleRetryListenersElement(Element element, MutablePropertyValues propertyValues,
-			ParserContext parserContext, BeanDefinition enclosing) {
+	ParserContext parserContext, BeanDefinition enclosing) {
 		Element listenersElement = DomUtils.getChildElementByTagName(element, "retry-listeners");
 		if (listenersElement != null) {
 			CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(listenersElement.getTagName(),
-					parserContext.extractSource(element));
+			parserContext.extractSource(element));
 			parserContext.pushContainingComponent(compositeDef);
 			ManagedList<BeanMetadataElement> retryListenerBeans = new ManagedList<>();
 			retryListenerBeans.setMergeEnabled(listenersElement.hasAttribute(MERGE_ATTR)
-					&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
+			&& Boolean.valueOf(listenersElement.getAttribute(MERGE_ATTR)));
 			handleRetryListenerElements(parserContext, listenersElement, retryListenerBeans, enclosing);
 			propertyValues.addPropertyValue("retryListeners", retryListenerBeans);
 			parserContext.popAndRegisterContainingComponent();
@@ -306,7 +306,7 @@ public class ChunkElementParser {
 	}
 
 	private void handleRetryListenerElements(ParserContext parserContext, Element element,
-			ManagedList<BeanMetadataElement> beans, BeanDefinition enclosing) {
+	ManagedList<BeanMetadataElement> beans, BeanDefinition enclosing) {
 		List<Element> listenerElements = DomUtils.getChildElementsByTagName(element, "listener");
 		if (listenerElements != null) {
 			for (Element listenerElement : listenerElements) {
@@ -316,12 +316,12 @@ public class ChunkElementParser {
 	}
 
 	private void handleStreamsElement(Element element, MutablePropertyValues propertyValues,
-			ParserContext parserContext) {
+	ParserContext parserContext) {
 		Element streamsElement = DomUtils.getChildElementByTagName(element, "streams");
 		if (streamsElement != null) {
 			ManagedList<RuntimeBeanReference> streamBeans = new ManagedList<>();
 			streamBeans.setMergeEnabled(streamsElement.hasAttribute(MERGE_ATTR)
-					&& Boolean.valueOf(streamsElement.getAttribute(MERGE_ATTR)));
+			&& Boolean.valueOf(streamsElement.getAttribute(MERGE_ATTR)));
 			List<Element> streamElements = DomUtils.getChildElementsByTagName(streamsElement, "stream");
 			if (streamElements != null) {
 				for (Element streamElement : streamElements) {
@@ -331,7 +331,7 @@ public class ChunkElementParser {
 					}
 					else {
 						parserContext.getReaderContext().error(
-								REF_ATTR + " not specified for <" + streamElement.getTagName() + "> element", element);
+						REF_ATTR + " not specified for <" + streamElement.getTagName() + "> element", element);
 					}
 				}
 			}

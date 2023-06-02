@@ -40,8 +40,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public class MongoDBSampleApp {
 
 	public static void main(String[] args) throws Exception {
-		Class<?>[] configurationClasses = { InsertionJobConfiguration.class, DeletionJobConfiguration.class,
-				MongoDBConfiguration.class };
+		Class<?>[] configurationClasses = {InsertionJobConfiguration.class, DeletionJobConfiguration.class,
+		MongoDBConfiguration.class};
 		ApplicationContext context = new AnnotationConfigApplicationContext(configurationClasses);
 		MongoTemplate mongoTemplate = context.getBean(MongoTemplate.class);
 
@@ -51,7 +51,7 @@ public class MongoDBSampleApp {
 		personsIn.deleteMany(new Document());
 		personsOut.deleteMany(new Document());
 		personsIn.insertMany(Arrays.asList(new Document("name", "foo1"), new Document("name", "foo2"),
-				new Document("name", "foo3"), new Document("name", "foo4")));
+		new Document("name", "foo3"), new Document("name", "foo4")));
 
 		// run the insertion job
 		JobLauncher jobLauncher = context.getBean(JobLauncher.class);

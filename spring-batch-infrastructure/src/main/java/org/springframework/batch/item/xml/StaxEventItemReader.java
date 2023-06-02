@@ -61,7 +61,7 @@ import org.springframework.util.xml.StaxUtils;
  * @author Mahmoud Ben Hassine
  */
 public class StaxEventItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements ResourceAwareItemReaderItemStream<T>, InitializingBean {
+implements ResourceAwareItemReaderItemStream<T>, InitializingBean {
 
 	private static final Log logger = LogFactory.getLog(StaxEventItemReader.class);
 
@@ -117,7 +117,7 @@ public class StaxEventItemReader<T> extends AbstractItemCountingItemStreamItemRe
 	 * @param fragmentRootElementName name of the root element of the fragment
 	 */
 	public void setFragmentRootElementName(String fragmentRootElementName) {
-		setFragmentRootElementNames(new String[] { fragmentRootElementName });
+		setFragmentRootElementNames(new String[]{fragmentRootElementName});
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class StaxEventItemReader<T> extends AbstractItemCountingItemStreamItemRe
 		Assert.state(!fragmentRootElementNames.isEmpty(), "The FragmentRootElementNames must not be empty");
 		for (QName fragmentRootElementName : fragmentRootElementNames) {
 			Assert.state(StringUtils.hasText(fragmentRootElementName.getLocalPart()),
-					"The FragmentRootElementNames must not contain empty elements");
+			"The FragmentRootElementNames must not contain empty elements");
 		}
 	}
 
@@ -240,7 +240,7 @@ public class StaxEventItemReader<T> extends AbstractItemCountingItemStreamItemRe
 
 		inputStream = resource.getInputStream();
 		eventReader = this.encoding != null ? xmlInputFactory.createXMLEventReader(inputStream, this.encoding)
-				: xmlInputFactory.createXMLEventReader(inputStream);
+		: xmlInputFactory.createXMLEventReader(inputStream);
 		fragmentReader = new DefaultFragmentEventReader(eventReader);
 		noInput = false;
 
@@ -345,7 +345,7 @@ public class StaxEventItemReader<T> extends AbstractItemCountingItemStreamItemRe
 		for (QName fragmentRootElementName : fragmentRootElementNames) {
 			if (fragmentRootElementName.getLocalPart().equals(name.getLocalPart())) {
 				if (!StringUtils.hasText(fragmentRootElementName.getNamespaceURI())
-						|| fragmentRootElementName.getNamespaceURI().equals(name.getNamespaceURI())) {
+				|| fragmentRootElementName.getNamespaceURI().equals(name.getNamespaceURI())) {
 					return true;
 				}
 			}

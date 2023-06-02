@@ -11,13 +11,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @EnableScheduling
 @EnableBatchProcessing
-@Import({ Job1Configuration.class, Job2Configuration.class, JobScheduler.class, PrometheusConfiguration.class })
+@Import({Job1Configuration.class, Job2Configuration.class, JobScheduler.class, PrometheusConfiguration.class})
 @PropertySource("metrics-sample.properties")
 public class BatchMetricsApplication {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				BatchMetricsApplication.class);
+		BatchMetricsApplication.class);
 		applicationContext.start();
 	}
 

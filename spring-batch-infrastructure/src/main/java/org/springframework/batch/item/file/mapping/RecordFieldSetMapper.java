@@ -68,7 +68,7 @@ public class RecordFieldSetMapper<T> implements FieldSetMapper<T> {
 	@Override
 	public T mapFieldSet(FieldSet fieldSet) {
 		Assert.isTrue(fieldSet.getFieldCount() == this.constructorParameterNames.length,
-				"Fields count must be equal to record components count");
+		"Fields count must be equal to record components count");
 		Assert.isTrue(fieldSet.hasNames(), "Field names must specified");
 		Object[] args = new Object[0];
 		if (this.constructorParameterNames != null && this.constructorParameterTypes != null) {

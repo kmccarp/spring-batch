@@ -53,14 +53,14 @@ class AvroItemWriterTests extends AvroItemWriterTestSupport {
 	void itemWriterForGenericRecords() throws Exception {
 
 		AvroItemWriter<GenericRecord> avroItemWriter = new AvroItemWriter<>(this.output,
-				this.plainOldUserSchemaResource, GenericRecord.class);
+		this.plainOldUserSchemaResource, GenericRecord.class);
 
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.genericPlainOldUsers());
 		avroItemWriter.close();
 
 		verifyRecordsWithEmbeddedHeader(this.outputStream.toByteArray(), this.genericPlainOldUsers(),
-				GenericRecord.class);
+		GenericRecord.class);
 
 	}
 
@@ -68,7 +68,7 @@ class AvroItemWriterTests extends AvroItemWriterTestSupport {
 	void itemWriterForPojos() throws Exception {
 
 		AvroItemWriter<PlainOldUser> avroItemWriter = new AvroItemWriter<>(this.output, this.plainOldUserSchemaResource,
-				PlainOldUser.class);
+		PlainOldUser.class);
 		avroItemWriter.open(new ExecutionContext());
 		avroItemWriter.write(this.plainOldUsers());
 		avroItemWriter.close();
@@ -92,13 +92,13 @@ class AvroItemWriterTests extends AvroItemWriterTestSupport {
 	@Test
 	void shouldFailWitNoOutput() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemWriter<>(null, this.schemaResource, User.class).open(new ExecutionContext()));
+		() -> new AvroItemWriter<>(null, this.schemaResource, User.class).open(new ExecutionContext()));
 	}
 
 	@Test
 	void shouldFailWitNoType() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new AvroItemWriter<>(this.output, this.schemaResource, null).open(new ExecutionContext()));
+		() -> new AvroItemWriter<>(this.output, this.schemaResource, null).open(new ExecutionContext()));
 	}
 
 }

@@ -59,14 +59,14 @@ class MultiResourceItemReaderBuilderTests extends AbstractItemStreamItemReaderTe
 			return 0; // preserve original ordering
 		};
 		return new MultiResourceItemReaderBuilder<Foo>().delegate(fileReader)
-				.resources(new Resource[] { r1, r2, r3, r4 }).saveState(true).comparator(comparator).name("FOO")
-				.build();
+		.resources(new Resource[]{r1, r2, r3, r4}).saveState(true).comparator(comparator).name("FOO")
+		.build();
 	}
 
 	@Test
 	void testNullDelegate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new MultiResourceItemReaderBuilder<String>().resources(new Resource[] {}).build());
+		() -> new MultiResourceItemReaderBuilder<String>().resources(new Resource[]{}).build());
 		assertEquals("delegate is required.", exception.getMessage());
 	}
 
@@ -74,7 +74,7 @@ class MultiResourceItemReaderBuilderTests extends AbstractItemStreamItemReaderTe
 	@SuppressWarnings("unchecked")
 	void testNullResources() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new MultiResourceItemReaderBuilder<String>().delegate(mock(FlatFileItemReader.class)).build());
+		() -> new MultiResourceItemReaderBuilder<String>().delegate(mock(FlatFileItemReader.class)).build());
 		assertEquals("resources array is required.", exception.getMessage());
 	}
 
@@ -82,7 +82,7 @@ class MultiResourceItemReaderBuilderTests extends AbstractItemStreamItemReaderTe
 	protected void pointToEmptyInput(ItemReader<Foo> tested) throws Exception {
 		MultiResourceItemReader<Foo> multiReader = (MultiResourceItemReader<Foo>) tested;
 		multiReader.close();
-		multiReader.setResources(new Resource[] { new ByteArrayResource("".getBytes()) });
+		multiReader.setResources(new Resource[]{new ByteArrayResource("".getBytes())});
 		multiReader.open(new ExecutionContext());
 	}
 

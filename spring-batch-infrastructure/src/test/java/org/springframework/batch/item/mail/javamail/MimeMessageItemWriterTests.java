@@ -66,7 +66,7 @@ class MimeMessageItemWriterTests {
 
 		MimeMessage foo = new MimeMessage(session);
 		MimeMessage bar = new MimeMessage(session);
-		MimeMessage[] items = new MimeMessage[] { foo, bar };
+		MimeMessage[] items = new MimeMessage[]{foo, bar};
 
 		mailSender.send(aryEq(items));
 
@@ -79,7 +79,7 @@ class MimeMessageItemWriterTests {
 
 		MimeMessage foo = new MimeMessage(session);
 		MimeMessage bar = new MimeMessage(session);
-		MimeMessage[] items = new MimeMessage[] { foo, bar };
+		MimeMessage[] items = new MimeMessage[]{foo, bar};
 
 		// Spring 4.1 changed the send method to be vargs instead of an array
 		if (ReflectionUtils.findMethod(MailSender.class, "send", MimeMessage[].class) != null) {
@@ -90,7 +90,7 @@ class MimeMessageItemWriterTests {
 		}
 
 		when(mailSender).thenThrow(new MailSendException(
-				Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
+		Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
 
 		assertThrows(MailSendException.class, () -> writer.write(Chunk.of(items)));
 	}
@@ -108,7 +108,7 @@ class MimeMessageItemWriterTests {
 
 		MimeMessage foo = new MimeMessage(session);
 		MimeMessage bar = new MimeMessage(session);
-		MimeMessage[] items = new MimeMessage[] { foo, bar };
+		MimeMessage[] items = new MimeMessage[]{foo, bar};
 
 		// Spring 4.1 changed the send method to be vargs instead of an array
 		if (ReflectionUtils.findMethod(MailSender.class, "send", MimeMessage[].class) != null) {
@@ -119,7 +119,7 @@ class MimeMessageItemWriterTests {
 		}
 
 		when(mailSender).thenThrow(new MailSendException(
-				Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
+		Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
 
 		writer.write(Chunk.of(items));
 

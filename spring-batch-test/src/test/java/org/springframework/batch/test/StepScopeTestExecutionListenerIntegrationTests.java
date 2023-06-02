@@ -34,7 +34,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
  * @since 2.1
  */
 @SpringJUnitConfig
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, StepScopeTestExecutionListener.class })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, StepScopeTestExecutionListener.class})
 class StepScopeTestExecutionListenerIntegrationTests {
 
 	@Autowired

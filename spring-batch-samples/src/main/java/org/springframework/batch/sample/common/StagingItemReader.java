@@ -47,7 +47,7 @@ import org.springframework.util.Assert;
  * To achieve restartability use together with {@link StagingItemProcessor}.
  */
 public class StagingItemReader<T>
-		implements ItemReader<ProcessIndicatorItemWrapper<T>>, StepExecutionListener, InitializingBean, DisposableBean {
+implements ItemReader<ProcessIndicatorItemWrapper<T>>, StepExecutionListener, InitializingBean, DisposableBean {
 
 	private static Log logger = LogFactory.getLog(StagingItemReader.class);
 
@@ -82,16 +82,16 @@ public class StagingItemReader<T>
 
 			return jdbcTemplate.query(
 
-					"SELECT ID FROM BATCH_STAGING WHERE JOB_ID=? AND PROCESSED=? ORDER BY ID",
+			"SELECT ID FROM BATCH_STAGING WHERE JOB_ID=? AND PROCESSED=? ORDER BY ID",
 
-					new RowMapper<Long>() {
-						@Override
-						public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
-							return rs.getLong(1);
-						}
-					},
+			new RowMapper<Long>() {
+				@Override
+				public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getLong(1);
+				}
+			},
 
-					stepExecution.getJobExecution().getJobId(), StagingItemWriter.NEW);
+			stepExecution.getJobExecution().getJobId(), StagingItemWriter.NEW);
 
 		}
 
@@ -118,7 +118,7 @@ public class StagingItemReader<T>
 		}
 		@SuppressWarnings("unchecked")
 		T result = (T) jdbcTemplate.queryForObject("SELECT VALUE FROM BATCH_STAGING WHERE ID=?",
-				(rs, rowNum) -> deserialize(rs.getBinaryStream(1)), id);
+		(rs, rowNum) -> deserialize(rs.getBinaryStream(1)), id);
 
 		return new ProcessIndicatorItemWrapper<>(id, result);
 	}

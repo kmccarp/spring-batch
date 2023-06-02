@@ -131,7 +131,7 @@ public class StepScopeTestExecutionListener implements TestExecutionListener {
 			}
 			catch (Exception e) {
 				throw new IllegalArgumentException("Could not create step execution from method: " + method.getName(),
-						e);
+				e);
 			}
 		}
 

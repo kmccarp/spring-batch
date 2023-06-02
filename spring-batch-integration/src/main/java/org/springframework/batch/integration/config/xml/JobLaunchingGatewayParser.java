@@ -48,7 +48,7 @@ public class JobLaunchingGatewayParser extends AbstractConsumerEndpointParser {
 	protected BeanDefinitionBuilder parseHandler(Element element, ParserContext parserContext) {
 
 		final BeanDefinitionBuilder jobLaunchingGatewayBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition(JobLaunchingGateway.class);
+		.genericBeanDefinition(JobLaunchingGateway.class);
 
 		final String jobLauncher = element.getAttribute("job-launcher");
 
@@ -63,7 +63,7 @@ public class JobLaunchingGatewayParser extends AbstractConsumerEndpointParser {
 		}
 
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(jobLaunchingGatewayBuilder, element, "reply-timeout",
-				"sendTimeout");
+		"sendTimeout");
 
 		final String replyChannel = element.getAttribute("reply-channel");
 

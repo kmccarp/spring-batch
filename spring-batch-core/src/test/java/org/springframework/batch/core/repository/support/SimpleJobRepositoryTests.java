@@ -273,7 +273,7 @@ class SimpleJobRepositoryTests {
 		when(jobExecutionDao.findJobExecutions(jobInstance)).thenReturn(Arrays.asList(jobExecution));
 
 		assertThrows(JobExecutionAlreadyRunningException.class,
-				() -> jobRepository.createJobExecution("foo", new JobParameters()));
+		() -> jobRepository.createJobExecution("foo", new JobParameters()));
 	}
 
 	@Test
@@ -296,7 +296,7 @@ class SimpleJobRepositoryTests {
 		when(jobExecutionDao.findJobExecutions(jobInstance)).thenReturn(Arrays.asList(jobExecution));
 
 		assertThrows(JobInstanceAlreadyCompleteException.class,
-				() -> jobRepository.createJobExecution("foo", new JobParameters()));
+		() -> jobRepository.createJobExecution("foo", new JobParameters()));
 	}
 
 	@Test
@@ -373,7 +373,7 @@ class SimpleJobRepositoryTests {
 		JobExecution jobExecution2 = mock(JobExecution.class);
 		JobInstance jobInstance = mock(JobInstance.class);
 		when(this.jobExecutionDao.findJobExecutions(jobInstance))
-				.thenReturn(Arrays.asList(jobExecution1, jobExecution2));
+		.thenReturn(Arrays.asList(jobExecution1, jobExecution2));
 
 		// when
 		this.jobRepository.deleteJobInstance(jobInstance);

@@ -124,7 +124,7 @@ class JobExplorerFactoryBeanTests {
 		for (Advisor advisor : advisors) {
 			if (advisor.getAdvice() instanceof TransactionInterceptor transactionInterceptor) {
 				Assertions.assertEquals(transactionAttributeSource,
-						transactionInterceptor.getTransactionAttributeSource());
+				transactionInterceptor.getTransactionAttributeSource());
 			}
 		}
 	}

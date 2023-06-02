@@ -28,7 +28,7 @@ public class BillingInfoFieldExtractor implements FieldExtractor<Order> {
 	@Override
 	public Object[] extract(Order order) {
 		BillingInfo billingInfo = order.getBilling();
-		return new Object[] { "BILLING:", billingInfo.getPaymentId(), billingInfo.getPaymentDesc() };
+		return new Object[]{"BILLING:", billingInfo.getPaymentId(), billingInfo.getPaymentDesc()};
 	}
 
 }

@@ -77,9 +77,9 @@ class JdbcPagingItemReaderBuilderTests {
 		provider.setSortKeys(sortKeys);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader").currentItemCount(1)
-				.dataSource(this.dataSource).queryProvider(provider).fetchSize(2).maxItemCount(2)
-				.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
-				.build();
+		.dataSource(this.dataSource).queryProvider(provider).fetchSize(2).maxItemCount(2)
+		.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
+		.build();
 
 		reader.afterPropertiesSet();
 
@@ -105,10 +105,10 @@ class JdbcPagingItemReaderBuilderTests {
 		sortKeys.put("ID", Order.DESCENDING);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader").currentItemCount(1)
-				.dataSource(this.dataSource).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
-				.fromClause("FOO").sortKeys(sortKeys)
-				.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
-				.build();
+		.dataSource(this.dataSource).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
+		.fromClause("FOO").sortKeys(sortKeys)
+		.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
+		.build();
 
 		reader.afterPropertiesSet();
 
@@ -128,10 +128,10 @@ class JdbcPagingItemReaderBuilderTests {
 		sortKeys.put("ID", Order.DESCENDING);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader")
-				.dataSource(this.dataSource).pageSize(1).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
-				.fromClause("FOO").sortKeys(sortKeys)
-				.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
-				.build();
+		.dataSource(this.dataSource).pageSize(1).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
+		.fromClause("FOO").sortKeys(sortKeys)
+		.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
+		.build();
 
 		reader.afterPropertiesSet();
 
@@ -157,10 +157,10 @@ class JdbcPagingItemReaderBuilderTests {
 		sortKeys.put("ID", Order.DESCENDING);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().dataSource(this.dataSource)
-				.pageSize(1).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD").fromClause("FOO")
-				.sortKeys(sortKeys).saveState(false)
-				.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
-				.build();
+		.pageSize(1).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD").fromClause("FOO")
+		.sortKeys(sortKeys).saveState(false)
+		.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
+		.build();
 
 		reader.afterPropertiesSet();
 
@@ -195,11 +195,11 @@ class JdbcPagingItemReaderBuilderTests {
 		parameterValues.put("max", 10);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader")
-				.dataSource(this.dataSource).pageSize(1).maxItemCount(1).selectClause("SELECT ID, FIRST, SECOND, THIRD")
-				.fromClause("FOO").whereClause("FIRST > :min AND FIRST < :max").sortKeys(sortKeys)
-				.parameterValues(parameterValues)
-				.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
-				.build();
+		.dataSource(this.dataSource).pageSize(1).maxItemCount(1).selectClause("SELECT ID, FIRST, SECOND, THIRD")
+		.fromClause("FOO").whereClause("FIRST > :min AND FIRST < :max").sortKeys(sortKeys)
+		.parameterValues(parameterValues)
+		.rowMapper((rs, rowNum) -> new Foo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)))
+		.build();
 
 		reader.afterPropertiesSet();
 
@@ -219,8 +219,8 @@ class JdbcPagingItemReaderBuilderTests {
 		sortKeys.put("ID", Order.DESCENDING);
 
 		JdbcPagingItemReader<Foo> reader = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader").currentItemCount(1)
-				.dataSource(this.dataSource).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
-				.fromClause("FOO").sortKeys(sortKeys).beanRowMapper(Foo.class).build();
+		.dataSource(this.dataSource).maxItemCount(2).selectClause("SELECT ID, FIRST, SECOND, THIRD")
+		.fromClause("FOO").sortKeys(sortKeys).beanRowMapper(Foo.class).build();
 
 		reader.afterPropertiesSet();
 
@@ -257,12 +257,12 @@ class JdbcPagingItemReaderBuilderTests {
 		assertEquals("selectClause is required when not providing a PagingQueryProvider", exception.getMessage());
 
 		builder = new JdbcPagingItemReaderBuilder<Foo>().name("fooReader").pageSize(2).dataSource(this.dataSource)
-				.selectClause("SELECT *");
+		.selectClause("SELECT *");
 		exception = assertThrows(IllegalArgumentException.class, builder::build);
 		assertEquals("fromClause is required when not providing a PagingQueryProvider", exception.getMessage());
 
 		builder = new JdbcPagingItemReaderBuilder<Foo>().saveState(false).pageSize(2).dataSource(this.dataSource)
-				.selectClause("SELECT *").fromClause("FOO");
+		.selectClause("SELECT *").fromClause("FOO");
 		exception = assertThrows(IllegalArgumentException.class, builder::build);
 		assertEquals("sortKeys are required when not providing a PagingQueryProvider", exception.getMessage());
 	}
@@ -325,14 +325,14 @@ class JdbcPagingItemReaderBuilderTests {
 	public static class TestDataSourceConfiguration {
 
 		private static final String CREATE_SQL = "CREATE TABLE FOO  (\n"
-				+ "\tID BIGINT IDENTITY NOT NULL PRIMARY KEY ,\n" + "\tFIRST BIGINT ,\n"
-				+ "\tSECOND VARCHAR(5) NOT NULL,\n" + "\tTHIRD VARCHAR(5) NOT NULL) ;";
+		+ "\tID BIGINT IDENTITY NOT NULL PRIMARY KEY ,\n" + "\tFIRST BIGINT ,\n"
+		+ "\tSECOND VARCHAR(5) NOT NULL,\n" + "\tTHIRD VARCHAR(5) NOT NULL) ;";
 
 		private static final String INSERT_SQL = "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (1, '2', '3');"
-				+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (4, '5', '6');"
-				+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (7, '8', '9');"
-				+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (10, '11', '12');"
-				+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (13, '14', '15');";
+		+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (4, '5', '6');"
+		+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (7, '8', '9');"
+		+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (10, '11', '12');"
+		+ "INSERT INTO FOO (FIRST, SECOND, THIRD) VALUES (13, '14', '15');";
 
 		@Bean
 		public DataSource dataSource() {

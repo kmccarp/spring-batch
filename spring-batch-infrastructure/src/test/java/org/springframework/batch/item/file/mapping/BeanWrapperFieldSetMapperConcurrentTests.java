@@ -38,7 +38,7 @@ class BeanWrapperFieldSetMapperConcurrentTests {
 		mapper.setTargetType(GreenBean.class);
 		// mapper.setDistanceLimit(0);
 		final DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		String[] names = { "blue", "green" };
+		String[] names = {"blue", "green"};
 		lineTokenizer.setNames(names);
 
 		ExecutorService executorService = Executors.newFixedThreadPool(5);

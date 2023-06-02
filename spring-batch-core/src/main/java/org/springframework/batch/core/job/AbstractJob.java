@@ -293,14 +293,14 @@ public abstract class AbstractJob implements Job, StepLocator, BeanNameAware, In
 		JobSynchronizationManager.register(execution);
 		String activeJobMeterName = "job.active";
 		LongTaskTimer longTaskTimer = BatchMetrics.createLongTaskTimer(this.meterRegistry, activeJobMeterName,
-				"Active jobs", Tag.of(BatchMetrics.METRICS_PREFIX + activeJobMeterName + ".name",
-						execution.getJobInstance().getJobName()));
+		"Active jobs", Tag.of(BatchMetrics.METRICS_PREFIX + activeJobMeterName + ".name",
+	execution.getJobInstance().getJobName()));
 		LongTaskTimer.Sample longTaskTimerSample = longTaskTimer.start();
 		Observation observation = BatchMetrics
-				.createObservation(BatchJobObservation.BATCH_JOB_OBSERVATION.getName(), new BatchJobContext(execution),
-						this.observationRegistry)
-				.contextualName(execution.getJobInstance().getJobName())
-				.observationConvention(this.observationConvention).start();
+		.createObservation(BatchJobObservation.BATCH_JOB_OBSERVATION.getName(), new BatchJobContext(execution),
+	this.observationRegistry)
+		.contextualName(execution.getJobInstance().getJobName())
+		.observationConvention(this.observationConvention).start();
 		try (Observation.Scope scope = observation.openScope()) {
 
 			jobParametersValidator.validate(execution.getJobParameters());
@@ -355,10 +355,10 @@ public abstract class AbstractJob implements Job, StepLocator, BeanNameAware, In
 		finally {
 			try {
 				if (execution.getStatus().isLessThanOrEqualTo(BatchStatus.STOPPED)
-						&& execution.getStepExecutions().isEmpty()) {
+				&& execution.getStepExecutions().isEmpty()) {
 					ExitStatus exitStatus = execution.getExitStatus();
 					ExitStatus newExitStatus = ExitStatus.NOOP
-							.addExitDescription("All steps already completed or no steps configured for this job.");
+					.addExitDescription("All steps already completed or no steps configured for this job.");
 					execution.setExitStatus(exitStatus.and(newExitStatus));
 				}
 				stopObservation(execution, observation);
@@ -392,7 +392,7 @@ public abstract class AbstractJob implements Job, StepLocator, BeanNameAware, In
 
 	private IllegalStateException mergedThrowables(List<Throwable> throwables) {
 		return new IllegalStateException(
-				throwables.stream().map(Throwable::toString).collect(Collectors.joining("\n")));
+		throwables.stream().map(Throwable::toString).collect(Collectors.joining("\n")));
 	}
 
 	/**
@@ -413,7 +413,7 @@ public abstract class AbstractJob implements Job, StepLocator, BeanNameAware, In
 	 * failure
 	 */
 	protected final StepExecution handleStep(Step step, JobExecution execution)
-			throws JobInterruptedException, JobRestartException, StartLimitExceededException {
+	throws JobInterruptedException, JobRestartException, StartLimitExceededException {
 		return stepHandler.handleStep(step, execution);
 
 	}

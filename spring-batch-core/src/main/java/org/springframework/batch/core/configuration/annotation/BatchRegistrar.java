@@ -55,7 +55,7 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 		watch.start();
 		validateState(importingClassMetadata);
 		EnableBatchProcessing batchAnnotation = importingClassMetadata.getAnnotations().get(EnableBatchProcessing.class)
-				.synthesize();
+		.synthesize();
 		String importingClassName = importingClassMetadata.getClassName();
 		registerJobRepository(registry, batchAnnotation, importingClassName);
 		registerJobExplorer(registry, batchAnnotation, importingClassName);
@@ -65,7 +65,7 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 		registerAutomaticJobRegistrar(registry, batchAnnotation);
 		watch.stop();
 		LOGGER.info(LogMessage.format("Finished Spring Batch infrastructure beans configuration in %s ms.",
-				watch.getLastTaskTimeMillis()));
+		watch.getLastTaskTimeMillis()));
 	}
 
 	private void validateState(AnnotationMetadata importingClassMetadata) {
@@ -77,14 +77,14 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 	}
 
 	private void registerJobRepository(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation,
-			String importingClassName) {
+	String importingClassName) {
 		if (registry.containsBeanDefinition("jobRepository")) {
 			LOGGER.info("Bean jobRepository already defined in the application context, skipping"
-					+ " the registration of a jobRepository");
+			+ " the registration of a jobRepository");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition(JobRepositoryFactoryBean.class);
+		.genericBeanDefinition(JobRepositoryFactoryBean.class);
 
 		// set mandatory properties
 		String dataSourceRef = batchAnnotation.dataSourceRef();
@@ -135,14 +135,14 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 	}
 
 	private void registerJobExplorer(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation,
-			String importingClassName) {
+	String importingClassName) {
 		if (registry.containsBeanDefinition("jobExplorer")) {
 			LOGGER.info("Bean jobExplorer already defined in the application context, skipping"
-					+ " the registration of a jobExplorer");
+			+ " the registration of a jobExplorer");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition(JobExplorerFactoryBean.class);
+		.genericBeanDefinition(JobExplorerFactoryBean.class);
 
 		// set mandatory properties
 		String dataSourceRef = batchAnnotation.dataSourceRef();
@@ -180,14 +180,14 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 	}
 
 	private void registerJobLauncher(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation,
-			String importingClassName) {
+	String importingClassName) {
 		if (registry.containsBeanDefinition("jobLauncher")) {
 			LOGGER.info("Bean jobLauncher already defined in the application context, skipping"
-					+ " the registration of a jobLauncher");
+			+ " the registration of a jobLauncher");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition(TaskExecutorJobLauncher.class);
+		.genericBeanDefinition(TaskExecutorJobLauncher.class);
 		// set mandatory properties
 		beanDefinitionBuilder.addPropertyReference("jobRepository", "jobRepository");
 
@@ -202,22 +202,22 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 	private void registerJobRegistry(BeanDefinitionRegistry registry) {
 		if (registry.containsBeanDefinition("jobRegistry")) {
 			LOGGER.info("Bean jobRegistry already defined in the application context, skipping"
-					+ " the registration of a jobRegistry");
+			+ " the registration of a jobRegistry");
 			return;
 		}
 		BeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(MapJobRegistry.class)
-				.getBeanDefinition();
+		.getBeanDefinition();
 		registry.registerBeanDefinition("jobRegistry", beanDefinition);
 	}
 
 	private void registerJobOperator(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation) {
 		if (registry.containsBeanDefinition("jobOperator")) {
 			LOGGER.info("Bean jobOperator already defined in the application context, skipping"
-					+ " the registration of a jobOperator");
+			+ " the registration of a jobOperator");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.genericBeanDefinition(JobOperatorFactoryBean.class);
+		.genericBeanDefinition(JobOperatorFactoryBean.class);
 		// set mandatory properties
 		String transactionManagerRef = batchAnnotation.transactionManagerRef();
 		beanDefinitionBuilder.addPropertyReference("transactionManager", transactionManagerRef);
@@ -236,15 +236,15 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 		}
 		if (registry.containsBeanDefinition("jobRegistrar")) {
 			LOGGER.info("Bean jobRegistrar already defined in the application context, skipping"
-					+ " the registration of a jobRegistrar");
+			+ " the registration of a jobRegistrar");
 			return;
 		}
 		BeanDefinition jobLoaderBeanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DefaultJobLoader.class)
-				.addPropertyReference("jobRegistry", "jobRegistry").getBeanDefinition();
+		.addPropertyReference("jobRegistry", "jobRegistry").getBeanDefinition();
 		registry.registerBeanDefinition("jobLoader", jobLoaderBeanDefinition);
 		BeanDefinition jobRegistrarBeanDefinition = BeanDefinitionBuilder
-				.genericBeanDefinition(AutomaticJobRegistrar.class).addPropertyReference("jobLoader", "jobLoader")
-				.getBeanDefinition();
+		.genericBeanDefinition(AutomaticJobRegistrar.class).addPropertyReference("jobLoader", "jobLoader")
+		.getBeanDefinition();
 		registry.registerBeanDefinition("jobRegistrar", jobRegistrarBeanDefinition);
 	}
 

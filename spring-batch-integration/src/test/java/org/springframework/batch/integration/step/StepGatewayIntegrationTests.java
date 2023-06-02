@@ -63,7 +63,7 @@ class StepGatewayIntegrationTests {
 	void testLaunchFailedJob() throws Exception {
 		tasklet.setFail(true);
 		JobExecution jobExecution = jobLauncher.run(job,
-				new JobParametersBuilder().addLong("run.id", 2L).toJobParameters());
+		new JobParametersBuilder().addLong("run.id", 2L).toJobParameters());
 		assertEquals(BatchStatus.FAILED, jobExecution.getStatus());
 		assertEquals(ExitStatus.FAILED, jobExecution.getExitStatus());
 	}

@@ -44,19 +44,19 @@ class JsonItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new JsonItemReaderBuilder<String>().build());
+		() -> new JsonItemReaderBuilder<String>().build());
 		assertEquals("A json object reader is required.", exception.getMessage());
 
 		exception = assertThrows(IllegalStateException.class,
-				() -> new JsonItemReaderBuilder<String>().jsonObjectReader(this.jsonObjectReader).build());
+		() -> new JsonItemReaderBuilder<String>().jsonObjectReader(this.jsonObjectReader).build());
 		assertEquals("A name is required when saveState is set to true.", exception.getMessage());
 	}
 
 	@Test
 	void testConfiguration() {
 		JsonItemReader<String> itemReader = new JsonItemReaderBuilder<String>().jsonObjectReader(this.jsonObjectReader)
-				.resource(this.resource).saveState(true).strict(true).name("jsonItemReader").maxItemCount(100)
-				.currentItemCount(50).build();
+		.resource(this.resource).saveState(true).strict(true).name("jsonItemReader").maxItemCount(100)
+		.currentItemCount(50).build();
 
 		assertEquals(this.jsonObjectReader, getField(itemReader, "jsonObjectReader"));
 		assertEquals(this.resource, getField(itemReader, "resource"));
@@ -71,7 +71,7 @@ class JsonItemReaderBuilderTests {
 	@Test
 	void shouldBuildJsonItemReaderWhenResourceIsNotProvided() {
 		JsonItemReader<String> itemReader = new JsonItemReaderBuilder<String>().jsonObjectReader(this.jsonObjectReader)
-				.saveState(true).strict(true).name("jsonItemReader").maxItemCount(100).currentItemCount(50).build();
+		.saveState(true).strict(true).name("jsonItemReader").maxItemCount(100).currentItemCount(50).build();
 
 		assertEquals(this.jsonObjectReader, getField(itemReader, "jsonObjectReader"));
 		assertEquals(100, getField(itemReader, "maxItemCount"));

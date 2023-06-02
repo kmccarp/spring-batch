@@ -35,25 +35,25 @@ class JobRegistryBackgroundJobRunnerTests {
 	@Test
 	void testMain() throws Exception {
 		JobRegistryBackgroundJobRunner.main(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "test-environment-with-registry.xml"),
-				ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "test-environment-with-registry.xml"),
+		ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
 		assertEquals(0, JobRegistryBackgroundJobRunner.getErrors().size());
 	}
 
 	@Test
 	void testMainWithAutoRegister() throws Exception {
 		JobRegistryBackgroundJobRunner.main(
-				ClassUtils.addResourcePathToPackagePath(getClass(),
-						"test-environment-with-registry-and-auto-register.xml"),
-				ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(),
+	"test-environment-with-registry-and-auto-register.xml"),
+		ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
 		assertEquals(0, JobRegistryBackgroundJobRunner.getErrors().size());
 	}
 
 	@Test
 	void testMainWithJobLoader() throws Exception {
 		JobRegistryBackgroundJobRunner.main(
-				ClassUtils.addResourcePathToPackagePath(getClass(), "test-environment-with-loader.xml"),
-				ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
+		ClassUtils.addResourcePathToPackagePath(getClass(), "test-environment-with-loader.xml"),
+		ClassUtils.addResourcePathToPackagePath(getClass(), "job.xml"));
 		assertEquals(0, JobRegistryBackgroundJobRunner.getErrors().size());
 	}
 

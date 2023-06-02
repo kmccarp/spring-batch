@@ -47,14 +47,14 @@ public abstract class AbstractPartitionHandler implements PartitionHandler {
 	 * and rely on the caller to translate an exception into a step failure as necessary.
 	 */
 	protected abstract Set<StepExecution> doHandle(StepExecution managerStepExecution,
-			Set<StepExecution> partitionStepExecutions) throws Exception;
+	Set<StepExecution> partitionStepExecutions) throws Exception;
 
 	/**
 	 * @see PartitionHandler#handle(StepExecutionSplitter, StepExecution)
 	 */
 	@Override
 	public Collection<StepExecution> handle(final StepExecutionSplitter stepSplitter,
-			final StepExecution managerStepExecution) throws Exception {
+	final StepExecution managerStepExecution) throws Exception {
 		final Set<StepExecution> stepExecutions = stepSplitter.split(managerStepExecution, gridSize);
 
 		return doHandle(managerStepExecution, stepExecutions);

@@ -66,12 +66,12 @@ class JdbcPagingQueryIntegrationTests {
 	@BeforeEach
 	void testInit() {
 		jdbcTemplate = new JdbcTemplate(dataSource);
-		String[] names = { "Foo", "Bar", "Baz", "Foo", "Bar", "Baz", "Foo", "Bar", "Baz" };
-		String[] codes = { "A", "B", "A", "B", "B", "B", "A", "B", "A" };
+		String[] names = {"Foo", "Bar", "Baz", "Foo", "Bar", "Baz", "Foo", "Bar", "Baz"};
+		String[] codes = {"A", "B", "A", "B", "B", "B", "A", "B", "A"};
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_FOOS");
 		for (int i = 0; i < names.length; i++) {
 			jdbcTemplate.update("INSERT into T_FOOS (ID,NAME, CODE, VALUE) values (?, ?, ?, ?)", maxId, names[i],
-					codes[i], i);
+			codes[i], i);
 			maxId++;
 		}
 		assertEquals(9, JdbcTestUtils.countRowsInTable(jdbcTemplate, "T_FOOS"));
@@ -103,7 +103,7 @@ class JdbcPagingQueryIntegrationTests {
 			Map<String, Object> startAfterValues = getStartAfterValues(queryProvider, list);
 			assertNotSame(oldValues, startAfterValues);
 			list = jdbcTemplate.queryForList(queryProvider.generateRemainingPagesQuery(pageSize),
-					getParameterList(null, startAfterValues).toArray());
+			getParameterList(null, startAfterValues).toArray());
 			assertEquals(pageSize, list.size());
 			count += pageSize;
 			oldValues = startAfterValues;
@@ -112,7 +112,7 @@ class JdbcPagingQueryIntegrationTests {
 		if (count < total) {
 			Map<String, Object> startAfterValues = getStartAfterValues(queryProvider, list);
 			list = jdbcTemplate.queryForList(queryProvider.generateRemainingPagesQuery(pageSize),
-					getParameterList(null, startAfterValues).toArray());
+			getParameterList(null, startAfterValues).toArray());
 			assertEquals(total - pages * pageSize, list.size());
 			count += list.size();
 		}
@@ -143,7 +143,7 @@ class JdbcPagingQueryIntegrationTests {
 			Map<String, Object> startAfterValues = getStartAfterValues(queryProvider, list);
 			assertNotSame(oldValues, startAfterValues);
 			list = jdbcTemplate.queryForList(queryProvider.generateRemainingPagesQuery(pageSize),
-					getParameterList(null, startAfterValues).toArray());
+			getParameterList(null, startAfterValues).toArray());
 			count += list.size();
 
 			if (list.size() < pageSize) {

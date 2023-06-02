@@ -100,7 +100,7 @@ class TransactionalPollingIntegrationTests implements ApplicationContextAware {
 	void testSunnyDay() {
 		try {
 			list = TransactionAwareProxyFactory.createTransactionalList(
-					Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
+			Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d,e,f,g,h,j,k")));
 			expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,c,d"));
 			waitForResults(bus, 4, 60);
 			assertEquals(expected, processed);
@@ -115,7 +115,7 @@ class TransactionalPollingIntegrationTests implements ApplicationContextAware {
 	@DirtiesContext
 	void testRollback() throws Exception {
 		list = TransactionAwareProxyFactory.createTransactionalList(
-				Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
+		Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,d,e,f,g,h,j,k")));
 		expected = Arrays.asList(StringUtils.commaDelimitedListToStringArray("a,b,fail,fail"));
 		waitForResults(bus, 4, 30);
 		assertEquals(expected, processed);

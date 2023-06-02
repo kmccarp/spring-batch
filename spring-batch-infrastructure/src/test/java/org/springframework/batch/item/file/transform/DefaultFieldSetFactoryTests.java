@@ -33,13 +33,13 @@ class DefaultFieldSetFactoryTests {
 
 	@Test
 	void testVanillaFieldSet() {
-		FieldSet fieldSet = factory.create(new String[] { "foo", "bar" });
+		FieldSet fieldSet = factory.create(new String[]{"foo", "bar"});
 		assertEquals("foo", fieldSet.readString(0));
 	}
 
 	@Test
 	void testVanillaFieldSetWithNames() {
-		FieldSet fieldSet = factory.create(new String[] { "1", "bar" }, new String[] { "foo", "bar" });
+		FieldSet fieldSet = factory.create(new String[]{"1", "bar"}, new String[]{"foo", "bar"});
 		assertEquals(1, fieldSet.readInt("foo"));
 	}
 
@@ -47,14 +47,14 @@ class DefaultFieldSetFactoryTests {
 	void testFieldSetWithDateFormat() throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		factory.setDateFormat(format);
-		FieldSet fieldSet = factory.create(new String[] { "1999/12/18", "bar" });
+		FieldSet fieldSet = factory.create(new String[]{"1999/12/18", "bar"});
 		assertEquals(format.parse("1999/12/18"), fieldSet.readDate(0));
 	}
 
 	@Test
 	void testFieldSetWithNumberFormat() {
 		factory.setNumberFormat(NumberFormat.getNumberInstance(Locale.GERMAN));
-		FieldSet fieldSet = factory.create(new String[] { "19.991.218", "bar" });
+		FieldSet fieldSet = factory.create(new String[]{"19.991.218", "bar"});
 		assertEquals(19991218, fieldSet.readInt(0));
 	}
 

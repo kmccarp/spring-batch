@@ -133,7 +133,7 @@ public class JobStep extends AbstractStep {
 	 */
 	private ExitStatus determineStepExitStatus(StepExecution stepExecution, JobExecution jobExecution) {
 		ExitStatus exitStatus = stepExecution.getExitStatus() != null ? stepExecution.getExitStatus()
-				: ExitStatus.COMPLETED;
+		: ExitStatus.COMPLETED;
 
 		return exitStatus.and(jobExecution.getExitStatus());
 	}

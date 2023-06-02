@@ -56,7 +56,7 @@ class BatchRetryTemplateTests {
 			@Override
 			public String doWithRetry(RetryContext context) throws Exception {
 				assertTrue(context.getClass().getSimpleName().contains("Batch"),
-						"Wrong context type: " + context.getClass().getSimpleName());
+				"Wrong context type: " + context.getClass().getSimpleName());
 				return "2";
 			}
 		}, Arrays.<RetryState>asList(new DefaultRetryState("1")));
@@ -77,7 +77,7 @@ class BatchRetryTemplateTests {
 				if (count++ == 0) {
 					throw new RecoverableException("Recoverable");
 				}
-				return new String[] { "a", "b" };
+				return new String[]{"a", "b"};
 			}
 		};
 
@@ -95,7 +95,7 @@ class BatchRetryTemplateTests {
 
 		BatchRetryTemplate template = new BatchRetryTemplate();
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
 		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
 			@Override
@@ -109,11 +109,11 @@ class BatchRetryTemplateTests {
 
 		outputs = List.of("a", "b");
 		Exception exception = assertThrows(RecoverableException.class,
-				() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
 		assertEquals("Recoverable", exception.getMessage());
 		outputs = List.of("a", "c");
 		assertThrows(ExhaustedRetryException.class,
-				() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
 	}
 
 	@Test
@@ -121,7 +121,7 @@ class BatchRetryTemplateTests {
 
 		BatchRetryTemplate template = new BatchRetryTemplate();
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
 		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
 			@Override
@@ -135,12 +135,12 @@ class BatchRetryTemplateTests {
 
 		outputs = Arrays.asList("a", "b");
 		Exception exception = assertThrows(RecoverableException.class,
-				() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
 		assertEquals("Recoverable", exception.getMessage());
 
 		outputs = Arrays.asList("b", "c");
 		assertThrows(ExhaustedRetryException.class,
-				() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
 
 		// "c" is not tarred with same brush as "b" because it was never
 		// processed on account of the exhausted retry
@@ -151,7 +151,7 @@ class BatchRetryTemplateTests {
 		// "a" is still marked as a failure from the first chunk
 		outputs = Arrays.asList("a", "e");
 		assertThrows(ExhaustedRetryException.class,
-				() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, BatchRetryTemplate.createState(outputs)));
 
 		outputs = Arrays.asList("e", "f");
 		result = template.execute(retryCallback, BatchRetryTemplate.createState(outputs));
@@ -164,7 +164,7 @@ class BatchRetryTemplateTests {
 
 		BatchRetryTemplate template = new BatchRetryTemplate();
 		template.setRetryPolicy(new SimpleRetryPolicy(1,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
 		RetryCallback<String[], Exception> retryCallback = new RetryCallback<String[], Exception>() {
 			@Override
@@ -189,7 +189,7 @@ class BatchRetryTemplateTests {
 
 		outputs = Arrays.asList("a", "b");
 		Exception exception = assertThrows(RecoverableException.class,
-				() -> template.execute(retryCallback, recoveryCallback, BatchRetryTemplate.createState(outputs)));
+		() -> template.execute(retryCallback, recoveryCallback, BatchRetryTemplate.createState(outputs)));
 		assertEquals("Recoverable", exception.getMessage());
 
 		outputs = Arrays.asList("b", "c");

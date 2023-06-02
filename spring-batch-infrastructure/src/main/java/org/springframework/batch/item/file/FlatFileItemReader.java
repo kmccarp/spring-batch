@@ -51,13 +51,13 @@ import org.springframework.util.StringUtils;
  * @author Mahmoud Ben Hassine
  */
 public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements ResourceAwareItemReaderItemStream<T>, InitializingBean {
+implements ResourceAwareItemReaderItemStream<T>, InitializingBean {
 
 	private static final Log logger = LogFactory.getLog(FlatFileItemReader.class);
 
 	public static final String DEFAULT_CHARSET = StandardCharsets.UTF_8.name();
 
-	public static final String[] DEFAULT_COMMENT_PREFIXES = new String[] { "#" };
+	public static final String[] DEFAULT_COMMENT_PREFIXES = new String[]{"#"};
 
 	private RecordSeparatorPolicy recordSeparatorPolicy = new SimpleRecordSeparatorPolicy();
 
@@ -195,7 +195,7 @@ public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemRea
 			}
 			catch (Exception ex) {
 				throw new FlatFileParseException("Parsing error at line: " + lineCount + " in resource=["
-						+ resource.getDescription() + "], input=[" + line + "]", ex, line, lineCount);
+				+ resource.getDescription() + "], input=[" + line + "]", ex, line, lineCount);
 			}
 		}
 	}
@@ -233,7 +233,7 @@ public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemRea
 			// if client keeps catching and re-calling
 			noInput = true;
 			throw new NonTransientFlatFileException("Unable to read from resource: [" + resource + "]", e, line,
-					lineCount);
+			lineCount);
 		}
 		return line;
 	}
@@ -272,7 +272,7 @@ public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemRea
 		if (!resource.isReadable()) {
 			if (strict) {
 				throw new IllegalStateException(
-						"Input resource must be readable (reader is in 'strict' mode): " + resource);
+				"Input resource must be readable (reader is in 'strict' mode): " + resource);
 			}
 			logger.warn("Input resource is not readable " + resource.getDescription());
 			return;
@@ -310,7 +310,7 @@ public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemRea
 					// A record was partially complete since it hasn't ended but
 					// the line is null
 					throw new FlatFileParseException("Unexpected end of file before record complete", record,
-							lineCount);
+					lineCount);
 				}
 				else {
 					// Record has no text but it might still be post processed

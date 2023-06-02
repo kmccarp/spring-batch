@@ -42,15 +42,15 @@ class JobLaunchingGatewayTests {
 	void testExceptionRaised() throws Exception {
 
 		final Message<JobLaunchRequest> message = MessageBuilder
-				.withPayload(new JobLaunchRequest(new JobSupport("testJob"), new JobParameters())).build();
+		.withPayload(new JobLaunchRequest(new JobSupport("testJob"), new JobParameters())).build();
 
 		final JobLauncher jobLauncher = mock(JobLauncher.class);
 		when(jobLauncher.run(any(Job.class), any(JobParameters.class)))
-				.thenThrow(new JobParametersInvalidException("This is a JobExecutionException."));
+		.thenThrow(new JobParametersInvalidException("This is a JobExecutionException."));
 
 		JobLaunchingGateway jobLaunchingGateway = new JobLaunchingGateway(jobLauncher);
 		Exception exception = assertThrows(MessageHandlingException.class,
-				() -> jobLaunchingGateway.handleMessage(message));
+		() -> jobLaunchingGateway.handleMessage(message));
 		assertEquals("This is a JobExecutionException.", exception.getCause().getMessage());
 	}
 

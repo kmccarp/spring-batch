@@ -56,8 +56,8 @@ class SimpleStepExecutionSplitterTests {
 	void setUp() throws Exception {
 		step = new TaskletStep("step");
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(embeddedDatabase);
 		factory.setTransactionManager(new JdbcTransactionManager(embeddedDatabase));
@@ -70,7 +70,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testSimpleStepExecutionProviderJobRepositoryStep() throws Exception {
 		SimpleStepExecutionSplitter splitter = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> execs = splitter.split(stepExecution, 2);
 		assertEquals(2, execs.size());
 
@@ -86,7 +86,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testAddressabilityOfSetResults() throws Exception {
 		SimpleStepExecutionSplitter splitter = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> execs = splitter.split(stepExecution, 2);
 		assertEquals(2, execs.size());
 
@@ -99,19 +99,19 @@ class SimpleStepExecutionSplitterTests {
 	void testSimpleStepExecutionProviderJobRepositoryStepPartitioner() throws Exception {
 		final Map<String, ExecutionContext> map = Collections.singletonMap("foo", new ExecutionContext());
 		SimpleStepExecutionSplitter splitter = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new Partitioner() {
-					@Override
-					public Map<String, ExecutionContext> partition(int gridSize) {
-						return map;
-					}
-				});
+		new Partitioner() {
+			@Override
+			public Map<String, ExecutionContext> partition(int gridSize) {
+				return map;
+			}
+		});
 		assertEquals(1, splitter.split(stepExecution, 2).size());
 	}
 
 	@Test
 	void testRememberGridSize() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		stepExecution = update(split, stepExecution, BatchStatus.FAILED);
@@ -134,7 +134,7 @@ class SimpleStepExecutionSplitterTests {
 
 		}
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new CustomPartitioner());
+		new CustomPartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(1, split.size());
 		assertEquals("step:foo", split.iterator().next().getStepName());
@@ -146,14 +146,14 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testGetStepName() {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		assertEquals("step", provider.getStepName());
 	}
 
 	@Test
 	void testUnknownStatus() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		stepExecution = update(split, stepExecution, BatchStatus.UNKNOWN);
@@ -169,7 +169,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testCompleteStatusAfterFailure() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, false, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		StepExecution nextExecution = update(split, stepExecution, BatchStatus.COMPLETED, false);
@@ -180,7 +180,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testCompleteStatusSameJobExecution() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, false, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		stepExecution = update(split, stepExecution, BatchStatus.COMPLETED);
@@ -191,7 +191,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testIncompleteStatus() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		stepExecution = update(split, stepExecution, BatchStatus.STARTED);
@@ -208,7 +208,7 @@ class SimpleStepExecutionSplitterTests {
 	@Test
 	void testAbandonedStatus() throws Exception {
 		SimpleStepExecutionSplitter provider = new SimpleStepExecutionSplitter(jobRepository, true, step.getName(),
-				new SimplePartitioner());
+		new SimplePartitioner());
 		Set<StepExecution> split = provider.split(stepExecution, 2);
 		assertEquals(2, split.size());
 		stepExecution = update(split, stepExecution, BatchStatus.ABANDONED);
@@ -223,12 +223,12 @@ class SimpleStepExecutionSplitterTests {
 	}
 
 	private StepExecution update(Set<StepExecution> split, StepExecution stepExecution, BatchStatus status)
-			throws Exception {
+	throws Exception {
 		return update(split, stepExecution, status, true);
 	}
 
 	private StepExecution update(Set<StepExecution> split, StepExecution stepExecution, BatchStatus status,
-			boolean sameJobExecution) throws Exception {
+	boolean sameJobExecution) throws Exception {
 
 		ExecutionContext executionContext = stepExecution.getExecutionContext();
 

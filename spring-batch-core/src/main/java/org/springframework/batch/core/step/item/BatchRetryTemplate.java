@@ -152,7 +152,7 @@ public class BatchRetryTemplate implements RetryOperations {
 
 		@Override
 		protected <T> T handleRetryExhausted(RecoveryCallback<T> recoveryCallback, RetryContext context,
-				RetryState state) throws Throwable {
+		RetryState state) throws Throwable {
 
 			BatchRetryState batchState = (BatchRetryState) state;
 			BatchRetryContext batchContext = (BatchRetryContext) context;
@@ -199,32 +199,32 @@ public class BatchRetryTemplate implements RetryOperations {
 	private RetryPolicy retryPolicy;
 
 	public <T, E extends Throwable> T execute(RetryCallback<T, E> retryCallback, Collection<RetryState> states)
-			throws E, Exception {
+	throws E, Exception {
 		RetryState batchState = new BatchRetryState(states);
 		return delegate.execute(retryCallback, batchState);
 	}
 
 	public <T, E extends Throwable> T execute(RetryCallback<T, E> retryCallback, RecoveryCallback<T> recoveryCallback,
-			Collection<RetryState> states) throws E, Exception {
+	Collection<RetryState> states) throws E, Exception {
 		RetryState batchState = new BatchRetryState(states);
 		return delegate.execute(retryCallback, recoveryCallback, batchState);
 	}
 
 	@Override
 	public final <T, E extends Throwable> T execute(RetryCallback<T, E> retryCallback,
-			RecoveryCallback<T> recoveryCallback, RetryState retryState) throws E {
+	RecoveryCallback<T> recoveryCallback, RetryState retryState) throws E {
 		return regular.execute(retryCallback, recoveryCallback, retryState);
 	}
 
 	@Override
 	public final <T, E extends Throwable> T execute(RetryCallback<T, E> retryCallback,
-			RecoveryCallback<T> recoveryCallback) throws E {
+	RecoveryCallback<T> recoveryCallback) throws E {
 		return regular.execute(retryCallback, recoveryCallback);
 	}
 
 	@Override
 	public final <T, E extends Throwable> T execute(RetryCallback<T, E> retryCallback, RetryState retryState)
-			throws E, ExhaustedRetryException {
+	throws E, ExhaustedRetryException {
 		return regular.execute(retryCallback, retryState);
 	}
 

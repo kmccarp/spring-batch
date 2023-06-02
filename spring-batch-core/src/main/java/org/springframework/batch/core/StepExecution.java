@@ -501,7 +501,7 @@ public class StepExecution extends Entity {
 		StepExecution other = (StepExecution) obj;
 
 		return stepName.equals(other.getStepName()) && (jobExecutionId.equals(other.getJobExecutionId()))
-				&& getId().equals(other.getId());
+		&& getId().equals(other.getId());
 	}
 
 	/**
@@ -525,7 +525,7 @@ public class StepExecution extends Entity {
 		Object jobExecutionId = getJobExecutionId();
 		Long id = getId();
 		return super.hashCode() + 31 * (stepName != null ? stepName.hashCode() : 0)
-				+ 91 * (jobExecutionId != null ? jobExecutionId.hashCode() : 0) + 59 * (id != null ? id.hashCode() : 0);
+		+ 91 * (jobExecutionId != null ? jobExecutionId.hashCode() : 0) + 59 * (id != null ? id.hashCode() : 0);
 	}
 
 	@Override
@@ -538,10 +538,10 @@ public class StepExecution extends Entity {
 	 */
 	public String getSummary() {
 		return super.toString() + String.format(
-				", name=%s, status=%s, exitStatus=%s, readCount=%d, filterCount=%d, writeCount=%d readSkipCount=%d, writeSkipCount=%d"
-						+ ", processSkipCount=%d, commitCount=%d, rollbackCount=%d",
-				stepName, status, exitStatus.getExitCode(), readCount, filterCount, writeCount, readSkipCount,
-				writeSkipCount, processSkipCount, commitCount, rollbackCount);
+		", name=%s, status=%s, exitStatus=%s, readCount=%d, filterCount=%d, writeCount=%d readSkipCount=%d, writeSkipCount=%d"
+	+ ", processSkipCount=%d, commitCount=%d, rollbackCount=%d",
+		stepName, status, exitStatus.getExitCode(), readCount, filterCount, writeCount, readSkipCount,
+		writeSkipCount, processSkipCount, commitCount, rollbackCount);
 	}
 
 }

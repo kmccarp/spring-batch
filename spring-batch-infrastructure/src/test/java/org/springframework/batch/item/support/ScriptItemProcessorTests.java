@@ -70,7 +70,7 @@ class ScriptItemProcessorTests {
 
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setScriptSource("function process(item) { return item.toUpperCase(); } process(item);",
-				"javascript");
+		"javascript");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");
@@ -115,7 +115,7 @@ class ScriptItemProcessorTests {
 
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setScriptSource("String process(String item) { return item.toUpperCase(); } process(item);",
-				"bsh");
+		"bsh");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");
@@ -138,7 +138,7 @@ class ScriptItemProcessorTests {
 
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setScriptSource("def process(item) { return item.toUpperCase() } \n process(item)",
-				"groovy");
+		"groovy");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");
@@ -194,7 +194,7 @@ class ScriptItemProcessorTests {
 	void testScriptSourceWithNoLanguage() {
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		assertThrows(IllegalArgumentException.class, () -> scriptItemProcessor
-				.setScriptSource("function process(item) { return item.toUpperCase(); } process(item);", null));
+		.setScriptSource("function process(item) { return item.toUpperCase(); } process(item);", null));
 	}
 
 	@Test
@@ -204,7 +204,7 @@ class ScriptItemProcessorTests {
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<>();
 		scriptItemProcessor.setItemBindingVariableName("someOtherVarName");
 		scriptItemProcessor.setScriptSource(
-				"function process(param) { return param.toUpperCase(); } process(someOtherVarName);", "javascript");
+		"function process(param) { return param.toUpperCase(); } process(someOtherVarName);", "javascript");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");
@@ -217,7 +217,7 @@ class ScriptItemProcessorTests {
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<String, Object>();
 		scriptItemProcessor.setScriptEvaluator(new BshScriptEvaluator());
 		scriptItemProcessor.setScriptSource("String process(String item) { return item.toUpperCase(); } process(item);",
-				"bsh");
+		"bsh");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");
@@ -230,7 +230,7 @@ class ScriptItemProcessorTests {
 		ScriptItemProcessor<String, Object> scriptItemProcessor = new ScriptItemProcessor<String, Object>();
 		scriptItemProcessor.setScriptEvaluator(new GroovyScriptEvaluator());
 		scriptItemProcessor.setScriptSource("def process(item) { return item.toUpperCase() } \n process(item)",
-				"groovy");
+		"groovy");
 		scriptItemProcessor.afterPropertiesSet();
 
 		assertEquals("SS", scriptItemProcessor.process("ss"), "Incorrect transformed value");

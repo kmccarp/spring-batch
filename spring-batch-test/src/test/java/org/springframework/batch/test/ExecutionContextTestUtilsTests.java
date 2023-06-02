@@ -41,7 +41,7 @@ class ExecutionContextTestUtilsTests {
 	void testFromStepInJob() {
 		Date date = new Date();
 		JobExecution jobExecution = MetaDataInstanceFactory.createJobExecutionWithStepExecutions(123L,
-				Arrays.asList("foo", "bar"));
+		Arrays.asList("foo", "bar"));
 		StepExecution stepExecution = jobExecution.createStepExecution("spam");
 		stepExecution.getExecutionContext().put("foo", date);
 		Date result = ExecutionContextTestUtils.getValueFromStepInJob(jobExecution, "spam", "foo");
@@ -51,9 +51,9 @@ class ExecutionContextTestUtilsTests {
 	@Test
 	void testFromStepInJobNoSuchStep() {
 		JobExecution jobExecution = MetaDataInstanceFactory.createJobExecutionWithStepExecutions(123L,
-				Arrays.asList("foo", "bar"));
+		Arrays.asList("foo", "bar"));
 		assertThrows(IllegalArgumentException.class,
-				() -> ExecutionContextTestUtils.getValueFromStepInJob(jobExecution, "spam", "foo"));
+		() -> ExecutionContextTestUtils.getValueFromStepInJob(jobExecution, "spam", "foo"));
 	}
 
 	@Test

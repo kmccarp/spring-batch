@@ -60,7 +60,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetNamedJobParameters() {
 		StepExecution stepExecution = getStepExecution("foo=bar");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertTrue(jobParameters.getParameters().containsKey("foo"));
 		assertEquals("bar", jobParameters.getString("foo"));
@@ -70,7 +70,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetAllJobParameters() {
 		StepExecution stepExecution = getStepExecution("foo=bar", "spam=bucket");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals("bar", jobParameters.getString("foo"));
 		assertEquals("bucket", jobParameters.getString("spam"));
@@ -80,7 +80,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetNamedLongStringParameters() {
 		StepExecution stepExecution = getStepExecution("foo=bar");
-		extractor.setKeys(new String[] { "foo", "bar,java.lang.String" });
+		extractor.setKeys(new String[]{"foo", "bar,java.lang.String"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals("bar", jobParameters.getString("foo"));
 	}
@@ -88,7 +88,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetNamedLongJobParameters() {
 		StepExecution stepExecution = getStepExecution("foo=11,java.lang.Long");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals(11L, jobParameters.getLong("foo"));
 	}
@@ -96,7 +96,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetNamedDoubleJobParameters() {
 		StepExecution stepExecution = getStepExecution("foo=11.1,java.lang.Double");
-		extractor.setKeys(new String[] { "foo" });
+		extractor.setKeys(new String[]{"foo"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals(11.1, jobParameters.getDouble("foo"));
 	}
@@ -104,7 +104,7 @@ class DefaultJobParametersExtractorJobParametersTests {
 	@Test
 	void testGetNamedDateJobParameters() throws Exception {
 		StepExecution stepExecution = getStepExecution("foo=2012-12-12,java.time.LocalDate");
-		extractor.setKeys(new String[] { "foo" });
+		extractor.setKeys(new String[]{"foo"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals(LocalDate.of(2012, 12, 12), jobParameters.getParameter("foo").getValue());
 	}

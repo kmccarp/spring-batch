@@ -46,7 +46,7 @@ public class ExecutionContextPromotionListener implements StepExecutionListener,
 
 	private String[] keys = null;
 
-	private String[] statuses = new String[] { ExitStatus.COMPLETED.getExitCode() };
+	private String[] statuses = new String[]{ExitStatus.COMPLETED.getExitCode()};
 
 	private boolean strict = false;
 
@@ -65,7 +65,7 @@ public class ExecutionContextPromotionListener implements StepExecutionListener,
 					else {
 						if (strict) {
 							throw new IllegalArgumentException(
-									"The key [" + key + "] was not found in the Step's ExecutionContext.");
+							"The key [" + key + "] was not found in the Step's ExecutionContext.");
 						}
 					}
 				}

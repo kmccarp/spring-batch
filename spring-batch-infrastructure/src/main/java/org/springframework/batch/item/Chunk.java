@@ -221,8 +221,8 @@ public class Chunk<W> implements Iterable<W>, Serializable {
 		}
 		Chunk<?> other = (Chunk<?>) obj;
 		return Objects.equals(this.items, other.items) && Objects.equals(this.skips, other.skips)
-				&& Objects.equals(this.errors, other.errors) && Objects.equals(this.userData, other.userData)
-				&& this.end == other.end && this.busy == other.busy;
+		&& Objects.equals(this.errors, other.errors) && Objects.equals(this.userData, other.userData)
+		&& this.end == other.end && this.busy == other.busy;
 	}
 
 	@Override

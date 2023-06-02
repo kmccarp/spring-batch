@@ -68,7 +68,7 @@ public class BatchMessageListenerContainer extends DefaultMessageListenerContain
 	private ContainerDelegate delegate = new ContainerDelegate() {
 		@Override
 		public boolean receiveAndExecute(Object invoker, Session session, MessageConsumer consumer)
-				throws JMSException {
+		throws JMSException {
 			return BatchMessageListenerContainer.super.receiveAndExecute(invoker, session, consumer);
 		}
 	};
@@ -128,7 +128,7 @@ public class BatchMessageListenerContainer extends DefaultMessageListenerContain
 	 */
 	@Override
 	protected boolean receiveAndExecute(final Object invoker, final Session session, final MessageConsumer consumer)
-			throws JMSException {
+	throws JMSException {
 		return proxy.receiveAndExecute(invoker, session, consumer);
 	}
 

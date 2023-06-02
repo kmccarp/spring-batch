@@ -35,7 +35,7 @@ class PassThroughFieldSetMapperTests {
 	 */
 	@Test
 	void testMapLine() {
-		FieldSet fieldSet = new DefaultFieldSet(new String[] { "foo", "bar" });
+		FieldSet fieldSet = new DefaultFieldSet(new String[]{"foo", "bar"});
 		assertEquals(fieldSet, mapper.mapFieldSet(fieldSet));
 	}
 

@@ -102,7 +102,7 @@ public class RemoteChunkingWorkerBuilder<I, O> {
 	 * the output channel.
 	 * @return the integration flow
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public IntegrationFlow build() {
 		Assert.notNull(this.itemWriter, "An ItemWriter must be provided");
 		Assert.notNull(this.inputChannel, "An InputChannel must be provided");
@@ -117,7 +117,7 @@ public class RemoteChunkingWorkerBuilder<I, O> {
 		chunkProcessorChunkHandler.setChunkProcessor(chunkProcessor);
 
 		return IntegrationFlow.from(this.inputChannel).handle(chunkProcessorChunkHandler, SERVICE_ACTIVATOR_METHOD_NAME)
-				.channel(this.outputChannel).get();
+		.channel(this.outputChannel).get();
 	}
 
 }

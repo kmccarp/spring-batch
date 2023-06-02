@@ -155,8 +155,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({ BatchRegistrar.class, ScopeConfiguration.class, AutomaticJobRegistrarBeanPostProcessor.class,
-		BatchObservabilityBeanPostProcessor.class })
+@Import({BatchRegistrar.class, ScopeConfiguration.class, AutomaticJobRegistrarBeanPostProcessor.class,
+BatchObservabilityBeanPostProcessor.class})
 public @interface EnableBatchProcessing {
 
 	/**

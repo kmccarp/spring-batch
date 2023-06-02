@@ -228,7 +228,7 @@ public class ExtendedConnectionDataSourceProxy implements SmartDataSource, Initi
 	 */
 	protected Connection getCloseSuppressingConnectionProxy(Connection target) {
 		return (Connection) Proxy.newProxyInstance(ConnectionProxy.class.getClassLoader(),
-				new Class[] { ConnectionProxy.class }, new CloseSuppressingInvocationHandler(target, this));
+		new Class[]{ConnectionProxy.class}, new CloseSuppressingInvocationHandler(target, this));
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class ExtendedConnectionDataSourceProxy implements SmartDataSource, Initi
 			return (Logger) invoker.invoke();
 		}
 		catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
-				| InvocationTargetException nsme) {
+		| InvocationTargetException nsme) {
 			throw new SQLFeatureNotSupportedException(nsme);
 		}
 	}

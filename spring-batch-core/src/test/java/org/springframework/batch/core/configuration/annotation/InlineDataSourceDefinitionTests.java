@@ -42,7 +42,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig
-@Disabled // FIXME review this as part of issue 3942
+@Disabled
+// FIXME review this as part of issue 3942
 class InlineDataSourceDefinitionTests {
 
 	@Test
@@ -61,17 +62,17 @@ class InlineDataSourceDefinitionTests {
 		@Bean
 		public Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
 			return new JobBuilder("job", jobRepository)
-					.start(new StepBuilder("step", jobRepository).tasklet((contribution, chunkContext) -> {
-						System.out.println("hello world");
-						return RepeatStatus.FINISHED;
-					}, transactionManager).build()).build();
+			.start(new StepBuilder("step", jobRepository).tasklet((contribution, chunkContext) -> {
+				System.out.println("hello world");
+				return RepeatStatus.FINISHED;
+			}, transactionManager).build()).build();
 		}
 
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-					.addScript("/org/springframework/batch/core/schema-drop-h2.sql")
-					.addScript("/org/springframework/batch/core/schema-h2.sql").generateUniqueName(true).build();
+			.addScript("/org/springframework/batch/core/schema-drop-h2.sql")
+			.addScript("/org/springframework/batch/core/schema-h2.sql").generateUniqueName(true).build();
 		}
 
 		@Bean

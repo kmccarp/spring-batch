@@ -57,7 +57,7 @@ class JobParserValidatorTests {
 	void testValidatorAttribute() {
 		assertNotNull(job1);
 		JobParametersValidator validator = (JobParametersValidator) ReflectionTestUtils.getField(job1,
-				"jobParametersValidator");
+		"jobParametersValidator");
 		assertNotNull(validator);
 		assertThrows(JobParametersInvalidException.class, () -> validator.validate(new JobParameters()));
 	}
@@ -66,7 +66,7 @@ class JobParserValidatorTests {
 	void testValidatorRef() {
 		assertNotNull(job2);
 		JobParametersValidator validator = (JobParametersValidator) ReflectionTestUtils.getField(job2,
-				"jobParametersValidator");
+		"jobParametersValidator");
 		assertNotNull(validator);
 		assertThrows(JobParametersInvalidException.class, () -> validator.validate(new JobParameters()));
 	}
@@ -75,7 +75,7 @@ class JobParserValidatorTests {
 	void testValidatorBean() {
 		assertNotNull(job3);
 		JobParametersValidator validator = (JobParametersValidator) ReflectionTestUtils.getField(job3,
-				"jobParametersValidator");
+		"jobParametersValidator");
 		assertNotNull(validator);
 		assertThrows(JobParametersInvalidException.class, () -> validator.validate(new JobParameters()));
 	}

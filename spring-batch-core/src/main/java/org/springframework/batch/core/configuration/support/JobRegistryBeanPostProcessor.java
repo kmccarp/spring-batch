@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
  *
  */
 public class JobRegistryBeanPostProcessor
-		implements BeanPostProcessor, BeanFactoryAware, InitializingBean, DisposableBean {
+implements BeanPostProcessor, BeanFactoryAware, InitializingBean, DisposableBean {
 
 	private static Log logger = LogFactory.getLog(JobRegistryBeanPostProcessor.class);
 

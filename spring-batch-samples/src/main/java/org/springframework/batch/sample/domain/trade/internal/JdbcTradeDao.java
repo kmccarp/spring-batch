@@ -60,7 +60,7 @@ public class JdbcTradeDao implements TradeDao {
 			log.debug("Processing: " + trade);
 		}
 		jdbcTemplate.update(INSERT_TRADE_RECORD, id, trade.getIsin(), trade.getQuantity(), trade.getPrice(),
-				trade.getCustomer());
+		trade.getCustomer());
 	}
 
 	public void setDataSource(DataSource dataSource) {

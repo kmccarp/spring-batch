@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TransactionAwareMapFactoryTests {
 
 	private final TransactionTemplate transactionTemplate = new TransactionTemplate(
-			new ResourcelessTransactionManager());
+	new ResourcelessTransactionManager());
 
 	private Map<String, String> map;
 
@@ -145,10 +145,10 @@ class TransactionAwareMapFactoryTests {
 	@Test
 	void testTransactionalAddWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testAdd();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testAdd();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, map.size());
 	}
@@ -156,10 +156,10 @@ class TransactionAwareMapFactoryTests {
 	@Test
 	void testTransactionalRemoveWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testRemove();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testRemove();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, map.size());
 	}
@@ -167,10 +167,10 @@ class TransactionAwareMapFactoryTests {
 	@Test
 	void testTransactionalClearWithRollback() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
-					testClear();
-					throw new RuntimeException("Rollback!");
-				}));
+		() -> transactionTemplate.execute((TransactionCallback<Void>) status -> {
+			testClear();
+			throw new RuntimeException("Rollback!");
+		}));
 		assertEquals("Rollback!", exception.getMessage());
 		assertEquals(3, map.size());
 	}

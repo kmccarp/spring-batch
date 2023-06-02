@@ -143,7 +143,7 @@ public class RangeArrayPropertyEditor extends PropertyEditorSupport {
 		// verify that ranges are disjoint
 		for (int i = 1; i < ranges.length; i++) {
 			Assert.isTrue(ranges[i - 1].getMax() < ranges[i].getMin(), "Ranges must be disjoint. Range[" + (i - 1)
-					+ "]: (" + ranges[i - 1] + ") Range[" + i + "]: (" + ranges[i] + ")");
+			+ "]: (" + ranges[i - 1] + ") Range[" + i + "]: (" + ranges[i] + ")");
 		}
 	}
 

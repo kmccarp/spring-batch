@@ -61,7 +61,7 @@ class SimpleMailMessageItemWriterTests {
 
 		SimpleMailMessage foo = new SimpleMailMessage();
 		SimpleMailMessage bar = new SimpleMailMessage();
-		SimpleMailMessage[] items = new SimpleMailMessage[] { foo, bar };
+		SimpleMailMessage[] items = new SimpleMailMessage[]{foo, bar};
 
 		writer.write(Chunk.of(items));
 
@@ -79,7 +79,7 @@ class SimpleMailMessageItemWriterTests {
 
 		SimpleMailMessage foo = new SimpleMailMessage();
 		SimpleMailMessage bar = new SimpleMailMessage();
-		SimpleMailMessage[] items = new SimpleMailMessage[] { foo, bar };
+		SimpleMailMessage[] items = new SimpleMailMessage[]{foo, bar};
 
 		// Spring 4.1 changed the send method to be vargs instead of an array
 		if (ReflectionUtils.findMethod(SimpleMailMessage.class, "send", SimpleMailMessage[].class) != null) {
@@ -90,7 +90,7 @@ class SimpleMailMessageItemWriterTests {
 		}
 
 		when(mailSender).thenThrow(new MailSendException(
-				Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
+		Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
 
 		assertThrows(MailSendException.class, () -> writer.write(Chunk.of(items)));
 	}
@@ -108,7 +108,7 @@ class SimpleMailMessageItemWriterTests {
 
 		SimpleMailMessage foo = new SimpleMailMessage();
 		SimpleMailMessage bar = new SimpleMailMessage();
-		SimpleMailMessage[] items = new SimpleMailMessage[] { foo, bar };
+		SimpleMailMessage[] items = new SimpleMailMessage[]{foo, bar};
 
 		// Spring 4.1 changed the send method to be vargs instead of an array
 		if (ReflectionUtils.findMethod(SimpleMailMessage.class, "send", SimpleMailMessage[].class) != null) {
@@ -119,7 +119,7 @@ class SimpleMailMessageItemWriterTests {
 		}
 
 		when(mailSender).thenThrow(new MailSendException(
-				Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
+		Collections.singletonMap((Object) foo, (Exception) new MessagingException("FOO"))));
 
 		writer.write(Chunk.of(items));
 

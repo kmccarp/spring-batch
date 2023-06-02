@@ -55,9 +55,9 @@ public class TestingChunkOrientedTasklet<T> extends ChunkOrientedTasklet<T> {
 	 * {@link Tasklet}.
 	 */
 	public TestingChunkOrientedTasklet(ItemReader<T> itemReader, ItemProcessor<T, T> itemProcessor,
-			ItemWriter<T> itemWriter, RepeatOperations repeatOperations) {
+	ItemWriter<T> itemWriter, RepeatOperations repeatOperations) {
 		super(new SimpleChunkProvider<>(itemReader, repeatOperations),
-				new SimpleChunkProcessor<>(itemProcessor, itemWriter));
+		new SimpleChunkProcessor<>(itemProcessor, itemWriter));
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class TestingChunkOrientedTasklet<T> extends ChunkOrientedTasklet<T> {
 	 * {@link Tasklet}.
 	 */
 	public TestingChunkOrientedTasklet(ItemReader<T> itemReader, ItemWriter<T> itemWriter,
-			RepeatOperations repeatOperations) {
+	RepeatOperations repeatOperations) {
 		this(itemReader, new PassThroughItemProcessor<>(), itemWriter, repeatOperations);
 	}
 

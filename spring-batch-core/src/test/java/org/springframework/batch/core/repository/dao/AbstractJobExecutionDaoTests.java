@@ -243,7 +243,7 @@ public abstract class AbstractJobExecutionDaoTests {
 		assertEquals(3, values.size());
 		Long jobExecutionId = exec.getId();
 		JobExecution value = values.stream().filter(jobExecution -> jobExecutionId.equals(jobExecution.getId()))
-				.findFirst().orElseThrow();
+		.findFirst().orElseThrow();
 		assertEquals(now.plus(3, ChronoUnit.SECONDS), value.getLastUpdated());
 
 	}

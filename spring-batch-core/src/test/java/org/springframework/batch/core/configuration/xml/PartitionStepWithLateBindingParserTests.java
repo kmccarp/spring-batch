@@ -64,7 +64,7 @@ class PartitionStepWithLateBindingParserTests {
 	void testExplicitHandlerStep() throws Exception {
 		assertNotNull(job1);
 		JobExecution jobExecution = jobRepository.createJobExecution(job1.getName(),
-				new JobParametersBuilder().addLong("gridSize", 1L).toJobParameters());
+		new JobParametersBuilder().addLong("gridSize", 1L).toJobParameters());
 		job1.execute(jobExecution);
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		Collections.sort(savedStepNames);

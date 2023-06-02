@@ -181,7 +181,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 	 */
 	public SimpleStepBuilder<I, O> chunk(int chunkSize) {
 		Assert.state(completionPolicy == null || chunkSize == 0,
-				"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
+		"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
 		this.chunkSize = chunkSize;
 		return this;
 	}
@@ -195,7 +195,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 	 */
 	public SimpleStepBuilder<I, O> chunk(CompletionPolicy completionPolicy) {
 		Assert.state(chunkSize == 0 || completionPolicy == null,
-				"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
+		"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
 		this.completionPolicy = completionPolicy;
 		return this;
 	}
@@ -366,7 +366,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 	 */
 	protected CompletionPolicy getChunkCompletionPolicy() {
 		Assert.state(!(completionPolicy != null && chunkSize > 0),
-				"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
+		"You must specify either a chunkCompletionPolicy or a commitInterval but not both.");
 		Assert.state(chunkSize >= 0, "The commitInterval must be positive or zero (for default value).");
 
 		if (completionPolicy != null) {
@@ -382,8 +382,8 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 	}
 
 	protected void registerAsStreamsAndListeners(ItemReader<? extends I> itemReader,
-			ItemProcessor<? super I, ? extends O> itemProcessor, ItemWriter<? super O> itemWriter) {
-		for (Object itemHandler : new Object[] { itemReader, itemWriter, itemProcessor }) {
+	ItemProcessor<? super I, ? extends O> itemProcessor, ItemWriter<? super O> itemWriter) {
+		for (Object itemHandler : new Object[]{itemReader, itemWriter, itemProcessor}) {
 			if (itemHandler instanceof ItemStream) {
 				stream((ItemStream) itemHandler);
 			}
@@ -396,7 +396,7 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 					listener((ChunkListener) listener);
 				}
 				if (listener instanceof ItemReadListener<?> || listener instanceof ItemProcessListener<?, ?>
-						|| listener instanceof ItemWriteListener<?>) {
+				|| listener instanceof ItemWriteListener<?>) {
 					itemListeners.add(listener);
 				}
 			}

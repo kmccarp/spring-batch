@@ -160,7 +160,7 @@ public class JobSupport implements BeanNameAware, Job, StepLocator {
 	@Override
 	public void execute(JobExecution execution) throws UnexpectedJobExecutionException {
 		throw new UnsupportedOperationException(
-				"JobSupport does not provide an implementation of execute().  Use a smarter subclass.");
+		"JobSupport does not provide an implementation of execute().  Use a smarter subclass.");
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class JobSupport implements BeanNameAware, Job, StepLocator {
 		final Step step = steps.get(stepName);
 		if (step == null) {
 			throw new NoSuchStepException(
-					"Step [" + stepName + "] does not exist for job with name [" + getName() + "]");
+			"Step [" + stepName + "] does not exist for job with name [" + getName() + "]");
 		}
 		return step;
 	}

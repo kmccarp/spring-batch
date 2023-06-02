@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/partitionFileJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/partitionFileJob.xml", "/job-runner-context.xml"})
 class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 
 	@Autowired
@@ -65,7 +65,7 @@ class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 	@Test
 	void testUpdateCredit() throws Exception {
 		assertTrue(applicationContext.containsBeanDefinition("outputTestReader"),
-				"Define a prototype bean called 'outputTestReader' to check the output");
+		"Define a prototype bean called 'outputTestReader' to check the output");
 
 		open(inputReader);
 		List<CustomerCredit> inputs = new ArrayList<>(getCredits(inputReader));
@@ -76,7 +76,7 @@ class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 
 		@SuppressWarnings("unchecked")
 		ItemReader<CustomerCredit> outputReader = (ItemReader<CustomerCredit>) applicationContext
-				.getBean("outputTestReader");
+		.getBean("outputTestReader");
 		open(outputReader);
 		List<CustomerCredit> outputs = new ArrayList<>(getCredits(outputReader));
 		close(outputReader);
@@ -88,7 +88,7 @@ class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 		inputs.iterator();
 		for (int i = 0; i < itemCount; i++) {
 			assertEquals(inputs.get(i).getCredit().add(CustomerCreditIncreaseProcessor.FIXED_AMOUNT).intValue(),
-					outputs.get(i).getCredit().intValue());
+			outputs.get(i).getCredit().intValue());
 		}
 	}
 

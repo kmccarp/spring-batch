@@ -37,7 +37,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * @since 2.0.1
  */
 public class CoreNamespacePostProcessor
-		implements BeanPostProcessor, BeanFactoryPostProcessor, ApplicationContextAware {
+implements BeanPostProcessor, BeanFactoryPostProcessor, ApplicationContextAware {
 
 	private static final String DEFAULT_JOB_REPOSITORY_NAME = "jobRepository";
 
@@ -70,7 +70,7 @@ public class CoreNamespacePostProcessor
 			if (beanFactory.isTypeMatch(beanName, AbstractStep.class)) {
 				String jobName = (String) bd.getAttribute(JOB_FACTORY_PROPERTY_NAME);
 				PropertyValue jobRepository = BeanDefinitionUtils.getPropertyValue(jobName,
-						JOB_REPOSITORY_PROPERTY_NAME, beanFactory);
+				JOB_REPOSITORY_PROPERTY_NAME, beanFactory);
 				if (jobRepository != null) {
 					// Set the job's JobRepository onto the step
 					pvs.addPropertyValue(jobRepository);
@@ -131,7 +131,7 @@ public class CoreNamespacePostProcessor
 			PlatformTransactionManager transactionManager = fb.getTransactionManager();
 			if (transactionManager == null && fb.requiresTransactionManager()) {
 				fb.setTransactionManager(
-						(PlatformTransactionManager) applicationContext.getBean(DEFAULT_TRANSACTION_MANAGER_NAME));
+				(PlatformTransactionManager) applicationContext.getBean(DEFAULT_TRANSACTION_MANAGER_NAME));
 			}
 		}
 		return bean;

@@ -142,7 +142,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [customer=" + customer + ", orderId=" + orderId + ", totalItems=" + totalItems + ", totalPrice="
-				+ totalPrice + "]";
+		+ totalPrice + "]";
 	}
 
 	@Override

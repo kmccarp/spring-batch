@@ -48,6 +48,6 @@ public interface StepHandler {
 	 * @see Step#execute(StepExecution)
 	 */
 	StepExecution handleStep(Step step, JobExecution jobExecution)
-			throws JobInterruptedException, JobRestartException, StartLimitExceededException;
+	throws JobInterruptedException, JobRestartException, StartLimitExceededException;
 
 }

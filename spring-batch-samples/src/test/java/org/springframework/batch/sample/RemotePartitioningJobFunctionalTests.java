@@ -69,8 +69,8 @@ public abstract class RemotePartitioningJobFunctionalTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		Configuration configuration = new ConfigurationImpl().addAcceptorConfiguration("jms", "tcp://localhost:61617")
-				.setPersistenceEnabled(false).setSecurityEnabled(false).setJMXManagementEnabled(false)
-				.setJournalDatasync(false);
+		.setPersistenceEnabled(false).setSecurityEnabled(false).setJMXManagementEnabled(false)
+		.setJournalDatasync(false);
 		this.brokerService = new EmbeddedActiveMQ().setConfiguration(configuration).start();
 		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 		databasePopulator.addScript(new ClassPathResource("/org/springframework/batch/core/schema-drop-hsqldb.sql"));
@@ -90,7 +90,7 @@ public abstract class RemotePartitioningJobFunctionalTests {
 		// then
 		assertEquals(ExitStatus.COMPLETED.getExitCode(), jobExecution.getExitStatus().getExitCode());
 		assertEquals(4, jobExecution.getStepExecutions().size()); // manager + 3
-																	// workers
+		// workers
 	}
 
 	@AfterEach

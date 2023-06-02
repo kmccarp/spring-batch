@@ -105,7 +105,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 
 	@Override
 	public StepExecution handleStep(Step step, JobExecution execution)
-			throws JobInterruptedException, JobRestartException, StartLimitExceededException {
+	throws JobInterruptedException, JobRestartException, StartLimitExceededException {
 		if (execution.isStopping()) {
 			throw new JobInterruptedException("JobExecution interrupted.");
 		}
@@ -118,9 +118,9 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 			// probably intentional so we want to run it again...
 			if (logger.isInfoEnabled()) {
 				logger.info(String.format(
-						"Duplicate step [%s] detected in execution of job=[%s]. "
-								+ "If either step fails, both will be executed again on restart.",
-						step.getName(), jobInstance.getJobName()));
+				"Duplicate step [%s] detected in execution of job=[%s]. "
+			+ "If either step fails, both will be executed again on restart.",
+				step.getName(), jobInstance.getJobName()));
 			}
 			lastStepExecution = null;
 		}
@@ -131,7 +131,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 			currentStepExecution = execution.createStepExecution(step.getName());
 
 			boolean isRestart = (lastStepExecution != null
-					&& !lastStepExecution.getStatus().equals(BatchStatus.COMPLETED));
+			&& !lastStepExecution.getStatus().equals(BatchStatus.COMPLETED));
 
 			if (isRestart) {
 				currentStepExecution.setExecutionContext(lastStepExecution.getExecutionContext());
@@ -164,7 +164,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 			jobRepository.updateExecutionContext(execution);
 
 			if (currentStepExecution.getStatus() == BatchStatus.STOPPING
-					|| currentStepExecution.getStatus() == BatchStatus.STOPPED) {
+			|| currentStepExecution.getStatus() == BatchStatus.STOPPED) {
 				// Ensure that the job gets the message that it is stopping
 				execution.setStatus(BatchStatus.STOPPING);
 				throw new JobInterruptedException("Job interrupted by step execution");
@@ -184,7 +184,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 	 */
 	private boolean stepExecutionPartOfExistingJobExecution(JobExecution jobExecution, StepExecution stepExecution) {
 		return stepExecution != null && stepExecution.getJobExecutionId() != null
-				&& stepExecution.getJobExecutionId().equals(jobExecution.getId());
+		&& stepExecution.getJobExecutionId().equals(jobExecution.getId());
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 	 * failure
 	 */
 	protected boolean shouldStart(StepExecution lastStepExecution, JobExecution jobExecution, Step step)
-			throws JobRestartException, StartLimitExceededException {
+	throws JobRestartException, StartLimitExceededException {
 
 		BatchStatus stepStatus;
 		if (lastStepExecution == null) {
@@ -212,12 +212,12 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 
 		if (stepStatus == BatchStatus.UNKNOWN) {
 			throw new JobRestartException("Cannot restart step from UNKNOWN status. "
-					+ "The last execution ended with a failure that could not be rolled back, "
-					+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
+			+ "The last execution ended with a failure that could not be rolled back, "
+			+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
 		}
 
 		if ((stepStatus == BatchStatus.COMPLETED && !step.isAllowStartIfComplete())
-				|| stepStatus == BatchStatus.ABANDONED) {
+		|| stepStatus == BatchStatus.ABANDONED) {
 			// step is complete, false should be returned, indicating that the
 			// step should not be started
 			if (logger.isInfoEnabled()) {
@@ -233,7 +233,7 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 		else {
 			// start max has been exceeded, throw an exception.
 			throw new StartLimitExceededException(
-					"Maximum start limit exceeded for step: " + step.getName() + "StartMax: " + step.getStartLimit());
+			"Maximum start limit exceeded for step: " + step.getName() + "StartMax: " + step.getStartLimit());
 		}
 	}
 

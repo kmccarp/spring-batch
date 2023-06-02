@@ -34,8 +34,8 @@ public final class AmqpMessageProducer {
 
 	private static final int SEND_MESSAGE_COUNT = 10;
 
-	private static final String[] BEAN_CONFIG = { "classpath:/META-INF/spring/jobs/messaging/rabbitmq-beans.xml",
-			"classpath:/META-INF/spring/config-beans.xml" };
+	private static final String[] BEAN_CONFIG = {"classpath:/META-INF/spring/jobs/messaging/rabbitmq-beans.xml",
+	"classpath:/META-INF/spring/config-beans.xml"};
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(BEAN_CONFIG);

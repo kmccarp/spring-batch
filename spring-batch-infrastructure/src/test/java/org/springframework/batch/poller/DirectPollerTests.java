@@ -106,7 +106,7 @@ class DirectPollerTests {
 		sleepAndCreateStringInBackground(500L);
 
 		Exception exception = assertThrows(ExecutionException.class,
-				() -> poller.poll(callback).get(1000L, TimeUnit.MILLISECONDS));
+		() -> poller.poll(callback).get(1000L, TimeUnit.MILLISECONDS));
 		assertEquals("Expected", exception.getCause().getMessage());
 	}
 

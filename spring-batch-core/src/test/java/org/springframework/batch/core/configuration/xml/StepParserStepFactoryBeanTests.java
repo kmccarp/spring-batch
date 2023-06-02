@@ -110,8 +110,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setStartLimit(5);
 		fb.setTasklet(new DummyTasklet());
 		fb.setTransactionManager(new ResourcelessTransactionManager());
-		fb.setListeners(new StepExecutionListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepExecutionListener[]{new StepExecutionListener() {
+		}});
 		fb.setIsolation(Isolation.DEFAULT);
 		fb.setTransactionTimeout(-1);
 		fb.setPropagation(Propagation.REQUIRED);
@@ -143,8 +143,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
 		fb.setTransactionManager(new ResourcelessTransactionManager());
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setIsolation(Isolation.DEFAULT);
 		fb.setTransactionTimeout(-1);
 		fb.setPropagation(Propagation.REQUIRED);
@@ -153,7 +153,7 @@ class StepParserStepFactoryBeanTests {
 		fb.setTaskExecutor(new SyncTaskExecutor());
 		fb.setItemReader(new DummyItemReader());
 		fb.setItemWriter(new DummyItemWriter());
-		fb.setStreams(new ItemStream[] { new FlatFileItemReader<>() });
+		fb.setStreams(new ItemStream[]{new FlatFileItemReader<>()});
 		fb.setHasChunkElement(true);
 
 		assertThrows(IllegalStateException.class, fb::getObject);
@@ -167,8 +167,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
 		fb.setTransactionManager(new ResourcelessTransactionManager());
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setIsolation(Isolation.DEFAULT);
 		fb.setTransactionTimeout(-1);
 		fb.setPropagation(Propagation.REQUIRED);
@@ -177,7 +177,7 @@ class StepParserStepFactoryBeanTests {
 		fb.setTaskExecutor(new SyncTaskExecutor());
 		fb.setItemReader(new DummyItemReader());
 		fb.setItemWriter(new DummyItemWriter());
-		fb.setStreams(new ItemStream[] { new FlatFileItemReader<>() });
+		fb.setStreams(new ItemStream[]{new FlatFileItemReader<>()});
 		fb.setCacheCapacity(5);
 		fb.setIsReaderTransactionalQueue(true);
 		fb.setRetryLimit(5);
@@ -199,8 +199,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
 		fb.setTransactionManager(new ResourcelessTransactionManager());
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setIsolation(Isolation.DEFAULT);
 		fb.setTransactionTimeout(-1);
 		fb.setPropagation(Propagation.REQUIRED);
@@ -209,7 +209,7 @@ class StepParserStepFactoryBeanTests {
 		fb.setItemReader(new DummyItemReader());
 		fb.setItemProcessor(new PassThroughItemProcessor<>());
 		fb.setItemWriter(new DummyItemWriter());
-		fb.setStreams(new ItemStream[] { new FlatFileItemReader<>() });
+		fb.setStreams(new ItemStream[]{new FlatFileItemReader<>()});
 
 		Object step = fb.getObject();
 		assertTrue(step instanceof TaskletStep);
@@ -226,14 +226,14 @@ class StepParserStepFactoryBeanTests {
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
 		fb.setTransactionManager(new ResourcelessTransactionManager());
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setChunkCompletionPolicy(new DummyCompletionPolicy());
 		fb.setTaskExecutor(new SyncTaskExecutor());
 		fb.setItemReader(new DummyItemReader());
 		fb.setItemProcessor(new PassThroughItemProcessor<>());
 		fb.setItemWriter(new DummyItemWriter());
-		fb.setStreams(new ItemStream[] { new FlatFileItemReader<>() });
+		fb.setStreams(new ItemStream[]{new FlatFileItemReader<>()});
 		fb.setCacheCapacity(5);
 		fb.setIsReaderTransactionalQueue(true);
 		fb.setRetryLimit(5);
@@ -248,7 +248,7 @@ class StepParserStepFactoryBeanTests {
 		Object step = fb.getObject();
 		assertTrue(step instanceof TaskletStep);
 		Object throttleLimit = ReflectionTestUtils.getField(ReflectionTestUtils.getField(step, "stepOperations"),
-				"throttleLimit");
+		"throttleLimit");
 		assertEquals(Integer.valueOf(10), throttleLimit);
 		Object tasklet = ReflectionTestUtils.getField(step, "tasklet");
 		assertTrue(tasklet instanceof ChunkOrientedTasklet<?>);
@@ -266,8 +266,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setAllowStartIfComplete(true);
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setTaskExecutor(new SyncTaskExecutor());
 
 		SimplePartitioner partitioner = new SimplePartitioner();
@@ -287,8 +287,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setAllowStartIfComplete(true);
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setTaskExecutor(new SyncTaskExecutor());
 
 		SimplePartitioner partitioner = new SimplePartitioner();
@@ -311,8 +311,8 @@ class StepParserStepFactoryBeanTests {
 		fb.setAllowStartIfComplete(true);
 		fb.setJobRepository(new JobRepositorySupport());
 		fb.setStartLimit(5);
-		fb.setListeners(new StepListener[] { new StepExecutionListener() {
-		} });
+		fb.setListeners(new StepListener[]{new StepExecutionListener() {
+		}});
 		fb.setTaskExecutor(new SyncTaskExecutor());
 
 		fb.setFlow(new SimpleFlow("foo"));

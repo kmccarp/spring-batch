@@ -102,7 +102,7 @@ class StaxEventItemReaderTests {
 
 	private static final String FRAGMENT_ROOT_ELEMENT = "fragment";
 
-	private static final String[] MULTI_FRAGMENT_ROOT_ELEMENTS = { "fragmentA", "fragmentB" };
+	private static final String[] MULTI_FRAGMENT_ROOT_ELEMENTS = {"fragmentA", "fragmentB"};
 
 	private ExecutionContext executionContext;
 
@@ -288,14 +288,14 @@ class StaxEventItemReaderTests {
 	void testMultiFragmentNameSpace() throws Exception {
 
 		source.setResource(new ByteArrayResource(xmlMultiFragment.getBytes()));
-		source.setFragmentRootElementNames(new String[] { "{urn:org.test.bar}fragmentA", "fragmentB" });
+		source.setFragmentRootElementNames(new String[]{"{urn:org.test.bar}fragmentA", "fragmentB"});
 		source.afterPropertiesSet();
 		source.open(executionContext);
 		// see asserts in the mock unmarshaller
 		assertNotNull(source.read());
 		assertNotNull(source.read());
 		assertNull(source.read()); // there are only two fragments (one has wrong
-									// namespace)
+		// namespace)
 
 		source.close();
 	}
@@ -608,8 +608,8 @@ class StaxEventItemReaderTests {
 	@Test
 	void testDtdXml() {
 		String xmlWithDtd = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE rohit [\n<!ENTITY entityex SYSTEM \"file://"
-				+ new File("src/test/resources/org/springframework/batch/support/existing.txt").getAbsolutePath()
-				+ "\">\n]>\n<abc>&entityex;</abc>";
+		+ new File("src/test/resources/org/springframework/batch/support/existing.txt").getAbsolutePath()
+		+ "\">\n]>\n<abc>&entityex;</abc>";
 		StaxEventItemReader<String> reader = new StaxEventItemReader<>();
 		reader.setName("foo");
 		reader.setResource(new ByteArrayResource(xmlWithDtd.getBytes()));
@@ -691,13 +691,13 @@ class StaxEventItemReaderTests {
 		 * Skips the XML fragment contents.
 		 */
 		private List<XMLEvent> readRecordsInsideFragment(XMLEventReader eventReader, QName fragmentName)
-				throws XMLStreamException {
+		throws XMLStreamException {
 			XMLEvent eventInsideFragment;
 			List<XMLEvent> events = new ArrayList<>();
 			do {
 				eventInsideFragment = eventReader.peek();
 				if (eventInsideFragment instanceof EndElement
-						&& fragmentName.equals(((EndElement) eventInsideFragment).getName())) {
+				&& fragmentName.equals(((EndElement) eventInsideFragment).getName())) {
 					break;
 				}
 				events.add(eventReader.nextEvent());

@@ -74,7 +74,7 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 	@SuppressWarnings("resource")
 	public static void main(String... args) {
 		new ClassPathXmlApplicationContext(ClassUtils.addResourcePathToPackagePath(DataSourceInitializer.class,
-				DataSourceInitializer.class.getSimpleName() + "-context.xml"));
+		DataSourceInitializer.class.getSimpleName() + "-context.xml"));
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class DataSourceInitializer implements InitializingBean, DisposableBean {
 				String[] scripts;
 				try {
 					scripts = StringUtils.delimitedListToStringArray(
-							stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
+					stripComments(IOUtils.readLines(scriptResource.getInputStream(), "UTF-8")), ";");
 				}
 				catch (IOException e) {
 					throw new BeanInitializationException("Cannot load script from [" + scriptResource + "]", e);

@@ -54,18 +54,18 @@ class OrderItemReaderTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	void testNext() throws Exception {
-		FieldSet headerFS = new DefaultFieldSet(new String[] { Order.LINE_ID_HEADER });
-		FieldSet customerFS = new DefaultFieldSet(new String[] { Customer.LINE_ID_NON_BUSINESS_CUST });
-		FieldSet billingFS = new DefaultFieldSet(new String[] { Address.LINE_ID_BILLING_ADDR });
-		FieldSet shippingFS = new DefaultFieldSet(new String[] { Address.LINE_ID_SHIPPING_ADDR });
-		FieldSet billingInfoFS = new DefaultFieldSet(new String[] { BillingInfo.LINE_ID_BILLING_INFO });
-		FieldSet shippingInfoFS = new DefaultFieldSet(new String[] { ShippingInfo.LINE_ID_SHIPPING_INFO });
-		FieldSet itemFS = new DefaultFieldSet(new String[] { LineItem.LINE_ID_ITEM });
-		FieldSet footerFS = new DefaultFieldSet(new String[] { Order.LINE_ID_FOOTER, "100", "3", "3" },
-				new String[] { "ID", "TOTAL_PRICE", "TOTAL_LINE_ITEMS", "TOTAL_ITEMS" });
+		FieldSet headerFS = new DefaultFieldSet(new String[]{Order.LINE_ID_HEADER});
+		FieldSet customerFS = new DefaultFieldSet(new String[]{Customer.LINE_ID_NON_BUSINESS_CUST});
+		FieldSet billingFS = new DefaultFieldSet(new String[]{Address.LINE_ID_BILLING_ADDR});
+		FieldSet shippingFS = new DefaultFieldSet(new String[]{Address.LINE_ID_SHIPPING_ADDR});
+		FieldSet billingInfoFS = new DefaultFieldSet(new String[]{BillingInfo.LINE_ID_BILLING_INFO});
+		FieldSet shippingInfoFS = new DefaultFieldSet(new String[]{ShippingInfo.LINE_ID_SHIPPING_INFO});
+		FieldSet itemFS = new DefaultFieldSet(new String[]{LineItem.LINE_ID_ITEM});
+		FieldSet footerFS = new DefaultFieldSet(new String[]{Order.LINE_ID_FOOTER, "100", "3", "3"},
+		new String[]{"ID", "TOTAL_PRICE", "TOTAL_LINE_ITEMS", "TOTAL_ITEMS"});
 
 		when(input.read()).thenReturn(headerFS, customerFS, billingFS, shippingFS, billingInfoFS, shippingInfoFS,
-				itemFS, itemFS, itemFS, footerFS, null);
+		itemFS, itemFS, itemFS, footerFS, null);
 
 		Order order = new Order();
 		Customer customer = new Customer();

@@ -27,7 +27,7 @@ public class SkipCheckingDecider implements JobExecutionDecider {
 	@Override
 	public FlowExecutionStatus decide(JobExecution jobExecution, @Nullable StepExecution stepExecution) {
 		if (!stepExecution.getExitStatus().getExitCode().equals(ExitStatus.FAILED.getExitCode())
-				&& stepExecution.getSkipCount() > 0) {
+		&& stepExecution.getSkipCount() > 0) {
 			return new FlowExecutionStatus("COMPLETED WITH SKIPS");
 		}
 		else {

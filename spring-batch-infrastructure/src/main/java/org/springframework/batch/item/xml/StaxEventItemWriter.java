@@ -77,7 +77,7 @@ import org.springframework.util.xml.StaxUtils;
  * @author Mahmoud Ben Hassine
  */
 public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
-		implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
+implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
 
 	private static final Log log = LogFactory.getLog(StaxEventItemWriter.class);
 
@@ -400,7 +400,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 			currentRecordCount = executionContext.getLong(getExecutionContextKey(WRITE_STATISTICS_NAME));
 			if (executionContext.containsKey(getExecutionContextKey(UNCLOSED_HEADER_CALLBACK_ELEMENTS_NAME))) {
 				unclosedHeaderCallbackElements = (List<QName>) executionContext
-						.get(getExecutionContextKey(UNCLOSED_HEADER_CALLBACK_ELEMENTS_NAME));
+				.get(getExecutionContextKey(UNCLOSED_HEADER_CALLBACK_ELEMENTS_NAME));
 			}
 
 			restarted = true;
@@ -425,7 +425,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 			try {
 				if (headerCallback != null) {
 					UnclosedElementCollectingEventWriter headerCallbackWriter = new UnclosedElementCollectingEventWriter(
-							delegateEventWriter);
+					delegateEventWriter);
 					headerCallback.write(headerCallbackWriter);
 					unclosedHeaderCallbackElements = headerCallbackWriter.getUnclosedElements();
 				}
@@ -510,7 +510,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 		}
 		catch (UnsupportedEncodingException e) {
 			throw new ItemStreamException(
-					"Unable to write to file resource: [" + resource + "] with encoding=[" + encoding + "]", e);
+			"Unable to write to file resource: [" + resource + "] with encoding=[" + encoding + "]", e);
 		}
 		catch (IOException e) {
 			throw new ItemStreamException("Unable to write to file resource: [" + resource + "]", e);
@@ -526,7 +526,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 	 * @throws XMLStreamException thrown if error occured creating {@link XMLEventWriter}.
 	 */
 	protected XMLEventWriter createXmlEventWriter(XMLOutputFactory outputFactory, Writer writer)
-			throws XMLStreamException {
+	throws XMLStreamException {
 		return outputFactory.createXMLEventWriter(writer);
 	}
 
@@ -699,7 +699,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 				XMLEventWriter footerCallbackWriter = delegateEventWriter;
 				if (restarted && !unclosedHeaderCallbackElements.isEmpty()) {
 					footerCallbackWriter = new UnopenedElementClosingEventWriter(delegateEventWriter, bufferedWriter,
-							unclosedHeaderCallbackElements);
+					unclosedHeaderCallbackElements);
 				}
 				footerCallback.write(footerCallbackWriter);
 			}
@@ -774,7 +774,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 
 		for (Object object : items) {
 			Assert.state(marshaller.supports(object.getClass()),
-					"Marshaller must support the class of the marshalled object");
+			"Marshaller must support the class of the marshalled object");
 			Result result = createStaxResult();
 			marshaller.marshal(object, result);
 		}
@@ -804,7 +804,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 			executionContext.putLong(getExecutionContextKey(WRITE_STATISTICS_NAME), currentRecordCount);
 			if (!unclosedHeaderCallbackElements.isEmpty()) {
 				executionContext.put(getExecutionContextKey(UNCLOSED_HEADER_CALLBACK_ELEMENTS_NAME),
-						unclosedHeaderCallbackElements);
+				unclosedHeaderCallbackElements);
 			}
 		}
 	}

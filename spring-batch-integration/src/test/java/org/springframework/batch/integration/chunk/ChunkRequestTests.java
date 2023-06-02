@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class ChunkRequestTests {
 
 	private final ChunkRequest<String> request = new ChunkRequest<>(0, Chunk.of("foo", "bar"), 111L,
-			MetaDataInstanceFactory.createStepExecution().createStepContribution());
+	MetaDataInstanceFactory.createStepExecution().createStepContribution());
 
 	@Test
 	void testGetJobId() {

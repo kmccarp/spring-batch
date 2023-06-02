@@ -47,9 +47,9 @@ import static org.springframework.test.util.ReflectionTestUtils.getField;
 class StaxEventItemReaderBuilderTests {
 
 	private static final String SIMPLE_XML = "<foos><foo><first>1</first>"
-			+ "<second>two</second><third>three</third></foo><foo><first>4</first>"
-			+ "<second>five</second><third>six</third></foo><foo><first>7</first>"
-			+ "<second>eight</second><third>nine</third></foo></foos>";
+	+ "<second>two</second><third>three</third></foo><foo><first>4</first>"
+	+ "<second>five</second><third>six</third></foo><foo><first>7</first>"
+	+ "<second>eight</second><third>nine</third></foo></foos>";
 
 	@Mock
 	private Resource resource;
@@ -57,18 +57,18 @@ class StaxEventItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new StaxEventItemReaderBuilder<Foo>().resource(this.resource).build());
+		() -> new StaxEventItemReaderBuilder<Foo>().resource(this.resource).build());
 		assertEquals("A name is required when saveState is set to true.", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new StaxEventItemReaderBuilder<Foo>().resource(this.resource).saveState(false).build());
+		() -> new StaxEventItemReaderBuilder<Foo>().resource(this.resource).saveState(false).build());
 		assertEquals("At least one fragment root element is required", exception.getMessage());
 	}
 
 	@Test
 	void testBuildWithoutProvidingResource() {
 		StaxEventItemReader<Foo> reader = new StaxEventItemReaderBuilder<Foo>().name("fooReader")
-				.addFragmentRootElements("foo").build();
+		.addFragmentRootElements("foo").build();
 
 		assertNotNull(reader);
 	}
@@ -79,8 +79,8 @@ class StaxEventItemReaderBuilderTests {
 		unmarshaller.setClassesToBeBound(Foo.class);
 
 		StaxEventItemReader<Foo> reader = new StaxEventItemReaderBuilder<Foo>().name("fooReader")
-				.resource(getResource(SIMPLE_XML)).addFragmentRootElements("foo").currentItemCount(1).maxItemCount(2)
-				.unmarshaller(unmarshaller).xmlInputFactory(XMLInputFactory.newInstance()).build();
+		.resource(getResource(SIMPLE_XML)).addFragmentRootElements("foo").currentItemCount(1).maxItemCount(2)
+		.unmarshaller(unmarshaller).xmlInputFactory(XMLInputFactory.newInstance()).build();
 
 		reader.afterPropertiesSet();
 
@@ -110,9 +110,9 @@ class StaxEventItemReaderBuilderTests {
 		ByteBuffer xml = charset.encode(SIMPLE_XML);
 
 		StaxEventItemReader<Foo> reader = new StaxEventItemReaderBuilder<Foo>().name("fooReader")
-				.resource(new ByteArrayResource(xml.array())).encoding(charset.name()).addFragmentRootElements("foo")
-				.currentItemCount(1).maxItemCount(2).unmarshaller(unmarshaller)
-				.xmlInputFactory(XMLInputFactory.newInstance()).build();
+		.resource(new ByteArrayResource(xml.array())).encoding(charset.name()).addFragmentRootElements("foo")
+		.currentItemCount(1).maxItemCount(2).unmarshaller(unmarshaller)
+		.xmlInputFactory(XMLInputFactory.newInstance()).build();
 
 		reader.afterPropertiesSet();
 
@@ -136,7 +136,7 @@ class StaxEventItemReaderBuilderTests {
 		unmarshaller.setClassesToBeBound(Foo.class);
 
 		StaxEventItemReader<Foo> reader = new StaxEventItemReaderBuilder<Foo>().name("fooReader")
-				.resource(this.resource).addFragmentRootElements("foo").unmarshaller(unmarshaller).build();
+		.resource(this.resource).addFragmentRootElements("foo").unmarshaller(unmarshaller).build();
 
 		reader.afterPropertiesSet();
 
@@ -150,8 +150,8 @@ class StaxEventItemReaderBuilderTests {
 		unmarshaller.setClassesToBeBound(Foo.class);
 
 		StaxEventItemReader<Foo> reader = new StaxEventItemReaderBuilder<Foo>().name("fooReader")
-				.resource(getResource(SIMPLE_XML)).addFragmentRootElements("foo").unmarshaller(unmarshaller)
-				.saveState(false).build();
+		.resource(getResource(SIMPLE_XML)).addFragmentRootElements("foo").unmarshaller(unmarshaller)
+		.saveState(false).build();
 
 		reader.afterPropertiesSet();
 

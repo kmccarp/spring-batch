@@ -84,7 +84,7 @@ public class ChunkProcessorChunkHandler<S> implements ChunkHandler<S>, Initializ
 		if (failure != null) {
 			logger.debug("Failed chunk", failure);
 			return new ChunkResponse(false, chunkRequest.getSequence(), chunkRequest.getJobId(), stepContribution,
-					failure.getClass().getName() + ": " + failure.getMessage());
+			failure.getClass().getName() + ": " + failure.getMessage());
 		}
 
 		if (logger.isDebugEnabled()) {

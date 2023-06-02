@@ -19,7 +19,7 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.sample.domain.trade.CustomerCredit;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = { "/hibernate-context.xml", "/jobs/iosample/hibernate.xml" })
+@SpringJUnitConfig(locations = {"/hibernate-context.xml", "/jobs/iosample/hibernate.xml"})
 class HibernateFunctionalTests extends AbstractIoSampleTests {
 
 	@Override

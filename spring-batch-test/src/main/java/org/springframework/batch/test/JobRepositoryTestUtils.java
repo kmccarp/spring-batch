@@ -96,12 +96,12 @@ public class JobRepositoryTestUtils {
 	 * complete.
 	 */
 	public List<JobExecution> createJobExecutions(String jobName, String[] stepNames, int count)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 		List<JobExecution> list = new ArrayList<>();
 		JobParameters jobParameters = new JobParameters();
 		for (int i = 0; i < count; i++) {
 			JobExecution jobExecution = jobRepository.createJobExecution(jobName,
-					jobParametersIncrementer.getNext(jobParameters));
+			jobParametersIncrementer.getNext(jobParameters));
 			list.add(jobExecution);
 			for (String stepName : stepNames) {
 				jobRepository.add(jobExecution.createStepExecution(stepName));
@@ -121,8 +121,8 @@ public class JobRepositoryTestUtils {
 	 * complete.
 	 */
 	public List<JobExecution> createJobExecutions(int count)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-		return createJobExecutions("job", new String[] { "step" }, count);
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+		return createJobExecutions("job", new String[]{"step"}, count);
 	}
 
 	/**

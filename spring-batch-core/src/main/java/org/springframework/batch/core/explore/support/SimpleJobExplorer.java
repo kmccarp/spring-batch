@@ -71,7 +71,7 @@ public class SimpleJobExplorer implements JobExplorer {
 	 * @param ecDao The {@link ExecutionContextDao} to be used by the repository.
 	 */
 	public SimpleJobExplorer(JobInstanceDao jobInstanceDao, JobExecutionDao jobExecutionDao,
-			StepExecutionDao stepExecutionDao, ExecutionContextDao ecDao) {
+	StepExecutionDao stepExecutionDao, ExecutionContextDao ecDao) {
 		super();
 		this.jobInstanceDao = jobInstanceDao;
 		this.jobExecutionDao = jobExecutionDao;

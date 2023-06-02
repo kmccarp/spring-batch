@@ -37,7 +37,7 @@ class JdbcStepExecutionDaoTests extends AbstractStepExecutionDaoTests {
 	@Override
 	protected JobRepository getJobRepository() {
 		deleteFromTables("BATCH_JOB_EXECUTION_CONTEXT", "BATCH_STEP_EXECUTION_CONTEXT", "BATCH_STEP_EXECUTION",
-				"BATCH_JOB_EXECUTION_PARAMS", "BATCH_JOB_EXECUTION", "BATCH_JOB_INSTANCE");
+		"BATCH_JOB_EXECUTION_PARAMS", "BATCH_JOB_EXECUTION", "BATCH_JOB_INSTANCE");
 		return (JobRepository) applicationContext.getBean("jobRepository");
 	}
 
@@ -64,14 +64,14 @@ class JdbcStepExecutionDaoTests extends AbstractStepExecutionDaoTests {
 		StepExecution retrievedAfterSave = dao.getStepExecution(jobExecution, stepExecution.getId());
 
 		assertTrue(retrievedAfterSave.getExitStatus().getExitDescription().length() < stepExecution.getExitStatus()
-				.getExitDescription().length(), "Exit description should be truncated");
+		.getExitDescription().length(), "Exit description should be truncated");
 
 		dao.updateStepExecution(stepExecution);
 
 		StepExecution retrievedAfterUpdate = dao.getStepExecution(jobExecution, stepExecution.getId());
 
 		assertTrue(retrievedAfterUpdate.getExitStatus().getExitDescription().length() < stepExecution.getExitStatus()
-				.getExitDescription().length(), "Exit description should be truncated");
+		.getExitDescription().length(), "Exit description should be truncated");
 	}
 
 	@Transactional

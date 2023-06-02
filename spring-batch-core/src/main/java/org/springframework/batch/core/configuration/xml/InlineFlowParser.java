@@ -59,7 +59,7 @@ public class InlineFlowParser extends AbstractFlowParser {
 		builder.getRawBeanDefinition().setAttribute("flowName", flowName);
 		builder.addPropertyValue("name", flowName);
 		builder.addPropertyValue("stateTransitionComparator",
-				new RuntimeBeanReference(DefaultStateTransitionComparator.STATE_TRANSITION_COMPARATOR));
+		new RuntimeBeanReference(DefaultStateTransitionComparator.STATE_TRANSITION_COMPARATOR));
 		super.doParse(element, parserContext, builder);
 		builder.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 		parserContext.popAndRegisterContainingComponent();

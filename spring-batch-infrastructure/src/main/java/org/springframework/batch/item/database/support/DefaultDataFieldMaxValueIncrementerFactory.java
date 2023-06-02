@@ -107,7 +107,7 @@ public class DefaultDataFieldMaxValueIncrementerFactory implements DataFieldMaxV
 		}
 		else if (databaseType == MYSQL) {
 			MySQLMaxValueIncrementer mySQLMaxValueIncrementer = new MySQLMaxValueIncrementer(dataSource,
-					incrementerName, incrementerColumnName);
+			incrementerName, incrementerColumnName);
 			mySQLMaxValueIncrementer.setUseNewConnection(true);
 			return mySQLMaxValueIncrementer;
 		}

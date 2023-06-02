@@ -26,7 +26,7 @@ public class LineItemFieldExtractor implements FieldExtractor<LineItem> {
 
 	@Override
 	public Object[] extract(LineItem item) {
-		return new Object[] { "ITEM:", item.getItemId(), item.getPrice() };
+		return new Object[]{"ITEM:", item.getItemId(), item.getPrice()};
 	}
 
 }

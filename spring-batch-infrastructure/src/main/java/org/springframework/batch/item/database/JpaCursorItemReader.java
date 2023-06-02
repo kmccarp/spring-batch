@@ -105,7 +105,7 @@ public class JpaCursorItemReader<T> extends AbstractItemCountingItemStreamItemRe
 		Assert.state(this.entityManagerFactory != null, "EntityManagerFactory is required");
 		if (this.queryProvider == null) {
 			Assert.state(StringUtils.hasLength(this.queryString),
-					"Query string is required when queryProvider is null");
+			"Query string is required when queryProvider is null");
 		}
 	}
 

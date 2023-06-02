@@ -65,7 +65,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Dan Garrette
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(locations = { "/skipSample-job-launcher-context.xml" })
+@SpringJUnitConfig(locations = {"/skipSample-job-launcher-context.xml"})
 class SkipSampleFunctionalTests {
 
 	private JdbcTemplate jdbcTemplate;
@@ -90,7 +90,7 @@ class SkipSampleFunctionalTests {
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "TRADE", "CUSTOMER");
 		for (int i = 1; i < 10; i++) {
 			jdbcTemplate.update("INSERT INTO CUSTOMER (ID, VERSION, NAME, CREDIT) VALUES (" + incrementer.nextIntValue()
-					+ ", 0, 'customer" + i + "', 100000)");
+			+ ", 0, 'customer" + i + "', 100000)");
 		}
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "ERROR_LOG");
 	}
@@ -218,7 +218,7 @@ class SkipSampleFunctionalTests {
 	void testSkippableExceptionDuringProcess() throws Exception {
 		// given
 		ApplicationContext context = new AnnotationConfigApplicationContext(
-				SkippableExceptionDuringProcessSample.class);
+		SkippableExceptionDuringProcessSample.class);
 		JobLauncher jobLauncher = context.getBean(JobLauncher.class);
 		Job job = context.getBean(Job.class);
 
@@ -275,11 +275,11 @@ class SkipSampleFunctionalTests {
 		assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "ERROR_LOG"));
 
 		assertEquals("2 records were skipped!",
-				jdbcTemplate.queryForObject("SELECT MESSAGE from ERROR_LOG where JOB_NAME = ? and STEP_NAME = ?",
-						String.class, "skipJob", "step1"));
+		jdbcTemplate.queryForObject("SELECT MESSAGE from ERROR_LOG where JOB_NAME = ? and STEP_NAME = ?",
+	String.class, "skipJob", "step1"));
 		assertEquals("2 records were skipped!",
-				jdbcTemplate.queryForObject("SELECT MESSAGE from ERROR_LOG where JOB_NAME = ? and STEP_NAME = ?",
-						String.class, "skipJob", "step2"));
+		jdbcTemplate.queryForObject("SELECT MESSAGE from ERROR_LOG where JOB_NAME = ? and STEP_NAME = ?",
+	String.class, "skipJob", "step2"));
 
 		System.err.println(jobExecution.getExecutionContext());
 		assertEquals(new BigDecimal("340.45"), jobExecution.getExecutionContext().get(TradeWriter.TOTAL_AMOUNT_KEY));
@@ -308,8 +308,8 @@ class SkipSampleFunctionalTests {
 	private Map<String, Object> getStepExecutionAsMap(JobExecution jobExecution, String stepName) {
 		long jobExecutionId = jobExecution.getId();
 		return jdbcTemplate.queryForMap(
-				"SELECT * from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? and STEP_NAME = ?", jobExecutionId,
-				stepName);
+		"SELECT * from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? and STEP_NAME = ?", jobExecutionId,
+		stepName);
 	}
 
 	/**

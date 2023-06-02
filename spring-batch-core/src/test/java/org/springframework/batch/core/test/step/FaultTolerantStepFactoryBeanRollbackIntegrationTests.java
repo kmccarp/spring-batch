@@ -240,12 +240,12 @@ class FaultTolerantStepFactoryBeanRollbackIntegrationTests {
 
 		public List<String> getCommitted() {
 			return jdbcTemplate.query("SELECT MESSAGE from ERROR_LOG where STEP_NAME='written'",
-					new RowMapper<String>() {
-						@Override
-						public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-							return rs.getString(1);
-						}
-					});
+			new RowMapper<String>() {
+				@Override
+				public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getString(1);
+				}
+			});
 		}
 
 		public void clear() {
@@ -294,12 +294,12 @@ class FaultTolerantStepFactoryBeanRollbackIntegrationTests {
 
 		public List<String> getCommitted() {
 			return jdbcTemplate.query("SELECT MESSAGE from ERROR_LOG where STEP_NAME='processed'",
-					new RowMapper<String>() {
-						@Override
-						public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-							return rs.getString(1);
-						}
-					});
+			new RowMapper<String>() {
+				@Override
+				public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getString(1);
+				}
+			});
 		}
 
 		public void clear() {

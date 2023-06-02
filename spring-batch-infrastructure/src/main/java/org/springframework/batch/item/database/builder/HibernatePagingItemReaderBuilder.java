@@ -236,7 +236,7 @@ public class HibernatePagingItemReaderBuilder<T> {
 
 		if (this.queryProvider == null) {
 			Assert.state(StringUtils.hasText(queryString) ^ StringUtils.hasText(queryName),
-					"queryString or queryName must be set");
+			"queryString or queryName must be set");
 		}
 
 		HibernatePagingItemReader<T> reader = new HibernatePagingItemReader<>();

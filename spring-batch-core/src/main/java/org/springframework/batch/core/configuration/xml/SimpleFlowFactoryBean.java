@@ -117,7 +117,7 @@ public class SimpleFlowFactoryBean implements FactoryBean<SimpleFlow>, Initializ
 		for (StateTransition stateTransition : stateTransitions) {
 			State state = getProxyState(stateTransition.getState());
 			updatedTransitions.add(StateTransition.switchOriginAndDestination(stateTransition, state,
-					getNext(stateTransition.getNext())));
+			getNext(stateTransition.getNext())));
 		}
 
 		flow.setStateTransitions(updatedTransitions);

@@ -89,7 +89,7 @@ public class RepositoryItemWriterBuilder<T> {
 	 *
 	 */
 	public RepositoryItemWriterBuilder<T> repository(
-			RepositoryItemWriterBuilder.RepositoryMethodReference repositoryMethodReference) {
+	RepositoryItemWriterBuilder.RepositoryMethodReference repositoryMethodReference) {
 		this.repositoryMethodReference = repositoryMethodReference;
 
 		return this;

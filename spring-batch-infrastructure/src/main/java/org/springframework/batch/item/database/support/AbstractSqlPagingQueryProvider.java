@@ -197,7 +197,7 @@ public abstract class AbstractSqlPagingQueryProvider implements PagingQueryProvi
 		if (namedParameters.size() > 0) {
 			if (parameterCount != namedParameters.size()) {
 				throw new InvalidDataAccessApiUsageException(
-						"You can't use both named parameters and classic \"?\" placeholders: " + sql);
+				"You can't use both named parameters and classic \"?\" placeholders: " + sql);
 			}
 			usingNamedParameters = true;
 		}
@@ -225,7 +225,7 @@ public abstract class AbstractSqlPagingQueryProvider implements PagingQueryProvi
 		String temp = clause.trim();
 		int length = keyWord.length();
 		if (temp.toLowerCase().startsWith(keyWord) && Character.isWhitespace(temp.charAt(length))
-				&& temp.length() > length + 1) {
+		&& temp.length() > length + 1) {
 			return temp.substring(length + 1);
 		}
 		else {

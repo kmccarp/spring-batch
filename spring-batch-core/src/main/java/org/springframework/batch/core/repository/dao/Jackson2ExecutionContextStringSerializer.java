@@ -126,10 +126,10 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	 */
 	public Jackson2ExecutionContextStringSerializer(String... trustedClassNames) {
 		this.objectMapper = JsonMapper.builder().configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
-				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
-				.configure(MapperFeature.BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES, true)
-				.setDefaultTyping(createTrustedDefaultTyping(trustedClassNames)).addModule(new JobParametersModule())
-				.build();
+		.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
+		.configure(MapperFeature.BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES, true)
+		.setDefaultTyping(createTrustedDefaultTyping(trustedClassNames)).addModule(new JobParametersModule())
+		.build();
 	}
 
 	public void setObjectMapper(ObjectMapper objectMapper) {
@@ -184,7 +184,7 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 
 			@Override
 			public void serializeWithType(JobParameter value, JsonGenerator gen, SerializerProvider provider,
-					TypeSerializer typeSer) throws IOException {
+			TypeSerializer typeSer) throws IOException {
 				WritableTypeId typeId = typeSer.typeId(value, START_OBJECT);
 				typeSer.writeTypePrefix(gen, typeId);
 				serialize(value, gen, provider);
@@ -193,7 +193,7 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 
 			@Override
 			public void serialize(JobParameter jobParameter, JsonGenerator jsonGenerator,
-					SerializerProvider serializerProvider) throws IOException {
+			SerializerProvider serializerProvider) throws IOException {
 				jsonGenerator.writeFieldName(VALUE_KEY_NAME);
 				jsonGenerator.writeObject(jobParameter.getValue());
 				jsonGenerator.writeFieldName(TYPE_KEY_NAME);
@@ -238,9 +238,9 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	 * @param trustedClassNames array of fully qualified trusted class names
 	 */
 	private static TypeResolverBuilder<? extends TypeResolverBuilder> createTrustedDefaultTyping(
-			String[] trustedClassNames) {
+	String[] trustedClassNames) {
 		TypeResolverBuilder<StdTypeResolverBuilder> result = new TrustedTypeResolverBuilder(
-				ObjectMapper.DefaultTyping.NON_FINAL, trustedClassNames);
+		ObjectMapper.DefaultTyping.NON_FINAL, trustedClassNames);
 		result = result.init(JsonTypeInfo.Id.CLASS, null);
 		result = result.inclusion(JsonTypeInfo.As.PROPERTY);
 		return result;
@@ -259,16 +259,16 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 
 		TrustedTypeResolverBuilder(ObjectMapper.DefaultTyping defaultTyping, String[] trustedClassNames) {
 			super(defaultTyping,
-					// we do explicit validation in the TypeIdResolver
-					BasicPolymorphicTypeValidator.builder().allowIfSubType(Object.class).build());
+			// we do explicit validation in the TypeIdResolver
+			BasicPolymorphicTypeValidator.builder().allowIfSubType(Object.class).build());
 			this.trustedClassNames = trustedClassNames != null
-					? Arrays.copyOf(trustedClassNames, trustedClassNames.length) : null;
+			? Arrays.copyOf(trustedClassNames, trustedClassNames.length) : null;
 		}
 
 		@Override
 		protected TypeIdResolver idResolver(MapperConfig<?> config, JavaType baseType,
-				PolymorphicTypeValidator subtypeValidator, Collection<NamedType> subtypes, boolean forSer,
-				boolean forDeser) {
+		PolymorphicTypeValidator subtypeValidator, Collection<NamedType> subtypes, boolean forSer,
+		boolean forDeser) {
 			TypeIdResolver result = super.idResolver(config, baseType, subtypeValidator, subtypes, forSer, forDeser);
 			return new TrustedTypeIdResolver(result, this.trustedClassNames);
 		}
@@ -283,20 +283,20 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	static class TrustedTypeIdResolver implements TypeIdResolver {
 
 		private static final Set<String> TRUSTED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-				"javax.xml.namespace.QName", "java.util.UUID", "java.util.ArrayList", "java.util.Arrays$ArrayList",
-				"java.util.LinkedList", "java.util.Collections$EmptyList", "java.util.Collections$EmptyMap",
-				"java.util.Collections$EmptySet", "java.util.Collections$UnmodifiableRandomAccessList",
-				"java.util.Collections$UnmodifiableList", "java.util.Collections$UnmodifiableMap",
-				"java.util.Collections$UnmodifiableSet", "java.util.Collections$SingletonList",
-				"java.util.Collections$SingletonMap", "java.util.Collections$SingletonSet", "java.util.Date",
-				"java.time.Instant", "java.time.Duration", "java.time.LocalDate", "java.time.LocalTime",
-				"java.time.LocalDateTime", "java.sql.Timestamp", "java.net.URL", "java.util.TreeMap",
-				"java.util.HashMap", "java.util.LinkedHashMap", "java.util.TreeSet", "java.util.HashSet",
-				"java.util.LinkedHashSet", "java.lang.Boolean", "java.lang.Byte", "java.lang.Short",
-				"java.lang.Integer", "java.lang.Long", "java.lang.Double", "java.lang.Float", "java.math.BigDecimal",
-				"java.math.BigInteger", "java.lang.String", "java.lang.Character", "java.lang.CharSequence",
-				"java.util.Properties", "[Ljava.util.Properties;", "org.springframework.batch.core.JobParameter",
-				"org.springframework.batch.core.JobParameters")));
+		"javax.xml.namespace.QName", "java.util.UUID", "java.util.ArrayList", "java.util.Arrays$ArrayList",
+		"java.util.LinkedList", "java.util.Collections$EmptyList", "java.util.Collections$EmptyMap",
+		"java.util.Collections$EmptySet", "java.util.Collections$UnmodifiableRandomAccessList",
+		"java.util.Collections$UnmodifiableList", "java.util.Collections$UnmodifiableMap",
+		"java.util.Collections$UnmodifiableSet", "java.util.Collections$SingletonList",
+		"java.util.Collections$SingletonMap", "java.util.Collections$SingletonSet", "java.util.Date",
+		"java.time.Instant", "java.time.Duration", "java.time.LocalDate", "java.time.LocalTime",
+		"java.time.LocalDateTime", "java.sql.Timestamp", "java.net.URL", "java.util.TreeMap",
+		"java.util.HashMap", "java.util.LinkedHashMap", "java.util.TreeSet", "java.util.HashSet",
+		"java.util.LinkedHashSet", "java.lang.Boolean", "java.lang.Byte", "java.lang.Short",
+		"java.lang.Integer", "java.lang.Long", "java.lang.Double", "java.lang.Float", "java.math.BigDecimal",
+		"java.math.BigInteger", "java.lang.String", "java.lang.Character", "java.lang.CharSequence",
+		"java.util.Properties", "[Ljava.util.Properties;", "org.springframework.batch.core.JobParameter",
+		"org.springframework.batch.core.JobParameters")));
 
 		private final Set<String> trustedClassNames = new LinkedHashSet<>(TRUSTED_CLASS_NAMES);
 
@@ -347,10 +347,10 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 				return result;
 			}
 			throw new IllegalArgumentException("The class with " + id + " and name of " + className
-					+ " is not trusted. "
-					+ "If you believe this class is safe to deserialize, you can add it to the base set of trusted classes "
-					+ "at construction time or provide an explicit mapping using Jackson annotations or a custom ObjectMapper. "
-					+ "If the serialization is only done by a trusted source, you can also enable default typing.");
+			+ " is not trusted. "
+			+ "If you believe this class is safe to deserialize, you can add it to the base set of trusted classes "
+			+ "at construction time or provide an explicit mapping using Jackson annotations or a custom ObjectMapper. "
+			+ "If the serialization is only done by a trusted source, you can also enable default typing.");
 		}
 
 		private boolean isTrusted(String id) {

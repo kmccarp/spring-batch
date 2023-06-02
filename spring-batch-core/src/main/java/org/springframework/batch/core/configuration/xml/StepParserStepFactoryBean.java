@@ -228,7 +228,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	public Step getObject() throws Exception {
 		if (hasChunkElement) {
 			Assert.isNull(tasklet,
-					"Step [" + name + "] has both a <chunk/> element and a 'ref' attribute  referencing a Tasklet.");
+			"Step [" + name + "] has both a <chunk/> element and a 'ref' attribute  referencing a Tasklet.");
 
 			validateFaultTolerantSettings();
 
@@ -290,7 +290,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 		PartitionStepBuilder builder;
 		if (partitioner != null) {
 			builder = new StepBuilder(name, jobRepository)
-					.partitioner(step != null ? step.getName() : name, partitioner).step(step);
+			.partitioner(step != null ? step.getName() : name, partitioner).step(step);
 		}
 		else {
 			builder = new StepBuilder(name, jobRepository).partitioner(step);
@@ -454,7 +454,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	 */
 	protected TaskletStep createTaskletStep() {
 		TaskletStepBuilder builder = new TaskletStepBuilder(new StepBuilder(name, jobRepository)).tasklet(tasklet,
-				transactionManager);
+		transactionManager);
 		enhanceTaskletStepBuilder(builder);
 		return builder.build();
 	}
@@ -478,7 +478,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 		}
 		builder.transactionManager(transactionManager);
 		if (transactionTimeout != null || propagation != null || isolation != null
-				|| noRollbackExceptionClasses != null) {
+		|| noRollbackExceptionClasses != null) {
 			DefaultTransactionAttribute attribute = new DefaultTransactionAttribute();
 			if (propagation != null) {
 				attribute.setPropagationBehavior(propagation.value());
@@ -490,7 +490,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 				attribute.setTimeout(transactionTimeout);
 			}
 			Collection<Class<? extends Throwable>> exceptions = noRollbackExceptionClasses == null ? new HashSet<>()
-					: noRollbackExceptionClasses;
+			: noRollbackExceptionClasses;
 			final BinaryExceptionClassifier classifier = new BinaryExceptionClassifier(exceptions, false);
 			builder.transactionAttribute(new DefaultTransactionAttribute(attribute) {
 				@Override
@@ -535,9 +535,9 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 		validateDependency("retryable-exception-classes", retryableExceptionClasses, "retry-limit", retryLimit, true);
 		validateDependency("retry-listeners", retryListeners, "retry-limit", retryLimit, false);
 		if (isPresent(processorTransactional) && !processorTransactional && isPresent(readerTransactionalQueue)
-				&& readerTransactionalQueue) {
+		&& readerTransactionalQueue) {
 			throw new IllegalArgumentException(
-					"The field 'processor-transactional' cannot be false if 'reader-transactional-queue' is true");
+			"The field 'processor-transactional' cannot be false if 'reader-transactional-queue' is true");
 		}
 	}
 
@@ -554,14 +554,14 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	 * @throws an IllegalArgumentException if either condition is violated
 	 */
 	private void validateDependency(String dependentName, Object dependentValue, String name, Object value,
-			boolean twoWayDependency) {
+	boolean twoWayDependency) {
 		if (isPresent(dependentValue) && !isPresent(value)) {
 			throw new IllegalArgumentException("The field '" + dependentName + "' is not permitted on the step ["
-					+ this.name + "] because there is no '" + name + "'.");
+			+ this.name + "] because there is no '" + name + "'.");
 		}
 		if (twoWayDependency && isPresent(value) && !isPresent(dependentValue)) {
 			throw new IllegalArgumentException("The field '" + name + "' is not permitted on the step [" + this.name
-					+ "] because there is no '" + dependentName + "'.");
+			+ "] because there is no '" + dependentName + "'.");
 		}
 	}
 
@@ -590,7 +590,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	 */
 	protected boolean isFaultTolerant() {
 		return backOffPolicy != null || skipPolicy != null || retryPolicy != null || isPositive(skipLimit)
-				|| isPositive(retryLimit) || isPositive(cacheCapacity) || isTrue(readerTransactionalQueue);
+		|| isPositive(retryLimit) || isPositive(cacheCapacity) || isTrue(readerTransactionalQueue);
 	}
 
 	private boolean isTrue(Boolean b) {

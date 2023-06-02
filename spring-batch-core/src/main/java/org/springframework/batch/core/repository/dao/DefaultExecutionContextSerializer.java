@@ -54,8 +54,8 @@ public class DefaultExecutionContextSerializer implements ExecutionContextSerial
 			Assert.notNull(value, "A null value was found");
 			if (!(value instanceof Serializable)) {
 				throw new IllegalArgumentException(
-						"Value: [" + value + "] must be serializable. " + "Object of class: ["
-								+ value.getClass().getName() + "] must be an instance of " + Serializable.class);
+				"Value: [" + value + "] must be serializable. " + "Object of class: ["
+			+ value.getClass().getName() + "] must be an instance of " + Serializable.class);
 			}
 		}
 		var byteArrayOutputStream = new ByteArrayOutputStream(1024);

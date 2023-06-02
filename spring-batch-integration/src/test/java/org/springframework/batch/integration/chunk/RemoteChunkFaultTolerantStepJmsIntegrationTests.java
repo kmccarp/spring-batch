@@ -53,7 +53,7 @@ class RemoteChunkFaultTolerantStepJmsIntegrationTests {
 	@Test
 	void testFailedStep() throws Exception {
 		JobExecution jobExecution = jobLauncher.run(job, new JobParameters(
-				Collections.singletonMap("item.three", new JobParameter("unsupported", String.class))));
+		Collections.singletonMap("item.three", new JobParameter("unsupported", String.class))));
 		assertEquals(BatchStatus.FAILED, jobExecution.getStatus());
 		StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();
 		assertEquals(9, stepExecution.getReadCount());
@@ -64,7 +64,7 @@ class RemoteChunkFaultTolerantStepJmsIntegrationTests {
 	@Test
 	void testFailedStepOnError() throws Exception {
 		JobExecution jobExecution = jobLauncher.run(job,
-				new JobParameters(Collections.singletonMap("item.three", new JobParameter("error", String.class))));
+		new JobParameters(Collections.singletonMap("item.three", new JobParameter("error", String.class))));
 		assertEquals(BatchStatus.FAILED, jobExecution.getStatus());
 		StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();
 		assertEquals(9, stepExecution.getReadCount());
@@ -75,7 +75,7 @@ class RemoteChunkFaultTolerantStepJmsIntegrationTests {
 	@Test
 	void testSunnyDayFaultTolerant() throws Exception {
 		JobExecution jobExecution = jobLauncher.run(job,
-				new JobParameters(Collections.singletonMap("item.three", new JobParameter("3", Integer.class))));
+		new JobParameters(Collections.singletonMap("item.three", new JobParameter("3", Integer.class))));
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();
 		assertEquals(9, stepExecution.getReadCount());
@@ -85,7 +85,7 @@ class RemoteChunkFaultTolerantStepJmsIntegrationTests {
 	@Test
 	void testSkipsInWriter() throws Exception {
 		JobExecution jobExecution = jobLauncher.run(job,
-				new JobParametersBuilder().addString("item.three", "fail").addLong("run.id", 1L).toJobParameters());
+		new JobParametersBuilder().addString("item.three", "fail").addLong("run.id", 1L).toJobParameters());
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();
 		assertEquals(9, stepExecution.getReadCount());

@@ -49,7 +49,7 @@ class StagingItemWriterTests {
 	@BeforeEach
 	void onSetUpBeforeTransaction() {
 		StepExecution stepExecution = new StepExecution("stepName",
-				new JobExecution(new JobInstance(12L, "testJob"), new JobParameters()));
+		new JobExecution(new JobInstance(12L, "testJob"), new JobParameters()));
 		writer.beforeStep(stepExecution);
 	}
 

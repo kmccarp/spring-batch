@@ -37,17 +37,17 @@ class DelimitedLineAggregatorTests {
 	@Test
 	void testSetDelimiter() {
 		aggregator.setDelimiter(";");
-		assertEquals("foo;bar", aggregator.aggregate(new String[] { "foo", "bar" }));
+		assertEquals("foo;bar", aggregator.aggregate(new String[]{"foo", "bar"}));
 	}
 
 	@Test
 	void testAggregate() {
-		assertEquals("foo,bar", aggregator.aggregate(new String[] { "foo", "bar" }));
+		assertEquals("foo,bar", aggregator.aggregate(new String[]{"foo", "bar"}));
 	}
 
 	@Test
 	void testAggregateWithNull() {
-		assertEquals("foo,,bar", aggregator.aggregate(new String[] { "foo", null, "bar" }));
+		assertEquals("foo,,bar", aggregator.aggregate(new String[]{"foo", null, "bar"}));
 	}
 
 }

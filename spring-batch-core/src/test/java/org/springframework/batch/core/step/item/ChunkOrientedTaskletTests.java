@@ -59,7 +59,7 @@ class ChunkOrientedTaskletTests {
 			}
 		});
 		StepContribution contribution = new StepContribution(
-				new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
+		new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
 		handler.execute(contribution, context);
 		assertEquals(1, contribution.getReadCount());
 		assertEquals(1, contribution.getWriteCount());
@@ -84,7 +84,7 @@ class ChunkOrientedTaskletTests {
 			}
 		});
 		StepContribution contribution = new StepContribution(
-				new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
+		new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
 		Exception exception = assertThrows(RuntimeException.class, () -> handler.execute(contribution, context));
 		assertEquals("Foo!", exception.getMessage());
 		assertEquals(0, contribution.getReadCount());
@@ -112,7 +112,7 @@ class ChunkOrientedTaskletTests {
 			}
 		});
 		StepContribution contribution = new StepContribution(
-				new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
+		new StepExecution("foo", new JobExecution(new JobInstance(123L, "job"), new JobParameters())));
 		ExitStatus expected = contribution.getExitStatus();
 		handler.execute(contribution, context);
 		// The tasklet does not change the exit code

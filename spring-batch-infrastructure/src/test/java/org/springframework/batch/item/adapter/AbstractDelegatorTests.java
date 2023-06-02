@@ -75,7 +75,7 @@ class AbstractDelegatorTests {
 		// using the arguments setter should work equally well
 		foo.setName("foo");
 		assertNotEquals(NEW_FOO_NAME, foo.getName());
-		delegator.setArguments(new Object[] { NEW_FOO_NAME });
+		delegator.setArguments(new Object[]{NEW_FOO_NAME});
 		delegator.afterPropertiesSet();
 		delegator.invokeDelegateMethod();
 		assertEquals(NEW_FOO_NAME, foo.getName());
@@ -87,7 +87,7 @@ class AbstractDelegatorTests {
 	@Test
 	void testDelegationWithCheckedNullArgument() throws Exception {
 		delegator.setTargetMethod("setName");
-		delegator.setArguments(new Object[] { null });
+		delegator.setArguments(new Object[]{null});
 		delegator.afterPropertiesSet();
 		delegator.invokeDelegateMethod();
 		assertNull(foo.getName());
@@ -106,7 +106,7 @@ class AbstractDelegatorTests {
 		final String FOO_NAME = "fooName";
 		final int FOO_VALUE = 12345;
 
-		delegator.invokeDelegateMethodWithArguments(new Object[] { FOO_NAME, FOO_VALUE });
+		delegator.invokeDelegateMethodWithArguments(new Object[]{FOO_NAME, FOO_VALUE});
 		Foo foo = fooService.getProcessedFooNameValuePairs().get(0);
 		assertEquals(FOO_NAME, foo.getName());
 		assertEquals(FOO_VALUE, foo.getValue());
@@ -146,7 +146,7 @@ class AbstractDelegatorTests {
 	void testTooManyArguments() throws Exception {
 		delegator.setTargetMethod("setName");
 		// single argument expected but two provided
-		delegator.invokeDelegateMethodWithArguments(new Object[] { "name", "anotherName" });
+		delegator.invokeDelegateMethodWithArguments(new Object[]{"name", "anotherName"});
 		assertEquals("name", foo.getName());
 	}
 
@@ -158,11 +158,11 @@ class AbstractDelegatorTests {
 		delegator.setTargetMethod("setName");
 
 		// incorrect argument count
-		delegator.setArguments(new Object[] { "first", "second" });
+		delegator.setArguments(new Object[]{"first", "second"});
 		assertThrows(IllegalStateException.class, delegator::afterPropertiesSet);
 
 		// correct argument count, but invalid argument type
-		delegator.setArguments(new Object[] { new Object() });
+		delegator.setArguments(new Object[]{new Object()});
 		assertThrows(IllegalStateException.class, delegator::afterPropertiesSet);
 	}
 

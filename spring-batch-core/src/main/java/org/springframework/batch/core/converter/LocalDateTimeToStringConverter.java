@@ -30,7 +30,7 @@ import org.springframework.core.convert.converter.Converter;
  * @since 5.0.1
  */
 public class LocalDateTimeToStringConverter extends AbstractDateTimeConverter
-		implements Converter<LocalDateTime, String> {
+implements Converter<LocalDateTime, String> {
 
 	@Override
 	public String convert(LocalDateTime source) {

@@ -40,13 +40,13 @@ class JmsMethodArgumentsKeyGeneratorTests {
 
 		JmsItemReader<Message> itemReader = new JmsItemReader<>();
 		itemReader.setItemType(Message.class);
-		assertEquals("foo", methodArgumentsKeyGenerator.getKey(new Object[] { message }));
+		assertEquals("foo", methodArgumentsKeyGenerator.getKey(new Object[]{message}));
 
 	}
 
 	@Test
 	void testGetKeyFromNonMessage() {
-		assertEquals("foo", methodArgumentsKeyGenerator.getKey(new Object[] { "foo" }));
+		assertEquals("foo", methodArgumentsKeyGenerator.getKey(new Object[]{"foo"}));
 	}
 
 }

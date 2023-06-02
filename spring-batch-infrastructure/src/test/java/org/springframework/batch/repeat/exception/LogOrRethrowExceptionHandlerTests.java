@@ -55,14 +55,14 @@ class LogOrRethrowExceptionHandlerTests {
 		LoggerConfig rootLoggerConfig = configuration.getLoggerConfig(logger.getName());
 		rootLoggerConfig.getAppenders().forEach((name, appender) -> rootLoggerConfig.removeAppender(name));
 		Appender appender = WriterAppender.createAppender(PatternLayout.createDefaultLayout(), null, writer,
-				"TESTWriter", false, false);
+		"TESTWriter", false, false);
 		rootLoggerConfig.addAppender(appender, org.apache.logging.log4j.Level.DEBUG, null);
 	}
 
 	@Test
 	void testRuntimeException() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("Foo")));
+		() -> handler.handleException(context, new RuntimeException("Foo")));
 		assertEquals("Foo", exception.getMessage());
 	}
 

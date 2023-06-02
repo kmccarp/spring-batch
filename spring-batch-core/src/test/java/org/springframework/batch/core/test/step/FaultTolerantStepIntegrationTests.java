@@ -78,7 +78,7 @@ class FaultTolerantStepIntegrationTests {
 		};
 		skipPolicy = new SkipIllegalArgumentExceptionSkipPolicy();
 		stepBuilder = new StepBuilder("step", jobRepository).<Integer, Integer>chunk(CHUNK_SIZE, transactionManager)
-				.reader(itemReader).processor(item -> item > 20 ? null : item).writer(itemWriter).faultTolerant();
+		.reader(itemReader).processor(item -> item > 20 ? null : item).writer(itemWriter).faultTolerant();
 	}
 
 	@Test
@@ -131,7 +131,7 @@ class FaultTolerantStepIntegrationTests {
 	void testFilterCountOnRetryWithNonTransactionalProcessorWhenSkipInWrite() throws Exception {
 		// Given
 		Step step = stepBuilder.retry(IllegalArgumentException.class).retryLimit(2).skipPolicy(skipPolicy)
-				.processorNonTransactional().build();
+		.processorNonTransactional().build();
 
 		// When
 		StepExecution stepExecution = execute(step);
@@ -158,7 +158,7 @@ class FaultTolerantStepIntegrationTests {
 			public Integer process(Integer item) throws Exception {
 				cpt++;
 				if (cpt == 7) { // item 2 succeeds the first time but fails during the
-								// scan
+					// scan
 					throw new Exception("Error during process");
 				}
 				return item;
@@ -178,8 +178,8 @@ class FaultTolerantStepIntegrationTests {
 		};
 
 		Step step = new StepBuilder("step", jobRepository).<Integer, Integer>chunk(5, transactionManager)
-				.reader(itemReader).processor(itemProcessor).writer(itemWriter).faultTolerant().skip(Exception.class)
-				.skipLimit(3).build();
+		.reader(itemReader).processor(itemProcessor).writer(itemWriter).faultTolerant().skip(Exception.class)
+		.skipLimit(3).build();
 
 		// When
 		StepExecution stepExecution = execute(step);
@@ -218,8 +218,8 @@ class FaultTolerantStepIntegrationTests {
 		};
 
 		Step step = new StepBuilder("step", jobRepository).<Integer, Integer>chunk(5, transactionManager)
-				.reader(itemReader).processor(itemProcessor).writer(itemWriter).faultTolerant()
-				.skipPolicy(new AlwaysSkipItemSkipPolicy()).build();
+		.reader(itemReader).processor(itemProcessor).writer(itemWriter).faultTolerant()
+		.skipPolicy(new AlwaysSkipItemSkipPolicy()).build();
 
 		// When
 		StepExecution stepExecution = execute(step);

@@ -50,7 +50,7 @@ public class ExceptionClassifierSkipPolicy implements SkipPolicy {
 	 */
 	public void setPolicyMap(Map<Class<? extends Throwable>, SkipPolicy> policyMap) {
 		SubclassClassifier<Throwable, SkipPolicy> subclassClassifier = new SubclassClassifier<>(policyMap,
-				new NeverSkipItemSkipPolicy());
+		new NeverSkipItemSkipPolicy());
 		this.classifier = subclassClassifier;
 	}
 

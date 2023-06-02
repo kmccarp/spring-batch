@@ -80,7 +80,7 @@ public class SimpleJobRepository implements JobRepository {
 	}
 
 	public SimpleJobRepository(JobInstanceDao jobInstanceDao, JobExecutionDao jobExecutionDao,
-			StepExecutionDao stepExecutionDao, ExecutionContextDao ecDao) {
+	StepExecutionDao stepExecutionDao, ExecutionContextDao ecDao) {
 		super();
 		this.jobInstanceDao = jobInstanceDao;
 		this.jobExecutionDao = jobExecutionDao;
@@ -114,7 +114,7 @@ public class SimpleJobRepository implements JobRepository {
 
 	@Override
 	public JobExecution createJobExecution(String jobName, JobParameters jobParameters)
-			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+	throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 
 		Assert.notNull(jobName, "Job name must not be null.");
 		Assert.notNull(jobParameters, "JobParameters must not be null.");
@@ -143,22 +143,22 @@ public class SimpleJobRepository implements JobRepository {
 			for (JobExecution execution : executions) {
 				if (execution.isRunning()) {
 					throw new JobExecutionAlreadyRunningException(
-							"A job execution for this job is already running: " + jobInstance);
+					"A job execution for this job is already running: " + jobInstance);
 				}
 				BatchStatus status = execution.getStatus();
 				if (status == BatchStatus.UNKNOWN) {
 					throw new JobRestartException("Cannot restart job from UNKNOWN status. "
-							+ "The last execution ended with a failure that could not be rolled back, "
-							+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
+					+ "The last execution ended with a failure that could not be rolled back, "
+					+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
 				}
 				Collection<JobParameter<?>> allJobParameters = execution.getJobParameters().getParameters().values();
 				long identifyingJobParametersCount = allJobParameters.stream().filter(JobParameter::isIdentifying)
-						.count();
+				.count();
 				if (identifyingJobParametersCount > 0
-						&& (status == BatchStatus.COMPLETED || status == BatchStatus.ABANDONED)) {
+				&& (status == BatchStatus.COMPLETED || status == BatchStatus.ABANDONED)) {
 					throw new JobInstanceAlreadyCompleteException(
-							"A job instance already exists and is complete for parameters=" + jobParameters
-									+ ".  If you want to run this job again, change the parameters.");
+					"A job instance already exists and is complete for parameters=" + jobParameters
+				+ ".  If you want to run this job again, change the parameters.");
 				}
 			}
 			executionContext = ecDao.getExecutionContext(jobExecutionDao.getLastJobExecution(jobInstance));

@@ -73,12 +73,12 @@ class DateFormatTests {
 		 * toString still didn't match.
 		 */
 		return Stream.of(Arguments.of("1970-01-01 11:20:34.0 GMT", "1970-01-01 11:20:34.0 GMT", 11),
-				Arguments.of("1971-02-01 11:20:34.0 GMT", "1971-02-01 11:20:34.0 GMT", 11),
-				// After 1972 you always get the right answer
-				Arguments.of("1972-02-01 11:20:34.0 GMT", "1972-02-01 11:20:34.0 GMT", 11),
-				Arguments.of("1976-02-01 11:20:34.0 GMT", "1976-02-01 11:20:34.0 GMT", 11),
-				Arguments.of("1982-02-01 11:20:34.0 GMT", "1982-02-01 11:20:34.0 GMT", 11),
-				Arguments.of("2008-02-01 11:20:34.0 GMT", "2008-02-01 11:20:34.0 GMT", 11));
+		Arguments.of("1971-02-01 11:20:34.0 GMT", "1971-02-01 11:20:34.0 GMT", 11),
+		// After 1972 you always get the right answer
+		Arguments.of("1972-02-01 11:20:34.0 GMT", "1972-02-01 11:20:34.0 GMT", 11),
+		Arguments.of("1976-02-01 11:20:34.0 GMT", "1976-02-01 11:20:34.0 GMT", 11),
+		Arguments.of("1982-02-01 11:20:34.0 GMT", "1982-02-01 11:20:34.0 GMT", 11),
+		Arguments.of("2008-02-01 11:20:34.0 GMT", "2008-02-01 11:20:34.0 GMT", 11));
 	}
 
 }

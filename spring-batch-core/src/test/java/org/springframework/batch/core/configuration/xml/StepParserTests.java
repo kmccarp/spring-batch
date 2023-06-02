@@ -75,14 +75,14 @@ public class StepParserTests {
 	@BeforeAll
 	public static void loadAppCtx() {
 		stepParserParentAttributeTestsCtx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserParentAttributeTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/StepParserParentAttributeTests-context.xml");
 	}
 
 	@Test
 	void testTaskletStepAttributes() throws Exception {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserTaskletAttributesTests-context.xml");
-		@SuppressWarnings({ "rawtypes" })
+		"org/springframework/batch/core/configuration/xml/StepParserTaskletAttributesTests-context.xml");
+		@SuppressWarnings({"rawtypes"})
 		Map<String, StepParserStepFactoryBean> beans = ctx.getBeansOfType(StepParserStepFactoryBean.class);
 		String factoryName = (String) beans.keySet().toArray()[0];
 		@SuppressWarnings("unchecked")
@@ -96,7 +96,7 @@ public class StepParserTests {
 	@Test
 	void testStepParserBeanName() {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserBeanNameTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/StepParserBeanNameTests-context.xml");
 		Map<String, Step> beans = ctx.getBeansOfType(Step.class);
 		assertTrue(beans.containsKey("s1"), "'s1' bean not found");
 		Step s1 = (Step) ctx.getBean("s1");
@@ -106,13 +106,13 @@ public class StepParserTests {
 	@Test
 	void testStepParserCommitIntervalCompletionPolicy() {
 		assertThrows(BeanDefinitionParsingException.class, () -> new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserCommitIntervalCompletionPolicyTests-context.xml"));
+		"org/springframework/batch/core/configuration/xml/StepParserCommitIntervalCompletionPolicyTests-context.xml"));
 	}
 
 	@Test
 	void testStepParserCommitInterval() throws Exception {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserCommitIntervalTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/StepParserCommitIntervalTests-context.xml");
 		Map<String, Step> beans = ctx.getBeansOfType(Step.class);
 		assertTrue(beans.containsKey("s1"), "'s1' bean not found");
 		Step s1 = (Step) ctx.getBean("s1");
@@ -124,7 +124,7 @@ public class StepParserTests {
 	@Test
 	void testStepParserCompletionPolicy() throws Exception {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserCompletionPolicyTests-context.xml");
+		"org/springframework/batch/core/configuration/xml/StepParserCompletionPolicyTests-context.xml");
 		Map<String, Step> beans = ctx.getBeansOfType(Step.class);
 		assertTrue(beans.containsKey("s1"), "'s1' bean not found");
 		Step s1 = (Step) ctx.getBean("s1");
@@ -142,19 +142,19 @@ public class StepParserTests {
 	@Test
 	void testStepParserNoCommitIntervalOrCompletionPolicy() {
 		assertThrows(BeanDefinitionParsingException.class, () -> new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserNoCommitIntervalOrCompletionPolicyTests-context.xml"));
+		"org/springframework/batch/core/configuration/xml/StepParserNoCommitIntervalOrCompletionPolicyTests-context.xml"));
 	}
 
 	@Test
 	void testTaskletStepWithBadStepListener() {
 		assertThrows(BeanDefinitionParsingException.class, () -> new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserBadStepListenerTests-context.xml"));
+		"org/springframework/batch/core/configuration/xml/StepParserBadStepListenerTests-context.xml"));
 	}
 
 	@Test
 	void testTaskletStepWithBadRetryListener() {
 		assertThrows(BeanDefinitionParsingException.class, () -> new ClassPathXmlApplicationContext(
-				"org/springframework/batch/core/configuration/xml/StepParserBadRetryListenerTests-context.xml"));
+		"org/springframework/batch/core/configuration/xml/StepParserBadRetryListenerTests-context.xml"));
 	}
 
 	@Test
@@ -218,7 +218,7 @@ public class StepParserTests {
 		Object compositeListener = ReflectionTestUtils.getField(step, "stepExecutionListener");
 		Object composite = ReflectionTestUtils.getField(compositeListener, "list");
 		List<StepExecutionListener> list = (List<StepExecutionListener>) ReflectionTestUtils.getField(composite,
-				"list");
+		"list");
 		List<StepExecutionListener> unwrappedList = new ArrayList<>();
 		for (StepExecutionListener listener : list) {
 			while (listener instanceof Advised) {
@@ -301,14 +301,14 @@ public class StepParserTests {
 	}
 
 	private void assertDummyJobRepository(String beanName, String jobRepoName, ApplicationContext ctx)
-			throws Exception {
+	throws Exception {
 		JobRepository jobRepository = getJobRepository(beanName, ctx);
 		assertTrue(jobRepository instanceof DummyJobRepository);
 		assertEquals(jobRepoName, ((DummyJobRepository) jobRepository).getName());
 	}
 
 	private void assertDummyTransactionManager(String beanName, String txMgrName, ApplicationContext ctx)
-			throws Exception {
+	throws Exception {
 		PlatformTransactionManager txMgr = getTransactionManager(beanName, ctx);
 		assertTrue(txMgr instanceof DummyPlatformTransactionManager);
 		assertEquals(txMgrName, ((DummyPlatformTransactionManager) txMgr).getName());
@@ -434,11 +434,11 @@ public class StepParserTests {
 		retryable.put(ForceRollbackForWriteSkipException.class, true);
 		List<Class<? extends ItemStream>> streams = Arrays.asList(CompositeItemStream.class, TestReader.class);
 		List<Class<? extends RetryListener>> retryListeners = Arrays.asList(RetryListenerSupport.class,
-				DummyRetryListener.class);
+		DummyRetryListener.class);
 		List<Class<? extends StepExecutionListener>> stepListeners = Arrays.asList(DummyStepExecutionListener.class,
-				CompositeStepExecutionListener.class);
+		CompositeStepExecutionListener.class);
 		List<Class<? extends SkippableRuntimeException>> noRollback = Arrays.asList(FatalRuntimeException.class,
-				SkippableRuntimeException.class);
+		SkippableRuntimeException.class);
 
 		StepParserStepFactoryBean<?, ?> fb = (StepParserStepFactoryBean<?, ?>) ctx.getBean("&stepWithListsMerge");
 
@@ -447,7 +447,7 @@ public class StepParserTests {
 		ItemStream[] streamsFound = (ItemStream[]) ReflectionTestUtils.getField(fb, "streams");
 		RetryListener[] retryListenersFound = (RetryListener[]) ReflectionTestUtils.getField(fb, "retryListeners");
 		Set<StepExecutionListener> stepListenersFound = (Set<StepExecutionListener>) ReflectionTestUtils.getField(fb,
-				"stepExecutionListeners");
+		"stepExecutionListeners");
 		Collection<Class<? extends Throwable>> noRollbackFound = getExceptionList(fb, "noRollbackExceptionClasses");
 
 		assertSameMaps(skippable, skippableFound);
@@ -482,7 +482,7 @@ public class StepParserTests {
 		ItemStream[] streamsFound = (ItemStream[]) ReflectionTestUtils.getField(fb, "streams");
 		RetryListener[] retryListenersFound = (RetryListener[]) ReflectionTestUtils.getField(fb, "retryListeners");
 		Set<StepExecutionListener> stepListenersFound = (Set<StepExecutionListener>) ReflectionTestUtils.getField(fb,
-				"stepExecutionListeners");
+		"stepExecutionListeners");
 		Collection<Class<? extends Throwable>> noRollbackFound = getExceptionList(fb, "noRollbackExceptionClasses");
 
 		assertSameMaps(skippable, skippableFound);
@@ -499,26 +499,26 @@ public class StepParserTests {
 		ApplicationContext ctx = stepParserParentAttributeTestsCtx;
 
 		StepParserStepFactoryBean<?, ?> fb = (StepParserStepFactoryBean<?, ?>) ctx
-				.getBean("&stepWithListsOverrideWithEmpty");
+		.getBean("&stepWithListsOverrideWithEmpty");
 
 		assertEquals(1, getExceptionMap(fb, "skippableExceptionClasses").size());
 		assertEquals(1, getExceptionMap(fb, "retryableExceptionClasses").size());
 		assertEquals(0, ((ItemStream[]) ReflectionTestUtils.getField(fb, "streams")).length);
 		assertEquals(0, ((RetryListener[]) ReflectionTestUtils.getField(fb, "retryListeners")).length);
 		assertEquals(0,
-				((Set<StepExecutionListener>) ReflectionTestUtils.getField(fb, "stepExecutionListeners")).size());
+		((Set<StepExecutionListener>) ReflectionTestUtils.getField(fb, "stepExecutionListeners")).size());
 		assertEquals(0, getExceptionList(fb, "noRollbackExceptionClasses").size());
 	}
 
 	@SuppressWarnings("unchecked")
 	private Collection<Class<? extends Throwable>> getExceptionList(StepParserStepFactoryBean<?, ?> fb,
-			String propertyName) {
+	String propertyName) {
 		return (Collection<Class<? extends Throwable>>) ReflectionTestUtils.getField(fb, propertyName);
 	}
 
 	@SuppressWarnings("unchecked")
 	private Map<Class<? extends Throwable>, Boolean> getExceptionMap(StepParserStepFactoryBean<?, ?> fb,
-			String propertyName) {
+	String propertyName) {
 		return (Map<Class<? extends Throwable>, Boolean>) ReflectionTestUtils.getField(fb, propertyName);
 	}
 

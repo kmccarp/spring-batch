@@ -33,7 +33,7 @@ public class BeanDefinitionUtils {
 	 * hierarchy if necessary. Return null if none is found.
 	 */
 	public static PropertyValue getPropertyValue(String beanName, String propertyName,
-			ConfigurableListableBeanFactory beanFactory) {
+	ConfigurableListableBeanFactory beanFactory) {
 		return beanFactory.getMergedBeanDefinition(beanName).getPropertyValues().getPropertyValue(propertyName);
 	}
 
@@ -45,7 +45,7 @@ public class BeanDefinitionUtils {
 	 * necessary. Return null if none is found.
 	 */
 	public static Object getAttribute(String beanName, String attributeName,
-			ConfigurableListableBeanFactory beanFactory) {
+	ConfigurableListableBeanFactory beanFactory) {
 		return beanFactory.getMergedBeanDefinition(beanName).getAttribute(attributeName);
 	}
 

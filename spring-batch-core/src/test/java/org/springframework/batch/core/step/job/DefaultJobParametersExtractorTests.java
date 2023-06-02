@@ -47,7 +47,7 @@ class DefaultJobParametersExtractorTests {
 	@Test
 	void testGetNamedJobParameters() {
 		stepExecution.getExecutionContext().put("foo", "bar");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertNotNull(jobParameters.getParameter("foo"));
 	}
@@ -55,7 +55,7 @@ class DefaultJobParametersExtractorTests {
 	@Test
 	void testGetNamedLongStringParameters() {
 		stepExecution.getExecutionContext().putString("foo", "bar,java.lang.String");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertNotNull(jobParameters.getParameter("foo"));
 	}
@@ -63,7 +63,7 @@ class DefaultJobParametersExtractorTests {
 	@Test
 	void testGetNamedLongJobParameters() {
 		stepExecution.getExecutionContext().put("foo", "11,java.lang.Long");
-		extractor.setKeys(new String[] { "foo", "bar" });
+		extractor.setKeys(new String[]{"foo", "bar"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals(11L, jobParameters.getParameter("foo").getValue());
 	}
@@ -71,7 +71,7 @@ class DefaultJobParametersExtractorTests {
 	@Test
 	void testGetNamedDoubleJobParameters() {
 		stepExecution.getExecutionContext().put("foo", "11.1,java.lang.Double");
-		extractor.setKeys(new String[] { "foo" });
+		extractor.setKeys(new String[]{"foo"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 		assertEquals(11.1, jobParameters.getParameter("foo").getValue());
 	}
@@ -79,12 +79,12 @@ class DefaultJobParametersExtractorTests {
 	@Test
 	void testUseParentParameters() {
 		JobExecution jobExecution = new JobExecution(0L,
-				new JobParametersBuilder().addString("parentParam", "val").toJobParameters());
+		new JobParametersBuilder().addString("parentParam", "val").toJobParameters());
 
 		StepExecution stepExecution = new StepExecution("step", jobExecution);
 
 		stepExecution.getExecutionContext().put("foo", "11.1,java.lang.Double");
-		extractor.setKeys(new String[] { "foo" });
+		extractor.setKeys(new String[]{"foo"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 
 		assertNotNull(jobParameters.getParameter("parentParam").getValue());
@@ -97,12 +97,12 @@ class DefaultJobParametersExtractorTests {
 		extractor.setUseAllParentParameters(false);
 
 		JobExecution jobExecution = new JobExecution(0L,
-				new JobParametersBuilder().addString("parentParam", "val").toJobParameters());
+		new JobParametersBuilder().addString("parentParam", "val").toJobParameters());
 
 		StepExecution stepExecution = new StepExecution("step", jobExecution);
 
 		stepExecution.getExecutionContext().put("foo", "11.1,java.lang.Double");
-		extractor.setKeys(new String[] { "foo" });
+		extractor.setKeys(new String[]{"foo"});
 		JobParameters jobParameters = extractor.getJobParameters(null, stepExecution);
 
 		assertNull(jobParameters.getParameter("parentParam"));

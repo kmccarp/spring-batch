@@ -31,7 +31,7 @@ class DatabaseTypeIntegrationTests {
 	@Test
 	void testH2() throws Exception {
 		DataSource dataSource = DatabaseTypeTestUtils.getDataSource(org.h2.Driver.class,
-				"jdbc:h2:file:./target/data/sample");
+		"jdbc:h2:file:./target/data/sample");
 		assertEquals(DatabaseType.H2, DatabaseType.fromMetaData(dataSource));
 		dataSource.getConnection();
 	}
@@ -39,7 +39,7 @@ class DatabaseTypeIntegrationTests {
 	@Test
 	void testDerby() throws Exception {
 		DataSource dataSource = DatabaseTypeTestUtils.getDataSource(org.apache.derby.jdbc.EmbeddedDriver.class,
-				"jdbc:derby:./target/derby-home/test;create=true", "sa", "");
+		"jdbc:derby:./target/derby-home/test;create=true", "sa", "");
 		assertEquals(DatabaseType.DERBY, DatabaseType.fromMetaData(dataSource));
 		dataSource.getConnection();
 	}

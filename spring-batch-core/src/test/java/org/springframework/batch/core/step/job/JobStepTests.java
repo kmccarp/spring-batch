@@ -56,8 +56,8 @@ class JobStepTests {
 	void setUp() throws Exception {
 		step.setName("step");
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(embeddedDatabase);
 		factory.setTransactionManager(new JdbcTransactionManager(embeddedDatabase));
@@ -103,7 +103,7 @@ class JobStepTests {
 		step.execute(stepExecution);
 		assertEquals(BatchStatus.COMPLETED, stepExecution.getStatus());
 		assertTrue(stepExecution.getExecutionContext().containsKey(JobStep.class.getName() + ".JOB_PARAMETERS"),
-				"Missing job parameters in execution context: " + stepExecution.getExecutionContext());
+		"Missing job parameters in execution context: " + stepExecution.getExecutionContext());
 	}
 
 	@Test
@@ -138,7 +138,7 @@ class JobStepTests {
 	void testExecuteRestart() throws Exception {
 
 		DefaultJobParametersExtractor jobParametersExtractor = new DefaultJobParametersExtractor();
-		jobParametersExtractor.setKeys(new String[] { "foo" });
+		jobParametersExtractor.setKeys(new String[]{"foo"});
 		ExecutionContext executionContext = stepExecution.getExecutionContext();
 		executionContext.put("foo", "bar");
 		step.setJobParametersExtractor(jobParametersExtractor);
@@ -180,7 +180,7 @@ class JobStepTests {
 	void testStoppedChild() throws Exception {
 
 		DefaultJobParametersExtractor jobParametersExtractor = new DefaultJobParametersExtractor();
-		jobParametersExtractor.setKeys(new String[] { "foo" });
+		jobParametersExtractor.setKeys(new String[]{"foo"});
 		ExecutionContext executionContext = stepExecution.getExecutionContext();
 		executionContext.put("foo", "bar");
 		step.setJobParametersExtractor(jobParametersExtractor);

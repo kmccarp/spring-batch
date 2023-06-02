@@ -43,7 +43,7 @@ public class TopLevelFlowParser extends AbstractFlowParser {
 		builder.getRawBeanDefinition().setAttribute("flowName", flowName);
 		builder.addPropertyValue("name", flowName);
 		builder.addPropertyValue("stateTransitionComparator",
-				new RuntimeBeanReference(DefaultStateTransitionComparator.STATE_TRANSITION_COMPARATOR));
+		new RuntimeBeanReference(DefaultStateTransitionComparator.STATE_TRANSITION_COMPARATOR));
 		String abstractAttr = element.getAttribute(ABSTRACT_ATTR);
 		if (StringUtils.hasText(abstractAttr)) {
 			builder.setAbstract(abstractAttr.equals("true"));

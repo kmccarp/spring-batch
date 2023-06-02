@@ -34,12 +34,12 @@ class InternalBeanStepScopeIntegrationTests {
 	@Test
 	void testCommitIntervalJobParameter() throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"/org/springframework/batch/core/scope/context/CommitIntervalJobParameter-context.xml");
+		"/org/springframework/batch/core/scope/context/CommitIntervalJobParameter-context.xml");
 		Job job = context.getBean(Job.class);
 		JobLauncher launcher = context.getBean(JobLauncher.class);
 
 		JobExecution execution = launcher.run(job,
-				new JobParametersBuilder().addLong("commit.interval", 1l).toJobParameters());
+		new JobParametersBuilder().addLong("commit.interval", 1l).toJobParameters());
 
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		assertEquals(2, execution.getStepExecutions().iterator().next().getReadCount());
@@ -49,12 +49,12 @@ class InternalBeanStepScopeIntegrationTests {
 	@Test
 	void testInvalidCommitIntervalJobParameter() throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"/org/springframework/batch/core/scope/context/CommitIntervalJobParameter-context.xml");
+		"/org/springframework/batch/core/scope/context/CommitIntervalJobParameter-context.xml");
 		Job job = context.getBean(Job.class);
 		JobLauncher launcher = context.getBean(JobLauncher.class);
 
 		JobExecution execution = launcher.run(job,
-				new JobParametersBuilder().addLong("commit.intervall", 1l).toJobParameters());
+		new JobParametersBuilder().addLong("commit.intervall", 1l).toJobParameters());
 
 		assertEquals(BatchStatus.FAILED, execution.getStatus());
 	}

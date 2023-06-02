@@ -65,7 +65,7 @@ public class StepExecutionRequest implements Serializable {
 	@Override
 	public String toString() {
 		return String.format("StepExecutionRequest: [jobExecutionId=%d, stepExecutionId=%d, stepName=%s]",
-				jobExecutionId, stepExecutionId, stepName);
+		jobExecutionId, stepExecutionId, stepName);
 	}
 
 }

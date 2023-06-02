@@ -39,7 +39,7 @@ import org.springframework.util.ObjectUtils;
  * @author Mahmoud Ben Hassine
  */
 public class PropertyExtractingDelegatingItemWriter<T> extends AbstractMethodInvokingDelegator<T>
-		implements ItemWriter<T> {
+implements ItemWriter<T> {
 
 	private String[] fieldsUsedAsTargetMethodArguments;
 
@@ -68,7 +68,7 @@ public class PropertyExtractingDelegatingItemWriter<T> extends AbstractMethodInv
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		Assert.state(!ObjectUtils.isEmpty(fieldsUsedAsTargetMethodArguments),
-				"fieldsUsedAsTargetMethodArguments must not be empty");
+		"fieldsUsedAsTargetMethodArguments must not be empty");
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class PropertyExtractingDelegatingItemWriter<T> extends AbstractMethodInv
 	 */
 	public void setFieldsUsedAsTargetMethodArguments(String[] fieldsUsedAsMethodArguments) {
 		this.fieldsUsedAsTargetMethodArguments = Arrays.asList(fieldsUsedAsMethodArguments)
-				.toArray(new String[fieldsUsedAsMethodArguments.length]);
+		.toArray(new String[fieldsUsedAsMethodArguments.length]);
 	}
 
 }

@@ -40,7 +40,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/jobs/customerFilterJob.xml", "/job-runner-context.xml" })
+locations = {"/simple-job-launcher-context.xml", "/jobs/customerFilterJob.xml", "/job-runner-context.xml"})
 class CustomerFilterJobFunctionalTests {
 
 	private static final String GET_CUSTOMERS = "select NAME, CREDIT from CUSTOMER order by NAME";
@@ -85,9 +85,9 @@ class CustomerFilterJobFunctionalTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 
 		customers = Arrays.asList(new Customer("customer1", (credits.get("customer1"))),
-				new Customer("customer2", (credits.get("customer2"))), new Customer("customer3", 100500),
-				new Customer("customer4", credits.get("customer4")), new Customer("customer5", 32345),
-				new Customer("customer6", 123456));
+		new Customer("customer2", (credits.get("customer2"))), new Customer("customer3", 100500),
+		new Customer("customer4", credits.get("customer4")), new Customer("customer5", 32345),
+		new Customer("customer6", 123456));
 
 		activeRow = 0;
 		jdbcTemplate.query(GET_CUSTOMERS, new RowCallbackHandler() {
@@ -108,8 +108,8 @@ class CustomerFilterJobFunctionalTests {
 	private Map<String, Object> getStepExecution(JobExecution jobExecution, String stepName) {
 		Long jobExecutionId = jobExecution.getId();
 		return jdbcTemplate.queryForMap(
-				"SELECT * from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? and STEP_NAME = ?", jobExecutionId,
-				stepName);
+		"SELECT * from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? and STEP_NAME = ?", jobExecutionId,
+		stepName);
 	}
 
 	private static class Customer {

@@ -256,7 +256,7 @@ class MulticasterBatchListenerTests {
 	void testOnReadErrorFails() {
 		error = true;
 		Exception exception = assertThrows(StepListenerFailedException.class,
-				() -> multicast.onReadError(new RuntimeException("foo")));
+		() -> multicast.onReadError(new RuntimeException("foo")));
 		String message = exception.getCause().getMessage();
 		assertEquals("listener error", message, "Wrong message: " + message);
 		assertEquals(1, count);
@@ -332,7 +332,7 @@ class MulticasterBatchListenerTests {
 	void testOnWriteErrorFails() {
 		error = true;
 		Exception exception = assertThrows(StepListenerFailedException.class,
-				() -> multicast.onWriteError(new RuntimeException("foo"), null));
+		() -> multicast.onWriteError(new RuntimeException("foo"), null));
 		String message = exception.getCause().getMessage();
 		assertEquals("listener error", message, "Wrong message: " + message);
 		assertEquals(1, count);
@@ -370,7 +370,7 @@ class MulticasterBatchListenerTests {
 			}
 		});
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> multicast.onSkipInRead(new RuntimeException("bar")));
+		() -> multicast.onSkipInRead(new RuntimeException("bar")));
 		String message = exception.getMessage();
 		assertEquals("foo", message, "Wrong message: " + message);
 		assertEquals(1, count);
@@ -408,7 +408,7 @@ class MulticasterBatchListenerTests {
 			}
 		});
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> multicast.onSkipInWrite(null, new RuntimeException("bar")));
+		() -> multicast.onSkipInWrite(null, new RuntimeException("bar")));
 		String message = exception.getMessage();
 		assertEquals("foo", message, "Wrong message: " + message);
 		assertEquals(1, count);
@@ -446,7 +446,7 @@ class MulticasterBatchListenerTests {
 			}
 		});
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> multicast.onSkipInProcess(null, new RuntimeException("bar")));
+		() -> multicast.onSkipInProcess(null, new RuntimeException("bar")));
 		String message = exception.getMessage();
 		assertEquals("foo", message, "Wrong message: " + message);
 		assertEquals(1, count);

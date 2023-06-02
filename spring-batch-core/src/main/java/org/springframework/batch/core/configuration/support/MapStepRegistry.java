@@ -51,7 +51,7 @@ public class MapStepRegistry implements StepRegistry {
 		final Object previousValue = map.putIfAbsent(jobName, jobSteps);
 		if (previousValue != null) {
 			throw new DuplicateJobException(
-					"A job configuration with this name [" + jobName + "] was already registered");
+			"A job configuration with this name [" + jobName + "] was already registered");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class MapStepRegistry implements StepRegistry {
 			}
 			else {
 				throw new NoSuchStepException(
-						"The step called [" + stepName + "] does not exist in the job [" + jobName + "]");
+				"The step called [" + stepName + "] does not exist in the job [" + jobName + "]");
 			}
 		}
 	}

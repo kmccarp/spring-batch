@@ -79,7 +79,7 @@ class MultiResourceItemReaderXmlTests extends AbstractItemStreamItemReaderTests 
 		Resource r4 = new ByteArrayResource("<foos> <foo value=\"4\"/> <foo value=\"5\"/> </foos>".getBytes());
 
 		multiReader.setDelegate(reader);
-		multiReader.setResources(new Resource[] { r1, r2, r3, r4 });
+		multiReader.setResources(new Resource[]{r1, r2, r3, r4});
 		multiReader.setSaveState(true);
 		multiReader.setComparator(new Comparator<Resource>() {
 			@Override
@@ -95,7 +95,7 @@ class MultiResourceItemReaderXmlTests extends AbstractItemStreamItemReaderTests 
 	protected void pointToEmptyInput(ItemReader<Foo> tested) throws Exception {
 		MultiResourceItemReader<Foo> multiReader = (MultiResourceItemReader<Foo>) tested;
 		multiReader.close();
-		multiReader.setResources(new Resource[] { new ByteArrayResource("<foos />".getBytes()) });
+		multiReader.setResources(new Resource[]{new ByteArrayResource("<foos />".getBytes())});
 		multiReader.open(new ExecutionContext());
 	}
 

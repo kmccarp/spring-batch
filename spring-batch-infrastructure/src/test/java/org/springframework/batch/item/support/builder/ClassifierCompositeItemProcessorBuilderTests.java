@@ -43,7 +43,7 @@ class ClassifierCompositeItemProcessorBuilderTests {
 		routingConfiguration.put("foo", fooProcessor);
 		routingConfiguration.put("*", defaultProcessor);
 		ClassifierCompositeItemProcessor<String, String> processor = new ClassifierCompositeItemProcessorBuilder<String, String>()
-				.classifier(new PatternMatchingClassifier<>(routingConfiguration)).build();
+		.classifier(new PatternMatchingClassifier<>(routingConfiguration)).build();
 
 		assertEquals("bar", processor.process("bar"));
 		assertEquals("foo: foo", processor.process("foo"));
@@ -53,7 +53,7 @@ class ClassifierCompositeItemProcessorBuilderTests {
 	@Test
 	void testNullClassifier() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new ClassifierCompositeItemProcessorBuilder<String, String>().build());
+		() -> new ClassifierCompositeItemProcessorBuilder<String, String>().build());
 		assertEquals("A classifier is required.", exception.getMessage());
 	}
 

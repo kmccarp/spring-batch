@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Glenn Renfro
  */
 @SpringJUnitConfig(
-		classes = { DataSourceConfiguration.class, RetrySampleConfiguration.class, JobRunnerConfiguration.class })
+classes = {DataSourceConfiguration.class, RetrySampleConfiguration.class, JobRunnerConfiguration.class})
 class RetrySampleConfigurationTests {
 
 	@Autowired

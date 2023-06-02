@@ -104,7 +104,7 @@ public class LineItem {
 	@Override
 	public String toString() {
 		return "LineItem [description=" + description + ", perUnitOunces=" + perUnitOunces + ", price=" + price
-				+ ", quantity=" + quantity + "]";
+		+ ", quantity=" + quantity + "]";
 	}
 
 }

@@ -37,7 +37,7 @@ public class Player implements Serializable {
 	public String toString() {
 
 		return "PLAYER:id=" + id + ",Last Name=" + lastName + ",First Name=" + firstName + ",Position=" + position
-				+ ",Birth Year=" + birthYear + ",DebutYear=" + debutYear;
+		+ ",Birth Year=" + birthYear + ",DebutYear=" + debutYear;
 	}
 
 	public String getId() {

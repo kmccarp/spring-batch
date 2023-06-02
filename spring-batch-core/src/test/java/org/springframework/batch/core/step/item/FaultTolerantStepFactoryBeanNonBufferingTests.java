@@ -55,7 +55,7 @@ class FaultTolerantStepFactoryBeanNonBufferingTests {
 	private final List<String> items = Arrays.asList("1", "2", "3", "4", "5");
 
 	private final ListItemReader<String> reader = new ListItemReader<>(
-			TransactionAwareProxyFactory.createTransactionalList(items));
+	TransactionAwareProxyFactory.createTransactionalList(items));
 
 	private final SkipWriterStub writer = new SkipWriterStub();
 
@@ -92,7 +92,7 @@ class FaultTolerantStepFactoryBeanNonBufferingTests {
 		skipListener.onSkipInWrite("3", exception);
 		skipListener.onSkipInWrite("4", exception);
 
-		factory.setListeners(new SkipListener[] { skipListener });
+		factory.setListeners(new SkipListener[]{skipListener});
 		Step step = factory.getObject();
 
 		StepExecution stepExecution = new StepExecution(step.getName(), jobExecution);

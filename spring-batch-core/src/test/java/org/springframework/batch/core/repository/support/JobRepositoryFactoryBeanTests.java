@@ -101,9 +101,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.getSupportedIncrementerTypes()).thenReturn(new String[0]);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 
 		factory.afterPropertiesSet();
 		factory.getObject();
@@ -119,9 +119,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		factory.afterPropertiesSet();
@@ -139,9 +139,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		LobHandler lobHandler = new DefaultLobHandler();
@@ -162,14 +162,14 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		factory.afterPropertiesSet();
 		Serializer<Map<String, Object>> serializer = (Serializer<Map<String, Object>>) ReflectionTestUtils
-				.getField(factory, "serializer");
+		.getField(factory, "serializer");
 		assertTrue(serializer instanceof DefaultExecutionContextSerializer);
 	}
 
@@ -182,9 +182,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		ExecutionContextSerializer customSerializer = new DefaultExecutionContextSerializer();
@@ -203,9 +203,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		factory.afterPropertiesSet();
@@ -223,9 +223,9 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("ORACLE")).thenReturn(true);
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_SEQ")).thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer("ORACLE", tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		factory.setIncrementerFactory(incrementerFactory);
 
 		JdbcOperations customJdbcOperations = mock(JdbcOperations.class);
@@ -281,11 +281,11 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("HSQL")).thenReturn(true);
 		when(incrementerFactory.getSupportedIncrementerTypes()).thenReturn(new String[0]);
 		when(incrementerFactory.getIncrementer(databaseType, tablePrefix + "JOB_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer(databaseType, tablePrefix + "JOB_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 		when(incrementerFactory.getIncrementer(databaseType, tablePrefix + "STEP_EXECUTION_SEQ"))
-				.thenReturn(new StubIncrementer());
+		.thenReturn(new StubIncrementer());
 
 		factory.afterPropertiesSet();
 		factory.getObject();
@@ -297,10 +297,10 @@ class JobRepositoryFactoryBeanTests {
 		testCreateRepository();
 		JobRepository repository = factory.getObject();
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition(
-				DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
+		DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
 		when(transactionManager.getTransaction(transactionDefinition)).thenReturn(null);
 		Error error = assertThrows(AssertionError.class,
-				() -> repository.createJobExecution("foo", new JobParameters()));
+		() -> repository.createJobExecution("foo", new JobParameters()));
 		assertEquals("Unexpected method call", error.getMessage().substring(3, 25));
 	}
 
@@ -310,13 +310,13 @@ class JobRepositoryFactoryBeanTests {
 		testCreateRepository();
 		JobRepository repository = factory.getObject();
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition(
-				DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
+		DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
 		transactionDefinition.setIsolationLevel(DefaultTransactionDefinition.ISOLATION_SERIALIZABLE);
 		when(transactionManager.getTransaction(transactionDefinition)).thenReturn(null);
 		Connection conn = mock(Connection.class);
 		when(dataSource.getConnection()).thenReturn(conn);
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> repository.createJobExecution("foo", new JobParameters()));
+		() -> repository.createJobExecution("foo", new JobParameters()));
 		assertEquals("No Statement specified", exception.getMessage());
 
 	}
@@ -328,13 +328,13 @@ class JobRepositoryFactoryBeanTests {
 		testCreateRepository();
 		JobRepository repository = factory.getObject();
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition(
-				DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
+		DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
 		transactionDefinition.setIsolationLevel(DefaultTransactionDefinition.ISOLATION_READ_UNCOMMITTED);
 		when(transactionManager.getTransaction(transactionDefinition)).thenReturn(null);
 		Connection conn = mock(Connection.class);
 		when(dataSource.getConnection()).thenReturn(conn);
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> repository.createJobExecution("foo", new JobParameters()));
+		() -> repository.createJobExecution("foo", new JobParameters()));
 		assertEquals("No Statement specified", exception.getMessage());
 	}
 
@@ -354,7 +354,7 @@ class JobRepositoryFactoryBeanTests {
 		for (Advisor advisor : advisors) {
 			if (advisor.getAdvice() instanceof TransactionInterceptor transactionInterceptor) {
 				Assertions.assertEquals(transactionAttributeSource,
-						transactionInterceptor.getTransactionAttributeSource());
+				transactionInterceptor.getTransactionAttributeSource());
 			}
 		}
 	}

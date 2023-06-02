@@ -71,7 +71,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	public void beforeStep(StepExecution stepExecution) {
 		JobParameters jobParameters = stepExecution.getJobParameters();
 		Assert.state(jobParameters.getParameters().containsKey(keyName),
-				"JobParameters do not contain Long parameter with key=[" + keyName + "]");
+		"JobParameters do not contain Long parameter with key=[" + keyName + "]");
 		delegate = new SimpleCompletionPolicy(jobParameters.getLong(keyName).intValue());
 	}
 
@@ -83,7 +83,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	@Override
 	public boolean isComplete(RepeatContext context, RepeatStatus result) {
 		Assert.state(delegate != null, "The delegate resource has not been initialised. "
-				+ "Remember to register this object as a StepListener.");
+		+ "Remember to register this object as a StepListener.");
 		return delegate.isComplete(context, result);
 	}
 
@@ -94,7 +94,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	@Override
 	public boolean isComplete(RepeatContext context) {
 		Assert.state(delegate != null, "The delegate resource has not been initialised. "
-				+ "Remember to register this object as a StepListener.");
+		+ "Remember to register this object as a StepListener.");
 		return delegate.isComplete(context);
 	}
 
@@ -105,7 +105,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	@Override
 	public RepeatContext start(RepeatContext parent) {
 		Assert.state(delegate != null, "The delegate resource has not been initialised. "
-				+ "Remember to register this object as a StepListener.");
+		+ "Remember to register this object as a StepListener.");
 		return delegate.start(parent);
 	}
 
@@ -115,7 +115,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	@Override
 	public void update(RepeatContext context) {
 		Assert.state(delegate != null, "The delegate resource has not been initialised. "
-				+ "Remember to register this object as a StepListener.");
+		+ "Remember to register this object as a StepListener.");
 		delegate.update(context);
 	}
 

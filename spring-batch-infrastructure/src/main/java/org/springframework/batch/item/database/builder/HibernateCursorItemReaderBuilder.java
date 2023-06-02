@@ -272,7 +272,7 @@ public class HibernateCursorItemReaderBuilder<T> {
 		}
 		else {
 			throw new IllegalStateException("A HibernateQueryProvider, queryName, queryString, "
-					+ "or both the nativeQuery and entityClass must be configured");
+			+ "or both the nativeQuery and entityClass must be configured");
 		}
 
 		reader.setSessionFactory(this.sessionFactory);

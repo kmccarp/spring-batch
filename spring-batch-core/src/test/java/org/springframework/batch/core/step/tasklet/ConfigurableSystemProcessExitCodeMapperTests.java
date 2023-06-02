@@ -71,7 +71,7 @@ class ConfigurableSystemProcessExitCodeMapperTests {
 		assertThrows(IllegalArgumentException.class, () -> mapper.setMappings(missingElse));
 
 		Map<Object, ExitStatus> containsElse = Map.of(ConfigurableSystemProcessExitCodeMapper.ELSE_KEY,
-				ExitStatus.FAILED);
+		ExitStatus.FAILED);
 		// no error expected now
 		mapper.setMappings(containsElse);
 	}

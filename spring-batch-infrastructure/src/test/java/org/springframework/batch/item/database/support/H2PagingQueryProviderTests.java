@@ -43,7 +43,7 @@ class H2PagingQueryProviderTests extends AbstractSqlPagingQueryProviderTests {
 	@Override
 	void testGenerateRemainingPagesQuery() {
 		String sql = "SELECT id, name, age FROM foo WHERE (bar = 1) AND ((id > ?)) "
-				+ "ORDER BY id ASC FETCH NEXT 100 ROWS ONLY";
+		+ "ORDER BY id ASC FETCH NEXT 100 ROWS ONLY";
 		String s = pagingQueryProvider.generateRemainingPagesQuery(pageSize);
 		assertEquals(sql, s);
 	}
@@ -62,7 +62,7 @@ class H2PagingQueryProviderTests extends AbstractSqlPagingQueryProviderTests {
 	void testGenerateRemainingPagesQueryWithGroupBy() {
 		pagingQueryProvider.setGroupClause("dep");
 		String sql = "SELECT id, name, age FROM foo WHERE (bar = 1) AND ((id > ?)) GROUP BY dep "
-				+ "ORDER BY id ASC FETCH NEXT 100 ROWS ONLY";
+		+ "ORDER BY id ASC FETCH NEXT 100 ROWS ONLY";
 		String s = pagingQueryProvider.generateRemainingPagesQuery(pageSize);
 		assertEquals(sql, s);
 	}
@@ -75,7 +75,7 @@ class H2PagingQueryProviderTests extends AbstractSqlPagingQueryProviderTests {
 	@Override
 	String getRemainingSqlWithMultipleSortKeys() {
 		return "SELECT id, name, age FROM foo WHERE (bar = 1) AND ((name > ?) OR (name = ? AND id < ?)) "
-				+ "ORDER BY name ASC, id DESC FETCH NEXT 100 ROWS ONLY";
+		+ "ORDER BY name ASC, id DESC FETCH NEXT 100 ROWS ONLY";
 	}
 
 }

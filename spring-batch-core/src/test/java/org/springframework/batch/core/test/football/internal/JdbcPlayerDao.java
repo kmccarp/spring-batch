@@ -30,7 +30,7 @@ import javax.sql.DataSource;
 public class JdbcPlayerDao implements PlayerDao {
 
 	public static final String INSERT_PLAYER = "INSERT into PLAYERS (player_id, last_name, first_name, pos, year_of_birth, year_drafted)"
-			+ " values (:id, :lastName, :firstName, :position, :birthYear, :debutYear)";
+	+ " values (:id, :lastName, :firstName, :position, :birthYear, :debutYear)";
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

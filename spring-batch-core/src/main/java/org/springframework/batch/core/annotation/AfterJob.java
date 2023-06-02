@@ -36,7 +36,7 @@ import org.springframework.batch.core.JobExecutionListener;
  * @see JobExecutionListener
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface AfterJob {
 
 }

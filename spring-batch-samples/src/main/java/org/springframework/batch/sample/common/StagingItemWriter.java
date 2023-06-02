@@ -55,7 +55,7 @@ public class StagingItemWriter<T> extends JdbcDaoSupport implements StepExecutio
 	protected void initDao() throws Exception {
 		super.initDao();
 		Assert.notNull(incrementer, "DataFieldMaxValueIncrementer is required - set the incrementer property in the "
-				+ ClassUtils.getShortName(StagingItemWriter.class));
+		+ ClassUtils.getShortName(StagingItemWriter.class));
 	}
 
 	/**
@@ -76,23 +76,23 @@ public class StagingItemWriter<T> extends JdbcDaoSupport implements StepExecutio
 		final ListIterator<? extends T> itemIterator = chunk.getItems().listIterator();
 
 		getJdbcTemplate().batchUpdate("INSERT into BATCH_STAGING (ID, JOB_ID, VALUE, PROCESSED) values (?,?,?,?)",
-				new BatchPreparedStatementSetter() {
-					@Override
-					public int getBatchSize() {
-						return chunk.size();
-					}
+		new BatchPreparedStatementSetter() {
+			@Override
+			public int getBatchSize() {
+				return chunk.size();
+			}
 
-					@Override
-					public void setValues(PreparedStatement ps, int i) throws SQLException {
-						Assert.state(itemIterator.nextIndex() == i,
-								"Item ordering must be preserved in batch sql update");
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Assert.state(itemIterator.nextIndex() == i,
+			"Item ordering must be preserved in batch sql update");
 
-						ps.setLong(1, incrementer.nextLongValue());
-						ps.setLong(2, stepExecution.getJobExecution().getJobId());
-						ps.setBytes(3, SerializationUtils.serialize(itemIterator.next()));
-						ps.setString(4, NEW);
-					}
-				});
+				ps.setLong(1, incrementer.nextLongValue());
+				ps.setLong(2, stepExecution.getJobExecution().getJobId());
+				ps.setBytes(3, SerializationUtils.serialize(itemIterator.next()));
+				ps.setString(4, NEW);
+			}
+		});
 	}
 
 	/*

@@ -83,7 +83,7 @@ class JobRegistryBeanPostProcessorTests {
 		job.setBeanName("foo");
 		processor.postProcessAfterInitialization(job, "bar");
 		Exception exception = assertThrows(FatalBeanException.class,
-				() -> processor.postProcessAfterInitialization(job, "spam"));
+		() -> processor.postProcessAfterInitialization(job, "spam"));
 		assertTrue(exception.getCause() instanceof DuplicateJobException);
 	}
 

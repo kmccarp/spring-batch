@@ -77,7 +77,7 @@ public class CompositeChunkListener implements ChunkListener {
 	 */
 	@Override
 	public void afterChunk(ChunkContext context) {
-		for (Iterator<ChunkListener> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ChunkListener> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ChunkListener listener = iterator.next();
 			listener.afterChunk(context);
 		}
@@ -91,7 +91,7 @@ public class CompositeChunkListener implements ChunkListener {
 	 */
 	@Override
 	public void beforeChunk(ChunkContext context) {
-		for (Iterator<ChunkListener> iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<ChunkListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
 			ChunkListener listener = iterator.next();
 			listener.beforeChunk(context);
 		}
@@ -105,7 +105,7 @@ public class CompositeChunkListener implements ChunkListener {
 	 */
 	@Override
 	public void afterChunkError(ChunkContext context) {
-		for (Iterator<ChunkListener> iterator = listeners.reverse(); iterator.hasNext();) {
+		for (Iterator<ChunkListener> iterator = listeners.reverse(); iterator.hasNext(); ) {
 			ChunkListener listener = iterator.next();
 			listener.afterChunkError(context);
 		}

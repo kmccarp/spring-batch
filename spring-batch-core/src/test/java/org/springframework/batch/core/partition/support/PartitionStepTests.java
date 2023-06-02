@@ -53,8 +53,8 @@ class PartitionStepTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").build();
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(embeddedDatabase);
 		factory.setTransactionManager(new JdbcTransactionManager(embeddedDatabase));
@@ -67,11 +67,11 @@ class PartitionStepTests {
 	@Test
 	void testVanillaStepExecution() throws Exception {
 		step.setStepExecutionSplitter(
-				new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
+		new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
 		step.setPartitionHandler(new PartitionHandler() {
 			@Override
 			public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-					throws Exception {
+			throws Exception {
 				Set<StepExecution> executions = stepSplitter.split(stepExecution, 2);
 				for (StepExecution execution : executions) {
 					execution.setStatus(BatchStatus.COMPLETED);
@@ -93,11 +93,11 @@ class PartitionStepTests {
 	@Test
 	void testFailedStepExecution() throws Exception {
 		step.setStepExecutionSplitter(
-				new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
+		new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
 		step.setPartitionHandler(new PartitionHandler() {
 			@Override
 			public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-					throws Exception {
+			throws Exception {
 				Set<StepExecution> executions = stepSplitter.split(stepExecution, 2);
 				for (StepExecution execution : executions) {
 					execution.setStatus(BatchStatus.FAILED);
@@ -120,11 +120,11 @@ class PartitionStepTests {
 	void testRestartStepExecution() throws Exception {
 		final AtomicBoolean started = new AtomicBoolean(false);
 		step.setStepExecutionSplitter(
-				new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
+		new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
 		step.setPartitionHandler(new PartitionHandler() {
 			@Override
 			public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-					throws Exception {
+			throws Exception {
 				Set<StepExecution> executions = stepSplitter.split(stepExecution, 2);
 				if (!started.get()) {
 					started.set(true);
@@ -168,11 +168,11 @@ class PartitionStepTests {
 	@Test
 	void testStoppedStepExecution() throws Exception {
 		step.setStepExecutionSplitter(
-				new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
+		new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
 		step.setPartitionHandler(new PartitionHandler() {
 			@Override
 			public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-					throws Exception {
+			throws Exception {
 				Set<StepExecution> executions = stepSplitter.split(stepExecution, 2);
 				for (StepExecution execution : executions) {
 					execution.setStatus(BatchStatus.STOPPED);
@@ -201,11 +201,11 @@ class PartitionStepTests {
 			}
 		});
 		step.setStepExecutionSplitter(
-				new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
+		new SimpleStepExecutionSplitter(jobRepository, true, step.getName(), new SimplePartitioner()));
 		step.setPartitionHandler(new PartitionHandler() {
 			@Override
 			public Collection<StepExecution> handle(StepExecutionSplitter stepSplitter, StepExecution stepExecution)
-					throws Exception {
+			throws Exception {
 				return Arrays.asList(stepExecution);
 			}
 		});

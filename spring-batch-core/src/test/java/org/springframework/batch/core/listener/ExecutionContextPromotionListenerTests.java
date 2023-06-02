@@ -65,7 +65,7 @@ class ExecutionContextPromotionListenerTests {
 		stepExecution.getExecutionContext().putString(key, value);
 		stepExecution.getExecutionContext().putString(key2, value2);
 
-		listener.setKeys(new String[] { key });
+		listener.setKeys(new String[]{key});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -95,8 +95,8 @@ class ExecutionContextPromotionListenerTests {
 		stepExecution.getExecutionContext().putString(key, value);
 		stepExecution.getExecutionContext().putString(key2, value2);
 
-		listener.setKeys(new String[] { key });
-		listener.setStatuses(new String[] { status });
+		listener.setKeys(new String[]{key});
+		listener.setStatuses(new String[]{status});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -125,8 +125,8 @@ class ExecutionContextPromotionListenerTests {
 		stepExecution.getExecutionContext().putString(key, value);
 		stepExecution.getExecutionContext().putString(key2, value2);
 
-		listener.setKeys(new String[] { key });
-		listener.setStatuses(new String[] { status });
+		listener.setKeys(new String[]{key});
+		listener.setStatuses(new String[]{status});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -154,8 +154,8 @@ class ExecutionContextPromotionListenerTests {
 		stepExecution.getExecutionContext().putString(key, value);
 		stepExecution.getExecutionContext().putString(key2, value2);
 
-		listener.setKeys(new String[] { key });
-		listener.setStatuses(new String[] { statusWildcard });
+		listener.setKeys(new String[]{key});
+		listener.setStatuses(new String[]{statusWildcard});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -182,7 +182,7 @@ class ExecutionContextPromotionListenerTests {
 
 		stepExecution.getExecutionContext().putString(key, value);
 
-		listener.setKeys(new String[] { key, key2 });
+		listener.setKeys(new String[]{key, key2});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -209,7 +209,7 @@ class ExecutionContextPromotionListenerTests {
 
 		jobExecution.getExecutionContext().putString(key, value);
 
-		listener.setKeys(new String[] { key });
+		listener.setKeys(new String[]{key});
 		listener.afterPropertiesSet();
 
 		listener.afterStep(stepExecution);
@@ -237,7 +237,7 @@ class ExecutionContextPromotionListenerTests {
 
 		stepExecution.getExecutionContext().putString(key, value);
 
-		listener.setKeys(new String[] { key, key2 });
+		listener.setKeys(new String[]{key, key2});
 		listener.afterPropertiesSet();
 
 		assertThrows(IllegalArgumentException.class, () -> listener.afterStep(stepExecution));

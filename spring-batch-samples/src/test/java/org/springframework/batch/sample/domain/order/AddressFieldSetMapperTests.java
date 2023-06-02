@@ -52,11 +52,11 @@ class AddressFieldSetMapperTests extends AbstractFieldSetMapperTests {
 
 	@Override
 	protected FieldSet fieldSet() {
-		String[] tokens = new String[] { ADDRESSEE, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, COUNTRY, ZIP_CODE };
-		String[] columnNames = new String[] { AddressFieldSetMapper.ADDRESSEE_COLUMN,
-				AddressFieldSetMapper.ADDRESS_LINE1_COLUMN, AddressFieldSetMapper.ADDRESS_LINE2_COLUMN,
-				AddressFieldSetMapper.CITY_COLUMN, AddressFieldSetMapper.STATE_COLUMN,
-				AddressFieldSetMapper.COUNTRY_COLUMN, AddressFieldSetMapper.ZIP_CODE_COLUMN };
+		String[] tokens = new String[]{ADDRESSEE, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, COUNTRY, ZIP_CODE};
+		String[] columnNames = new String[]{AddressFieldSetMapper.ADDRESSEE_COLUMN,
+		AddressFieldSetMapper.ADDRESS_LINE1_COLUMN, AddressFieldSetMapper.ADDRESS_LINE2_COLUMN,
+		AddressFieldSetMapper.CITY_COLUMN, AddressFieldSetMapper.STATE_COLUMN,
+		AddressFieldSetMapper.COUNTRY_COLUMN, AddressFieldSetMapper.ZIP_CODE_COLUMN};
 
 		return new DefaultFieldSet(tokens, columnNames);
 	}

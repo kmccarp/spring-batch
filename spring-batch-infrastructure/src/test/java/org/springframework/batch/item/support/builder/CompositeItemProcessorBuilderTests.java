@@ -60,7 +60,7 @@ class CompositeItemProcessorBuilderTests {
 		Object itemAfterFirstTransformation = new Object();
 		Object itemAfterSecondTransformation = new Object();
 		CompositeItemProcessor<Object, Object> composite = new CompositeItemProcessorBuilder<>()
-				.delegates(this.processors).build();
+		.delegates(this.processors).build();
 
 		when(processor1.process(item)).thenReturn(itemAfterFirstTransformation);
 		when(processor2.process(itemAfterFirstTransformation)).thenReturn(itemAfterSecondTransformation);
@@ -74,7 +74,7 @@ class CompositeItemProcessorBuilderTests {
 		Object itemAfterFirstTransformation = new Object();
 		Object itemAfterSecondTransformation = new Object();
 		CompositeItemProcessor<Object, Object> composite = new CompositeItemProcessorBuilder<>()
-				.delegates(this.processor1, this.processor2).build();
+		.delegates(this.processor1, this.processor2).build();
 
 		when(processor1.process(item)).thenReturn(itemAfterFirstTransformation);
 		when(processor2.process(itemAfterFirstTransformation)).thenReturn(itemAfterSecondTransformation);
@@ -85,9 +85,9 @@ class CompositeItemProcessorBuilderTests {
 	@Test
 	void testNullOrEmptyDelegates() {
 		validateExceptionMessage(new CompositeItemProcessorBuilder<>().delegates(new ArrayList<>()),
-				"The delegates list must have one or more delegates.");
+		"The delegates list must have one or more delegates.");
 		validateExceptionMessage(new CompositeItemProcessorBuilder<>().delegates(),
-				"The delegates list must have one or more delegates.");
+		"The delegates list must have one or more delegates.");
 		validateExceptionMessage(new CompositeItemProcessorBuilder<>(), "A list of delegates is required.");
 	}
 

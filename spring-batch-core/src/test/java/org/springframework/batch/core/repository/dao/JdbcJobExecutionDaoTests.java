@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Parikshit Dutta
  * @author Mahmoud Ben Hassine
  */
-@SpringJUnitConfig(locations = { "sql-dao-test.xml" })
+@SpringJUnitConfig(locations = {"sql-dao-test.xml"})
 public class JdbcJobExecutionDaoTests extends AbstractJobExecutionDaoTests {
 
 	@Autowired
@@ -68,7 +68,7 @@ public class JdbcJobExecutionDaoTests extends AbstractJobExecutionDaoTests {
 	@Override
 	protected JobExecutionDao getJobExecutionDao() {
 		JdbcTestUtils.deleteFromTables(jdbcTemplate, "BATCH_JOB_EXECUTION_CONTEXT", "BATCH_STEP_EXECUTION_CONTEXT",
-				"BATCH_STEP_EXECUTION", "BATCH_JOB_EXECUTION", "BATCH_JOB_EXECUTION_PARAMS", "BATCH_JOB_INSTANCE");
+		"BATCH_STEP_EXECUTION", "BATCH_JOB_EXECUTION", "BATCH_JOB_EXECUTION_PARAMS", "BATCH_JOB_INSTANCE");
 		return jobExecutionDao;
 	}
 
@@ -119,9 +119,9 @@ public class JdbcJobExecutionDaoTests extends AbstractJobExecutionDaoTests {
 		long longParameter = 1L;
 		double doubleParameter = 2D;
 		JobParameters jobParameters = new JobParametersBuilder().addString("string", stringParameter)
-				.addLong("long", longParameter).addDouble("double", doubleParameter).addDate("date", dateParameter)
-				.addLocalDate("localDate", localDateParameter).addLocalTime("localTime", localTimeParameter)
-				.addLocalDateTime("localDateTime", localDateTimeParameter).toJobParameters();
+		.addLong("long", longParameter).addDouble("double", doubleParameter).addDate("date", dateParameter)
+		.addLocalDate("localDate", localDateParameter).addLocalTime("localTime", localTimeParameter)
+		.addLocalDateTime("localDateTime", localDateTimeParameter).toJobParameters();
 		JobExecution execution = new JobExecution(jobInstance, jobParameters);
 
 		// when

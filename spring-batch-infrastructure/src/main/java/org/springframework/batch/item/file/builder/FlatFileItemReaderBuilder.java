@@ -418,7 +418,7 @@ public class FlatFileItemReaderBuilder<T> {
 
 		if (this.resource == null) {
 			logger.debug("The resource is null.  This is only a valid scenario when "
-					+ "injecting it later as in when using the MultiResourceItemReader");
+			+ "injecting it later as in when using the MultiResourceItemReader");
 		}
 
 		Assert.notNull(this.recordSeparatorPolicy, "A RecordSeparatorPolicy is required.");
@@ -442,7 +442,7 @@ public class FlatFileItemReaderBuilder<T> {
 		}
 		else {
 			Assert.state(validatorValue == 0 || validatorValue == 1 || validatorValue == 2 || validatorValue == 4,
-					"Only one LineTokenizer option may be configured");
+			"Only one LineTokenizer option may be configured");
 
 			DefaultLineMapper<T> lineMapper = new DefaultLineMapper<>();
 

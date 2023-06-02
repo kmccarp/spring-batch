@@ -64,7 +64,7 @@ class StagingItemReaderTests {
 	@BeforeTransaction
 	void onSetUpBeforeTransaction() {
 		StepExecution stepExecution = new StepExecution("stepName",
-				new JobExecution(new JobInstance(jobId, "testJob"), new JobParameters()));
+		new JobExecution(new JobInstance(jobId, "testJob"), new JobParameters()));
 		writer.beforeStep(stepExecution);
 		writer.write(Chunk.of("FOO", "BAR", "SPAM", "BUCKET"));
 		reader.beforeStep(stepExecution);
@@ -128,9 +128,9 @@ class StagingItemReaderTests {
 			public Long doInTransaction(TransactionStatus transactionStatus) {
 
 				long id = jdbcTemplate.queryForObject("SELECT MIN(ID) from BATCH_STAGING where JOB_ID=?", Long.class,
-						jobId);
+				jobId);
 				String before = jdbcTemplate.queryForObject("SELECT PROCESSED from BATCH_STAGING where ID=?",
-						String.class, id);
+				String.class, id);
 				assertEquals(StagingItemWriter.NEW, before);
 
 				ProcessIndicatorItemWrapper<String> wrapper = reader.read();
@@ -143,7 +143,7 @@ class StagingItemReaderTests {
 		});
 
 		String after = jdbcTemplate.queryForObject("SELECT PROCESSED from BATCH_STAGING where ID=?", String.class,
-				idToUse);
+		idToUse);
 		assertEquals(StagingItemWriter.NEW, after);
 	}
 

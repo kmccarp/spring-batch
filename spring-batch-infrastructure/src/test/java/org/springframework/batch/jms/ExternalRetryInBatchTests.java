@@ -106,7 +106,7 @@ class ExternalRetryInBatchTests {
 		assertInitialState();
 
 		retryTemplate.setRetryPolicy(new SimpleRetryPolicy(1,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 
 		repeatTemplate.setCompletionPolicy(new SimpleCompletionPolicy(2));
 
@@ -139,8 +139,8 @@ class ExternalRetryInBatchTests {
 											// code is not
 											// executed...
 											jdbcTemplate.update(
-													"INSERT into T_BARS (id,name,foo_date) values (?,?,null)",
-													list.size(), item);
+											"INSERT into T_BARS (id,name,foo_date) values (?,?,null)",
+											list.size(), item);
 											throw new RuntimeException("Rollback!");
 										}
 									};

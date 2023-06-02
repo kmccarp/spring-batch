@@ -33,7 +33,7 @@ import java.lang.annotation.Target;
  * @see ChunkListener#afterChunkError(ChunkContext context)
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface AfterChunkError {
 
 }

@@ -38,7 +38,7 @@ public class SkipCheckingListener {
 	@AfterStep
 	public ExitStatus checkForSkips(StepExecution stepExecution) {
 		if (!stepExecution.getExitStatus().getExitCode().equals(ExitStatus.FAILED.getExitCode())
-				&& stepExecution.getSkipCount() > 0) {
+		&& stepExecution.getSkipCount() > 0) {
 			return new ExitStatus("COMPLETED WITH SKIPS");
 		}
 		else {

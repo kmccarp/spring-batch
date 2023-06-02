@@ -60,7 +60,7 @@ class HibernateNativeQueryProviderIntegrationTests {
 
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean.setMappingLocations(new Resource[] { new ClassPathResource("../Foo.hbm.xml", getClass()) });
+		factoryBean.setMappingLocations(new Resource[]{new ClassPathResource("../Foo.hbm.xml", getClass())});
 		factoryBean.afterPropertiesSet();
 
 		sessionFactory = factoryBean.getObject();

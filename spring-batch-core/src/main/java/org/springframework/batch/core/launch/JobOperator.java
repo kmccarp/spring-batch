@@ -117,7 +117,7 @@ public interface JobOperator {
 	 */
 	@Deprecated(since = "5.0.1", forRemoval = true)
 	Long start(String jobName, String parameters)
-			throws NoSuchJobException, JobInstanceAlreadyExistsException, JobParametersInvalidException;
+	throws NoSuchJobException, JobInstanceAlreadyExistsException, JobParametersInvalidException;
 
 	/**
 	 * Start a new instance of a job with the parameters specified.
@@ -131,7 +131,7 @@ public interface JobOperator {
 	 * invalid.
 	 */
 	default Long start(String jobName, Properties parameters)
-			throws NoSuchJobException, JobInstanceAlreadyExistsException, JobParametersInvalidException {
+	throws NoSuchJobException, JobInstanceAlreadyExistsException, JobParametersInvalidException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -152,7 +152,7 @@ public interface JobOperator {
 	 * @throws JobParametersInvalidException if the parameters are not valid for this job
 	 */
 	Long restart(long executionId) throws JobInstanceAlreadyCompleteException, NoSuchJobExecutionException,
-			NoSuchJobException, JobRestartException, JobParametersInvalidException;
+	NoSuchJobException, JobRestartException, JobParametersInvalidException;
 
 	/**
 	 * Launch the next in a sequence of {@link JobInstance} determined by the
@@ -180,8 +180,8 @@ public interface JobOperator {
 	 * completed job.
 	 */
 	Long startNextInstance(String jobName) throws NoSuchJobException, JobParametersNotFoundException,
-			JobRestartException, JobExecutionAlreadyRunningException, JobInstanceAlreadyCompleteException,
-			UnexpectedJobExecutionException, JobParametersInvalidException;
+	JobRestartException, JobExecutionAlreadyRunningException, JobInstanceAlreadyCompleteException,
+	UnexpectedJobExecutionException, JobParametersInvalidException;
 
 	/**
 	 * Send a stop signal to the {@link JobExecution} with the supplied id. The signal is

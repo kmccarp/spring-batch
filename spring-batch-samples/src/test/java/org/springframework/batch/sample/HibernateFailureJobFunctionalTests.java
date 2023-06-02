@@ -54,8 +54,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Glenn Renfro
  */
 
-@SpringJUnitConfig(locations = { "/simple-job-launcher-context.xml", "/hibernate-context.xml", "/jobs/hibernateJob.xml",
-		"/job-runner-context.xml" })
+@SpringJUnitConfig(locations = {"/simple-job-launcher-context.xml", "/hibernate-context.xml", "/jobs/hibernateJob.xml",
+"/job-runner-context.xml"})
 class HibernateFailureJobFunctionalTests {
 
 	private static final BigDecimal CREDIT_INCREASE = CustomerCreditIncreaseProcessor.FIXED_AMOUNT;
@@ -65,10 +65,10 @@ class HibernateFailureJobFunctionalTests {
 	private static final String CREDIT_COLUMN = "CREDIT";
 
 	private static final String[] customers = {
-			"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (1, 0, 'customer1', 100000)",
-			"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (2, 0, 'customer2', 100000)",
-			"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (3, 0, 'customer3', 100000)",
-			"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (4, 0, 'customer4', 100000)" };
+	"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (1, 0, 'customer1', 100000)",
+	"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (2, 0, 'customer2', 100000)",
+	"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (3, 0, 'customer3', 100000)",
+	"INSERT INTO CUSTOMER (id, version, name, credit) VALUES (4, 0, 'customer4', 100000)"};
 
 	protected static final String ID_COLUMN = "ID";
 
@@ -124,17 +124,17 @@ class HibernateFailureJobFunctionalTests {
 	protected void validatePreConditions() {
 		ensureState();
 		creditsBeforeUpdate = new TransactionTemplate(transactionManager)
-				.execute(new TransactionCallback<List<BigDecimal>>() {
+		.execute(new TransactionCallback<List<BigDecimal>>() {
+			@Override
+			public List<BigDecimal> doInTransaction(TransactionStatus status) {
+				return jdbcTemplate.query(ALL_CUSTOMERS, new RowMapper<BigDecimal>() {
 					@Override
-					public List<BigDecimal> doInTransaction(TransactionStatus status) {
-						return jdbcTemplate.query(ALL_CUSTOMERS, new RowMapper<BigDecimal>() {
-							@Override
-							public BigDecimal mapRow(ResultSet rs, int rowNum) throws SQLException {
-								return rs.getBigDecimal(CREDIT_COLUMN);
-							}
-						});
+					public BigDecimal mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return rs.getBigDecimal(CREDIT_COLUMN);
 					}
 				});
+			}
+		});
 	}
 
 	/*

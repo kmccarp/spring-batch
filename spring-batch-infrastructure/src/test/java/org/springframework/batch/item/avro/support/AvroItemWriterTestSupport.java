@@ -45,7 +45,7 @@ public abstract class AvroItemWriterTestSupport extends AvroTestFixtures {
 	 * This item reader configured for Specific Avro types.
 	 */
 	protected <T> void verifyRecords(byte[] bytes, Chunk<T> actual, Class<T> clazz, boolean embeddedSchema)
-			throws Exception {
+	throws Exception {
 		doVerify(bytes, clazz, actual, embeddedSchema);
 	}
 
@@ -55,7 +55,7 @@ public abstract class AvroItemWriterTestSupport extends AvroTestFixtures {
 
 	private <T> void doVerify(byte[] bytes, Class<T> clazz, Chunk<T> actual, boolean embeddedSchema) throws Exception {
 		AvroItemReader<T> avroItemReader = new AvroItemReaderBuilder<T>().type(clazz)
-				.resource(new ByteArrayResource(bytes)).embeddedSchema(embeddedSchema).build();
+		.resource(new ByteArrayResource(bytes)).embeddedSchema(embeddedSchema).build();
 
 		avroItemReader.open(new ExecutionContext());
 
@@ -67,7 +67,7 @@ public abstract class AvroItemWriterTestSupport extends AvroTestFixtures {
 		assertThat(records).hasSize(4);
 		List<T> actualItems = actual.getItems();
 		assertThat(records).containsExactlyInAnyOrder(actualItems.get(0), actualItems.get(1), actualItems.get(2),
-				actualItems.get(3));
+		actualItems.get(3));
 	}
 
 	protected static class OutputStreamResource implements WritableResource {

@@ -113,7 +113,7 @@ import org.springframework.util.Assert;
  * @author Mahmoud Ben Hassine
  */
 public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingItemStreamItemReader<T>
-		implements InitializingBean {
+implements InitializingBean {
 
 	/** Logger available to subclasses */
 	protected final Log log = LogFactory.getLog(getClass());
@@ -243,7 +243,7 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 				SQLWarning warningToLog = statement.getWarnings();
 				while (warningToLog != null) {
 					log.debug("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() + "', error code '"
-							+ warningToLog.getErrorCode() + "', message [" + warningToLog.getMessage() + "]");
+					+ warningToLog.getErrorCode() + "', message [" + warningToLog.getMessage() + "]");
 					warningToLog = warningToLog.getNextWarning();
 				}
 			}
@@ -440,8 +440,8 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 			if (useSharedExtendedConnection) {
 				if (!(getDataSource() instanceof ExtendedConnectionDataSourceProxy)) {
 					throw new InvalidDataAccessApiUsageException(
-							"You must use a ExtendedConnectionDataSourceProxy for the dataSource when "
-									+ "useSharedExtendedConnection is set to true.");
+					"You must use a ExtendedConnectionDataSourceProxy for the dataSource when "
+				+ "useSharedExtendedConnection is set to true.");
 				}
 				this.con = DataSourceUtils.getConnection(dataSource);
 				((ExtendedConnectionDataSourceProxy) dataSource).startCloseSuppression(this.con);
@@ -514,7 +514,7 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 				// Driver does not support rs.absolute(int) revert to
 				// traversing ResultSet
 				log.warn("The JDBC driver does not appear to support ResultSet.absolute(). Consider"
-						+ " reverting to the default behavior setting the driverSupportsAbsolute to false", e);
+				+ " reverting to the default behavior setting the driverSupportsAbsolute to false", e);
 
 				moveCursorToRow(itemIndex);
 			}

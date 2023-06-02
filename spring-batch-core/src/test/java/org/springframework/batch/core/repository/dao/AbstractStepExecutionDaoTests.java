@@ -182,7 +182,7 @@ public abstract class AbstractStepExecutionDaoTests extends AbstractTransactiona
 
 		dao.saveStepExecutions(Arrays.asList(stepExecution1, stepExecution2));
 		StepExecution lastStepExecution = stepExecution1.getId() > stepExecution2.getId() ? stepExecution1
-				: stepExecution2;
+		: stepExecution2;
 		StepExecution retrieved = dao.getLastStepExecution(jobInstance, "step1");
 		assertNotNull(retrieved);
 		assertEquals(lastStepExecution.getId(), retrieved.getId());

@@ -50,8 +50,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Mahmoud Ben Hassine
  */
 @SpringJUnitConfig(
-		locations = { "/simple-job-launcher-context.xml", "/job-runner-context.xml", "/jobs/ioSampleJob.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, StepScopeTestExecutionListener.class })
+locations = {"/simple-job-launcher-context.xml", "/job-runner-context.xml", "/jobs/ioSampleJob.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, StepScopeTestExecutionListener.class})
 abstract class AbstractIoSampleTests {
 
 	@Autowired
@@ -83,7 +83,7 @@ abstract class AbstractIoSampleTests {
 
 		for (int i = 0; i < itemCount; i++) {
 			assertEquals(inputs.get(i).getCredit().add(CustomerCreditIncreaseProcessor.FIXED_AMOUNT).intValue(),
-					outputs.get(i).getCredit().intValue());
+			outputs.get(i).getCredit().intValue());
 		}
 
 	}

@@ -97,7 +97,7 @@ class BatchMessageListenerContainerTests {
 		container = getContainer(template);
 		container.setSessionTransacted(true);
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> doTestWithException(new IllegalStateException("No way!"), true, 2));
+		() -> doTestWithException(new IllegalStateException("No way!"), true, 2));
 		assertEquals("No way!", exception.getMessage());
 	}
 
@@ -137,7 +137,7 @@ class BatchMessageListenerContainerTests {
 		};
 		RepeatOperationsInterceptor interceptor = new RepeatOperationsInterceptor();
 		interceptor.setRepeatOperations(template);
-		container.setAdviceChain(new Advice[] { interceptor });
+		container.setAdviceChain(new Advice[]{interceptor});
 		container.setConnectionFactory(connectionFactory);
 		container.setDestinationName("queue");
 		container.afterPropertiesSet();
@@ -145,7 +145,7 @@ class BatchMessageListenerContainerTests {
 	}
 
 	private boolean doTestWithException(final Throwable t, boolean expectRollback, int expectGetTransactionCount)
-			throws JMSException, IllegalAccessException {
+	throws JMSException, IllegalAccessException {
 		container.setAcceptMessagesWhileStopping(true);
 		container.setMessageListener(new MessageListener() {
 			@Override
@@ -179,7 +179,7 @@ class BatchMessageListenerContainerTests {
 
 	private boolean doExecute(Session session, MessageConsumer consumer) throws IllegalAccessException {
 		Method method = ReflectionUtils.findMethod(container.getClass(), "receiveAndExecute", Object.class,
-				Session.class, MessageConsumer.class);
+		Session.class, MessageConsumer.class);
 		method.setAccessible(true);
 		boolean received;
 		try {

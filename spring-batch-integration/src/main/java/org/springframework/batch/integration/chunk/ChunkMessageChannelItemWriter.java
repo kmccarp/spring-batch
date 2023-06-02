@@ -43,7 +43,7 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.Assert;
 
 public class ChunkMessageChannelItemWriter<T>
-		implements StepExecutionListener, ItemWriter<T>, ItemStream, StepContributionSource {
+implements StepExecutionListener, ItemWriter<T>, ItemStream, StepContributionSource {
 
 	private static final Log logger = LogFactory.getLog(ChunkMessageChannelItemWriter.class);
 
@@ -140,7 +140,7 @@ public class ChunkMessageChannelItemWriter<T>
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("Finished waiting for results in step listener.  Still expecting: "
-						+ localState.getExpecting());
+				+ localState.getExpecting());
 			}
 
 			for (StepContribution contribution : getStepContributions()) {
@@ -150,7 +150,7 @@ public class ChunkMessageChannelItemWriter<T>
 		if (timedOut) {
 			stepExecution.setStatus(BatchStatus.FAILED);
 			return ExitStatus.FAILED.addExitDescription(
-					"Timed out waiting for " + localState.getExpecting() + " backlog at end of step");
+			"Timed out waiting for " + localState.getExpecting() + " backlog at end of step");
 		}
 		return ExitStatus.COMPLETED.addExitDescription("Waited for " + expecting + " results.");
 	}
@@ -202,7 +202,7 @@ public class ChunkMessageChannelItemWriter<T>
 			}
 			catch (Throwable t) {
 				logger.error("Detected error in remote result. Trying to recover " + localState.getExpecting()
-						+ " outstanding results before completing.", t);
+				+ " outstanding results before completing.", t);
 				failure = t;
 			}
 		}
@@ -231,21 +231,21 @@ public class ChunkMessageChannelItemWriter<T>
 			Long jobInstanceId = payload.getJobId();
 			Assert.state(jobInstanceId != null, "Message did not contain job instance id.");
 			Assert.state(jobInstanceId.equals(localState.getJobId()), "Message contained wrong job instance id ["
-					+ jobInstanceId + "] should have been [" + localState.getJobId() + "].");
+			+ jobInstanceId + "] should have been [" + localState.getJobId() + "].");
 			if (payload.isRedelivered()) {
 				logger.warn(
-						"Redelivered result detected, which may indicate stale state. In the best case, we just picked up a timed out message "
-								+ "from a previous failed execution. In the worst case (and if this is not a restart), "
-								+ "the step may now timeout.  In that case if you believe that all messages "
-								+ "from workers have been sent, the business state "
-								+ "is probably inconsistent, and the step will fail.");
+				"Redelivered result detected, which may indicate stale state. In the best case, we just picked up a timed out message "
+			+ "from a previous failed execution. In the worst case (and if this is not a restart), "
+			+ "the step may now timeout.  In that case if you believe that all messages "
+			+ "from workers have been sent, the business state "
+			+ "is probably inconsistent, and the step will fail.");
 				localState.incrementRedelivered();
 			}
 			localState.pushResponse(payload);
 			localState.incrementActual();
 			if (!payload.isSuccessful()) {
 				throw new AsynchronousFailureException(
-						"Failure or interrupt detected in handler: " + payload.getMessage());
+				"Failure or interrupt detected in handler: " + payload.getMessage());
 			}
 		}
 	}

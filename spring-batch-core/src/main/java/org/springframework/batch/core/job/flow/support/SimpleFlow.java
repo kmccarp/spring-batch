@@ -174,7 +174,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 			catch (Exception e) {
 				executor.close(new FlowExecution(stateName, status));
 				throw new FlowExecutionException(
-						String.format("Ended flow=%s at state=%s with exception", name, stateName), e);
+				String.format("Ended flow=%s at state=%s with exception", name, stateName), e);
 			}
 
 			if (logger.isDebugEnabled()) {
@@ -206,12 +206,12 @@ public class SimpleFlow implements Flow, InitializingBean {
 	 * @throws FlowExecutionException thrown if error occurs during nextState processing.
 	 */
 	protected State nextState(String stateName, FlowExecutionStatus status, StepExecution stepExecution)
-			throws FlowExecutionException {
+	throws FlowExecutionException {
 		Set<StateTransition> set = transitionMap.get(stateName);
 
 		if (set == null) {
 			throw new FlowExecutionException(
-					String.format("No transitions found in flow=%s for state=%s", getName(), stateName));
+			String.format("No transitions found in flow=%s for state=%s", getName(), stateName));
 		}
 
 		String next = null;
@@ -219,7 +219,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		for (StateTransition stateTransition : set) {
 			if (stateTransition.matches(exitCode)
-					|| (exitCode.equals("PENDING") && stateTransition.matches("STOPPED"))) {
+			|| (exitCode.equals("PENDING") && stateTransition.matches("STOPPED"))) {
 				if (stateTransition.isEnd()) {
 					// End of job
 					return null;
@@ -231,13 +231,13 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		if (next == null) {
 			throw new FlowExecutionException(
-					String.format("Next state not found in flow=%s for state=%s with exit status=%s", getName(),
-							stateName, status.getName()));
+			String.format("Next state not found in flow=%s for state=%s with exit status=%s", getName(),
+		stateName, status.getName()));
 		}
 
 		if (!stateMap.containsKey(next)) {
 			throw new FlowExecutionException(
-					String.format("Next state not specified in flow=%s for next=%s", getName(), next));
+			String.format("Next state not specified in flow=%s for next=%s", getName(), next));
 		}
 
 		return stateMap.get(next);
@@ -254,7 +254,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 			Boolean executed = (Boolean) stepExecution.getExecutionContext().get("batch.executed");
 
 			if ((executed == null || !executed) && reRun != null && reRun && status == FlowExecutionStatus.STOPPED
-					&& !state.getName().endsWith(stepExecution.getStepName())) {
+			&& !state.getName().endsWith(stepExecution.getStepName())) {
 				continued = true;
 			}
 		}
@@ -274,7 +274,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		if (stateTransitions.isEmpty()) {
 			throw new IllegalArgumentException(
-					"No start state was found. You must specify at least one step in a job.");
+			"No start state was found. You must specify at least one step in a job.");
 		}
 
 		for (StateTransition stateTransition : stateTransitions) {
@@ -320,7 +320,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		if (!hasEndStep) {
 			throw new IllegalArgumentException(
-					"No end state was found.  You must specify at least one transition with no next state.");
+			"No end state was found.  You must specify at least one transition with no next state.");
 		}
 
 		startState = stateTransitions.get(0).getState();

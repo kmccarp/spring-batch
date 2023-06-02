@@ -35,7 +35,7 @@ class JmsMethodInvocationRecovererTests {
 		jmsTemplate.convertAndSend("foo");
 
 		itemReader.setJmsTemplate(jmsTemplate);
-		itemReader.recover(new Object[] { "foo" }, null);
+		itemReader.recover(new Object[]{"foo"}, null);
 
 	}
 

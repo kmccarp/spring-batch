@@ -65,7 +65,7 @@ class NonAbstractStepTests {
 	final List<String> events = new ArrayList<>();
 
 	final StepExecution execution = new StepExecution(tested.getName(),
-			new JobExecution(new JobInstance(1L, "jobName"), new JobParameters()));
+	new JobExecution(new JobInstance(1L, "jobName"), new JobParameters()));
 
 	/**
 	 * Fills the events list when abstract methods are called.
@@ -191,11 +191,11 @@ class NonAbstractStepTests {
 	 */
 	@Test
 	void testExecute() throws Exception {
-		tested.setStepExecutionListeners(new StepExecutionListener[] { listener1, listener2 });
+		tested.setStepExecutionListeners(new StepExecutionListener[]{listener1, listener2});
 
 		ObservationRegistry observationRegistry = ObservationRegistry.create();
 		observationRegistry.observationConfig()
-				.observationHandler(new DefaultMeterObservationHandler(Metrics.globalRegistry));
+		.observationHandler(new DefaultMeterObservationHandler(Metrics.globalRegistry));
 		tested.setObservationRegistry(observationRegistry);
 
 		tested.execute(execution);
@@ -213,16 +213,16 @@ class NonAbstractStepTests {
 		assertEquals(ExitStatus.COMPLETED, execution.getExitStatus());
 
 		assertTrue(repository.saved.containsKey("beforeStep"),
-				"Execution context modifications made by listener should be persisted");
+		"Execution context modifications made by listener should be persisted");
 		assertTrue(repository.saved.containsKey("afterStep"),
-				"Execution context modifications made by listener should be persisted");
+		"Execution context modifications made by listener should be persisted");
 
 		// Observability
 		MeterRegistryAssert.assertThat(Metrics.globalRegistry).hasTimerWithNameAndTags(
-				BatchStepObservation.BATCH_STEP_OBSERVATION.getName(),
-				Tags.of(Tag.of("error", "none"), Tag.of("spring.batch.step.job.name", "jobName"),
-						Tag.of("spring.batch.step.name", "eventTrackingStep"),
-						Tag.of("spring.batch.step.status", "COMPLETED")));
+		BatchStepObservation.BATCH_STEP_OBSERVATION.getName(),
+		Tags.of(Tag.of("error", "none"), Tag.of("spring.batch.step.job.name", "jobName"),
+	Tag.of("spring.batch.step.name", "eventTrackingStep"),
+	Tag.of("spring.batch.step.status", "COMPLETED")));
 	}
 
 	@AfterEach
@@ -240,7 +240,7 @@ class NonAbstractStepTests {
 			}
 		};
 		tested.setJobRepository(repository);
-		tested.setStepExecutionListeners(new StepExecutionListener[] { listener1, listener2 });
+		tested.setStepExecutionListeners(new StepExecutionListener[]{listener1, listener2});
 
 		tested.execute(execution);
 		assertEquals(BatchStatus.FAILED, execution.getStatus());
@@ -262,7 +262,7 @@ class NonAbstractStepTests {
 		assertTrue(exitDescription.contains("crash"), "Wrong message: " + exitDescription);
 
 		assertTrue(repository.saved.containsKey("afterStep"),
-				"Execution context modifications made by listener should be persisted");
+		"Execution context modifications made by listener should be persisted");
 	}
 
 	/**
@@ -278,7 +278,7 @@ class NonAbstractStepTests {
 			}
 		};
 		tested.setJobRepository(repository);
-		tested.setStepExecutionListeners(new StepExecutionListener[] { listener1, listener2 });
+		tested.setStepExecutionListeners(new StepExecutionListener[]{listener1, listener2});
 
 		tested.execute(execution);
 		assertEquals(BatchStatus.STOPPED, execution.getStatus());
@@ -298,7 +298,7 @@ class NonAbstractStepTests {
 		assertEquals("STOPPED", execution.getExitStatus().getExitCode());
 
 		assertTrue(repository.saved.containsKey("afterStep"),
-				"Execution context modifications made by listener should be persisted");
+		"Execution context modifications made by listener should be persisted");
 	}
 
 	@Test
@@ -312,7 +312,7 @@ class NonAbstractStepTests {
 			}
 		};
 		tested.setJobRepository(repository);
-		tested.setStepExecutionListeners(new StepExecutionListener[] { listener1, listener2 });
+		tested.setStepExecutionListeners(new StepExecutionListener[]{listener1, listener2});
 
 		tested.execute(execution);
 		assertEquals(BatchStatus.STOPPED, execution.getStatus());
@@ -322,7 +322,7 @@ class NonAbstractStepTests {
 		assertEquals("FUNNY", execution.getExitStatus().getExitCode());
 
 		assertTrue(repository.saved.containsKey("afterStep"),
-				"Execution context modifications made by listener should be persisted");
+		"Execution context modifications made by listener should be persisted");
 	}
 
 	/**

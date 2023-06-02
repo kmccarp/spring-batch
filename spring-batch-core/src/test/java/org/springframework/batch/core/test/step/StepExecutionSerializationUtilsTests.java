@@ -41,7 +41,7 @@ class StepExecutionSerializationUtilsTests {
 	@Test
 	void testCycle() {
 		StepExecution stepExecution = new StepExecution("step",
-				new JobExecution(new JobInstance(123L, "job"), 321L, new JobParameters()), 11L);
+		new JobExecution(new JobInstance(123L, "job"), 321L, new JobParameters()), 11L);
 		stepExecution.getExecutionContext().put("foo.bar.spam", 123);
 		StepExecution result = SerializationUtils.clone(stepExecution);
 		assertEquals(stepExecution, result);

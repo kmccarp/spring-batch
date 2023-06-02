@@ -67,7 +67,7 @@ class PartitionStepWithFlowParserTests {
 	void testRepeatedFlowStep() throws Exception {
 		assertNotNull(job1);
 		JobExecution jobExecution = jobRepository.createJobExecution(job1.getName(),
-				new JobParametersBuilder().addLong("gridSize", 1L).toJobParameters());
+		new JobParametersBuilder().addLong("gridSize", 1L).toJobParameters());
 		job1.execute(jobExecution);
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 		Collections.sort(savedStepNames);
@@ -75,8 +75,8 @@ class PartitionStepWithFlowParserTests {
 		List<String> stepNames = getStepNames(jobExecution);
 		assertEquals(14, stepNames.size());
 		assertEquals(
-				"[s1, s1, s1:partition0, s1:partition0, s1:partition1, s1:partition1, s2, s2, s2, s2, s3, s3, s3, s3]",
-				stepNames.toString());
+		"[s1, s1, s1:partition0, s1:partition0, s1:partition1, s1:partition1, s2, s2, s2, s2, s3, s3, s3, s3]",
+		stepNames.toString());
 	}
 
 	private List<String> getStepNames(JobExecution jobExecution) {

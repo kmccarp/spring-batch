@@ -61,7 +61,7 @@ class FaultTolerantChunkProcessorTests {
 	private FaultTolerantChunkProcessor<String, String> processor;
 
 	private final StepContribution contribution = new StepExecution("foo",
-			new JobExecution(new JobInstance(0L, "job"), new JobParameters())).createStepContribution();
+	new JobExecution(new JobInstance(0L, "job"), new JobParameters())).createStepContribution();
 
 	@BeforeEach
 	void setUp() {
@@ -141,7 +141,7 @@ class FaultTolerantChunkProcessorTests {
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("fail", "1", "2"));
 		processAndExpectPlannedRuntimeException(inputs); // (first attempt) Process fail,
-															// 1, 2
+		// 1, 2
 		// item 1 is filtered out so it is removed from the chunk => now inputs = [fail,
 		// 2]
 		// using NeverRetryPolicy by default => now scanning
@@ -172,7 +172,7 @@ class FaultTolerantChunkProcessorTests {
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("fail", "1", "2"));
 		processAndExpectPlannedRuntimeException(inputs); // (first attempt) Process fail,
-															// 1, 2
+		// 1, 2
 		// item 1 is filtered out so it is removed from the chunk => now inputs = [fail,
 		// 2]
 		processAndExpectPlannedRuntimeException(inputs); // (first retry) Process fail, 2
@@ -267,7 +267,7 @@ class FaultTolerantChunkProcessorTests {
 		});
 		processor.setProcessSkipPolicy(new AlwaysSkipItemSkipPolicy());
 		processor.setRollbackClassifier(
-				new BinaryExceptionClassifier(Set.of(DataIntegrityViolationException.class), false));
+		new BinaryExceptionClassifier(Set.of(DataIntegrityViolationException.class), false));
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2"));
 		processor.process(contribution, inputs);
 		assertEquals(1, list.size());
@@ -445,7 +445,7 @@ class FaultTolerantChunkProcessorTests {
 		retryPolicy.setMaxAttempts(2);
 		batchRetryTemplate.setRetryPolicy(retryPolicy);
 		processor.setWriteSkipPolicy(new LimitCheckingItemSkipPolicy(1,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(IllegalArgumentException.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(IllegalArgumentException.class, true)));
 		processor.setItemWriter(new ItemWriter<String>() {
 			@Override
 			public void write(Chunk<? extends String> chunk) throws Exception {
@@ -459,7 +459,7 @@ class FaultTolerantChunkProcessorTests {
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("3", "fail", "2"));
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> processor.process(contribution, inputs));
+		() -> processor.process(contribution, inputs));
 		assertEquals("Expected Exception!", exception.getMessage());
 		// first retry
 		exception = assertThrows(IllegalArgumentException.class, () -> processor.process(contribution, inputs));
@@ -501,7 +501,7 @@ class FaultTolerantChunkProcessorTests {
 		processor.afterPropertiesSet();
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2", "skip", "skip", "3", "fail", "fail", "4", "5"));
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> processor.process(contribution, inputs));
+		() -> processor.process(contribution, inputs));
 		assertEquals("Expected Skippable Exception!", exception.getMessage());
 		exception = assertThrows(IllegalArgumentException.class, () -> processor.process(contribution, inputs));
 		assertEquals("Expected Skippable Exception!", exception.getMessage());
@@ -535,7 +535,7 @@ class FaultTolerantChunkProcessorTests {
 			}
 		});
 		processor.setRollbackClassifier(new BinaryExceptionClassifier(
-				Collections.<Class<? extends Throwable>>singleton(IllegalArgumentException.class), false));
+		Collections.<Class<? extends Throwable>>singleton(IllegalArgumentException.class), false));
 		processor.afterPropertiesSet();
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2", "skip", "skip", "3", "fail", "fail", "4", "5"));
 		processor.process(contribution, inputs);

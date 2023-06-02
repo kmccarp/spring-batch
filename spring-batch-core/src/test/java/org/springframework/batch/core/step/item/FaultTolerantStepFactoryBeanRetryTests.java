@@ -102,8 +102,8 @@ class FaultTolerantStepFactoryBeanRetryTests {
 	void setUp() throws Exception {
 
 		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
-				.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
-				.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
+		.addScript("/org/springframework/batch/core/schema-drop-hsqldb.sql")
+		.addScript("/org/springframework/batch/core/schema-hsqldb.sql").generateUniqueName(true).build();
 		JdbcTransactionManager transactionManager = new JdbcTransactionManager(embeddedDatabase);
 		JobRepositoryFactoryBean repositoryFactoryBean = new JobRepositoryFactoryBean();
 		repositoryFactoryBean.setDataSource(embeddedDatabase);
@@ -124,7 +124,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 		factory.setSkippableExceptionClasses(getExceptionMap(Exception.class));
 
 		JobParameters jobParameters = new JobParametersBuilder().addString("statefulTest", "make_this_unique")
-				.toJobParameters();
+		.toJobParameters();
 		jobExecution = repository.createJobExecution("job", jobParameters);
 		jobExecution.setEndTime(LocalDateTime.now());
 
@@ -145,7 +145,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 	void testProcessAllItemsWhenErrorInWriterTransformationWhenReaderTransactional() throws Exception {
 		final int RETRY_LIMIT = 3;
 		final List<String> ITEM_LIST = TransactionAwareProxyFactory
-				.createTransactionalList(Arrays.asList("1", "2", "3"));
+		.createTransactionalList(Arrays.asList("1", "2", "3"));
 		FaultTolerantStepFactoryBean<String, Integer> factory = new FaultTolerantStepFactoryBean<>();
 		factory.setBeanName("step");
 
@@ -173,7 +173,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 			}
 		};
 		ItemReader<String> reader = new ListItemReader<>(
-				TransactionAwareProxyFactory.createTransactionalList(ITEM_LIST));
+		TransactionAwareProxyFactory.createTransactionalList(ITEM_LIST));
 		factory.setCommitInterval(3);
 		factory.setRetryLimit(RETRY_LIMIT);
 		factory.setSkipLimit(1);
@@ -356,7 +356,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 		// Need to set name or else reader will fail to open
 		reader.setName("foo");
 		factory.setItemReader(reader);
-		factory.setStreams(new ItemStream[] { reader });
+		factory.setStreams(new ItemStream[]{reader});
 		factory.setItemWriter(new ItemWriter<String>() {
 			@Override
 			public void write(Chunk<? extends String> chunk) throws Exception {
@@ -424,13 +424,13 @@ class FaultTolerantStepFactoryBeanRetryTests {
 	@Test
 	void testSkipAndRetryWithWriteFailure() throws Exception {
 
-		factory.setListeners(new StepListener[] { new SkipListener<String, String>() {
+		factory.setListeners(new StepListener[]{new SkipListener<String, String>() {
 			@Override
 			public void onSkipInWrite(String item, Throwable t) {
 				recovered.add(item);
 				assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
 			}
-		} });
+		}});
 		factory.setSkipLimit(2);
 		ItemReader<String> provider = new ListItemReader<String>(Arrays.asList("a", "b", "c", "d", "e", "f")) {
 			@Nullable
@@ -482,13 +482,13 @@ class FaultTolerantStepFactoryBeanRetryTests {
 	void testSkipAndRetryWithWriteFailureAndNonTrivialCommitInterval() throws Exception {
 
 		factory.setCommitInterval(3);
-		factory.setListeners(new StepListener[] { new SkipListener<String, String>() {
+		factory.setListeners(new StepListener[]{new SkipListener<String, String>() {
 			@Override
 			public void onSkipInWrite(String item, Throwable t) {
 				recovered.add(item);
 				assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
 			}
-		} });
+		}});
 		factory.setSkipLimit(2);
 		ItemReader<String> provider = new ListItemReader<String>(Arrays.asList("a", "b", "c", "d", "e", "f")) {
 			@Nullable
@@ -642,7 +642,7 @@ class FaultTolerantStepFactoryBeanRetryTests {
 	@Test
 	void testRetryPolicy() throws Exception {
 		factory.setRetryPolicy(new SimpleRetryPolicy(4,
-				Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
+		Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true)));
 		factory.setSkipLimit(0);
 		ItemReader<String> provider = new ListItemReader<String>(Arrays.asList("b")) {
 			@Nullable

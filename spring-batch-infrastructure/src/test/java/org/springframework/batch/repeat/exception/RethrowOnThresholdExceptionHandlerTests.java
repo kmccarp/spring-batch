@@ -39,7 +39,7 @@ class RethrowOnThresholdExceptionHandlerTests {
 	@Test
 	void testRuntimeException() {
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("Foo")));
+		() -> handler.handleException(context, new RuntimeException("Foo")));
 		assertEquals("Foo", exception.getMessage());
 	}
 
@@ -66,7 +66,7 @@ class RethrowOnThresholdExceptionHandlerTests {
 		handler.handleException(context, new RuntimeException("Foo"));
 		handler.handleException(context, new RuntimeException("Foo"));
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("Foo")));
+		() -> handler.handleException(context, new RuntimeException("Foo")));
 		assertEquals("Foo", exception.getMessage());
 	}
 
@@ -88,7 +88,7 @@ class RethrowOnThresholdExceptionHandlerTests {
 		handler.handleException(context, new RuntimeException("Foo"));
 		context = new RepeatContextSupport(parent);
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> handler.handleException(context, new RuntimeException("Foo")));
+		() -> handler.handleException(context, new RuntimeException("Foo")));
 		assertEquals("Foo", exception.getMessage());
 	}
 
