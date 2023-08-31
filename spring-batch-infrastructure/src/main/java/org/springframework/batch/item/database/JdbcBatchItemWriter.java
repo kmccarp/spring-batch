@@ -143,7 +143,7 @@ public class JdbcBatchItemWriter<T> implements ItemWriter<T>, InitializingBean {
 		Assert.state(sql != null, "An SQL statement is required.");
 		List<String> namedParameters = new ArrayList<>();
 		parameterCount = JdbcParameterUtils.countParameterPlaceholders(sql, namedParameters);
-		if (namedParameters.size() > 0) {
+		if (!namedParameters.isEmpty()) {
 			if (parameterCount != namedParameters.size()) {
 				throw new InvalidDataAccessApiUsageException(
 						"You can't use both named parameters and classic \"?\" placeholders: " + sql);

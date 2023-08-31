@@ -48,7 +48,7 @@ class FileToMessagesJobIntegrationTests implements MessageHandler {
 	@Autowired
 	private JobLauncher jobLauncher;
 
-	int count = 0;
+	int count;
 
 	@Override
 	public void handleMessage(Message<?> message) {

@@ -156,7 +156,7 @@ public class JdbcExecutionContextDao extends AbstractJdbcBatchMetadataDao implem
 
 		List<ExecutionContext> results = getJdbcTemplate().query(getQuery(FIND_JOB_EXECUTION_CONTEXT),
 				new ExecutionContextRowMapper(), executionId);
-		if (results.size() > 0) {
+		if (!results.isEmpty()) {
 			return results.get(0);
 		}
 		else {
@@ -171,7 +171,7 @@ public class JdbcExecutionContextDao extends AbstractJdbcBatchMetadataDao implem
 
 		List<ExecutionContext> results = getJdbcTemplate().query(getQuery(FIND_STEP_EXECUTION_CONTEXT),
 				new ExecutionContextRowMapper(), executionId);
-		if (results.size() > 0) {
+		if (!results.isEmpty()) {
 			return results.get(0);
 		}
 		else {

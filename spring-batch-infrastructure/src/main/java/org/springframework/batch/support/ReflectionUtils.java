@@ -31,7 +31,7 @@ import org.springframework.core.annotation.AnnotationUtils;
  * @author Mahmoud Ben Hassine
  * @since 2.2.6
  */
-public class ReflectionUtils {
+public final class ReflectionUtils {
 
 	private ReflectionUtils() {
 	}

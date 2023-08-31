@@ -245,7 +245,7 @@ public class Chunk<W> implements Iterable<W>, Serializable {
 	 */
 	public class ChunkIterator implements Iterator<W> {
 
-		final private Iterator<W> iterator;
+		private final Iterator<W> iterator;
 
 		private W next;
 

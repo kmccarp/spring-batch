@@ -85,11 +85,11 @@ public class StepListenerMethodInterceptorTests {
 	@SuppressWarnings("unused")
 	private static class TestClass {
 
-		int method1Count = 0;
+		int method1Count;
 
-		int method2Count = 0;
+		int method2Count;
 
-		int method3Count = 0;
+		int method3Count;
 
 		public void method1() {
 			method1Count++;

@@ -57,11 +57,11 @@ public class FaultTolerantStepFactoryBean<T, S> extends SimpleStepFactoryBean<T,
 
 	private Map<Class<? extends Throwable>, Boolean> retryableExceptionClasses = new HashMap<>();
 
-	private int cacheCapacity = 0;
+	private int cacheCapacity;
 
-	private int retryLimit = 0;
+	private int retryLimit;
 
-	private int skipLimit = 0;
+	private int skipLimit;
 
 	private SkipPolicy skipPolicy;
 

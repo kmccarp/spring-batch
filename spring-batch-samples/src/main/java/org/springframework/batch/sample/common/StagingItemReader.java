@@ -54,7 +54,7 @@ public class StagingItemReader<T>
 
 	private final Lock lock = new ReentrantLock();
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	private volatile Iterator<Long> keys;
 

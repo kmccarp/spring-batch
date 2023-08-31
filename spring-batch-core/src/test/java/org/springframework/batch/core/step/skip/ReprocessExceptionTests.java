@@ -66,9 +66,7 @@ public class ReprocessExceptionTests {
 			final String firstName = person.getFirstName().toUpperCase();
 			final String lastName = person.getLastName().toUpperCase();
 
-			final Person transformedPerson = new Person(firstName, lastName);
-
-			return transformedPerson;
+			return new Person(firstName, lastName);
 		}
 
 	}
@@ -78,7 +76,7 @@ public class ReprocessExceptionTests {
 		@Override
 		public void write(Chunk<? extends Person> persons) throws Exception {
 			for (Person person : persons) {
-				if (person.getFirstName().equals("JANE")) {
+				if ("JANE".equals(person.getFirstName())) {
 					throw new RuntimeException("jane doe write exception causing rollback");
 				}
 			}

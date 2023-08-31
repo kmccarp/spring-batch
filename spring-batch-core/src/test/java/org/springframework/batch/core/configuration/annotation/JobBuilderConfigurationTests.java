@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class JobBuilderConfigurationTests {
 
-	public static boolean fail = false;
+	public static boolean fail;
 
 	@Test
 	void testVanillaBatchConfiguration() throws Exception {

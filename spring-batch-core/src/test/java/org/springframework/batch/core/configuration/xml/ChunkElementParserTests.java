@@ -298,8 +298,7 @@ class ChunkElementParserTests {
 		@SuppressWarnings("unchecked")
 		SubclassClassifier<Throwable, Object> classifier = (SubclassClassifier<Throwable, Object>) getNestedPathInStep(
 				stepName, ctx, componentName);
-		Object policy = classifier.classify(new Exception());
-		return policy;
+		return classifier.classify(new Exception());
 	}
 
 	private Object getNestedPathInStep(String stepName, ApplicationContext ctx, String path) throws Exception {

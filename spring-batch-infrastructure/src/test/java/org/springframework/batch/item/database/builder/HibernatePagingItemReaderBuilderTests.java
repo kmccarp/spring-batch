@@ -177,7 +177,7 @@ class HibernatePagingItemReaderBuilderTests {
 		assertEquals("fetchSize must not be negative", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,
-				() -> new HibernatePagingItemReaderBuilder<Foo>().build());
+				new HibernatePagingItemReaderBuilder<Foo>()::build);
 		assertEquals("A SessionFactory must be provided", exception.getMessage());
 
 		exception = assertThrows(IllegalArgumentException.class,

@@ -56,9 +56,7 @@ class MultiResourceItemReaderBuilderTests extends AbstractItemStreamItemReaderTe
 		Resource r3 = new ByteArrayResource("3\n".getBytes());
 		Resource r4 = new ByteArrayResource("4\n5\n".getBytes());
 
-		Comparator<Resource> comparator = (arg0, arg1) -> {
-			return 0; // preserve original ordering
-		};
+		Comparator<Resource> comparator = (arg0, arg1) -> 0;
 		return new MultiResourceItemReaderBuilder<Foo>().delegate(fileReader)
 			.resources(new Resource[] { r1, r2, r3, r4 })
 			.saveState(true)

@@ -39,7 +39,7 @@ public class StoredProcedureItemReaderBuilder<T> {
 
 	public static final int VALUE_NOT_SET = -1;
 
-	private int currentItemCount = 0;
+	private int currentItemCount;
 
 	private int maxItemCount = Integer.MAX_VALUE;
 
@@ -57,9 +57,9 @@ public class StoredProcedureItemReaderBuilder<T> {
 
 	private boolean verifyCursorPosition = true;
 
-	private boolean driverSupportsAbsolute = false;
+	private boolean driverSupportsAbsolute;
 
-	private boolean useSharedExtendedConnection = false;
+	private boolean useSharedExtendedConnection;
 
 	private PreparedStatementSetter preparedStatementSetter;
 
@@ -69,9 +69,9 @@ public class StoredProcedureItemReaderBuilder<T> {
 
 	private SqlParameter[] parameters = new SqlParameter[0];
 
-	private boolean function = false;
+	private boolean function;
 
-	private int refCursorPosition = 0;
+	private int refCursorPosition;
 
 	private String name;
 

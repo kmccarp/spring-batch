@@ -285,7 +285,7 @@ public class MongoCursorItemReader<T> extends AbstractItemCountingItemStreamItem
 
 	private CloseableIterator<? extends T> streamToIterator(Stream<? extends T> stream) {
 		return new CloseableIterator<>() {
-			final private Iterator<? extends T> delegate = stream.iterator();
+			private final Iterator<? extends T> delegate = stream.iterator();
 
 			@Override
 			public boolean hasNext() {

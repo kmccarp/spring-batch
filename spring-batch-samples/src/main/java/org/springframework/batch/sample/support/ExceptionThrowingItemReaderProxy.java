@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
  */
 public class ExceptionThrowingItemReaderProxy<T> implements ItemReader<T> {
 
-	private int counter = 0;
+	private int counter;
 
 	private int throwExceptionOnRecordNumber = 4;
 

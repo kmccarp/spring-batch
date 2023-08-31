@@ -74,7 +74,7 @@ public abstract class AvroItemWriterTestSupport extends AvroTestFixtures {
 
 	protected static class OutputStreamResource implements WritableResource {
 
-		final private OutputStream outputStream;
+		private final OutputStream outputStream;
 
 		public OutputStreamResource(OutputStream outputStream) {
 			this.outputStream = outputStream;

@@ -36,7 +36,7 @@ public class SimpleCompletionPolicy extends DefaultResultCompletionPolicy {
 
 	public static final int DEFAULT_CHUNK_SIZE = 5;
 
-	int chunkSize = 0;
+	int chunkSize;
 
 	public SimpleCompletionPolicy() {
 		this(DEFAULT_CHUNK_SIZE);

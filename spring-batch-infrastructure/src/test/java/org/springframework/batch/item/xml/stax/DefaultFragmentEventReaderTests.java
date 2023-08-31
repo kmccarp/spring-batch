@@ -143,7 +143,7 @@ class DefaultFragmentEventReaderTests {
 
 	private void moveCursorBeforeFragmentStart() throws XMLStreamException {
 		XMLEvent event = eventReader.peek();
-		while (!event.isStartElement() || !EventHelper.startElementName(event).equals("fragment")) {
+		while (!event.isStartElement() || !"fragment".equals(EventHelper.startElementName(event))) {
 			eventReader.nextEvent();
 			event = eventReader.peek();
 		}

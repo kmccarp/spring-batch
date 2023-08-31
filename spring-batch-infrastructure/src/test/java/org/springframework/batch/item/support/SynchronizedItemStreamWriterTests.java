@@ -37,7 +37,7 @@ class SynchronizedItemStreamWriterTests extends AbstractSynchronizedItemStreamWr
 	@Test
 	void testDelegateIsNotNullWhenPropertiesSet() {
 		final Exception expectedException = assertThrows(IllegalStateException.class,
-				() -> ((InitializingBean) new SynchronizedItemStreamWriter<>()).afterPropertiesSet());
+				((InitializingBean) new SynchronizedItemStreamWriter<>())::afterPropertiesSet);
 		assertEquals("A delegate item writer is required", expectedException.getMessage());
 	}
 

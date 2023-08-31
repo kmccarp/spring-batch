@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
  */
 public class LimitDecider implements JobExecutionDecider {
 
-	private int count = 0;
+	private int count;
 
 	private int limit = 1;
 

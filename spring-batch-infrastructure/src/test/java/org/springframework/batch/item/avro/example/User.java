@@ -110,13 +110,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	/**
 	 * All-args constructor.
 	 * @param name The new value for name
-	 * @param favorite_number The new value for favorite_number
-	 * @param favorite_color The new value for favorite_color
+	 * @param favoriteNumber The new value for favorite_number
+	 * @param favoriteColor The new value for favorite_color
 	 */
-	public User(CharSequence name, Integer favorite_number, CharSequence favorite_color) {
+	public User(CharSequence name, Integer favoriteNumber, CharSequence favoriteColor) {
 		this.name = name;
-		this.favorite_number = favorite_number;
-		this.favorite_color = favorite_color;
+		this.favorite_number = favoriteNumber;
+		this.favorite_color = favoriteColor;
 	}
 
 	public SpecificData getSpecificData() {
@@ -235,8 +235,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase
 	/**
 	 * RecordBuilder for User instances.
 	 */
-	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
-			implements org.apache.avro.data.RecordBuilder<User> {
+	public static final class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>implements org.apache.avro.data.RecordBuilder<User> {
 
 		private CharSequence name;
 

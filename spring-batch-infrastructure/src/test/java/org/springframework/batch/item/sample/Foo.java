@@ -87,24 +87,28 @@ public class Foo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Foo other = (Foo) obj;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
 		}
-		else if (!name.equals(other.name))
+		if (obj == null) {
 			return false;
-		if (value != other.value)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		return true;
+		}
+		Foo other = (Foo) obj;
+		if (id != other.id) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		}
+		else if (!name.equals(other.name)) {
+			return false;
+		}
+		return value == other.value;
 	}
 
 	public void fail() throws Exception {

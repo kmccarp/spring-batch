@@ -902,7 +902,7 @@ class TaskletStepTests {
 
 	private static class JobRepositoryStub extends JobRepositorySupport {
 
-		private int updateCount = 0;
+		private int updateCount;
 
 		@Override
 		public void update(StepExecution stepExecution) {
@@ -916,7 +916,7 @@ class TaskletStepTests {
 
 	private static class JobRepositoryFailedUpdateStub extends JobRepositorySupport {
 
-		private int called = 0;
+		private int called;
 
 		@Override
 		public void update(StepExecution stepExecution) {
@@ -931,7 +931,7 @@ class TaskletStepTests {
 	private static class MockRestartableItemReader extends AbstractItemStreamItemReader<String>
 			implements StepExecutionListener {
 
-		private boolean getExecutionAttributesCalled = false;
+		private boolean getExecutionAttributesCalled;
 
 		private final boolean restoreFromCalled = false;
 

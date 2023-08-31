@@ -69,27 +69,27 @@ public class SystemCommandTasklet implements StepExecutionListener, StoppableTas
 
 	private String[] cmdArray;
 
-	private String[] environmentParams = null;
+	private String[] environmentParams;
 
-	private File workingDirectory = null;
+	private File workingDirectory;
 
 	private SystemProcessExitCodeMapper systemProcessExitCodeMapper = new SimpleSystemProcessExitCodeMapper();
 
-	private long timeout = 0;
+	private long timeout;
 
 	private long checkInterval = 1000;
 
-	private StepExecution execution = null;
+	private StepExecution execution;
 
 	private TaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
 
-	private boolean interruptOnCancel = false;
+	private boolean interruptOnCancel;
 
-	private volatile boolean stopped = false;
+	private volatile boolean stopped;
 
 	private JobExplorer jobExplorer;
 
-	private boolean stoppable = false;
+	private boolean stoppable;
 
 	/**
 	 * Execute system command and map its exit code to {@link ExitStatus} using

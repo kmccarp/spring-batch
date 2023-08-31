@@ -104,7 +104,7 @@ class JobScopeTestExecutionListenerTests {
 		return new MockTestContextManager(target, getClass()).getContext();
 	}
 
-	private final static class MockTestContextManager extends TestContextManager {
+	private static final class MockTestContextManager extends TestContextManager {
 
 		private MockTestContextManager(Object target, Class<?> testClass) throws Exception {
 			super(testClass);

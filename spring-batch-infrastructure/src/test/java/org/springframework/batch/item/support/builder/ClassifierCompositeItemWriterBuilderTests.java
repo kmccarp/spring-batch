@@ -59,7 +59,7 @@ class ClassifierCompositeItemWriterBuilderTests {
 	@Test
 	void testSetNullClassifier() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new ClassifierCompositeItemWriterBuilder<>().build());
+				new ClassifierCompositeItemWriterBuilder<>()::build);
 		assertEquals("A classifier is required.", exception.getMessage());
 	}
 

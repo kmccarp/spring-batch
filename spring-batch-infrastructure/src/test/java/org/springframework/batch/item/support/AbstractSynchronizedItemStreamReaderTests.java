@@ -44,7 +44,7 @@ public abstract class AbstractSynchronizedItemStreamReaderTests {
 
 	private final ExecutionContext testExecutionContext = new ExecutionContext();
 
-	abstract protected SynchronizedItemStreamReader<Object> createNewSynchronizedItemStreamReader();
+	protected abstract SynchronizedItemStreamReader<Object> createNewSynchronizedItemStreamReader();
 
 	@BeforeEach
 	void init() {

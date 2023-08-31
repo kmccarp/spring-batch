@@ -74,7 +74,7 @@ class AmqpItemReaderBuilderTests {
 	@Test
 	void testNullAmqpTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new AmqpItemReaderBuilder<Message>().build());
+				new AmqpItemReaderBuilder<Message>()::build);
 		assertEquals("amqpTemplate is required.", exception.getMessage());
 	}
 

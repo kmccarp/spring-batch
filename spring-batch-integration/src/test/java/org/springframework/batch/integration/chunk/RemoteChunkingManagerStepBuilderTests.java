@@ -242,7 +242,7 @@ class RemoteChunkingManagerStepBuilderTests {
 		when(retryListener.open(any(), any())).thenReturn(true);
 
 		ItemProcessor<String, String> itemProcessor = item -> {
-			if (item.equals("b")) {
+			if ("b".equals(item)) {
 				throw new Exception("b was found");
 			}
 			else {
@@ -268,8 +268,7 @@ class RemoteChunkingManagerStepBuilderTests {
 					throw new RuntimeException("7th item");
 				}
 				else if (count < items.size()) {
-					String item = items.get(count++);
-					return item;
+					return items.get(count++);
 				}
 				else {
 					return null;

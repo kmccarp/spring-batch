@@ -111,7 +111,7 @@ class SingleItemPeekableItemReaderTests {
 
 		private final List<T> list;
 
-		private int counter = 0;
+		private int counter;
 
 		public CountingListItemReader(List<T> list) {
 			this.list = list;

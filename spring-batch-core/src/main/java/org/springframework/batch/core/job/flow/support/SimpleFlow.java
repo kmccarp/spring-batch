@@ -217,7 +217,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		for (StateTransition stateTransition : set) {
 			if (stateTransition.matches(exitCode)
-					|| (exitCode.equals("PENDING") && stateTransition.matches("STOPPED"))) {
+					|| ("PENDING".equals(exitCode) && stateTransition.matches("STOPPED"))) {
 				if (stateTransition.isEnd()) {
 					// End of job
 					return null;

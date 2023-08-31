@@ -159,7 +159,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	//
 	// Chunk Attributes
 	//
-	private int cacheCapacity = 0;
+	private int cacheCapacity;
 
 	private CompletionPolicy chunkCompletionPolicy;
 
@@ -169,7 +169,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 
 	private Boolean processorTransactional;
 
-	private int retryLimit = 0;
+	private int retryLimit;
 
 	private BackOffPolicy backOffPolicy;
 
@@ -215,7 +215,7 @@ public class StepParserStepFactoryBean<I, O> implements FactoryBean<Step>, BeanN
 	//
 	// Additional
 	//
-	private boolean hasChunkElement = false;
+	private boolean hasChunkElement;
 
 	private StepExecutionAggregator stepExecutionAggregator;
 

@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RepeatListenerTests {
 
-	private int count = 0;
+	private int count;
 
 	@Test
 	void testBeforeInterceptors() {

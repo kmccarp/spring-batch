@@ -32,7 +32,7 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class EmptyItemWriter<T> implements ItemWriter<T>, InitializingBean {
 
-	private boolean failed = false;
+	private boolean failed;
 
 	// point at which to fail...
 	private int failurePoint = Integer.MAX_VALUE;

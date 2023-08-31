@@ -365,7 +365,7 @@ class StepListenerFactoryBeanTests {
 
 	private static class MultipleAfterStep implements StepExecutionListener {
 
-		int callcount = 0;
+		int callcount;
 
 		@Nullable
 		@Override
@@ -386,7 +386,7 @@ class StepListenerFactoryBeanTests {
 	@SuppressWarnings("unused")
 	private static class ThreeStepExecutionListener implements StepExecutionListener {
 
-		int callcount = 0;
+		int callcount;
 
 		@Nullable
 		@Override
@@ -415,39 +415,39 @@ class StepListenerFactoryBeanTests {
 	@SuppressWarnings("unused")
 	private static class TestListener implements SkipListener<String, Integer> {
 
-		boolean beforeStepCalled = false;
+		boolean beforeStepCalled;
 
-		boolean afterStepCalled = false;
+		boolean afterStepCalled;
 
-		boolean beforeChunkCalled = false;
+		boolean beforeChunkCalled;
 
-		boolean afterChunkCalled = false;
+		boolean afterChunkCalled;
 
-		boolean afterChunkErrorCalled = false;
+		boolean afterChunkErrorCalled;
 
-		boolean beforeReadCalled = false;
+		boolean beforeReadCalled;
 
-		boolean afterReadCalled = false;
+		boolean afterReadCalled;
 
-		boolean onReadErrorCalled = false;
+		boolean onReadErrorCalled;
 
-		boolean beforeProcessCalled = false;
+		boolean beforeProcessCalled;
 
-		boolean afterProcessCalled = false;
+		boolean afterProcessCalled;
 
-		boolean onProcessErrorCalled = false;
+		boolean onProcessErrorCalled;
 
-		boolean beforeWriteCalled = false;
+		boolean beforeWriteCalled;
 
-		boolean afterWriteCalled = false;
+		boolean afterWriteCalled;
 
-		boolean onWriteErrorCalled = false;
+		boolean onWriteErrorCalled;
 
-		boolean onSkipInReadCalled = false;
+		boolean onSkipInReadCalled;
 
-		boolean onSkipInProcessCalled = false;
+		boolean onSkipInProcessCalled;
 
-		boolean onSkipInWriteCalled = false;
+		boolean onSkipInWriteCalled;
 
 		@BeforeStep
 		public void initStep() {

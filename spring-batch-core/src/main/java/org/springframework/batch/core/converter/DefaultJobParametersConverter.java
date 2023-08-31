@@ -178,8 +178,7 @@ public class DefaultJobParametersConverter implements JobParametersConverter {
 			return String.class;
 		}
 		try {
-			Class<?> type = Class.forName(tokens[1]);
-			return type;
+			return Class.forName(tokens[1]);
 		}
 		catch (ClassNotFoundException e) {
 			throw new JobParametersConversionException("Unable to parse job parameter " + encodedJobParameter, e);

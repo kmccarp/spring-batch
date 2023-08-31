@@ -88,7 +88,7 @@ class FaultTolerantChunkProcessorTests {
 			@Nullable
 			@Override
 			public String process(String item) throws Exception {
-				return item.equals("1") ? null : item;
+				return "1".equals(item) ? null : item;
 			}
 		});
 		Chunk<String> inputs = new Chunk<>(Arrays.asList("1", "2"));
@@ -104,10 +104,10 @@ class FaultTolerantChunkProcessorTests {
 			@Nullable
 			@Override
 			public String process(String item) throws Exception {
-				if (item.equals("1")) {
+				if ("1".equals(item)) {
 					throw new RuntimeException("Skippable");
 				}
-				if (item.equals("3")) {
+				if ("3".equals(item)) {
 					return null;
 				}
 				return item;
@@ -130,7 +130,7 @@ class FaultTolerantChunkProcessorTests {
 			@Nullable
 			@Override
 			public String process(String item) throws Exception {
-				if (item.equals("1")) {
+				if ("1".equals(item)) {
 					return null;
 				}
 				return item;
@@ -161,7 +161,7 @@ class FaultTolerantChunkProcessorTests {
 			@Nullable
 			@Override
 			public String process(String item) throws Exception {
-				if (item.equals("1")) {
+				if ("1".equals(item)) {
 					return null;
 				}
 				return item;
@@ -246,7 +246,7 @@ class FaultTolerantChunkProcessorTests {
 			@Nullable
 			@Override
 			public String process(String item) throws Exception {
-				if (item.equals("1")) {
+				if ("1".equals(item)) {
 					throw new DataIntegrityViolationException("Planned");
 				}
 				return item;

@@ -77,7 +77,7 @@ public class FlatFileItemReaderBuilder<T> {
 
 	private List<String> comments = new ArrayList<>(Arrays.asList(FlatFileItemReader.DEFAULT_COMMENT_PREFIXES));
 
-	private int linesToSkip = 0;
+	private int linesToSkip;
 
 	private LineCallbackHandler skippedLinesCallback;
 

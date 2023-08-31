@@ -46,9 +46,7 @@ class MultiResourceItemReaderFlatFileTests extends AbstractItemStreamItemReaderT
 
 		multiReader.setResources(new Resource[] { r1, r2, r3, r4 });
 		multiReader.setSaveState(true);
-		multiReader.setComparator((arg0, arg1) -> {
-			return 0; // preserve original ordering
-		});
+		multiReader.setComparator((arg0, arg1) -> 0);
 
 		return multiReader;
 	}
