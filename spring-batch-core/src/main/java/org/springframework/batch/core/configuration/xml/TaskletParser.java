@@ -131,22 +131,22 @@ public class TaskletParser {
 		StringBuilder found = new StringBuilder();
 		if (total > 1) {
 			if (StringUtils.hasText(taskletRef)) {
-				found.append("'" + TASKLET_REF_ATTR + "' attribute, ");
+				found.append("'").append(TASKLET_REF_ATTR).append("' attribute, ");
 			}
 			if (chunkElements.size() == 1) {
-				found.append("<" + CHUNK_ELE + "/> element, ");
+				found.append("<").append(CHUNK_ELE).append("/> element, ");
 			}
 			else if (chunkElements.size() > 1) {
 				found.append(chunkElements.size()).append(" <").append(CHUNK_ELE).append("/> elements, ");
 			}
 			if (beanElements.size() == 1) {
-				found.append("<" + BEAN_ELE + "/> element, ");
+				found.append("<").append(BEAN_ELE).append("/> element, ");
 			}
 			else if (beanElements.size() > 1) {
 				found.append(beanElements.size()).append(" <").append(BEAN_ELE).append("/> elements, ");
 			}
 			if (refElements.size() == 1) {
-				found.append("<" + REF_ELE + "/> element, ");
+				found.append("<").append(REF_ELE).append("/> element, ");
 			}
 			else if (refElements.size() > 1) {
 				found.append(refElements.size()).append(" <").append(REF_ELE).append("/> elements, ");

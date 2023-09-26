@@ -57,7 +57,7 @@ class SingleItemPeekableItemReaderBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new SingleItemPeekableItemReaderBuilder<Foo>().build());
+				new SingleItemPeekableItemReaderBuilder<Foo>()::build);
 		assertEquals("A delegate is required", exception.getMessage());
 	}
 

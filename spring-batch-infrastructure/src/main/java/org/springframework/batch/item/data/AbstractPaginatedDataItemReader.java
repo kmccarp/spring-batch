@@ -40,7 +40,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public abstract class AbstractPaginatedDataItemReader<T> extends AbstractItemCountingItemStreamItemReader<T> {
 
-	protected volatile int page = 0;
+	protected volatile int page;
 
 	protected int pageSize = 10;
 

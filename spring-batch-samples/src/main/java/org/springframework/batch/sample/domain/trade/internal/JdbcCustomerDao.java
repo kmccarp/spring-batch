@@ -54,7 +54,7 @@ public class JdbcCustomerDao extends JdbcDaoSupport implements CustomerDao {
 			return customer;
 		}, name);
 
-		if (customers.size() == 0) {
+		if (customers.isEmpty()) {
 			return null;
 		}
 		else {

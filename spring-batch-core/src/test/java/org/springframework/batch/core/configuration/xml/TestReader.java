@@ -26,9 +26,9 @@ import org.springframework.lang.Nullable;
 
 public class TestReader extends AbstractTestComponent implements ItemStreamReader<String> {
 
-	private boolean opened = false;
+	private boolean opened;
 
-	List<String> items = null;
+	List<String> items;
 
 	{
 		List<String> l = new ArrayList<>();
@@ -50,9 +50,8 @@ public class TestReader extends AbstractTestComponent implements ItemStreamReade
 	public String read() throws Exception, UnexpectedInputException, ParseException {
 		executed = true;
 		synchronized (items) {
-			if (items.size() > 0) {
-				String item = items.remove(0);
-				return item;
+			if (!items.isEmpty()) {
+				return items.remove(0);
 			}
 		}
 		return null;

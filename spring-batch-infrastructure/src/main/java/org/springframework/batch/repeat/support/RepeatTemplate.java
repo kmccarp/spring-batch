@@ -168,8 +168,9 @@ public class RepeatTemplate implements RepeatOperations {
 		for (RepeatListener interceptor : listeners) {
 			interceptor.open(context);
 			running = running && !isMarkedComplete(context);
-			if (!running)
+			if (!running) {
 				break;
+			}
 		}
 
 		// Return value, default is to allow continued processing.

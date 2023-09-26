@@ -35,9 +35,9 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer {
 
 	private Range[] ranges;
 
-	private int maxRange = 0;
+	private int maxRange;
 
-	boolean open = false;
+	boolean open;
 
 	/**
 	 * Set the column ranges. Used in conjunction with the

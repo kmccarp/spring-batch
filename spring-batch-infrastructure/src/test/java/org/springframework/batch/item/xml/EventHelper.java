@@ -24,7 +24,7 @@ import javax.xml.stream.events.XMLEvent;
  *
  * @author Robert Kasanicky
  */
-public class EventHelper {
+public final class EventHelper {
 
 	// utility class
 	private EventHelper() {

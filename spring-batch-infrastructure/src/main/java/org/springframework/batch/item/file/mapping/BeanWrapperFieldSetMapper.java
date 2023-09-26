@@ -417,22 +417,25 @@ public class BeanWrapperFieldSetMapper<T> extends DefaultPropertyEditorRegistrar
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj)
+			if (this == obj) {
 				return true;
-			if (obj == null)
+			}
+			if (obj == null) {
 				return false;
-			if (getClass() != obj.getClass())
+			}
+			if (getClass() != obj.getClass()) {
 				return false;
+			}
 			DistanceHolder other = (DistanceHolder) obj;
 			if (cls == null) {
-				if (other.cls != null)
+				if (other.cls != null) {
 					return false;
+				}
 			}
-			else if (!cls.equals(other.cls))
+			else if (!cls.equals(other.cls)) {
 				return false;
-			if (distance != other.distance)
-				return false;
-			return true;
+			}
+			return distance == other.distance;
 		}
 
 	}

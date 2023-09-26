@@ -41,11 +41,11 @@ class AlmostStatefulRetryChunkTests {
 
 	private final Log logger = LogFactory.getLog(getClass());
 
-	private int retryAttempts = 0;
+	private int retryAttempts;
 
 	private static final int BACKSTOP_LIMIT = 1000;
 
-	private int count = 0;
+	private int count;
 
 	@MethodSource
 	@ParameterizedTest

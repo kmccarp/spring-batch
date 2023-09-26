@@ -191,8 +191,7 @@ class FaultTolerantStepFactoryBeanIntegrationTests {
 			if (counter >= items.length) {
 				return null;
 			}
-			String item = items[counter];
-			return item;
+			return items[counter];
 		}
 
 	}

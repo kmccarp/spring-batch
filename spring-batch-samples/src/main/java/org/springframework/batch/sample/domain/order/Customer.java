@@ -177,10 +177,7 @@ public class Customer {
 		if (registrationId != other.registrationId) {
 			return false;
 		}
-		if (vip != other.vip) {
-			return false;
-		}
-		return true;
+		return vip == other.vip;
 	}
 
 }

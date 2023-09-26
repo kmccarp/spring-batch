@@ -49,9 +49,9 @@ class MulticasterBatchListenerTests {
 
 	private final MulticasterBatchListener<Integer, String> multicast = new MulticasterBatchListener<>();
 
-	private int count = 0;
+	private int count;
 
-	private boolean error = false;
+	private boolean error;
 
 	@BeforeEach
 	void setUp() {

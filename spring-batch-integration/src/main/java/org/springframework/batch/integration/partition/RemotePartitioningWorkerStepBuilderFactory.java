@@ -35,9 +35,9 @@ public class RemotePartitioningWorkerStepBuilderFactory implements BeanFactoryAw
 
 	private BeanFactory beanFactory;
 
-	final private JobExplorer jobExplorer;
+	private final JobExplorer jobExplorer;
 
-	final private JobRepository jobRepository;
+	private final JobRepository jobRepository;
 
 	/**
 	 * Create a new {@link RemotePartitioningWorkerStepBuilderFactory}.

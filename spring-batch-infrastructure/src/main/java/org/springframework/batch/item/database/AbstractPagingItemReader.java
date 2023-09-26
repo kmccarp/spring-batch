@@ -50,13 +50,13 @@ public abstract class AbstractPagingItemReader<T> extends AbstractItemCountingIt
 
 	protected Log logger = LogFactory.getLog(getClass());
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	private int pageSize = 10;
 
-	private volatile int current = 0;
+	private volatile int current;
 
-	private volatile int page = 0;
+	private volatile int page;
 
 	protected volatile List<T> results;
 
@@ -135,7 +135,7 @@ public abstract class AbstractPagingItemReader<T> extends AbstractItemCountingIt
 
 	}
 
-	abstract protected void doReadPage();
+	protected abstract void doReadPage();
 
 	@Override
 	protected void doOpen() throws Exception {

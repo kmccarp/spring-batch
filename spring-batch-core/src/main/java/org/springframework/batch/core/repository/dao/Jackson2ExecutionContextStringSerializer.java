@@ -160,7 +160,7 @@ public class Jackson2ExecutionContextStringSerializer implements ExecutionContex
 	 * Custom Jackson module to support {@link JobParameter} and {@link JobParameters}
 	 * serialization and deserialization.
 	 */
-	private class JobParametersModule extends SimpleModule {
+	private final class JobParametersModule extends SimpleModule {
 
 		private static final long serialVersionUID = 1L;
 

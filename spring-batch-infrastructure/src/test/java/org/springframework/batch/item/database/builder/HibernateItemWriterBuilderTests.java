@@ -88,7 +88,7 @@ class HibernateItemWriterBuilderTests {
 	@Test
 	void testValidation() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new HibernateItemWriterBuilder<Foo>().build());
+				new HibernateItemWriterBuilder<Foo>()::build);
 		assertEquals("SessionFactory must be provided", exception.getMessage());
 	}
 

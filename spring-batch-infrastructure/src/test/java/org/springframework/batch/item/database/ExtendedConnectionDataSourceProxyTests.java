@@ -74,18 +74,18 @@ class ExtendedConnectionDataSourceProxyTests {
 
 		Connection con3 = csds.getConnection();
 		csds.startCloseSuppression(con3);
-		Connection con3_1 = csds.getConnection();
-		assertSame(con3, con3_1, "should be same connection");
+		Connection con31 = csds.getConnection();
+		assertSame(con3, con31, "should be same connection");
 		assertFalse(csds.shouldClose(con3), "should not be able to close connection");
-		con3_1.close(); // no mock call for this - should be suppressed
-		Connection con3_2 = csds.getConnection();
-		assertSame(con3, con3_2, "should be same connection");
+		con31.close(); // no mock call for this - should be suppressed
+		Connection con32 = csds.getConnection();
+		assertSame(con3, con32, "should be same connection");
 		Connection con4 = csds.getConnection();
 		assertNotSame(con3, con4, "shouldn't be same connection");
 		csds.stopCloseSuppression(con3);
 		assertTrue(csds.shouldClose(con3), "should be able to close connection");
-		con3_1 = null;
-		con3_2 = null;
+		con31 = null;
+		con32 = null;
 		con3.close();
 		assertTrue(csds.shouldClose(con4), "should be able to close connection");
 		con4.close();
@@ -106,17 +106,17 @@ class ExtendedConnectionDataSourceProxyTests {
 
 		Connection con1 = csds.getConnection();
 		csds.startCloseSuppression(con1);
-		Connection con1_1 = csds.getConnection();
-		assertSame(con1, con1_1, "should be same connection");
-		con1_1.close(); // no mock call for this - should be suppressed
-		Connection con1_2 = csds.getConnection();
-		assertSame(con1, con1_2, "should be same connection");
+		Connection con11 = csds.getConnection();
+		assertSame(con1, con11, "should be same connection");
+		con11.close(); // no mock call for this - should be suppressed
+		Connection con12 = csds.getConnection();
+		assertSame(con1, con12, "should be same connection");
 		Connection con2 = csds.getConnection();
 		assertNotSame(con1, con2, "shouldn't be same connection");
 		csds.stopCloseSuppression(con1);
 		assertTrue(csds.shouldClose(con1), "should be able to close connection");
-		con1_1 = null;
-		con1_2 = null;
+		con11 = null;
+		con12 = null;
 		con1.close();
 		assertTrue(csds.shouldClose(con2), "should be able to close connection");
 		con2.close();
@@ -309,10 +309,7 @@ class ExtendedConnectionDataSourceProxyTests {
 
 		@Override
 		public boolean isWrapperFor(Class<?> iface) throws SQLException {
-			if (iface.equals(Supported.class) || (iface.equals(DataSource.class))) {
-				return true;
-			}
-			return false;
+			return iface.equals(Supported.class) || (iface.equals(DataSource.class));
 		}
 
 		@Override

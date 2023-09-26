@@ -65,17 +65,17 @@ public class FlatFileItemReader<T> extends AbstractItemCountingItemStreamItemRea
 
 	private BufferedReader reader;
 
-	private int lineCount = 0;
+	private int lineCount;
 
 	protected String[] comments = DEFAULT_COMMENT_PREFIXES;
 
-	private boolean noInput = false;
+	private boolean noInput;
 
 	private String encoding = DEFAULT_CHARSET;
 
 	private LineMapper<T> lineMapper;
 
-	private int linesToSkip = 0;
+	private int linesToSkip;
 
 	private LineCallbackHandler skippedLinesCallback;
 

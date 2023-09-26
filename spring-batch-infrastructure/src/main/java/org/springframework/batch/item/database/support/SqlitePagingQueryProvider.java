@@ -59,7 +59,7 @@ public class SqlitePagingQueryProvider extends AbstractSqlPagingQueryProvider {
 	}
 
 	private String buildLimitClause(int pageSize) {
-		return new StringBuilder().append("LIMIT ").append(pageSize).toString();
+		return "LIMIT " + pageSize;
 	}
 
 }

@@ -87,32 +87,39 @@ public class Customer {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Customer other = (Customer) obj;
 		if (address == null) {
-			if (other.address != null)
+			if (other.address != null) {
 				return false;
+			}
 		}
-		else if (!address.equals(other.address))
+		else if (!address.equals(other.address)) {
 			return false;
-		if (age != other.age)
+		}
+		if (age != other.age) {
 			return false;
-		if (moo != other.moo)
+		}
+		if (moo != other.moo) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
+			}
 		}
-		else if (!name.equals(other.name))
+		else if (!name.equals(other.name)) {
 			return false;
-		if (poo != other.poo)
-			return false;
-		return true;
+		}
+		return poo == other.poo;
 	}
 
 	@Override

@@ -73,11 +73,11 @@ public class JobRegistryBackgroundJobRunner {
 
 	private JobLoader jobLoader;
 
-	private ApplicationContext parentContext = null;
+	private ApplicationContext parentContext;
 
-	public static boolean testing = false;
+	public static boolean testing;
 
-	final private String parentContextPath;
+	private final String parentContextPath;
 
 	private JobRegistry jobRegistry;
 

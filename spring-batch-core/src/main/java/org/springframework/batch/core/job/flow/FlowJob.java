@@ -44,7 +44,7 @@ public class FlowJob extends AbstractJob {
 
 	private final Map<String, Step> stepMap = new ConcurrentHashMap<>();
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	/**
 	 * Create a {@link FlowJob} with null name and no flow (invalid state).

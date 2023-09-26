@@ -28,7 +28,7 @@ public class Trade implements Serializable {
 
 	private String isin = "";
 
-	private long quantity = 0;
+	private long quantity;
 
 	private BigDecimal price = BigDecimal.ZERO;
 
@@ -36,7 +36,7 @@ public class Trade implements Serializable {
 
 	private Long id;
 
-	private long version = 0;
+	private long version;
 
 	public Trade() {
 	}
@@ -160,10 +160,7 @@ public class Trade implements Serializable {
 		if (quantity != other.quantity) {
 			return false;
 		}
-		if (version != other.version) {
-			return false;
-		}
-		return true;
+		return version == other.version;
 	}
 
 }

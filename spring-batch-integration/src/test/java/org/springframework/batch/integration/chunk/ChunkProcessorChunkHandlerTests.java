@@ -28,7 +28,7 @@ class ChunkProcessorChunkHandlerTests {
 
 	private final ChunkProcessorChunkHandler<Object> handler = new ChunkProcessorChunkHandler<>();
 
-	protected int count = 0;
+	protected int count;
 
 	@Test
 	void testVanillaHandleChunk() throws Exception {

@@ -197,11 +197,11 @@ class AsyncItemWriterTests {
 
 		protected List<String> items;
 
-		public boolean isOpened = false;
+		public boolean isOpened;
 
-		public boolean isUpdated = false;
+		public boolean isUpdated;
 
-		public boolean isClosed = false;
+		public boolean isClosed;
 
 		public ListItemWriter(List<String> items) {
 			this.items = items;
@@ -216,11 +216,11 @@ class AsyncItemWriterTests {
 
 	private static class ListItemStreamWriter implements ItemStreamWriter<String> {
 
-		public boolean isOpened = false;
+		public boolean isOpened;
 
-		public boolean isUpdated = false;
+		public boolean isUpdated;
 
-		public boolean isClosed = false;
+		public boolean isClosed;
 
 		protected List<String> items;
 

@@ -40,7 +40,7 @@ public class ThrottleLimitResultQueue<T> implements ResultQueue<T> {
 
 	private final Object lock = new Object();
 
-	private volatile int count = 0;
+	private volatile int count;
 
 	/**
 	 * @param throttleLimit the maximum number of results that can be expected at any

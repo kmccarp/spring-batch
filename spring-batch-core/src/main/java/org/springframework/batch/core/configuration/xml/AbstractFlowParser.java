@@ -127,7 +127,7 @@ public abstract class AbstractFlowParser extends AbstractSingleBeanDefinitionPar
 	 * Used as a suffix to generate unique state names for end transitions.
 	 */
 	// For generating unique state names for end transitions
-	protected static int endCounter = 0;
+	protected static int endCounter;
 
 	private String jobFactoryRef;
 

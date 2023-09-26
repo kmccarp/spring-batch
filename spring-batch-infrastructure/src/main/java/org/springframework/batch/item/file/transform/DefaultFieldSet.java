@@ -43,7 +43,7 @@ import org.springframework.util.StringUtils;
  */
 public class DefaultFieldSet implements FieldSet {
 
-	private final static String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+	private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
 
 	private DateFormat dateFormat = new SimpleDateFormat(DEFAULT_DATE_PATTERN);
 

@@ -113,6 +113,7 @@ class ChunkMessageItemWriterIntegrationTests {
 	@AfterEach
 	void tearDown() {
 		while (replies.receive(10L) != null) {
+			continue;
 		}
 	}
 
@@ -211,8 +212,7 @@ class ChunkMessageItemWriterIntegrationTests {
 			.createStepExecution("step")
 			.createStepContribution();
 		ChunkRequest chunk = new ChunkRequest(0, Chunk.of(items), jobId, stepContribution);
-		GenericMessage<ChunkRequest> message = new GenericMessage<>(chunk);
-		return message;
+		return new GenericMessage<>(chunk);
 	}
 
 	@Test

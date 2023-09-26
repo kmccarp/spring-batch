@@ -45,11 +45,11 @@ public class SimpleRetryExceptionHandler extends RetryListenerSupport implements
 
 	private static final Log logger = LogFactory.getLog(SimpleRetryExceptionHandler.class);
 
-	final private RetryPolicy retryPolicy;
+	private final RetryPolicy retryPolicy;
 
-	final private ExceptionHandler exceptionHandler;
+	private final ExceptionHandler exceptionHandler;
 
-	final private BinaryExceptionClassifier fatalExceptionClassifier;
+	private final BinaryExceptionClassifier fatalExceptionClassifier;
 
 	/**
 	 * Create an exception handler from its mandatory properties.

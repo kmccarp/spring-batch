@@ -38,7 +38,7 @@ public class DefaultResultCompletionPolicy extends CompletionPolicySupport {
 	 */
 	@Override
 	public boolean isComplete(RepeatContext context, RepeatStatus result) {
-		return (result == null || !result.isContinuable());
+		return result == null || !result.isContinuable();
 	}
 
 	/**

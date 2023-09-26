@@ -46,15 +46,15 @@ public class JsonFileItemWriterBuilder<T> {
 
 	private String lineSeparator = JsonFileItemWriter.DEFAULT_LINE_SEPARATOR;
 
-	private boolean append = false;
+	private boolean append;
 
-	private boolean forceSync = false;
+	private boolean forceSync;
 
 	private boolean saveState = true;
 
 	private boolean shouldDeleteIfExists = true;
 
-	private boolean shouldDeleteIfEmpty = false;
+	private boolean shouldDeleteIfEmpty;
 
 	private boolean transactional = JsonFileItemWriter.DEFAULT_TRANSACTIONAL;
 

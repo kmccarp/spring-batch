@@ -46,27 +46,27 @@ public class StepExecution extends Entity {
 
 	private volatile BatchStatus status = BatchStatus.STARTING;
 
-	private volatile long readCount = 0;
+	private volatile long readCount;
 
-	private volatile long writeCount = 0;
+	private volatile long writeCount;
 
-	private volatile long commitCount = 0;
+	private volatile long commitCount;
 
-	private volatile long rollbackCount = 0;
+	private volatile long rollbackCount;
 
-	private volatile long readSkipCount = 0;
+	private volatile long readSkipCount;
 
-	private volatile long processSkipCount = 0;
+	private volatile long processSkipCount;
 
-	private volatile long writeSkipCount = 0;
+	private volatile long writeSkipCount;
 
-	private volatile LocalDateTime startTime = null;
+	private volatile LocalDateTime startTime;
 
 	private volatile LocalDateTime createTime = LocalDateTime.now();
 
-	private volatile LocalDateTime endTime = null;
+	private volatile LocalDateTime endTime;
 
-	private volatile LocalDateTime lastUpdated = null;
+	private volatile LocalDateTime lastUpdated;
 
 	private volatile ExecutionContext executionContext = new ExecutionContext();
 

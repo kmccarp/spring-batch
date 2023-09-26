@@ -30,7 +30,7 @@ public class Trade {
 
 	private String isin = "";
 
-	private long quantity = 0;
+	private long quantity;
 
 	private BigDecimal price = new BigDecimal(0);
 
@@ -97,34 +97,41 @@ public class Trade {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Trade other = (Trade) obj;
 		if (customer == null) {
-			if (other.customer != null)
+			if (other.customer != null) {
 				return false;
+			}
 		}
-		else if (!customer.equals(other.customer))
+		else if (!customer.equals(other.customer)) {
 			return false;
+		}
 		if (isin == null) {
-			if (other.isin != null)
+			if (other.isin != null) {
 				return false;
+			}
 		}
-		else if (!isin.equals(other.isin))
+		else if (!isin.equals(other.isin)) {
 			return false;
+		}
 		if (price == null) {
-			if (other.price != null)
+			if (other.price != null) {
 				return false;
+			}
 		}
-		else if (!price.equals(other.price))
+		else if (!price.equals(other.price)) {
 			return false;
-		if (quantity != other.quantity)
-			return false;
-		return true;
+		}
+		return quantity == other.quantity;
 	}
 
 }

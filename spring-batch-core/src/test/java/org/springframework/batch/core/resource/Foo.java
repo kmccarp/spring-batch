@@ -97,10 +97,7 @@ public class Foo {
 		else if (!name.equals(other.name)) {
 			return false;
 		}
-		if (value != other.value) {
-			return false;
-		}
-		return true;
+		return value == other.value;
 	}
 
 }

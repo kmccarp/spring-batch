@@ -313,8 +313,8 @@ class StepBuilderTests {
 
 	public static class InterfaceBasedStepExecutionListener implements StepExecutionListener {
 
-		static int beforeStepCount = 0;
-		static int afterStepCount = 0;
+		static int beforeStepCount;
+		static int afterStepCount;
 
 		public InterfaceBasedStepExecutionListener() {
 			beforeStepCount = 0;
@@ -337,8 +337,8 @@ class StepBuilderTests {
 
 	public static class InterfaceBasedItemReadListenerListener implements ItemReadListener<String> {
 
-		static int beforeReadCount = 0;
-		static int afterReadCount = 0;
+		static int beforeReadCount;
+		static int afterReadCount;
 
 		public InterfaceBasedItemReadListenerListener() {
 			beforeReadCount = 0;
@@ -364,16 +364,16 @@ class StepBuilderTests {
 	@SuppressWarnings("unused")
 	public static class AnnotationBasedStepExecutionListener {
 
-		static int beforeStepCount = 0;
-		static int afterStepCount = 0;
-		static int beforeReadCount = 0;
-		static int afterReadCount = 0;
-		static int beforeProcessCount = 0;
-		static int afterProcessCount = 0;
-		static int beforeWriteCount = 0;
-		static int afterWriteCount = 0;
-		static int beforeChunkCount = 0;
-		static int afterChunkCount = 0;
+		static int beforeStepCount;
+		static int afterStepCount;
+		static int beforeReadCount;
+		static int afterReadCount;
+		static int beforeProcessCount;
+		static int afterProcessCount;
+		static int beforeWriteCount;
+		static int afterWriteCount;
+		static int beforeChunkCount;
+		static int afterChunkCount;
 
 		public AnnotationBasedStepExecutionListener() {
 			beforeStepCount = 0;
@@ -443,9 +443,9 @@ class StepBuilderTests {
 
 	public static class AnnotationBasedChunkListener {
 
-		static int beforeChunkCount = 0;
-		static int afterChunkCount = 0;
-		static int afterChunkErrorCount = 0;
+		static int beforeChunkCount;
+		static int afterChunkCount;
+		static int afterChunkErrorCount;
 
 		public AnnotationBasedChunkListener() {
 			beforeChunkCount = 0;

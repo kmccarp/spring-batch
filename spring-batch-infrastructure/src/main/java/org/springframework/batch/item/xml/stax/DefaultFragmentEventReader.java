@@ -39,16 +39,16 @@ import org.springframework.batch.item.ItemStreamException;
 public class DefaultFragmentEventReader extends AbstractEventReaderWrapper implements FragmentEventReader {
 
 	// true when the next event is the StartElement of next fragment
-	private boolean startFragmentFollows = false;
+	private boolean startFragmentFollows;
 
 	// true when the next event is the EndElement of current fragment
-	private boolean endFragmentFollows = false;
+	private boolean endFragmentFollows;
 
 	// true while cursor is inside fragment
-	private boolean insideFragment = false;
+	private boolean insideFragment;
 
 	// true when reader should behave like the cursor was at the end of document
-	private boolean fakeDocumentEnd = false;
+	private boolean fakeDocumentEnd;
 
 	private final StartDocument startDocumentEvent;
 
@@ -56,11 +56,11 @@ public class DefaultFragmentEventReader extends AbstractEventReaderWrapper imple
 
 	// fragment root name is remembered so that the matching closing element can
 	// be identified
-	private QName fragmentRootName = null;
+	private QName fragmentRootName;
 
 	// counts the occurrences of current fragmentRootName (increased for
 	// StartElement, decreased for EndElement)
-	private int matchCounter = 0;
+	private int matchCounter;
 
 	/**
 	 * Caches the StartDocument event for later use.

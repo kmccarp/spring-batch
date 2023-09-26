@@ -31,7 +31,7 @@ public class GeneratingTradeItemReader implements ItemReader<Trade> {
 
 	private int limit = 1;
 
-	private int counter = 0;
+	private int counter;
 
 	@Nullable
 	@Override

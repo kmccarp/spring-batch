@@ -79,26 +79,31 @@ public class LineItem {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		LineItem other = (LineItem) obj;
 		if (description == null) {
-			if (other.description != null)
+			if (other.description != null) {
 				return false;
+			}
 		}
-		else if (!description.equals(other.description))
+		else if (!description.equals(other.description)) {
 			return false;
-		if (Double.doubleToLongBits(perUnitOunces) != Double.doubleToLongBits(other.perUnitOunces))
+		}
+		if (Double.doubleToLongBits(perUnitOunces) != Double.doubleToLongBits(other.perUnitOunces)) {
 			return false;
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+		}
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) {
 			return false;
-		if (quantity != other.quantity)
-			return false;
-		return true;
+		}
+		return quantity == other.quantity;
 	}
 
 	@Override

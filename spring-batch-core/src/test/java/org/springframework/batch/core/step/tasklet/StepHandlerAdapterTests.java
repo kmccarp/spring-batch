@@ -34,7 +34,7 @@ class StepHandlerAdapterTests {
 
 	private final MethodInvokingTaskletAdapter tasklet = new MethodInvokingTaskletAdapter();
 
-	private Object result = null;
+	private Object result;
 
 	private final StepExecution stepExecution = new StepExecution("systemCommandStep",
 			new JobExecution(new JobInstance(1L, "systemCommandJob"), new JobParameters()));
