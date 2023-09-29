@@ -30,7 +30,7 @@ class ResourcelessTransactionManagerTests {
 
 	private int txStatus = Integer.MIN_VALUE;
 
-	private int count = 0;
+	private int count;
 
 	@Test
 	void testCommit() {

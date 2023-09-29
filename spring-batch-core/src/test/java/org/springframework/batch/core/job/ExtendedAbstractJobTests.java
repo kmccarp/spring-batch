@@ -121,7 +121,7 @@ class ExtendedAbstractJobTests {
 	@Test
 	void testAfterPropertiesSet() {
 		job.setJobRepository(null);
-		Exception exception = assertThrows(IllegalStateException.class, () -> job.afterPropertiesSet());
+		Exception exception = assertThrows(IllegalStateException.class, job::afterPropertiesSet);
 		assertTrue(exception.getMessage().contains("JobRepository"));
 	}
 

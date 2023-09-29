@@ -474,7 +474,7 @@ public class JdbcJobExecutionDao extends AbstractJdbcBatchMetadataDao implements
 			String stringValue = rs.getString("PARAMETER_VALUE");
 			Object typedValue = conversionService.convert(stringValue, parameterType);
 
-			boolean identifying = rs.getString("IDENTIFYING").equalsIgnoreCase("Y");
+			boolean identifying = "Y".equalsIgnoreCase(rs.getString("IDENTIFYING"));
 
 			JobParameter<?> jobParameter = new JobParameter(typedValue, parameterType, identifying);
 

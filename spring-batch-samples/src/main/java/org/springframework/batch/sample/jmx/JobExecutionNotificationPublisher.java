@@ -38,7 +38,7 @@ public class JobExecutionNotificationPublisher
 
 	private NotificationPublisher notificationPublisher;
 
-	private int notificationCount = 0;
+	private int notificationCount;
 
 	/**
 	 * Injection setter.

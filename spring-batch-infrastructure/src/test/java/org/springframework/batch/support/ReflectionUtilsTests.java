@@ -58,19 +58,19 @@ class ReflectionUtilsTests {
 
 		String name = iterator.next().getName();
 
-		if (name.equals("toString")) {
+		if ("toString".equals(name)) {
 			toStringFound = true;
 		}
-		else if (name.equals("methodOne")) {
+		else if ("methodOne".equals(name)) {
 			methodOneFound = true;
 		}
 
 		name = iterator.next().getName();
 
-		if (name.equals("toString")) {
+		if ("toString".equals(name)) {
 			toStringFound = true;
 		}
-		else if (name.equals("methodOne")) {
+		else if ("methodOne".equals(name)) {
 			methodOneFound = true;
 		}
 

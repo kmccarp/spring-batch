@@ -94,21 +94,7 @@ class HibernateFailureJobFunctionalTests {
 
 		JobParameters params = new JobParametersBuilder().addString("key", "failureJob").toJobParameters();
 		writer.setFailOnFlush(2);
-
-		try {
-			jobLauncherTestUtils.launchJob(params);
-		}
-		catch (HibernateJdbcException e) {
-			// This is what would happen if the flush happened outside the
-			// RepeatContext:
-			throw e;
-		}
-		catch (UncategorizedSQLException e) {
-			// This is what would happen if the job wasn't configured to skip
-			// exceptions at the step level.
-			// assertEquals(1, writer.getErrors().size());
-			throw e;
-		}
+		jobLauncherTestUtils.launchJob(params);
 
 		int after = JdbcTestUtils.countRowsInTable(jdbcTemplate, "CUSTOMER");
 		assertEquals(4, after);

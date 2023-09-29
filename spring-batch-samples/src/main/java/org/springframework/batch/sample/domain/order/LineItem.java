@@ -136,11 +136,7 @@ public class LineItem {
 			return false;
 		}
 
-		if (quantity != other.quantity) {
-			return false;
-		}
-
-		return true;
+		return quantity == other.quantity;
 	}
 
 }

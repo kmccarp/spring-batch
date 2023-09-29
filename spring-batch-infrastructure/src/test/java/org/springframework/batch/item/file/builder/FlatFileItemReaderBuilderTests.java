@@ -544,7 +544,7 @@ class FlatFileItemReaderBuilderTests {
 			.lineTokenizer(line -> new DefaultFieldSet(line.split(";")));
 		Exception exception = assertThrows(IllegalStateException.class, builder::build);
 		String message = exception.getMessage();
-		if (message.equals("No LineTokenizer implementation was provided.")) {
+		if ("No LineTokenizer implementation was provided.".equals(message)) {
 			fail("Error message should not be 'No LineTokenizer implementation was provided.' "
 					+ " when a LineTokenizer is provided");
 		}

@@ -96,9 +96,9 @@ public class FaultTolerantStepFactoryBeanTests {
 
 	private JobRepository repository;
 
-	private boolean opened = false;
+	private boolean opened;
 
-	private boolean closed = false;
+	private boolean closed;
 
 	public FaultTolerantStepFactoryBeanTests() throws Exception {
 		reader = new SkipReaderStub<>();
@@ -992,7 +992,7 @@ public class FaultTolerantStepFactoryBeanTests {
 
 	private static class ItemProcessListenerStub<T, S> implements ItemProcessListener<T, S> {
 
-		private boolean filterEncountered = false;
+		private boolean filterEncountered;
 
 		@Override
 		public void afterProcess(T item, @Nullable S result) {

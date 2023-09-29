@@ -176,7 +176,7 @@ class AsyncTaskletStepTests {
 			public String process(String item) throws Exception {
 				logger.info("Item: " + item);
 				processed.add(item);
-				if (item.equals("barf")) {
+				if ("barf".equals(item)) {
 					throw new RuntimeException("Planned processor error");
 				}
 				return item;

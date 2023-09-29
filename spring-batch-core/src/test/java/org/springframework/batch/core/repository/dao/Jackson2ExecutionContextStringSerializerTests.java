@@ -108,9 +108,10 @@ class Jackson2ExecutionContextStringSerializerTests extends AbstractExecutionCon
 
 	}
 
-	public static abstract class PhoneNumber {
+	public abstract static class PhoneNumber {
 
-		public int areaCode, local;
+		public int areaCode;
+		public int local;
 
 	}
 
@@ -157,9 +158,10 @@ class Jackson2ExecutionContextStringSerializerTests extends AbstractExecutionCon
 
 	}
 
-	public static abstract class UnmappedPhoneNumber {
+	public abstract static class UnmappedPhoneNumber {
 
-		public int areaCode, local;
+		public int areaCode;
+		public int local;
 
 	}
 

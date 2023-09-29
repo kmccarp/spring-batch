@@ -17,7 +17,7 @@ package org.springframework.batch.core.configuration.xml;
 
 public abstract class AbstractTestComponent {
 
-	protected boolean executed = false;
+	protected boolean executed;
 
 	public AbstractTestComponent() {
 		super();

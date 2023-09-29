@@ -39,7 +39,7 @@ class SimpleChunkProcessorTests {
 		@Nullable
 		@Override
 		public String process(String item) throws Exception {
-			if (item.equals("err")) {
+			if ("err".equals(item)) {
 				return null;
 			}
 			return item;

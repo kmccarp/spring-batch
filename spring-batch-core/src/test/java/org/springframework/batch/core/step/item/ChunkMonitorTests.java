@@ -40,9 +40,9 @@ class ChunkMonitorTests {
 
 	private ChunkMonitor monitor = new ChunkMonitor();
 
-	private int count = 0;
+	private int count;
 
-	private boolean closed = false;
+	private boolean closed;
 
 	@BeforeEach
 	void setUp() {

@@ -70,15 +70,15 @@ public class FlowBuilder<Q> {
 
 	private final EndState stoppedState;
 
-	private int stepCounter = 0;
+	private int stepCounter;
 
-	private int flowCounter = 0;
+	private int flowCounter;
 
-	private int decisionCounter = 0;
+	private int decisionCounter;
 
-	private int splitCounter = 0;
+	private int splitCounter;
 
-	private int endCounter = 0;
+	private int endCounter;
 
 	private final Map<Object, State> states = new HashMap<>();
 

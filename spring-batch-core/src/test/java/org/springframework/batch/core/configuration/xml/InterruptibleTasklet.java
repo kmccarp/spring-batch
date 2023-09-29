@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
  */
 public class InterruptibleTasklet extends NameStoringTasklet {
 
-	private volatile boolean started = false;
+	private volatile boolean started;
 
 	@Nullable
 	@Override

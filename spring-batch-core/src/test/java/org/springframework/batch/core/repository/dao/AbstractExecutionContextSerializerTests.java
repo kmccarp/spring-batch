@@ -186,8 +186,7 @@ public abstract class AbstractExecutionContextSerializerTests {
 		getSerializer().serialize(m1, out);
 
 		InputStream in = new ByteArrayInputStream(out.toByteArray());
-		Map<String, Object> m2 = getSerializer().deserialize(in);
-		return m2;
+		return getSerializer().deserialize(in);
 	}
 
 	protected abstract ExecutionContextSerializer getSerializer();
@@ -263,7 +262,7 @@ public abstract class AbstractExecutionContextSerializerTests {
 		@Override
 		public int hashCode() {
 			int result;
-			result = (name != null ? name.hashCode() : 0);
+			result = name != null ? name.hashCode() : 0;
 			result = 31 * result + (number != null ? number.hashCode() : 0);
 			result = 31 * result + (obj != null ? obj.hashCode() : 0);
 			result = 31 * result + (map != null ? map.hashCode() : 0);

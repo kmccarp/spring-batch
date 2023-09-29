@@ -27,7 +27,7 @@ public class LoggingTasklet implements Tasklet {
 
 	protected static final Log logger = LogFactory.getLog(LoggingTasklet.class);
 
-	private int id = 0;
+	private final int id;
 
 	public LoggingTasklet(int id) {
 		this.id = id;

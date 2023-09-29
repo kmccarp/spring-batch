@@ -800,7 +800,7 @@ class StaxEventItemReaderTests {
 
 	private static class MockStaxEventItemReader extends StaxEventItemReader<List<XMLEvent>> {
 
-		private boolean openCalled = false;
+		private boolean openCalled;
 
 		@Override
 		public void open(ExecutionContext executionContext) {

@@ -60,7 +60,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * @author Dave Syer
  *
  */
-public class TransactionAwareProxyFactory<T> {
+public final class TransactionAwareProxyFactory<T> {
 
 	private final T target;
 
@@ -239,7 +239,7 @@ public class TransactionAwareProxyFactory<T> {
 
 			if (appendOnly) {
 				String methodName = invocation.getMethod().getName();
-				if ((result == null && methodName.equals("get"))
+				if ((result == null && "get".equals(methodName))
 						|| (Boolean.FALSE.equals(result) && (methodName.startsWith("contains"))
 								|| (Boolean.TRUE.equals(result) && methodName.startsWith("isEmpty")))) {
 					// In appendOnly mode the result of a get might not be

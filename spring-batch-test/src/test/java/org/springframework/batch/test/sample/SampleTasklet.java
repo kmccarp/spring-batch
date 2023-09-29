@@ -34,9 +34,9 @@ public class SampleTasklet implements Tasklet {
 
 	private JobExecution jobExecution;
 
-	private int id = 0;
+	private final int id;
 
-	public boolean jobContextEntryFound = false;
+	public boolean jobContextEntryFound;
 
 	public SampleTasklet(int id) {
 		this.id = id;

@@ -56,7 +56,7 @@ class TransactionalPollingIntegrationTests implements ApplicationContextAware {
 		bus = (Lifecycle) applicationContext;
 	}
 
-	private volatile static int count = 0;
+	private static volatile int count;
 
 	@ServiceActivator(inputChannel = "requests", outputChannel = "replies")
 	public String process(String message) {

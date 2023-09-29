@@ -50,7 +50,7 @@ import java.util.Comparator;
  */
 public class RangeArrayPropertyEditor extends PropertyEditorSupport {
 
-	private boolean forceDisjointRanges = false;
+	private boolean forceDisjointRanges;
 
 	/**
 	 * Set force disjoint ranges. If set to TRUE, ranges are validated to be disjoint. For

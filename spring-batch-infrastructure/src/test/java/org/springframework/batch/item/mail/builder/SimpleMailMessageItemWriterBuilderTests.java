@@ -70,7 +70,7 @@ class SimpleMailMessageItemWriterBuilderTests {
 	@Test
 	void testMailSenderNotSet() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new SimpleMailMessageItemWriterBuilder().build());
+				new SimpleMailMessageItemWriterBuilder()::build);
 		assertEquals("A mailSender is required", exception.getMessage());
 	}
 

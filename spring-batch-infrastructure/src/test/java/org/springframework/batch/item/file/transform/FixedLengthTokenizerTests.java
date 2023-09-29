@@ -25,7 +25,7 @@ class FixedLengthTokenizerTests {
 
 	private final FixedLengthTokenizer tokenizer = new FixedLengthTokenizer();
 
-	private String line = null;
+	private String line;
 
 	/**
 	 * if null or empty string is tokenized, tokenizer returns empty fieldset (with no

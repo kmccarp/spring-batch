@@ -257,8 +257,8 @@ public abstract class AbstractJobDaoTests {
 		JobExecution lastExecution = new JobExecution(jobInstance, jobParameters);
 		lastExecution.setStatus(BatchStatus.STARTED);
 
-		int JUMP_INTO_FUTURE = 1000; // makes sure start time is 'greatest'
-		lastExecution.setCreateTime(LocalDateTime.now().plus(JUMP_INTO_FUTURE, ChronoUnit.MILLIS));
+		int jumpIntoFuture = 1000; // makes sure start time is 'greatest'
+		lastExecution.setCreateTime(LocalDateTime.now().plus(jumpIntoFuture, ChronoUnit.MILLIS));
 		jobExecutionDao.saveJobExecution(lastExecution);
 
 		assertEquals(lastExecution, jobExecutionDao.getLastJobExecution(jobInstance));

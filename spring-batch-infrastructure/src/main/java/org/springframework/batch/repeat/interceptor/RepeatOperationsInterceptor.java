@@ -69,48 +69,41 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 			// convenience of checking that there is a result.
 			result.setValue(new Object());
 		}
+		repeatOperations.iterate(context -> {
+			try {
 
-		try {
-			repeatOperations.iterate(context -> {
-				try {
-
-					MethodInvocation clone = invocation;
-					if (invocation instanceof ProxyMethodInvocation) {
-						clone = ((ProxyMethodInvocation) invocation).invocableClone();
-					}
-					else {
-						throw new IllegalStateException(
-								"MethodInvocation of the wrong type detected - this should not happen with Spring AOP, so please raise an issue if you see this exception");
-					}
-
-					Object value = clone.proceed();
-					if (voidReturnType) {
-						return RepeatStatus.CONTINUABLE;
-					}
-					if (!isComplete(value)) {
-						// Save the last result
-						result.setValue(value);
-						return RepeatStatus.CONTINUABLE;
-					}
-					else {
-						result.setFinalValue(value);
-						return RepeatStatus.FINISHED;
-					}
+				MethodInvocation clone = invocation;
+				if (invocation instanceof ProxyMethodInvocation) {
+					clone = ((ProxyMethodInvocation) invocation).invocableClone();
 				}
-				catch (Throwable e) {
-					if (e instanceof Exception) {
-						throw (Exception) e;
-					}
-					else {
-						throw new RepeatOperationsInterceptorException("Unexpected error in batch interceptor", e);
-					}
+				else {
+					throw new IllegalStateException(
+						"MethodInvocation of the wrong type detected - this should not happen with Spring AOP, so please raise an issue if you see this exception");
 				}
-			});
-		}
-		catch (Throwable t) {
-			// The repeat exception should be unwrapped by the template
-			throw t;
-		}
+
+				Object value = clone.proceed();
+				if (voidReturnType) {
+					return RepeatStatus.CONTINUABLE;
+				}
+				if (!isComplete(value)) {
+					// Save the last result
+					result.setValue(value);
+					return RepeatStatus.CONTINUABLE;
+				}
+				else {
+					result.setFinalValue(value);
+					return RepeatStatus.FINISHED;
+				}
+			}
+			catch (Throwable e) {
+				if (e instanceof Exception) {
+					throw (Exception) e;
+				}
+				else {
+					throw new RepeatOperationsInterceptorException("Unexpected error in batch interceptor", e);
+				}
+			}
+		});
 
 		if (result.isReady()) {
 			return result.getValue();
@@ -148,9 +141,9 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 	 */
 	private static class ResultHolder {
 
-		private Object value = null;
+		private Object value;
 
-		private boolean ready = false;
+		private boolean ready;
 
 		/**
 		 * Public setter for the Object.

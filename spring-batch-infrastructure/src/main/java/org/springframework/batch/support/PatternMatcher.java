@@ -144,8 +144,8 @@ public class PatternMatcher<S> {
 			}
 			// Find the pattern between padIdxStart & padIdxTmp in str between
 			// strIdxStart & strIdxEnd
-			int patLength = (patIdxTmp - patIdxStart - 1);
-			int strLength = (strIdxEnd - strIdxStart + 1);
+			int patLength = patIdxTmp - patIdxStart - 1;
+			int strLength = strIdxEnd - strIdxStart + 1;
 			int foundIdx = -1;
 			strLoop: for (int i = 0; i <= strLength - patLength; i++) {
 				for (int j = 0; j < patLength; j++) {

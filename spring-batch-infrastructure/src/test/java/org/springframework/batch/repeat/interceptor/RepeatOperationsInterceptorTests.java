@@ -221,7 +221,7 @@ class RepeatOperationsInterceptorTests {
 
 	private static class ServiceImpl implements Service {
 
-		private int count = 0;
+		private int count;
 
 		private boolean complete;
 

@@ -182,8 +182,9 @@ class ExternalRetryTests {
 			}
 			catch (Exception e) {
 
-				if (i < 3)
+				if (i < 3) {
 					assertEquals("Rollback!", e.getMessage());
+				}
 
 				// Client of retry template has to take care of rollback. This
 				// would
@@ -213,8 +214,9 @@ class ExternalRetryTests {
 		List<String> msgs = new ArrayList<>();
 		while (next != null) {
 			next = (String) jmsTemplate.receiveAndConvert("queue");
-			if (next != null)
+			if (next != null) {
 				msgs.add(next);
+			}
 		}
 		return msgs;
 	}

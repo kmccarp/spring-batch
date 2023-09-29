@@ -54,8 +54,9 @@ class MessagingTests {
 		List<String> msgs = new ArrayList<>();
 		while (next != null) {
 			next = (String) jmsTemplate.receiveAndConvert("queue");
-			if (next != null)
+			if (next != null) {
 				msgs.add(next);
+			}
 		}
 		return msgs;
 	}

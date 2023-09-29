@@ -69,7 +69,7 @@ public class Foo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (name == null ? 0 : name.hashCode());
 		result = prime * result + value;
 		return result;
 	}
@@ -97,10 +97,7 @@ public class Foo {
 		else if (!name.equals(other.name)) {
 			return false;
 		}
-		if (value != other.value) {
-			return false;
-		}
-		return true;
+		return value == other.value;
 	}
 
 }

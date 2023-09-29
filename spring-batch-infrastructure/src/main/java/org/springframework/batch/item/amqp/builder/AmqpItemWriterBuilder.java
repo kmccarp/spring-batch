@@ -50,9 +50,7 @@ public class AmqpItemWriterBuilder<T> {
 	public AmqpItemWriter<T> build() {
 		Assert.notNull(this.amqpTemplate, "amqpTemplate is required.");
 
-		AmqpItemWriter<T> writer = new AmqpItemWriter<>(this.amqpTemplate);
-
-		return writer;
+		return new AmqpItemWriter<>(this.amqpTemplate);
 	}
 
 }

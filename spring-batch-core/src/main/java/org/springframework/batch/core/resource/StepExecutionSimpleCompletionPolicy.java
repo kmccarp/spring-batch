@@ -125,7 +125,7 @@ public class StepExecutionSimpleCompletionPolicy implements StepExecutionListene
 	 */
 	@Override
 	public String toString() {
-		return (delegate == null) ? keyName : delegate.toString();
+		return delegate == null ? keyName : delegate.toString();
 	}
 
 }

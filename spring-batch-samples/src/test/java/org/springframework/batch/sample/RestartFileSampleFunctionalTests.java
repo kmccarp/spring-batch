@@ -68,12 +68,12 @@ class RestartFileSampleFunctionalTests {
 
 	static class CustomerCreditFlatFileItemWriter extends FlatFileItemWriter<CustomerCredit> {
 
-		private boolean failed = false;
+		private boolean failed;
 
 		@Override
 		public void write(Chunk<? extends CustomerCredit> arg0) throws Exception {
 			for (CustomerCredit cc : arg0) {
-				if (!failed && cc.getName().equals("customer13")) {
+				if (!failed && "customer13".equals(cc.getName())) {
 					failed = true;
 					throw new RuntimeException();
 				}

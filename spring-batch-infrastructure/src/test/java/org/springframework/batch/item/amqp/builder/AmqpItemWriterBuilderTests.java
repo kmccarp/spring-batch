@@ -37,7 +37,7 @@ class AmqpItemWriterBuilderTests {
 	@Test
 	void testNullAmqpTemplate() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new AmqpItemWriterBuilder<Message>().build());
+				new AmqpItemWriterBuilder<Message>()::build);
 		assertEquals("amqpTemplate is required.", exception.getMessage());
 	}
 

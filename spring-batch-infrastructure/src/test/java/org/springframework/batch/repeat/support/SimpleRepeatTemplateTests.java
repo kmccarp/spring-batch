@@ -47,7 +47,7 @@ class SimpleRepeatTemplateTests extends AbstractTradeBatchTests {
 
 	private RepeatTemplate template = getRepeatTemplate();
 
-	private int count = 0;
+	private int count;
 
 	protected RepeatTemplate getRepeatTemplate() {
 		template = new RepeatTemplate();
@@ -376,7 +376,7 @@ class SimpleRepeatTemplateTests extends AbstractTradeBatchTests {
 
 		class ExceptionHandlerStub implements ExceptionHandler {
 
-			boolean called = false;
+			boolean called;
 
 			@Override
 			public void handleException(RepeatContext context, Throwable throwable) throws Throwable {
@@ -391,7 +391,7 @@ class SimpleRepeatTemplateTests extends AbstractTradeBatchTests {
 
 		class RepeatListenerStub implements RepeatListener {
 
-			boolean called = false;
+			boolean called;
 
 			@Override
 			public void onError(RepeatContext context, Throwable throwable) {

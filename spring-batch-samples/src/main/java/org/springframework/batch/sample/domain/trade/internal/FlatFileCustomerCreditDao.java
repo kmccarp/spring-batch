@@ -37,7 +37,7 @@ public class FlatFileCustomerCreditDao implements CustomerCreditDao, DisposableB
 
 	private String separator = "\t";
 
-	private volatile boolean opened = false;
+	private volatile boolean opened;
 
 	@Override
 	public void writeCredit(CustomerCredit customerCredit) throws Exception {

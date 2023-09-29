@@ -52,7 +52,7 @@ public class TransactionAwareBufferedWriter extends Writer {
 
 	private String encoding = DEFAULT_CHARSET;
 
-	private boolean forceSync = false;
+	private boolean forceSync;
 
 	/**
 	 * Create a new instance with the underlying file channel provided, and a callback to

@@ -38,7 +38,7 @@ public class MultiResourceItemReaderBuilder<T> {
 
 	private Resource[] resources;
 
-	private boolean strict = false;
+	private boolean strict;
 
 	private Comparator<Resource> comparator;
 
