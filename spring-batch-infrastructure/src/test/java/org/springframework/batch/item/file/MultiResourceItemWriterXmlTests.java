@@ -40,9 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class MultiResourceItemWriterXmlTests extends AbstractMultiResourceItemWriterTests {
 
-	final static private String xmlDocStart = "<root>";
+	private static final String xmlDocStart = "<root>";
 
-	final static private String xmlDocEnd = "</root>";
+	private static final String xmlDocEnd = "</root>";
 
 	private StaxEventItemWriter<String> delegate;
 

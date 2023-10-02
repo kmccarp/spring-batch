@@ -24,7 +24,7 @@ public class TestDisposableCollaborator extends TestCollaborator implements Disp
 
 	@Override
 	public void destroy() throws Exception {
-		message = (message.equals("none") ? "" : message + ",") + getName() + ":destroyed";
+		message = ("none".equals(message) ? "" : message + ",") + getName() + ":destroyed";
 	}
 
 }

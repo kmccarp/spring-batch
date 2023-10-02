@@ -28,9 +28,9 @@ public class TradeProcessor implements ItemProcessor<Trade, Trade> {
 
 	private int failure = -1;
 
-	private int index = 0;
+	private int index;
 
-	private Trade failedItem = null;
+	private Trade failedItem;
 
 	/**
 	 * Public setter for the index on which failure should occur.

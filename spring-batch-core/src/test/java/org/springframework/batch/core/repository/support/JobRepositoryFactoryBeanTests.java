@@ -256,7 +256,7 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("mockDb")).thenReturn(true);
 		when(incrementerFactory.getSupportedIncrementerTypes()).thenReturn(new String[0]);
 
-		Exception exception = assertThrows(IllegalStateException.class, () -> factory.afterPropertiesSet());
+		Exception exception = assertThrows(IllegalStateException.class, factory::afterPropertiesSet);
 		String message = exception.getMessage();
 		assertTrue(message.contains("TransactionManager"), "Wrong message: " + message);
 
@@ -269,7 +269,7 @@ class JobRepositoryFactoryBeanTests {
 		when(incrementerFactory.isSupportedIncrementerType("foo")).thenReturn(false);
 		when(incrementerFactory.getSupportedIncrementerTypes()).thenReturn(new String[0]);
 
-		Exception exception = assertThrows(IllegalStateException.class, () -> factory.afterPropertiesSet());
+		Exception exception = assertThrows(IllegalStateException.class, factory::afterPropertiesSet);
 		String message = exception.getMessage();
 		assertTrue(message.contains("foo"), "Wrong message: " + message);
 

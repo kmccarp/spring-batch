@@ -48,7 +48,7 @@ public class JobSupport implements BeanNameAware, Job, StepLocator {
 
 	private String name;
 
-	private boolean restartable = false;
+	private boolean restartable;
 
 	private int startLimit = Integer.MAX_VALUE;
 

@@ -50,7 +50,7 @@ public class Db2PagingQueryProvider extends SqlWindowingPagingQueryProvider {
 	}
 
 	private String buildLimitClause(int pageSize) {
-		return new StringBuilder().append("FETCH FIRST ").append(pageSize).append(" ROWS ONLY").toString();
+		return "FETCH FIRST " + pageSize + " ROWS ONLY";
 	}
 
 }

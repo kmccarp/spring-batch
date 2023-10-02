@@ -39,9 +39,9 @@ public class StubJobLauncher implements JobLauncher {
 
 	private int lastRunCalled = RUN_NO_ARGS;
 
-	private JobExecution returnValue = null;
+	private JobExecution returnValue;
 
-	private boolean isRunning = false;
+	private boolean isRunning;
 
 	public boolean isRunning() {
 		return isRunning;

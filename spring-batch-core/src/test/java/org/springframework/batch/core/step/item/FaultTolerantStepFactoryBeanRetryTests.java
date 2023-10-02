@@ -81,9 +81,9 @@ class FaultTolerantStepFactoryBeanRetryTests {
 
 	private final List<Object> written = TransactionAwareProxyFactory.createTransactionalList();
 
-	int count = 0;
+	int count;
 
-	boolean fail = false;
+	boolean fail;
 
 	private JobRepository repository;
 

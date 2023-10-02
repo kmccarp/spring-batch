@@ -68,9 +68,7 @@ class MultiResourceItemReaderIntegrationTests {
 		itemReader.setLineMapper(new PassThroughLineMapper());
 
 		tested.setDelegate(itemReader);
-		tested.setComparator((o1, o2) -> {
-			return 0; // do not change ordering
-		});
+		tested.setComparator((o1, o2) -> 0);
 		tested.setResources(new Resource[] { r1, r2, r3, r4, r5 });
 	}
 
@@ -422,11 +420,11 @@ class MultiResourceItemReaderIntegrationTests {
 
 	private static class ItemStreamReaderImpl implements ResourceAwareItemReaderItemStream<String> {
 
-		private boolean openCalled = false;
+		private boolean openCalled;
 
-		private boolean updateCalled = false;
+		private boolean updateCalled;
 
-		private boolean closeCalled = false;
+		private boolean closeCalled;
 
 		@Nullable
 		@Override

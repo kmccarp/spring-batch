@@ -49,8 +49,8 @@ public class BillingInfo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((paymentDesc == null) ? 0 : paymentDesc.hashCode());
-		result = prime * result + ((paymentId == null) ? 0 : paymentId.hashCode());
+		result = prime * result + (paymentDesc == null ? 0 : paymentDesc.hashCode());
+		result = prime * result + (paymentId == null ? 0 : paymentId.hashCode());
 		return result;
 	}
 

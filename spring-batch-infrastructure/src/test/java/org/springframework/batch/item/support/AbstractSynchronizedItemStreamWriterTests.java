@@ -46,7 +46,7 @@ public abstract class AbstractSynchronizedItemStreamWriterTests {
 
 	private final ExecutionContext testExecutionContext = new ExecutionContext();
 
-	abstract protected SynchronizedItemStreamWriter<Object> createNewSynchronizedItemStreamWriter();
+	protected abstract SynchronizedItemStreamWriter<Object> createNewSynchronizedItemStreamWriter();
 
 	@BeforeEach
 	void init() {

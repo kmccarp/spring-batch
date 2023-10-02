@@ -76,9 +76,9 @@ public class StoredProcedureItemReader<T> extends AbstractCursorItemReader<T> {
 
 	private SqlParameter[] parameters = new SqlParameter[0];
 
-	private boolean function = false;
+	private boolean function;
 
-	private int refCursorPosition = 0;
+	private int refCursorPosition;
 
 	public StoredProcedureItemReader() {
 		super();

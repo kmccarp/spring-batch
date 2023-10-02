@@ -149,17 +149,17 @@ public class Order {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((billing == null) ? 0 : billing.hashCode());
-		result = prime * result + ((billingAddress == null) ? 0 : billingAddress.hashCode());
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + ((lineItems == null) ? 0 : lineItems.hashCode());
-		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
+		result = prime * result + (billing == null ? 0 : billing.hashCode());
+		result = prime * result + (billingAddress == null ? 0 : billingAddress.hashCode());
+		result = prime * result + (customer == null ? 0 : customer.hashCode());
+		result = prime * result + (lineItems == null ? 0 : lineItems.hashCode());
+		result = prime * result + (orderDate == null ? 0 : orderDate.hashCode());
 		result = prime * result + (int) (orderId ^ (orderId >>> 32));
-		result = prime * result + ((shipping == null) ? 0 : shipping.hashCode());
-		result = prime * result + ((shippingAddress == null) ? 0 : shippingAddress.hashCode());
+		result = prime * result + (shipping == null ? 0 : shipping.hashCode());
+		result = prime * result + (shippingAddress == null ? 0 : shippingAddress.hashCode());
 		result = prime * result + totalItems;
 		result = prime * result + totalLines;
-		result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
+		result = prime * result + (totalPrice == null ? 0 : totalPrice.hashCode());
 		return result;
 	}
 

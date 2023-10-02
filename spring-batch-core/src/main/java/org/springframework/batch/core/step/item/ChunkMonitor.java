@@ -38,7 +38,7 @@ public class ChunkMonitor extends ItemStreamSupport {
 
 	private final Log logger = LogFactory.getLog(getClass());
 
-	private boolean streamsRegistered = false;
+	private boolean streamsRegistered;
 
 	public static class ChunkMonitorData {
 

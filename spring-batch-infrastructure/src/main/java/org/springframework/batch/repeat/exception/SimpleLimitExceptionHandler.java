@@ -46,7 +46,7 @@ public class SimpleLimitExceptionHandler implements ExceptionHandler, Initializi
 	private Collection<Class<? extends Throwable>> fatalExceptionClasses = Collections
 		.<Class<? extends Throwable>>singleton(Error.class);
 
-	private int limit = 0;
+	private int limit;
 
 	/**
 	 * Apply the provided properties to create a delegate handler.

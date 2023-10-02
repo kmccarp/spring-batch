@@ -42,7 +42,7 @@ class BatchRetryTemplateTests {
 
 	}
 
-	private int count = 0;
+	private int count;
 
 	private List<String> outputs = new ArrayList<>();
 
@@ -74,7 +74,7 @@ class BatchRetryTemplateTests {
 			return new String[] { "a", "b" };
 		};
 
-		List<RetryState> states = Arrays.<RetryState>asList(new DefaultRetryState("1"), new DefaultRetryState("2"));
+		List<RetryState> states = Arrays.asList(new DefaultRetryState("1"), new DefaultRetryState("2"));
 		Exception exception = assertThrows(RecoverableException.class, () -> template.execute(retryCallback, states));
 		assertEquals("Recoverable", exception.getMessage());
 		String[] result = template.execute(retryCallback, states);

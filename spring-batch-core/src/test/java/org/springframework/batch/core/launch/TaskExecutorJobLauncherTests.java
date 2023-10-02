@@ -209,7 +209,7 @@ class TaskExecutorJobLauncherTests {
 	@Test
 	void testInitialiseWithoutRepository() {
 		Exception exception = assertThrows(IllegalStateException.class,
-				() -> new TaskExecutorJobLauncher().afterPropertiesSet());
+				new TaskExecutorJobLauncher()::afterPropertiesSet);
 		assertTrue(exception.getMessage().toLowerCase().contains("repository"),
 				"Message did not contain repository: " + exception.getMessage());
 	}

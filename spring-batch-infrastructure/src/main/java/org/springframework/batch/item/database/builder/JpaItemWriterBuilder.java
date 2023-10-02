@@ -32,7 +32,7 @@ public class JpaItemWriterBuilder<T> {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	private boolean usePersist = false;
+	private boolean usePersist;
 
 	private boolean clearPersistenceContext = true;
 

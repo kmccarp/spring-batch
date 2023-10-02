@@ -68,15 +68,15 @@ class KafkaItemWriterTests {
 	void testAfterPropertiesSet() {
 		this.writer = new KafkaItemWriter<>();
 
-		Exception exception = assertThrows(IllegalStateException.class, () -> this.writer.afterPropertiesSet());
+		Exception exception = assertThrows(IllegalStateException.class, this.writer::afterPropertiesSet);
 		assertEquals("itemKeyMapper requires a Converter type.", exception.getMessage());
 
 		this.writer.setItemKeyMapper(this.itemKeyMapper);
-		exception = assertThrows(IllegalStateException.class, () -> this.writer.afterPropertiesSet());
+		exception = assertThrows(IllegalStateException.class, this.writer::afterPropertiesSet);
 		assertEquals("KafkaTemplate must not be null.", exception.getMessage());
 
 		this.writer.setKafkaTemplate(this.kafkaTemplate);
-		assertDoesNotThrow(() -> this.writer.afterPropertiesSet());
+		assertDoesNotThrow(this.writer::afterPropertiesSet);
 	}
 
 	@Test

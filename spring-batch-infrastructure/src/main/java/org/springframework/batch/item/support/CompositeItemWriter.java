@@ -42,7 +42,7 @@ public class CompositeItemWriter<T> implements ItemStreamWriter<T>, Initializing
 
 	private List<ItemWriter<? super T>> delegates;
 
-	private boolean ignoreItemStream = false;
+	private boolean ignoreItemStream;
 
 	/**
 	 * Default constructor

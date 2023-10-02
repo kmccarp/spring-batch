@@ -157,7 +157,7 @@ public class AvroItemReader<T> extends AbstractItemCountingItemStreamItemReader<
 		return new ReflectDatumReader<>(clazz);
 	}
 
-	private static class InputStreamReader<T> {
+	private static final class InputStreamReader<T> {
 
 		private final DatumReader<T> datumReader;
 

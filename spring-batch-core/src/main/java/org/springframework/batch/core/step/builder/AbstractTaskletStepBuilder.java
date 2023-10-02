@@ -162,7 +162,7 @@ public abstract class AbstractTaskletStepBuilder<B extends AbstractTaskletStepBu
 		chunkListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterChunk.class));
 		chunkListenerMethods.addAll(ReflectionUtils.findMethod(listener.getClass(), AfterChunkError.class));
 
-		if (chunkListenerMethods.size() > 0) {
+		if (!chunkListenerMethods.isEmpty()) {
 			StepListenerFactoryBean factory = new StepListenerFactoryBean();
 			factory.setDelegate(listener);
 			this.listener((ChunkListener) factory.getObject());

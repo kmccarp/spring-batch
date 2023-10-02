@@ -272,11 +272,11 @@ class SimpleStepFactoryBeanTests {
 		}
 		class CountingChunkListener implements ChunkListener {
 
-			int beforeCount = 0;
+			int beforeCount;
 
-			int afterCount = 0;
+			int afterCount;
 
-			int failedCount = 0;
+			int failedCount;
 
 			private final AssertingWriteListener writeListener;
 

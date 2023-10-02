@@ -79,7 +79,7 @@ public class MongoItemWriter<T> implements ItemWriter<T>, InitializingBean {
 		 * Remove items from the target collection using
 		 * {@link BulkOperations#remove(Query)}.
 		 */
-		REMOVE;
+		REMOVE
 
 	}
 
@@ -108,7 +108,7 @@ public class MongoItemWriter<T> implements ItemWriter<T>, InitializingBean {
 	 */
 	@Deprecated(since = "5.1", forRemoval = true)
 	public void setDelete(boolean delete) {
-		this.mode = (delete) ? Mode.REMOVE : Mode.UPSERT;
+		this.mode = delete ? Mode.REMOVE : Mode.UPSERT;
 	}
 
 	/**

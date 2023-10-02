@@ -27,9 +27,9 @@ import org.springframework.lang.Nullable;
  */
 public class SkipWrapper<T> {
 
-	final private Throwable exception;
+	private final Throwable exception;
 
-	final private T item;
+	private final T item;
 
 	/**
 	 * @param item the item being wrapped.

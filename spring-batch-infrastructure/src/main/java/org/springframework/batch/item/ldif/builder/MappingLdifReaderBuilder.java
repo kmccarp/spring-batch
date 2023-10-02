@@ -32,7 +32,7 @@ public class MappingLdifReaderBuilder<T> {
 
 	private Resource resource;
 
-	private int recordsToSkip = 0;
+	private int recordsToSkip;
 
 	private boolean strict = true;
 

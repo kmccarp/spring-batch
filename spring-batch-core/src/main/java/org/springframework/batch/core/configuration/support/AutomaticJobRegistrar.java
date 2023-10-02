@@ -51,7 +51,7 @@ public class AutomaticJobRegistrar implements Ordered, SmartLifecycle, Applicati
 
 	private ApplicationContext applicationContext;
 
-	private volatile boolean running = false;
+	private volatile boolean running;
 
 	private int phase = Integer.MIN_VALUE + 1000;
 

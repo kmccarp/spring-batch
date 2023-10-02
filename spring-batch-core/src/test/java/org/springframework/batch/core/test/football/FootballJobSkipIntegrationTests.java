@@ -65,7 +65,7 @@ public class FootballJobSkipIntegrationTests {
 		assertEquals(BatchStatus.COMPLETED, execution.getStatus());
 		for (StepExecution stepExecution : execution.getStepExecutions()) {
 			logger.info("Processed: " + stepExecution);
-			if (stepExecution.getStepName().equals("playerload")) {
+			if ("playerload".equals(stepExecution.getStepName())) {
 				// The effect of the retries is to increase the number of
 				// rollbacks
 				long commitInterval = stepExecution.getReadCount() / (stepExecution.getCommitCount() - 1);

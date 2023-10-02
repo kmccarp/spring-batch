@@ -33,7 +33,7 @@ public class ValidatingItemProcessor<T> implements ItemProcessor<T, T>, Initiali
 
 	private Validator<? super T> validator;
 
-	private boolean filter = false;
+	private boolean filter;
 
 	/**
 	 * Default constructor

@@ -58,13 +58,12 @@ class SmokeTests {
 		// This has to be static because Spring Integration registers the handler
 		// more than once (every time a test instance is created), but only one of
 		// them will get the message.
-		private volatile static int count = 0;
+		private static volatile int count;
 
 		@ServiceActivator(inputChannel = "smokein", outputChannel = "smokeout")
 		public String process(String message) {
 			count++;
-			String result = message + ": " + count;
-			return result;
+			return message + ": " + count;
 		}
 
 	}

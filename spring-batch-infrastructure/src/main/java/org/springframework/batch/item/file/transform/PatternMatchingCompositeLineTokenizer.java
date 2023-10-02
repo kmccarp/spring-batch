@@ -36,7 +36,7 @@ import org.springframework.util.Assert;
  */
 public class PatternMatchingCompositeLineTokenizer implements LineTokenizer, InitializingBean {
 
-	private PatternMatcher<LineTokenizer> tokenizers = null;
+	private PatternMatcher<LineTokenizer> tokenizers;
 
 	/*
 	 * (non-Javadoc)

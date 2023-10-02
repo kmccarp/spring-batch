@@ -315,13 +315,13 @@ public class TaskletStep extends AbstractStep {
 
 		private final ChunkContext chunkContext;
 
-		private boolean rolledBack = false;
+		private boolean rolledBack;
 
-		private boolean stepExecutionUpdated = false;
+		private boolean stepExecutionUpdated;
 
 		private StepExecution oldVersion;
 
-		private boolean locked = false;
+		private boolean locked;
 
 		private final Semaphore semaphore;
 

@@ -127,7 +127,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 	private String rootTagNamespace = "";
 
 	// root element attributes
-	private Map<String, String> rootElementAttributes = null;
+	private Map<String, String> rootElementAttributes;
 
 	// TRUE means, that output file will be overwritten if exists - default is
 	// TRUE
@@ -144,7 +144,7 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 	private XMLEventWriter delegateEventWriter;
 
 	// current count of processed records
-	private long currentRecordCount = 0;
+	private long currentRecordCount;
 
 	private boolean saveState = true;
 
@@ -158,11 +158,11 @@ public class StaxEventItemWriter<T> extends AbstractItemStreamItemWriter<T>
 
 	private boolean forceSync;
 
-	private boolean shouldDeleteIfEmpty = false;
+	private boolean shouldDeleteIfEmpty;
 
-	private boolean restarted = false;
+	private boolean restarted;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 	// List holding the QName of elements that were opened in the header callback, but not
 	// closed

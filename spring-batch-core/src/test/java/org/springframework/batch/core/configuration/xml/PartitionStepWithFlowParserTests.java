@@ -90,7 +90,7 @@ class PartitionStepWithFlowParserTests {
 
 	public static class Decider implements JobExecutionDecider {
 
-		int count = 0;
+		int count;
 
 		@Override
 		public FlowExecutionStatus decide(JobExecution jobExecution, @Nullable StepExecution stepExecution) {

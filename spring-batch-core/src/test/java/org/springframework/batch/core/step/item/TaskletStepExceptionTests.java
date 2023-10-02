@@ -490,13 +490,13 @@ class TaskletStepExceptionTests {
 
 	private static class UpdateCountingJobRepository implements JobRepository {
 
-		private int updateCount = 0;
+		private int updateCount;
 
-		private boolean failOnUpdateContext = false;
+		private boolean failOnUpdateContext;
 
 		private int failOnUpdateExecution = -1;
 
-		private boolean failInTransaction = false;
+		private boolean failInTransaction;
 
 		public void setFailOnUpdateExecutionContext(boolean failOnUpdate) {
 			this.failOnUpdateContext = failOnUpdate;

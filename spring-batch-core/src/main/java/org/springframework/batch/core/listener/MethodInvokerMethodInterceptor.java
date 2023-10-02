@@ -56,7 +56,7 @@ public class MethodInvokerMethodInterceptor implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 
 		String methodName = invocation.getMethod().getName();
-		if (ordered && methodName.equals("getOrder")) {
+		if (ordered && "getOrder".equals(methodName)) {
 			return invocation.proceed();
 		}
 
