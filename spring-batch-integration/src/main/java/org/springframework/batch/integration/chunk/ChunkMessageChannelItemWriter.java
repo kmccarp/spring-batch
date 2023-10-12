@@ -121,7 +121,7 @@ public class ChunkMessageChannelItemWriter<T>
 	@Nullable
 	@Override
 	public ExitStatus afterStep(StepExecution stepExecution) {
-		if (!(stepExecution.getStatus() == BatchStatus.COMPLETED)) {
+		if (stepExecution.getStatus() != BatchStatus.COMPLETED) {
 			return ExitStatus.EXECUTING;
 		}
 		long expecting = localState.getExpecting();

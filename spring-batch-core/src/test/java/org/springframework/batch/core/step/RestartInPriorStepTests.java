@@ -89,7 +89,7 @@ class RestartInPriorStepTests {
 
 	public static class CompletionDecider implements JobExecutionDecider {
 
-		private int count = 0;
+		private int count;
 
 		@Override
 		public FlowExecutionStatus decide(JobExecution jobExecution, @Nullable StepExecution stepExecution) {

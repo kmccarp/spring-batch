@@ -90,11 +90,11 @@ public class RepositoryItemReader<T> extends AbstractItemCountingItemStreamItemR
 
 	private Sort sort;
 
-	private volatile int page = 0;
+	private volatile int page;
 
 	private int pageSize = 10;
 
-	private volatile int current = 0;
+	private volatile int current;
 
 	private List<?> arguments;
 
@@ -166,7 +166,7 @@ public class RepositoryItemReader<T> extends AbstractItemCountingItemStreamItemR
 
 		this.lock.lock();
 		try {
-			boolean nextPageNeeded = (results != null && current >= results.size());
+			boolean nextPageNeeded = results != null && current >= results.size();
 
 			if (results == null || nextPageNeeded) {
 
@@ -227,7 +227,7 @@ public class RepositoryItemReader<T> extends AbstractItemCountingItemStreamItemR
 
 		List<Object> parameters = new ArrayList<>();
 
-		if (arguments != null && arguments.size() > 0) {
+		if (arguments != null && !arguments.isEmpty()) {
 			parameters.addAll(arguments);
 		}
 

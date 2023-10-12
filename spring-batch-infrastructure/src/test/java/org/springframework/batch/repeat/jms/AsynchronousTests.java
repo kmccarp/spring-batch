@@ -131,7 +131,7 @@ class AsynchronousTests {
 			final String text = ((TextMessage) message).getText();
 			jdbcTemplate.update("INSERT into T_BARS (id,name,foo_date) values (?,?,null)", list.size(), text);
 			// This causes the DB to rollback but not the message
-			if (text.equals("bar")) {
+			if ("bar".equals(text)) {
 				throw new RuntimeException("Rollback!");
 			}
 		});
@@ -148,7 +148,7 @@ class AsynchronousTests {
 		container.stop();
 
 		// We rolled back so the messages might come in many times...
-		assertTrue(list.size() >= 1);
+		assertTrue(!list.isEmpty());
 
 		String text = "";
 		List<String> msgs = new ArrayList<>();

@@ -136,7 +136,7 @@ class NonAbstractStepTests {
 
 		ExecutionContext saved = new ExecutionContext();
 
-		static long counter = 0;
+		static long counter;
 
 		@Override
 		public void updateExecutionContext(StepExecution stepExecution) {

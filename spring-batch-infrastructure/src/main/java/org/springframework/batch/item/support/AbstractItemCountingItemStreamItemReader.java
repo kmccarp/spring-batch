@@ -40,7 +40,7 @@ public abstract class AbstractItemCountingItemStreamItemReader<T> extends Abstra
 
 	private static final String READ_COUNT_MAX = "read.count.max";
 
-	private int currentItemCount = 0;
+	private int currentItemCount;
 
 	private int maxItemCount = Integer.MAX_VALUE;
 

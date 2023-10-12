@@ -138,11 +138,11 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 
 	private SQLExceptionTranslator exceptionTranslator;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
-	private boolean driverSupportsAbsolute = false;
+	private boolean driverSupportsAbsolute;
 
-	private boolean useSharedExtendedConnection = false;
+	private boolean useSharedExtendedConnection;
 
 	private Boolean connectionAutoCommit;
 

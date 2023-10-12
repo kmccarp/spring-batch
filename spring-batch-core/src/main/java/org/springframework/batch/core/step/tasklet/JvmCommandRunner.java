@@ -36,7 +36,7 @@ public class JvmCommandRunner implements CommandRunner {
 	 * @see CommandRunner#exec(String[], String[], File)
 	 */
 	@Override
-	public Process exec(String command[], String[] envp, File dir) throws IOException {
+	public Process exec(String[] command, String[] envp, File dir) throws IOException {
 		return Runtime.getRuntime().exec(command, envp, dir);
 	}
 

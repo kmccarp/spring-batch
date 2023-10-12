@@ -33,13 +33,13 @@ public class ExampleItemReader extends AbstractItemStreamItemReader<String> {
 
 	private final String[] input = { "Hello", "world!", "Go", "on", "punk", "make", "my", "day!" };
 
-	private int index = 0;
+	private int index;
 
-	private int min = 0;
+	private int min;
 
 	private int max = Integer.MAX_VALUE;
 
-	public static volatile boolean fail = false;
+	public static volatile boolean fail;
 
 	public ExampleItemReader() {
 		this.setExecutionContextName(ClassUtils.getShortName(this.getClass()));

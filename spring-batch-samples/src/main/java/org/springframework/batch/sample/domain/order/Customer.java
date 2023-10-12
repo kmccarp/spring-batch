@@ -114,10 +114,10 @@ public class Customer {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (businessCustomer ? 1231 : 1237);
-		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result + (companyName == null ? 0 : companyName.hashCode());
+		result = prime * result + (firstName == null ? 0 : firstName.hashCode());
+		result = prime * result + (lastName == null ? 0 : lastName.hashCode());
+		result = prime * result + (middleName == null ? 0 : middleName.hashCode());
 		result = prime * result + (registered ? 1231 : 1237);
 		result = prime * result + (int) (registrationId ^ (registrationId >>> 32));
 		result = prime * result + (vip ? 1231 : 1237);
@@ -177,10 +177,7 @@ public class Customer {
 		if (registrationId != other.registrationId) {
 			return false;
 		}
-		if (vip != other.vip) {
-			return false;
-		}
-		return true;
+		return vip == other.vip;
 	}
 
 }

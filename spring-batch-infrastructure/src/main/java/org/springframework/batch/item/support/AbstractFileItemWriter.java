@@ -80,15 +80,15 @@ public abstract class AbstractFileItemWriter<T> extends AbstractItemStreamItemWr
 
 	private WritableResource resource;
 
-	protected OutputState state = null;
+	protected OutputState state;
 
 	private boolean saveState = true;
 
-	private boolean forceSync = false;
+	private boolean forceSync;
 
 	protected boolean shouldDeleteIfExists = true;
 
-	private boolean shouldDeleteIfEmpty = false;
+	private boolean shouldDeleteIfEmpty;
 
 	private String encoding = DEFAULT_CHARSET;
 
@@ -100,7 +100,7 @@ public abstract class AbstractFileItemWriter<T> extends AbstractItemStreamItemWr
 
 	private boolean transactional = DEFAULT_TRANSACTIONAL;
 
-	protected boolean append = false;
+	protected boolean append;
 
 	/**
 	 * Flag to indicate that changes should be force-synced to disk on flush. Defaults to
@@ -383,19 +383,19 @@ public abstract class AbstractFileItemWriter<T> extends AbstractItemStreamItemWr
 		// output file
 		String encoding = DEFAULT_CHARSET;
 
-		boolean restarted = false;
+		boolean restarted;
 
-		long lastMarkedByteOffsetPosition = 0;
+		long lastMarkedByteOffsetPosition;
 
-		long linesWritten = 0;
+		long linesWritten;
 
 		boolean shouldDeleteIfExists = true;
 
-		boolean initialized = false;
+		boolean initialized;
 
-		private boolean append = false;
+		private boolean append;
 
-		private boolean appending = false;
+		private boolean appending;
 
 		/**
 		 * Return the byte offset position of the cursor in the output file as a long

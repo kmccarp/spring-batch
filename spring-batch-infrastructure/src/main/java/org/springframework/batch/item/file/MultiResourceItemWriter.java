@@ -44,9 +44,9 @@ import org.springframework.util.ClassUtils;
  */
 public class MultiResourceItemWriter<T> extends AbstractItemStreamItemWriter<T> {
 
-	final static private String RESOURCE_INDEX_KEY = "resource.index";
+	private static final String RESOURCE_INDEX_KEY = "resource.index";
 
-	final static private String CURRENT_RESOURCE_ITEM_COUNT = "resource.item.count";
+	private static final String CURRENT_RESOURCE_ITEM_COUNT = "resource.item.count";
 
 	private Resource resource;
 
@@ -54,7 +54,7 @@ public class MultiResourceItemWriter<T> extends AbstractItemStreamItemWriter<T> 
 
 	private int itemCountLimitPerResource = Integer.MAX_VALUE;
 
-	private int currentResourceItemCount = 0;
+	private int currentResourceItemCount;
 
 	private int resourceIndex = 1;
 
@@ -62,7 +62,7 @@ public class MultiResourceItemWriter<T> extends AbstractItemStreamItemWriter<T> 
 
 	private boolean saveState = true;
 
-	private boolean opened = false;
+	private boolean opened;
 
 	public MultiResourceItemWriter() {
 		this.setExecutionContextName(ClassUtils.getShortName(MultiResourceItemWriter.class));

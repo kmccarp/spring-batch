@@ -189,7 +189,7 @@ class ItemListenerErrorTests {
 
 	public static class FailingItemWriter implements ItemWriter<String> {
 
-		private boolean goingToFail = false;
+		private boolean goingToFail;
 
 		@Override
 		public void write(Chunk<? extends String> items) throws Exception {
@@ -206,7 +206,7 @@ class ItemListenerErrorTests {
 
 	public static class FailingItemProcessor implements ItemProcessor<String, String> {
 
-		private boolean goingToFail = false;
+		private boolean goingToFail;
 
 		@Nullable
 		@Override
@@ -227,11 +227,11 @@ class ItemListenerErrorTests {
 
 	public static class FailingItemReader implements ItemReader<String> {
 
-		private boolean goingToFail = false;
+		private boolean goingToFail;
 
 		private final ItemReader<String> delegate = new ListItemReader<>(Collections.singletonList("1"));
 
-		private int count = 0;
+		private int count;
 
 		@Nullable
 		@Override
@@ -265,63 +265,63 @@ class ItemListenerErrorTests {
 
 		@Override
 		public void beforeRead() {
-			if (methodToThrowExceptionFrom.equals("beforeRead")) {
+			if ("beforeRead".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("beforeRead caused this Exception");
 			}
 		}
 
 		@Override
 		public void afterRead(String item) {
-			if (methodToThrowExceptionFrom.equals("afterRead")) {
+			if ("afterRead".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("afterRead caused this Exception");
 			}
 		}
 
 		@Override
 		public void onReadError(Exception ex) {
-			if (methodToThrowExceptionFrom.equals("onReadError")) {
+			if ("onReadError".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("onReadError caused this Exception");
 			}
 		}
 
 		@Override
 		public void beforeProcess(String item) {
-			if (methodToThrowExceptionFrom.equals("beforeProcess")) {
+			if ("beforeProcess".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("beforeProcess caused this Exception");
 			}
 		}
 
 		@Override
 		public void afterProcess(String item, @Nullable String result) {
-			if (methodToThrowExceptionFrom.equals("afterProcess")) {
+			if ("afterProcess".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("afterProcess caused this Exception");
 			}
 		}
 
 		@Override
 		public void onProcessError(String item, Exception ex) {
-			if (methodToThrowExceptionFrom.equals("onProcessError")) {
+			if ("onProcessError".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("onProcessError caused this Exception");
 			}
 		}
 
 		@Override
 		public void beforeWrite(Chunk<? extends String> items) {
-			if (methodToThrowExceptionFrom.equals("beforeWrite")) {
+			if ("beforeWrite".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("beforeWrite caused this Exception");
 			}
 		}
 
 		@Override
 		public void afterWrite(Chunk<? extends String> items) {
-			if (methodToThrowExceptionFrom.equals("afterWrite")) {
+			if ("afterWrite".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("afterWrite caused this Exception");
 			}
 		}
 
 		@Override
 		public void onWriteError(Exception ex, Chunk<? extends String> item) {
-			if (methodToThrowExceptionFrom.equals("onWriteError")) {
+			if ("onWriteError".equals(methodToThrowExceptionFrom)) {
 				throw new RuntimeException("onWriteError caused this Exception");
 			}
 		}

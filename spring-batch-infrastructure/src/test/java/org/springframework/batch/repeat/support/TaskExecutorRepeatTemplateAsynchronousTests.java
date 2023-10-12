@@ -45,7 +45,7 @@ class TaskExecutorRepeatTemplateAsynchronousTests extends AbstractTradeBatchTest
 
 	private final RepeatTemplate template = getRepeatTemplate();
 
-	private int count = 0;
+	private int count;
 
 	private RepeatTemplate getRepeatTemplate() {
 		TaskExecutorRepeatTemplate template = new TaskExecutorRepeatTemplate();
@@ -176,8 +176,9 @@ class TaskExecutorRepeatTemplateAsynchronousTests extends AbstractTradeBatchTest
 				for (int i = 0; i < 10; i++) {
 					TradeItemReader provider = new TradeItemReader(resource);
 					provider.open(new ExecutionContext());
-					while (provider.read() != null)
+					while (provider.read() != null) {
 						continue;
+					}
 					provider.close();
 				}
 			}
@@ -215,8 +216,9 @@ class TaskExecutorRepeatTemplateAsynchronousTests extends AbstractTradeBatchTest
 				Thread.sleep(100);
 				TradeItemReader provider = new TradeItemReader(resource);
 				provider.open(new ExecutionContext());
-				while (provider.read() != null)
-					;
+				while (provider.read() != null) {
+					continue;
+				}
 				return super.doInIteration(context);
 			}
 		};
@@ -232,7 +234,7 @@ class TaskExecutorRepeatTemplateAsynchronousTests extends AbstractTradeBatchTest
 		// Because of the throttling and queueing internally to a TaskExecutor,
 		// more than one thread will be used - the number used is the
 		// concurrency limit in the task executor, plus 1.
-		assertTrue(threadNames.size() >= 1);
+		assertTrue(!threadNames.isEmpty());
 	}
 
 }

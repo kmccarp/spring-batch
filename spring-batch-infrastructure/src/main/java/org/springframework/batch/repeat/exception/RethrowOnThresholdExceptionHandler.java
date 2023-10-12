@@ -44,7 +44,7 @@ public class RethrowOnThresholdExceptionHandler implements ExceptionHandler {
 
 	private Classifier<? super Throwable, IntegerHolder> exceptionClassifier = (Classifier<Throwable, IntegerHolder>) classifiable -> ZERO;
 
-	private boolean useParent = false;
+	private boolean useParent;
 
 	/**
 	 * Flag to indicate the exception counters should be shared between sibling contexts

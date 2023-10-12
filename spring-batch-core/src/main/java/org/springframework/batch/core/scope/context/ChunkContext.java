@@ -33,7 +33,7 @@ public class ChunkContext extends AttributeAccessorSupport {
 
 	private final StepContext stepContext;
 
-	private boolean complete = false;
+	private boolean complete;
 
 	/**
 	 * @param stepContext the current step context

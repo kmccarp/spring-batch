@@ -102,9 +102,9 @@ public class Address {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((addressee == null) ? 0 : addressee.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
+		result = prime * result + (addressee == null ? 0 : addressee.hashCode());
+		result = prime * result + (country == null ? 0 : country.hashCode());
+		result = prime * result + (zipCode == null ? 0 : zipCode.hashCode());
 		return result;
 	}
 

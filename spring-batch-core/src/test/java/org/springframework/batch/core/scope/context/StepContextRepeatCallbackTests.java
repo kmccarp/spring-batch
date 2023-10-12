@@ -35,9 +35,9 @@ class StepContextRepeatCallbackTests {
 
 	private final StepExecution stepExecution = new StepExecution("foo", new JobExecution(0L), 123L);
 
-	private boolean addedAttribute = false;
+	private boolean addedAttribute;
 
-	private boolean removedAttribute = false;
+	private boolean removedAttribute;
 
 	@AfterEach
 	void cleanUpStepContext() {

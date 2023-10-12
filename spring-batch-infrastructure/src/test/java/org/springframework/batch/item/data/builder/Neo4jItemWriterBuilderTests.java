@@ -84,7 +84,7 @@ class Neo4jItemWriterBuilderTests {
 	@Test
 	void testNoSessionFactory() {
 		Exception exception = assertThrows(IllegalArgumentException.class,
-				() -> new Neo4jItemWriterBuilder<String>().build());
+				new Neo4jItemWriterBuilder<String>()::build);
 		assertEquals("sessionFactory is required.", exception.getMessage());
 	}
 

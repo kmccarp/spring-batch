@@ -98,7 +98,7 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 
 	private JobExplorer jobExplorer;
 
-	private boolean pollRepositoryForResults = false;
+	private boolean pollRepositoryForResults;
 
 	private long timeout = -1;
 

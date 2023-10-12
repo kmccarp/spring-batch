@@ -75,7 +75,7 @@ class SimpleStepHandlerTests {
 		assertEquals(BatchStatus.COMPLETED, stepExecution.getStatus());
 	}
 
-	private class StubStep extends StepSupport {
+	private final class StubStep extends StepSupport {
 
 		private StubStep(String name) {
 			super(name);

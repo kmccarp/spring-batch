@@ -173,7 +173,7 @@ public class AvroItemWriter<T> extends AbstractItemStreamItemWriter<T> {
 		return new AvroItemWriter.OutputStreamWriter<>(outputStream, datumWriter);
 	}
 
-	private static class OutputStreamWriter<T> {
+	private static final class OutputStreamWriter<T> {
 
 		private final DatumWriter<T> datumWriter;
 

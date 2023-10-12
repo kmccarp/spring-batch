@@ -62,34 +62,42 @@ public class Name {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + born;
-		result = prime * result + ((first == null) ? 0 : first.hashCode());
-		result = prime * result + ((last == null) ? 0 : last.hashCode());
+		result = prime * result + (first == null ? 0 : first.hashCode());
+		result = prime * result + (last == null ? 0 : last.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Name other = (Name) obj;
-		if (born != other.born)
+		if (born != other.born) {
 			return false;
+		}
 		if (first == null) {
-			if (other.first != null)
+			if (other.first != null) {
 				return false;
+			}
 		}
-		else if (!first.equals(other.first))
+		else if (!first.equals(other.first)) {
 			return false;
+		}
 		if (last == null) {
-			if (other.last != null)
+			if (other.last != null) {
 				return false;
+			}
 		}
-		else if (!last.equals(other.last))
+		else if (!last.equals(other.last)) {
 			return false;
+		}
 		return true;
 	}
 

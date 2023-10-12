@@ -124,7 +124,7 @@ class RegisterMultiListenerTests {
 			.autowireBeanProperties(this, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
 	}
 
-	public static abstract class MultiListenerTestConfigurationSupport {
+	public abstract static class MultiListenerTestConfigurationSupport {
 
 		@Bean
 		public Job testJob(JobRepository jobRepository) {
@@ -246,18 +246,18 @@ class RegisterMultiListenerTests {
 
 	private static class CallChecker {
 
-		int beforeStepCalled = 0;
+		int beforeStepCalled;
 
-		int beforeChunkCalled = 0;
+		int beforeChunkCalled;
 
-		int beforeWriteCalled = 0;
+		int beforeWriteCalled;
 
-		int skipInWriteCalled = 0;
+		int skipInWriteCalled;
 
 	}
 
-	private static class MultiListener
-			implements StepExecutionListener, ChunkListener, ItemWriteListener<String>, SkipListener<String, String> {
+	private static final class MultiListener
+		implements StepExecutionListener, ChunkListener, ItemWriteListener<String>, SkipListener<String, String> {
 
 		private final CallChecker callChecker;
 

@@ -152,10 +152,12 @@ public abstract class AvroTestFixtures {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (o == null || getClass() != o.getClass())
+			}
+			if (o == null || getClass() != o.getClass()) {
 				return false;
+			}
 			PlainOldUser that = (PlainOldUser) o;
 			return favoriteNumber == that.favoriteNumber && Objects.equals(name, that.name)
 					&& Objects.equals(favoriteColor, that.favoriteColor);

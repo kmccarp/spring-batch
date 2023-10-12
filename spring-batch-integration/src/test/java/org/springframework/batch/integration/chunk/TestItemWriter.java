@@ -30,22 +30,22 @@ public class TestItemWriter<T> implements ItemWriter<T> {
 	/**
 	 * Counts the number of chunks processed in the handler.
 	 */
-	public volatile static int count = 0;
+	public static volatile int count;
 
 	/**
 	 * Item that causes failure in handler.
 	 */
-	public final static String FAIL_ON = "fail";
+	public static final String FAIL_ON = "fail";
 
 	/**
 	 * Item that causes error in handler.
 	 */
-	public final static String UNSUPPORTED_ON = "unsupported";
+	public static final String UNSUPPORTED_ON = "unsupported";
 
 	/**
 	 * Item that causes error in handler.
 	 */
-	public final static String ERROR_ON = "error";
+	public static final String ERROR_ON = "error";
 
 	/**
 	 * Item that causes handler to wait to simulate delayed processing.

@@ -82,7 +82,7 @@ public class SimpleJvmExitCodeMapper implements ExitCodeMapper {
 			logger.fatal("Error mapping exit code, generic exit status returned.", ex);
 		}
 
-		return (statusCode != null) ? statusCode : JVM_EXITCODE_GENERIC_ERROR;
+		return statusCode != null ? statusCode : JVM_EXITCODE_GENERIC_ERROR;
 	}
 
 }

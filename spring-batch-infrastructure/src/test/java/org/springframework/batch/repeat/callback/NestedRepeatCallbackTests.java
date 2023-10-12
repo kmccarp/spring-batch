@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class NestedRepeatCallbackTests {
 
-	private int count = 0;
+	private int count;
 
 	@Test
 	void testExecute() throws Exception {

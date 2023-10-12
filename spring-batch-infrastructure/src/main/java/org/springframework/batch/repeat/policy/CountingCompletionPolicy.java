@@ -36,9 +36,9 @@ public abstract class CountingCompletionPolicy extends DefaultResultCompletionPo
 	 */
 	public static final String COUNT = CountingCompletionPolicy.class.getName() + ".COUNT";
 
-	private boolean useParent = false;
+	private boolean useParent;
 
-	private int maxCount = 0;
+	private int maxCount;
 
 	/**
 	 * Flag to indicate whether the count is at the level of the parent context, or just
@@ -89,7 +89,7 @@ public abstract class CountingCompletionPolicy extends DefaultResultCompletionPo
 	 * springframework.batch.repeat.BatchContext)
 	 */
 	@Override
-	final public boolean isComplete(RepeatContext context) {
+	public final boolean isComplete(RepeatContext context) {
 		int count = ((CountingBatchContext) context).getCounter().getCount();
 		return count >= maxCount;
 	}
@@ -112,7 +112,7 @@ public abstract class CountingCompletionPolicy extends DefaultResultCompletionPo
 	 * springframework.batch.repeat.BatchContext)
 	 */
 	@Override
-	final public void update(RepeatContext context) {
+	public final void update(RepeatContext context) {
 		super.update(context);
 		int delta = doUpdate(context);
 		((CountingBatchContext) context).getCounter().increment(delta);

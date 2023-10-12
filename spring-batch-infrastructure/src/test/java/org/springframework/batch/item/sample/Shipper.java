@@ -47,7 +47,7 @@ public class Shipper {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (name == null ? 0 : name.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(perOunceRate);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -56,22 +56,25 @@ public class Shipper {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Shipper other = (Shipper) obj;
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
+			}
 		}
-		else if (!name.equals(other.name))
+		else if (!name.equals(other.name)) {
 			return false;
-		if (Double.doubleToLongBits(perOunceRate) != Double.doubleToLongBits(other.perOunceRate))
-			return false;
-		return true;
+		}
+		return Double.doubleToLongBits(perOunceRate) == Double.doubleToLongBits(other.perOunceRate);
 	}
 
 	@Override

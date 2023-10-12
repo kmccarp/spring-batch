@@ -145,10 +145,12 @@ class BatchMessageListenerContainerTests {
 			throws JMSException, IllegalAccessException {
 		container.setAcceptMessagesWhileStopping(true);
 		container.setMessageListener((MessageListener) arg0 -> {
-			if (t instanceof RuntimeException)
+			if (t instanceof RuntimeException) {
 				throw (RuntimeException) t;
-			else
+			}
+			else {
 				throw (Error) t;
+			}
 		});
 
 		Session session = mock();
@@ -166,9 +168,7 @@ class BatchMessageListenerContainerTests {
 			session.rollback();
 		}
 
-		boolean received = doExecute(session, consumer);
-
-		return received;
+		return doExecute(session, consumer);
 	}
 
 	private boolean doExecute(Session session, MessageConsumer consumer) throws IllegalAccessException {

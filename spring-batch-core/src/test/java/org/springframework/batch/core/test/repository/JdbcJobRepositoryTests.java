@@ -180,7 +180,7 @@ class JdbcJobRepositoryTests {
 		cacheJobIds(execution);
 
 		int count = 0;
-		while (list.size() == 0 && count++ < 100) {
+		while (list.isEmpty() && count++ < 100) {
 			Thread.sleep(200);
 		}
 

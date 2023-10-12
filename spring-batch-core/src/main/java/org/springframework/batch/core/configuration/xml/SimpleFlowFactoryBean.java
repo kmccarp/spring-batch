@@ -181,7 +181,7 @@ public class SimpleFlowFactoryBean implements FactoryBean<SimpleFlow>, Initializ
 	 * @author Dave Syer
 	 *
 	 */
-	public static class DelegateState extends AbstractState implements FlowHolder {
+	public static final class DelegateState extends AbstractState implements FlowHolder {
 
 		private final State state;
 
@@ -210,7 +210,7 @@ public class SimpleFlowFactoryBean implements FactoryBean<SimpleFlow>, Initializ
 
 		@Override
 		public Collection<Flow> getFlows() {
-			return (state instanceof FlowHolder) ? ((FlowHolder) state).getFlows() : Collections.<Flow>emptyList();
+			return state instanceof FlowHolder ? ((FlowHolder) state).getFlows() : Collections.<Flow>emptyList();
 		}
 
 	}

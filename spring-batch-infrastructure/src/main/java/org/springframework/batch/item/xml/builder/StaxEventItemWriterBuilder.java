@@ -44,9 +44,9 @@ public class StaxEventItemWriterBuilder<T> {
 
 	private boolean transactional = true;
 
-	private boolean forceSync = false;
+	private boolean forceSync;
 
-	private boolean shouldDeleteIfEmpty = false;
+	private boolean shouldDeleteIfEmpty;
 
 	private String encoding = StaxEventItemWriter.DEFAULT_ENCODING;
 

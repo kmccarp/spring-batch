@@ -40,7 +40,7 @@ public class SynchronizedItemStreamReaderTests extends AbstractSynchronizedItemS
 	@Test
 	void testDelegateIsNotNullWhenPropertiesSet() {
 		final Exception expectedException = assertThrows(IllegalStateException.class,
-				() -> ((InitializingBean) new SynchronizedItemStreamReader<>()).afterPropertiesSet());
+				((InitializingBean) new SynchronizedItemStreamReader<>())::afterPropertiesSet);
 		assertEquals("A delegate item reader is required", expectedException.getMessage());
 	}
 

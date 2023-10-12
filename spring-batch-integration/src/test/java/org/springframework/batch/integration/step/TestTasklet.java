@@ -27,7 +27,7 @@ import org.springframework.lang.Nullable;
  */
 public class TestTasklet implements Tasklet {
 
-	private boolean fail = false;
+	private boolean fail;
 
 	public void setFail(boolean fail) {
 		this.fail = fail;

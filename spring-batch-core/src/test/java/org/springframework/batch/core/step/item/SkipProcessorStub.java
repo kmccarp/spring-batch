@@ -33,7 +33,7 @@ public class SkipProcessorStub<T> extends AbstractExceptionThrowingItemHandlerSt
 
 	private final List<T> committed = TransactionAwareProxyFactory.createTransactionalList();
 
-	private boolean filter = false;
+	private boolean filter;
 
 	public SkipProcessorStub() throws Exception {
 		super();

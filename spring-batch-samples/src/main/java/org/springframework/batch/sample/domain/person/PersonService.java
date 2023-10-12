@@ -34,9 +34,9 @@ public class PersonService {
 
 	private static final int GENERATION_LIMIT = 10;
 
-	private int generatedCounter = 0;
+	private int generatedCounter;
 
-	private int processedCounter = 0;
+	private int processedCounter;
 
 	public Person getData() {
 		if (generatedCounter >= GENERATION_LIMIT) {

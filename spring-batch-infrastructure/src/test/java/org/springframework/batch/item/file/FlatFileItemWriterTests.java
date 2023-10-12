@@ -683,7 +683,7 @@ class FlatFileItemWriterTests {
 	void testLineAggregatorFailure() throws Exception {
 
 		writer.setLineAggregator(item -> {
-			if (item.equals("2")) {
+			if ("2".equals(item)) {
 				throw new RuntimeException("aggregation failed on " + item);
 			}
 			return item;

@@ -83,7 +83,7 @@ class CustomItemReaderTests {
 
 		private final List<T> items;
 
-		private int currentIndex = 0;
+		private int currentIndex;
 
 		public CustomItemReader(List<T> items) {
 			this.items = items;

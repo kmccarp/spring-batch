@@ -32,21 +32,21 @@ import org.springframework.util.Assert;
  */
 public class RepeatContextCounter {
 
-	final private String countKey;
+	private final String countKey;
 
 	/**
 	 * Flag to indicate whether the count is stored at the level of the parent context, or
 	 * just local to the current context. Default value is false.
 	 */
-	final private boolean useParent;
+	private final boolean useParent;
 
-	final private RepeatContext context;
+	private final RepeatContext context;
 
 	/**
 	 * Increment the counter.
 	 * @param delta the amount by which to increment the counter.
 	 */
-	final public void increment(int delta) {
+	public final void increment(int delta) {
 		AtomicInteger count = getCounter();
 		count.addAndGet(delta);
 	}
@@ -54,7 +54,7 @@ public class RepeatContextCounter {
 	/**
 	 * Increment by 1.
 	 */
-	final public void increment() {
+	public final void increment() {
 		increment(1);
 	}
 
@@ -106,7 +106,7 @@ public class RepeatContextCounter {
 	}
 
 	private AtomicInteger getCounter() {
-		return ((AtomicInteger) context.getAttribute(countKey));
+		return (AtomicInteger) context.getAttribute(countKey);
 	}
 
 }

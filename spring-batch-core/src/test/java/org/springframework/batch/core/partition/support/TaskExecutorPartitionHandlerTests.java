@@ -40,7 +40,7 @@ class TaskExecutorPartitionHandlerTests {
 
 	private TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
 
-	private int count = 0;
+	private int count;
 
 	private final Collection<String> stepExecutions = new TreeSet<>();
 

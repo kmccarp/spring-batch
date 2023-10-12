@@ -19,12 +19,12 @@ public class TestItemReader<T> implements ItemReader<T> {
 	/**
 	 * Counts the number of chunks processed in the handler.
 	 */
-	public volatile int count = 0;
+	public volatile int count;
 
 	/**
 	 * Item that causes failure in handler.
 	 */
-	public final static String FAIL_ON = "bad";
+	public static final String FAIL_ON = "bad";
 
 	/**
 	 * Item that causes handler to wait to simulate delayed processing.

@@ -74,7 +74,7 @@ public class RemoteChunkingManagerStepBuilder<I, O> extends FaultTolerantStepBui
 
 	private MessageChannel outputChannel;
 
-	private final int DEFAULT_MAX_WAIT_TIMEOUTS = 40;
+	private static final int DEFAULT_MAX_WAIT_TIMEOUTS = 40;
 
 	private static final long DEFAULT_THROTTLE_LIMIT = 6;
 

@@ -40,7 +40,7 @@ public abstract class BatchScopeSupport implements Scope, BeanFactoryPostProcess
 
 	private boolean autoProxy = true;
 
-	private boolean proxyTargetClass = false;
+	private boolean proxyTargetClass;
 
 	private String name;
 

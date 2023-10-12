@@ -54,9 +54,9 @@ public class ShippingInfo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((shipperId == null) ? 0 : shipperId.hashCode());
-		result = prime * result + ((shippingInfo == null) ? 0 : shippingInfo.hashCode());
-		result = prime * result + ((shippingTypeId == null) ? 0 : shippingTypeId.hashCode());
+		result = prime * result + (shipperId == null ? 0 : shipperId.hashCode());
+		result = prime * result + (shippingInfo == null ? 0 : shippingInfo.hashCode());
+		result = prime * result + (shippingTypeId == null ? 0 : shippingTypeId.hashCode());
 		return result;
 	}
 

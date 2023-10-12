@@ -36,23 +36,21 @@ class ConfigurableSystemProcessExitCodeMapperTests {
 	 */
 	@Test
 	void testMapping() {
-		Map<Object, ExitStatus> mappings = new HashMap<>() {
-			{
-				put(0, ExitStatus.COMPLETED);
-				put(1, ExitStatus.FAILED);
-				put(2, ExitStatus.EXECUTING);
-				put(3, ExitStatus.NOOP);
-				put(4, ExitStatus.UNKNOWN);
-				put(ConfigurableSystemProcessExitCodeMapper.ELSE_KEY, ExitStatus.UNKNOWN);
-			}
-		};
+		Map<Object, ExitStatus> mappings = new HashMap<>();
+		mappings.put(0, ExitStatus.COMPLETED);
+		mappings.put(1, ExitStatus.FAILED);
+		mappings.put(2, ExitStatus.EXECUTING);
+		mappings.put(3, ExitStatus.NOOP);
+		mappings.put(4, ExitStatus.UNKNOWN);
+		mappings.put(ConfigurableSystemProcessExitCodeMapper.ELSE_KEY, ExitStatus.UNKNOWN);
 
 		mapper.setMappings(mappings);
 
 		// check explicitly defined values
 		for (Map.Entry<Object, ExitStatus> entry : mappings.entrySet()) {
-			if (entry.getKey().equals(ConfigurableSystemProcessExitCodeMapper.ELSE_KEY))
+			if (entry.getKey().equals(ConfigurableSystemProcessExitCodeMapper.ELSE_KEY)) {
 				continue;
+			}
 
 			int exitCode = (Integer) entry.getKey();
 			assertSame(entry.getValue(), mapper.getExitStatus(exitCode));

@@ -103,7 +103,7 @@ class StepContextTests {
 			list.add("bar");
 			throw new RuntimeException("fail!");
 		});
-		Exception exception = assertThrows(RuntimeException.class, () -> context.close());
+		Exception exception = assertThrows(RuntimeException.class, context::close);
 		// We don't care which one was thrown...
 		assertEquals("fail!", exception.getMessage());
 		// ...but we do care that both were executed:

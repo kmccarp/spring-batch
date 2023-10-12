@@ -27,7 +27,7 @@ import org.springframework.batch.item.ItemWriter;
  */
 public class RetrySampleItemWriter<T> implements ItemWriter<T> {
 
-	private int counter = 0;
+	private int counter;
 
 	@Override
 	public void write(Chunk<? extends T> items) throws Exception {

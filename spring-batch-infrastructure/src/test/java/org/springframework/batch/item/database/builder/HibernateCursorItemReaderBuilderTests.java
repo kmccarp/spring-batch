@@ -190,7 +190,7 @@ class HibernateCursorItemReaderBuilderTests {
 		assertEquals("fetchSize must not be negative", exception.getMessage());
 
 		exception = assertThrows(IllegalStateException.class,
-				() -> new HibernateCursorItemReaderBuilder<Foo>().build());
+				new HibernateCursorItemReaderBuilder<Foo>()::build);
 		assertEquals("A SessionFactory must be provided", exception.getMessage());
 
 		exception = assertThrows(IllegalStateException.class,

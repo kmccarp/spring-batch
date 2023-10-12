@@ -63,7 +63,7 @@ public class DelimitedLineTokenizer extends AbstractLineTokenizer implements Ini
 
 	private String escapedQuoteString;
 
-	private Collection<Integer> includedFields = null;
+	private Collection<Integer> includedFields;
 
 	/**
 	 * Create a new instance of the {@link DelimitedLineTokenizer} class for the common
@@ -146,13 +146,13 @@ public class DelimitedLineTokenizer extends AbstractLineTokenizer implements Ini
 
 		for (int i = 0; i < length; i++) {
 			char currentChar = line.charAt(i);
-			boolean isEnd = (i == (length - 1));
+			boolean isEnd = i == (length - 1);
 
 			boolean isDelimiter = endsWithDelimiter(line, i, endIndexLastDelimiter);
 
 			if ((isDelimiter && !inQuoted) || isEnd) {
 				endIndexLastDelimiter = i;
-				int endPosition = (isEnd ? (length - lastCut) : (i - lastCut));
+				int endPosition = isEnd ? (length - lastCut) : (i - lastCut);
 
 				if (isEnd && isDelimiter) {
 					endPosition = endPosition - delimiter.length();
@@ -168,7 +168,7 @@ public class DelimitedLineTokenizer extends AbstractLineTokenizer implements Ini
 
 				fieldCount++;
 
-				if (isEnd && (isDelimiter)) {
+				if (isEnd && isDelimiter) {
 					if (includedFields == null || includedFields.contains(fieldCount)) {
 						tokens.add("");
 					}
